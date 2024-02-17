@@ -1,7 +1,6 @@
-# HighlightBadges
+# Highlight Badges
 
-Add a brief description of this project here, in Markdown format.
-It will be shown on the main page of the project's GitHub repository.
+Add Highlight Badges to record pages to give users quick insight into record details or related record information.
 
 ## Development
 
