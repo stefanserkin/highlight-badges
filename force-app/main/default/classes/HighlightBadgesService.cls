@@ -1,6 +1,5 @@
 /**
  * The HighlightBadgesService provides badges relevant to a particular user and record page
- * 
  * @date 2024
  */
 public with sharing class HighlightBadgesService {
