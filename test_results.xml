@@ -1,0 +1,9 @@
+<testsuite tests="7">
+  <testcase classname="HighlightBadgeQueryBuilder_Test" name="testBasicQuery" time="19" />
+  <testcase classname="HighlightBadgesService_Test" name="testConstructor" time="51" />
+  <testcase classname="HighlightBadgesService_Test" name="testGetChildBadge" time="932" />
+  <testcase classname="HighlightBadgesService_Test" name="testGetCommonParentBadge" time="472" />
+  <testcase classname="HighlightBadgesService_Test" name="testGetSourceBadge" time="3" />
+  <testcase classname="HighlightBadgesService_Test" name="testNoBadgesForRecord" time="2" />
+  <testcase classname="HighlightBadgesService_Test" name="testSOQLLimitHandling" time="1099" />
+</testsuite>
