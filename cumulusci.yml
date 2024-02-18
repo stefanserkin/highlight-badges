@@ -12,6 +12,26 @@ project:
     source_format: sfdx
 
 tasks:
+    assign_badges_admin_permset:
+        description: Assigns the admin permset to the running user
+        class_path: cumulusci.tasks.apex.anon.AnonymousApexTask
+        options:
+            apex: >
+                PermissionSet ps = [SELECT Id FROM PermissionSet WHERE Name = 'Highlight_Badges_Admin' LIMIT 1];
+                insert new PermissionSetAssignment(
+                    PermissionSetId = ps.Id,
+                    AssigneeId = UserInfo.getUserId()
+                );
+
+    configure_scratch_user:
+        description: Updates the default user to eastern time
+        class_path: cumulusci.tasks.apex.anon.AnonymousApexTask
+        options:
+            apex: >
+                User u = [SELECT Id, TimeZoneSidKey FROM User WHERE Alias = 'UUser' LIMIT 1];
+                u.TimeZoneSidKey = 'America/New_York';
+                update u;
+
     robot:
         options:
             suites: robot/HighlightBadges/tests
@@ -26,3 +46,18 @@ tasks:
     run_tests:
         options:
             required_org_code_coverage_percent: 85
+
+flows:
+    config_dev:
+        steps:
+            10:
+                task: configure_scratch_user
+            11:
+                task: assign_badges_admin_permset
+
+    config_managed:
+        steps:
+            10:
+                task: configure_scratch_user
+            11:
+                task: assign_badges_admin_permset
