@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Source_Object__c</fullName>
+    <description>The API Name of the Salesforce object that is the source of the badge information. For example, a badge on a contact record displaying open cases would have a Source Object of &apos;Case&apos;.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>The API Name of the Salesforce object that is the source of the badge information. For example, a badge on a contact record displaying open cases would have a Source Object of &apos;Case&apos;.</inlineHelpText>
+    <label>Source Object</label>
+    <length>100</length>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>
