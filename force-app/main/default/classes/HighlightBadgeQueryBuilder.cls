@@ -44,10 +44,10 @@ public with sharing class HighlightBadgeQueryBuilder {
         }
 
         // FROM
-        query += 'FROM ' + definition.Child_Object__c + ' ';
+        query += 'FROM ' + definition.Source_Object__c + ' ';
 
         // WHERE
-        query += 'WHERE ' + definition.Child_to_Parent_Path__c + ' = :parentId ';
+        query += 'WHERE ' + definition.Source_to_Parent_Path__c + ' = :parentId ';
         if (!String.isBlank(definition.Filter_Criteria__c)) {
             query += 'AND ' + definition.Filter_Criteria__c + ' ';
         }
@@ -94,8 +94,8 @@ public with sharing class HighlightBadgeQueryBuilder {
         }
         */
         // Add all additional fields for the modal
-        if (!String.isBlank(definition.Display_Detail_Fields__c)) {
-            fieldsForSelector.addAll(definition.Display_Detail_Fields__c.replaceAll('\\s+', '').split(','));
+        if (!String.isBlank(definition.Source_Detail_Fields__c)) {
+            fieldsForSelector.addAll(definition.Source_Detail_Fields__c.replaceAll('\\s+', '').split(','));
         } else {
             fieldsForSelector.add('Name');
         }
