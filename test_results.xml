@@ -1,10 +1,10 @@
 <testsuite tests="8">
-  <testcase classname="HighlightBadgeQueryBuilder_Test" name="testBasicQuery" time="26" />
-  <testcase classname="HighlightBadgesController_Test" name="testGetBadges" time="853" />
-  <testcase classname="HighlightBadgesService_Test" name="testConstructor" time="48" />
-  <testcase classname="HighlightBadgesService_Test" name="testGetChildBadge" time="722" />
-  <testcase classname="HighlightBadgesService_Test" name="testGetCommonParentBadge" time="413" />
-  <testcase classname="HighlightBadgesService_Test" name="testGetSourceBadge" time="3" />
-  <testcase classname="HighlightBadgesService_Test" name="testNoBadgesForRecord" time="2" />
-  <testcase classname="HighlightBadgesService_Test" name="testSOQLLimitHandling" time="1057" />
+  <testcase classname="HighlightBadgeQueryBuilder_Test" name="testBasicQuery" time="9" />
+  <testcase classname="HighlightBadgesController_Test" name="testGetBadges" time="887" />
+  <testcase classname="HighlightBadgesService_Test" name="testConstructor" time="60" />
+  <testcase classname="HighlightBadgesService_Test" name="testGetChildBadge" time="927" />
+  <testcase classname="HighlightBadgesService_Test" name="testGetCommonParentBadge" time="488" />
+  <testcase classname="HighlightBadgesService_Test" name="testGetSourceBadge" time="4" />
+  <testcase classname="HighlightBadgesService_Test" name="testNoBadgesForRecord" time="4" />
+  <testcase classname="HighlightBadgesService_Test" name="testSOQLLimitHandling" time="1238" />
 </testsuite>
