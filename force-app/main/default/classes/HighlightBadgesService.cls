@@ -274,6 +274,7 @@ public with sharing class HighlightBadgesService {
                    Source_to_Parent_Path__c, 
                    Display_to_Parent_Path__c, 
                    Filter_Criteria__c, 
+                   Order_By__c, 
                    Source_Detail_Fields__c, 
                    Label__c, 
                    Icon_Name__c, 

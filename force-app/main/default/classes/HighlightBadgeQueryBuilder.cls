@@ -53,11 +53,10 @@ public with sharing class HighlightBadgeQueryBuilder {
         }
         
         // ORDER BY
-        /*
         if (!String.isBlank(definition.Order_By__c)) {
             query += 'ORDER BY ' + definition.Order_By__c;
         }
-        */
+        
         System.debug(':::: query --> ' + query);
         return query;
     }
