@@ -1,6 +1,6 @@
 import { LightningElement, api, wire } from 'lwc';
 import getBadges from '@salesforce/apex/HighlightBadgesController.getBadges';
-import canViewHighlightBadges from "@salesforce/userPermission/Can_View_Highlight_Badges";
+import canViewHighlightBadges from '@salesforce/customPermission/Can_View_Highlight_Badges';
 
 export default class HighlightBadges extends LightningElement {
     @api recordId;
@@ -21,6 +21,7 @@ export default class HighlightBadges extends LightningElement {
     }
 
     get displayBadges() {
+        console.log(':::: has badge access --> ' + this.hasBadgeAccess);
         return (this.hasBadgeAccess && this.badges != null && this.badges.length > 0);
     }
 
