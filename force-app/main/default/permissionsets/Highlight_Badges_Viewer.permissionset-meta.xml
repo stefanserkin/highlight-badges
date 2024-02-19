@@ -16,6 +16,21 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Highlight_Badge_Definition__c.Alert_Message__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Highlight_Badge_Definition__c.Alert_Type__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Highlight_Badge_Definition__c.Alert__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Highlight_Badge_Definition__c.Background_Color__c</field>
         <readable>true</readable>
     </fieldPermissions>

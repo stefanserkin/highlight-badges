@@ -32,12 +32,13 @@ public with sharing class HighlightBadge {
     @AuraEnabled
     public String labelStyle {get;set;}
 
-    /*
     @AuraEnabled
     public Boolean hasAlert {get;set;}
 
     @AuraEnabled
     public String alertMessage {get;set;}
-    */
+
+    @AuraEnabled
+    public String alertType {get;set;}
 
 }

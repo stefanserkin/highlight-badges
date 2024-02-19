@@ -1,6 +1,7 @@
 import { LightningElement, api, wire } from 'lwc';
 import getBadges from '@salesforce/apex/HighlightBadgesController.getBadges';
 import canViewHighlightBadges from '@salesforce/customPermission/Can_View_Highlight_Badges';
+import AlertsModal from 'c/highlightBadgesAlertsModal';
 
 export default class HighlightBadges extends LightningElement {
     @api recordId;
@@ -10,11 +11,14 @@ export default class HighlightBadges extends LightningElement {
     wiredBadges = [];
     badges;
     selectedBadge;
+    alertMessages = [];
+    alertModalContent;
 
     error;
     errorMessage;
     isLoading = false;
     showModal = false;
+    showAlert = false;
 
     get hasBadgeAccess() {
         return canViewHighlightBadges;
@@ -31,6 +35,19 @@ export default class HighlightBadges extends LightningElement {
         this.wiredBadges = result;
         if (result.data) {
             this.badges = result.data;
+
+            for (let i = 0; i < this.badges.length; i++) {
+                if (this.badges[i].hasAlert) {
+                    if (this.alertMessages.includes(this.badges[i].alertMessage) === false) {
+                        this.alertMessages.push(this.badge[i].alertMessage);
+                    }
+                }
+            }
+            if (this.alertMessages.length > 0) {
+                this.alertModalContent = this.alertMessages.join("\n");
+                this.showAlert();
+            }
+
             this.error = undefined;
         } else if (result.error) {
             this.badges = undefined;
@@ -43,6 +60,17 @@ export default class HighlightBadges extends LightningElement {
             console.error(this.error);
         }
         this.isLoading = false;
+    }
+
+    async displayAlerts() {
+        this.showAlert = true;
+
+        const result = await AlertsModal.open({
+            size: 'small', 
+            description: 'Alerts', 
+            alertsModalHeader: this.alertsModalHeader
+        });
+
     }
 
     handleBadgeClick(event) {

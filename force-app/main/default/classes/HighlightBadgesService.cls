@@ -94,7 +94,10 @@ public with sharing class HighlightBadgesService {
                 badge.fieldSet = String.isBlank(definition.Source_Detail_Fields__c)
                     ? DEFAULT_BADGE_FIELDSET
                     : definition.Source_Detail_Fields__c.replaceAll('\\s+', '');
-                
+                badge.hasAlert = definition.Alert__c;
+                badge.alertMessage = definition.Alert_Message__c;
+                badge.alertType = definition.Alert_Type__c;
+
                 lstBadges.add(badge);
             }
         }
@@ -279,7 +282,10 @@ public with sharing class HighlightBadgesService {
                    Label__c, 
                    Icon_Name__c, 
                    Background_Color__c, 
-                   Label_Color__c
+                   Label_Color__c, 
+                   Alert__c, 
+                   Alert_Message__c, 
+                   Alert_Type__c 
               FROM Highlight_Badge_Definition__c
              WHERE Display_Object__c = :sourceObject
                AND Active__c = true
