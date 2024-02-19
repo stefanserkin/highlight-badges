@@ -9,7 +9,7 @@
     ></c-highlight-badges-detail-modal>
 
     <!-- ROW OF BADGES -->
-    <lightning-card lwc:if={badges}>
+    <lightning-card lwc:if={displayBadges}>
         <template for:each={badges} for:item="badge" for:index="index">
             <div key={badge.id} 
                 style="display:inline-block;" 

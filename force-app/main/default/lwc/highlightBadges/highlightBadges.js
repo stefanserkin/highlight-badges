@@ -1,6 +1,6 @@
 import { LightningElement, api, wire } from 'lwc';
-// import { NavigationMixin } from 'lightning/navigation';
 import getBadges from '@salesforce/apex/HighlightBadgesController.getBadges';
+import canViewHighlightBadges from "@salesforce/userPermission/Can_View_Highlight_Badges";
 
 export default class HighlightBadges extends LightningElement {
     @api recordId;
@@ -15,6 +15,14 @@ export default class HighlightBadges extends LightningElement {
     errorMessage;
     isLoading = false;
     showModal = false;
+
+    get hasBadgeAccess() {
+        return canViewHighlightBadges;
+    }
+
+    get displayBadges() {
+        return (this.hasBadgeAccess && this.badges != null && this.badges.length > 0);
+    }
 
     @wire(getBadges, {recordId: '$recordId', sObjectType: '$objectApiName'})
     wireResult(result) {
