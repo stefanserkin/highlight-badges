@@ -7,9 +7,9 @@
         "Outcome": "Pass",
         "StackTrace": null,
         "Stats": {
-            "duration": 7
+            "duration": 10
         },
-        "TestTimestamp": "2024-02-19T02:08:15.000+0000"
+        "TestTimestamp": "2024-02-19T02:44:44.000+0000"
     },
     {
         "Children": null,
@@ -19,7 +19,7 @@
         "Outcome": "Pass",
         "StackTrace": null,
         "Stats": {
-            "duration": 1172,
+            "duration": 1112,
             "TESTING_LIMITS: Number of SOQL queries": {
                 "used": 0,
                 "allowed": 100
@@ -37,7 +37,7 @@
                 "allowed": 10000
             },
             "TESTING_LIMITS: Maximum CPU time": {
-                "used": 477,
+                "used": 405,
                 "allowed": 10000
             },
             "TESTING_LIMITS: Number of query rows": {
@@ -61,7 +61,7 @@
                 "allowed": 100
             }
         },
-        "TestTimestamp": "2024-02-19T02:08:16.000+0000"
+        "TestTimestamp": "2024-02-19T02:44:43.000+0000"
     },
     {
         "Children": null,
@@ -71,7 +71,7 @@
         "Outcome": "Pass",
         "StackTrace": null,
         "Stats": {
-            "duration": 55,
+            "duration": 60,
             "TESTING_LIMITS: Number of SOQL queries": {
                 "used": 0,
                 "allowed": 100
@@ -89,7 +89,7 @@
                 "allowed": 10000
             },
             "TESTING_LIMITS: Maximum CPU time": {
-                "used": 17,
+                "used": 15,
                 "allowed": 10000
             },
             "TESTING_LIMITS: Number of query rows": {
@@ -113,7 +113,7 @@
                 "allowed": 100
             }
         },
-        "TestTimestamp": "2024-02-19T02:08:17.000+0000"
+        "TestTimestamp": "2024-02-19T02:44:43.000+0000"
     },
     {
         "Children": null,
@@ -123,7 +123,7 @@
         "Outcome": "Pass",
         "StackTrace": null,
         "Stats": {
-            "duration": 1019,
+            "duration": 806,
             "TESTING_LIMITS: Number of SOQL queries": {
                 "used": 0,
                 "allowed": 100
@@ -141,7 +141,7 @@
                 "allowed": 10000
             },
             "TESTING_LIMITS: Maximum CPU time": {
-                "used": 453,
+                "used": 394,
                 "allowed": 10000
             },
             "TESTING_LIMITS: Number of query rows": {
@@ -165,7 +165,7 @@
                 "allowed": 100
             }
         },
-        "TestTimestamp": "2024-02-19T02:08:17.000+0000"
+        "TestTimestamp": "2024-02-19T02:44:43.000+0000"
     },
     {
         "Children": null,
@@ -175,7 +175,7 @@
         "Outcome": "Pass",
         "StackTrace": null,
         "Stats": {
-            "duration": 607,
+            "duration": 520,
             "TESTING_LIMITS: Number of SOQL queries": {
                 "used": 0,
                 "allowed": 100
@@ -193,7 +193,7 @@
                 "allowed": 10000
             },
             "TESTING_LIMITS: Maximum CPU time": {
-                "used": 251,
+                "used": 205,
                 "allowed": 10000
             },
             "TESTING_LIMITS: Number of query rows": {
@@ -217,7 +217,7 @@
                 "allowed": 100
             }
         },
-        "TestTimestamp": "2024-02-19T02:08:18.000+0000"
+        "TestTimestamp": "2024-02-19T02:44:44.000+0000"
     },
     {
         "Children": null,
@@ -229,7 +229,7 @@
         "Stats": {
             "duration": 4
         },
-        "TestTimestamp": "2024-02-19T02:08:18.000+0000"
+        "TestTimestamp": "2024-02-19T02:44:45.000+0000"
     },
     {
         "Children": null,
@@ -239,9 +239,9 @@
         "Outcome": "Pass",
         "StackTrace": null,
         "Stats": {
-            "duration": 3
+            "duration": 4
         },
-        "TestTimestamp": "2024-02-19T02:08:18.000+0000"
+        "TestTimestamp": "2024-02-19T02:44:45.000+0000"
     },
     {
         "Children": null,
@@ -251,7 +251,7 @@
         "Outcome": "Pass",
         "StackTrace": null,
         "Stats": {
-            "duration": 1873,
+            "duration": 1329,
             "TESTING_LIMITS: Number of SOQL queries": {
                 "used": 0,
                 "allowed": 100
@@ -269,7 +269,7 @@
                 "allowed": 10000
             },
             "TESTING_LIMITS: Maximum CPU time": {
-                "used": 243,
+                "used": 201,
                 "allowed": 10000
             },
             "TESTING_LIMITS: Number of query rows": {
@@ -293,6 +293,6 @@
                 "allowed": 100
             }
         },
-        "TestTimestamp": "2024-02-19T02:08:18.000+0000"
+        "TestTimestamp": "2024-02-19T02:44:45.000+0000"
     }
 ]
