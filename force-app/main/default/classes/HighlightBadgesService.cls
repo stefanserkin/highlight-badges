@@ -21,6 +21,7 @@ public with sharing class HighlightBadgesService {
     private static final String DEFAULT_LABEL_COLOR = '#000000';
     private static final String DEFAULT_ICON_NAME = 'utility:info';
     private static final String MERGE_FIELD_REGEX = '\\{!.+?\\}';
+    private static final String DEFAULT_BADGE_FIELDSET = 'Name';
 
     private Map<String, Id> mapParentIds;
 
@@ -87,10 +88,13 @@ public with sharing class HighlightBadgesService {
                 } else {
                     setLabelNames.add(badge.label);
                 }
-                badge.fieldSet = definition.Source_Detail_Fields__c;
                 badge.iconName = getBadgeIconName(definition);
                 badge.colorStyle = getBadgeColorStyle(definition);
                 badge.labelStyle = getBadgeLabelStyle(definition);
+                badge.fieldSet = String.isBlank(definition.Source_Detail_Fields__c)
+                    ? DEFAULT_BADGE_FIELDSET
+                    : definition.Source_Detail_Fields__c.replaceAll('\\s+', '');
+                
                 lstBadges.add(badge);
             }
         }

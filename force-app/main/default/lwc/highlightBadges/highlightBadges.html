@@ -1,0 +1,37 @@
+<template>
+
+    <!-- MODAL DETAIL DISPLAY -->
+    <c-highlight-badges-detail-modal lwc:if={showModal}
+        badge={selectedBadge} 
+        record-id={recordId} 
+        modal-header={modalHeader} 
+        onclose={handleModalClose}
+    ></c-highlight-badges-detail-modal>
+
+    <!-- ROW OF BADGES -->
+    <lightning-card lwc:if={badges}>
+        <template for:each={badges} for:item="badge" for:index="index">
+            <div key={badge.id} 
+                style="display:inline-block;" 
+                data-id={badge.id} 
+                onclick={handleBadgeClick} 
+                class="contact-badge">
+                <div style={badge.colorStyle}>
+                    <div style={badge.labelStyle}>
+                        <lightning-badge 
+                            icon-name={badge.iconName}
+                            label={badge.label} 
+                            class="slds-var-m-horizontal_small slds-var-m-bottom_small" 
+                        ></lightning-badge>
+                    </div>
+                </div>
+            </div>
+        </template>
+    </lightning-card>
+
+    <!-- ERROR -->
+    <lightning-card lwc:if={error}>
+        <p class="slds-var-m-around_medium">{errorMessage}</p>
+    </lightning-card>
+
+</template>
