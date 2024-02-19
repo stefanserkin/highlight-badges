@@ -4,7 +4,6 @@ import { NavigationMixin } from 'lightning/navigation';
 export default class HighlightBadgesDetailModal extends NavigationMixin(LightningElement) {
     @api badge;
     @api recordId;
-    @api modalHeader;
 
     get navigationEnabled() {
         return (this.badge.recordId != this.recordId);
