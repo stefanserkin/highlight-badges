@@ -10,7 +10,7 @@
         <targetConfig targets="lightning__RecordPage">
             <property
                 label="Alerts Modal Header" 
-                name="alertsModalHeader" 
+                name="alertModalHeader" 
                 type="String" 
                 default="Highlight Badges Alerts" 
                 required="true"

@@ -1,11 +1,14 @@
-import { api } from 'lwc';
-import LightningModal from 'lightning/modal';
+import { LightningElement, api } from 'lwc';
 
-export default class HighlightBadgesAlertsModal extends LightningModal {
-    @api alertsModalHeader;
+export default class HighlightBadgesAlertsModal extends LightningElement {
+    @api modalHeader;
+    @api alertMessages;
+    showCancel = false;
+    showOkay = true;
 
-    handleOkay() {
-        this.close('okay');
+    handleCloseEvent() {
+        console.log('doing this close thing');
+        this.dispatchEvent(new CustomEvent('close'));
     }
 
 }

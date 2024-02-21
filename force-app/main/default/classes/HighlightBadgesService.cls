@@ -95,8 +95,8 @@ public with sharing class HighlightBadgesService {
                     ? DEFAULT_BADGE_FIELDSET
                     : definition.Source_Detail_Fields__c.replaceAll('\\s+', '');
                 badge.hasAlert = definition.Alert__c;
-                badge.alertMessage = definition.Alert_Message__c;
-                badge.alertType = definition.Alert_Type__c;
+                badge.alertMessage = definition.Alert_Message__c != null ? definition.Alert_Message__c : null;
+                badge.alertType = definition.Alert_Type__c != null ? definition.Alert_Type__c : null;
 
                 lstBadges.add(badge);
             }

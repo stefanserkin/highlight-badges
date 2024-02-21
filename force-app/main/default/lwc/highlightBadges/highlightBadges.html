@@ -1,7 +1,16 @@
 <template>
 
+    <!-- MODAL ALERTS -->
+    <c-highlight-badges-alerts-modal
+        lwc:if={showModalAlert}
+        modal-header={alertModalHeader}
+        alert-messages={alertMessages}
+        onclose={handleModalClose}
+    ></c-highlight-badges-alerts-modal>
+
     <!-- MODAL DETAIL DISPLAY -->
-    <c-highlight-badges-detail-modal lwc:if={showModal}
+    <c-highlight-badges-detail-modal 
+        lwc:if={showModal}
         badge={selectedBadge} 
         record-id={recordId} 
         onclose={handleModalClose}

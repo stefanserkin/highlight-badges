@@ -6,7 +6,7 @@ import AlertsModal from 'c/highlightBadgesAlertsModal';
 export default class HighlightBadges extends LightningElement {
     @api recordId;
     @api objectApiName;
-    @api alertsModalHeader;
+    @api alertModalHeader;
     
     wiredBadges = [];
     badges;
@@ -18,7 +18,7 @@ export default class HighlightBadges extends LightningElement {
     errorMessage;
     isLoading = false;
     showModal = false;
-    showAlert = false;
+    showModalAlert = false;
 
     get hasBadgeAccess() {
         return canViewHighlightBadges;
@@ -26,6 +26,9 @@ export default class HighlightBadges extends LightningElement {
 
     get displayBadges() {
         console.log(':::: has badge access --> ' + this.hasBadgeAccess);
+        console.log(':::: this.badges --> ');
+        console.table(this.badges);
+
         return (this.hasBadgeAccess && this.badges != null && this.badges.length > 0);
     }
 
@@ -35,20 +38,27 @@ export default class HighlightBadges extends LightningElement {
         this.wiredBadges = result;
         if (result.data) {
             this.badges = result.data;
+            console.log(':::: loaded badges');
+            console.table(this.badges);
 
             for (let i = 0; i < this.badges.length; i++) {
                 if (this.badges[i].hasAlert) {
+                    console.log(':::: evaluating badge --> ' + this.badges[i].id);
                     if (this.alertMessages.includes(this.badges[i].alertMessage) === false) {
-                        this.alertMessages.push(this.badge[i].alertMessage);
+                        console.log(':::: adding message --> ' + this.badges[i].alertMessage);
+                        this.alertMessages.push(this.badges[i].alertMessage);
                     }
                 }
             }
             if (this.alertMessages.length > 0) {
+                console.log(':::: setting modal content');
                 this.alertModalContent = this.alertMessages.join("\n");
-                this.showAlert();
+                console.log(':::: setting modal content --> ' + this.alertModalContent);
+                this.showModalAlert = true;
             }
 
             this.error = undefined;
+            this.isLoading = false;
         } else if (result.error) {
             this.badges = undefined;
             this.error = result.error;
@@ -58,12 +68,12 @@ export default class HighlightBadges extends LightningElement {
                 this.errorMessage = this.error.body.message;
             }
             console.error(this.error);
+            this.isLoading = false;
         }
-        this.isLoading = false;
     }
 
     async displayAlerts() {
-        this.showAlert = true;
+        this.showModalAlert = true;
 
         const result = await AlertsModal.open({
             size: 'small', 
@@ -87,7 +97,9 @@ export default class HighlightBadges extends LightningElement {
     }
 
     handleModalClose() {
+        console.log('handling modal close');
         this.showModal = false;
+        this.showModalAlert = false;
     }
 
 }
