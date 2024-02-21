@@ -173,7 +173,6 @@ public with sharing class HighlightBadgesService {
      * @param SObject The api name of the sObject type
      ****************************************************/
     
-     /*
     public static String getBadgeAlertMessage(
         Highlight_Badge_Definition__c definition, 
         SObject obj
@@ -193,7 +192,6 @@ public with sharing class HighlightBadgesService {
         }
         return alertMessage;
     }
-    */
 
     /****************************************************
      * Returns a string that can be referenced in an html style attribute
@@ -285,7 +283,7 @@ public with sharing class HighlightBadgesService {
                    Label_Color__c, 
                    Alert__c, 
                    Alert_Message__c, 
-                   Alert_Type__c 
+                   Alert_Type__c
               FROM Highlight_Badge_Definition__c
              WHERE Display_Object__c = :sourceObject
                AND Active__c = true

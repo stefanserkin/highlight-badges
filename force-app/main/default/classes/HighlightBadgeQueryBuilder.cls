@@ -81,7 +81,6 @@ public with sharing class HighlightBadgeQueryBuilder {
             );
         }
         // If displaying an alert, check for merge fields to add to query
-        /*
         if (
             definition.Alert__c && 
             !String.isBlank(definition.Alert_Message__c) &&
@@ -91,7 +90,7 @@ public with sharing class HighlightBadgeQueryBuilder {
                 getMergeFieldsFromString(definition.Alert_Message__c)
             );
         }
-        */
+        
         // Add all additional fields for the modal
         if (!String.isBlank(definition.Source_Detail_Fields__c)) {
             fieldsForSelector.addAll(definition.Source_Detail_Fields__c.replaceAll('\\s+', '').split(','));

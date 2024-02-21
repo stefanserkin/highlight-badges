@@ -134,7 +134,7 @@
         <customLabel>true</customLabel>
         <detailHeading>false</detailHeading>
         <editHeading>false</editHeading>
-        <label>Alerts 1-Section</label>
+        <label>Alerts 1 Column</label>
         <layoutColumns>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -178,7 +178,7 @@
     <showRunAssignmentRulesCheckbox>false</showRunAssignmentRulesCheckbox>
     <showSubmitAndAttachButton>false</showSubmitAndAttachButton>
     <summaryLayout>
-        <masterLabel>00h8K000002h9pd</masterLabel>
+        <masterLabel>00h03000002wVmM</masterLabel>
         <sizeX>4</sizeX>
         <sizeY>0</sizeY>
         <summaryLayoutStyle>Default</summaryLayoutStyle>

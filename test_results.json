@@ -9,7 +9,7 @@
         "Stats": {
             "duration": 10
         },
-        "TestTimestamp": "2024-02-19T04:29:03.000+0000"
+        "TestTimestamp": "2024-02-21T03:43:30.000+0000"
     },
     {
         "Children": null,
@@ -19,9 +19,9 @@
         "Outcome": "Pass",
         "StackTrace": null,
         "Stats": {
-            "duration": 844,
+            "duration": 909,
             "TESTING_LIMITS: Number of SOQL queries": {
-                "used": 0,
+                "used": 4,
                 "allowed": 100
             },
             "TESTING_LIMITS: Number of Email Invocations": {
@@ -33,19 +33,19 @@
                 "allowed": 50
             },
             "TESTING_LIMITS: Number of DML rows": {
-                "used": 0,
+                "used": 1,
                 "allowed": 10000
             },
             "TESTING_LIMITS: Maximum CPU time": {
-                "used": 391,
+                "used": 441,
                 "allowed": 10000
             },
             "TESTING_LIMITS: Number of query rows": {
-                "used": 0,
+                "used": 4,
                 "allowed": 50000
             },
             "TESTING_LIMITS: Number of DML statements": {
-                "used": 0,
+                "used": 1,
                 "allowed": 150
             },
             "TESTING_LIMITS: Number of Mobile Apex push calls": {
@@ -61,7 +61,7 @@
                 "allowed": 100
             }
         },
-        "TestTimestamp": "2024-02-19T04:29:08.000+0000"
+        "TestTimestamp": "2024-02-21T03:43:30.000+0000"
     },
     {
         "Children": null,
@@ -71,7 +71,7 @@
         "Outcome": "Pass",
         "StackTrace": null,
         "Stats": {
-            "duration": 48,
+            "duration": 45,
             "TESTING_LIMITS: Number of SOQL queries": {
                 "used": 0,
                 "allowed": 100
@@ -113,7 +113,7 @@
                 "allowed": 100
             }
         },
-        "TestTimestamp": "2024-02-19T04:29:04.000+0000"
+        "TestTimestamp": "2024-02-21T03:43:30.000+0000"
     },
     {
         "Children": null,
@@ -123,9 +123,9 @@
         "Outcome": "Pass",
         "StackTrace": null,
         "Stats": {
-            "duration": 989,
+            "duration": 897,
             "TESTING_LIMITS: Number of SOQL queries": {
-                "used": 0,
+                "used": 4,
                 "allowed": 100
             },
             "TESTING_LIMITS: Number of Email Invocations": {
@@ -137,19 +137,19 @@
                 "allowed": 50
             },
             "TESTING_LIMITS: Number of DML rows": {
-                "used": 0,
+                "used": 1,
                 "allowed": 10000
             },
             "TESTING_LIMITS: Maximum CPU time": {
-                "used": 414,
+                "used": 393,
                 "allowed": 10000
             },
             "TESTING_LIMITS: Number of query rows": {
-                "used": 0,
+                "used": 5,
                 "allowed": 50000
             },
             "TESTING_LIMITS: Number of DML statements": {
-                "used": 0,
+                "used": 1,
                 "allowed": 150
             },
             "TESTING_LIMITS: Number of Mobile Apex push calls": {
@@ -165,7 +165,7 @@
                 "allowed": 100
             }
         },
-        "TestTimestamp": "2024-02-19T04:29:04.000+0000"
+        "TestTimestamp": "2024-02-21T03:43:30.000+0000"
     },
     {
         "Children": null,
@@ -175,9 +175,9 @@
         "Outcome": "Pass",
         "StackTrace": null,
         "Stats": {
-            "duration": 520,
+            "duration": 534,
             "TESTING_LIMITS: Number of SOQL queries": {
-                "used": 0,
+                "used": 4,
                 "allowed": 100
             },
             "TESTING_LIMITS: Number of Email Invocations": {
@@ -189,19 +189,19 @@
                 "allowed": 50
             },
             "TESTING_LIMITS: Number of DML rows": {
-                "used": 0,
+                "used": 1,
                 "allowed": 10000
             },
             "TESTING_LIMITS: Maximum CPU time": {
-                "used": 210,
+                "used": 218,
                 "allowed": 10000
             },
             "TESTING_LIMITS: Number of query rows": {
-                "used": 0,
+                "used": 5,
                 "allowed": 50000
             },
             "TESTING_LIMITS: Number of DML statements": {
-                "used": 0,
+                "used": 1,
                 "allowed": 150
             },
             "TESTING_LIMITS: Number of Mobile Apex push calls": {
@@ -217,7 +217,7 @@
                 "allowed": 100
             }
         },
-        "TestTimestamp": "2024-02-19T04:29:05.000+0000"
+        "TestTimestamp": "2024-02-21T03:43:31.000+0000"
     },
     {
         "Children": null,
@@ -229,7 +229,7 @@
         "Stats": {
             "duration": 4
         },
-        "TestTimestamp": "2024-02-19T04:29:06.000+0000"
+        "TestTimestamp": "2024-02-21T03:43:32.000+0000"
     },
     {
         "Children": null,
@@ -241,7 +241,7 @@
         "Stats": {
             "duration": 3
         },
-        "TestTimestamp": "2024-02-19T04:29:06.000+0000"
+        "TestTimestamp": "2024-02-21T03:43:32.000+0000"
     },
     {
         "Children": null,
@@ -251,9 +251,9 @@
         "Outcome": "Pass",
         "StackTrace": null,
         "Stats": {
-            "duration": 1406,
+            "duration": 1274,
             "TESTING_LIMITS: Number of SOQL queries": {
-                "used": 0,
+                "used": 100,
                 "allowed": 100
             },
             "TESTING_LIMITS: Number of Email Invocations": {
@@ -265,19 +265,19 @@
                 "allowed": 50
             },
             "TESTING_LIMITS: Number of DML rows": {
-                "used": 0,
+                "used": 102,
                 "allowed": 10000
             },
             "TESTING_LIMITS: Maximum CPU time": {
-                "used": 205,
+                "used": 208,
                 "allowed": 10000
             },
             "TESTING_LIMITS: Number of query rows": {
-                "used": 0,
+                "used": 199,
                 "allowed": 50000
             },
             "TESTING_LIMITS: Number of DML statements": {
-                "used": 0,
+                "used": 2,
                 "allowed": 150
             },
             "TESTING_LIMITS: Number of Mobile Apex push calls": {
@@ -293,6 +293,6 @@
                 "allowed": 100
             }
         },
-        "TestTimestamp": "2024-02-19T04:29:06.000+0000"
+        "TestTimestamp": "2024-02-21T03:43:32.000+0000"
     }
 ]
