@@ -56,6 +56,11 @@ public with sharing class HighlightBadgeQueryBuilder {
         if (!String.isBlank(definition.Order_By__c)) {
             query += 'ORDER BY ' + definition.Order_By__c;
         }
+
+        // LIMIT
+        if (definition.Limit__c != null) {
+            query += ' LIMIT ' + Integer.valueOf(definition.Limit__c);
+        }
         
         System.debug(':::: query --> ' + query);
         return query;

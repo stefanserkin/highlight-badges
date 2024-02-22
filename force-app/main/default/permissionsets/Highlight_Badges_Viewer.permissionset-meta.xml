@@ -66,6 +66,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Highlight_Badge_Definition__c.Limit__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Highlight_Badge_Definition__c.Order_By__c</field>
         <readable>true</readable>
     </fieldPermissions>
