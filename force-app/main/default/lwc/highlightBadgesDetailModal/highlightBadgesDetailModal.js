@@ -11,12 +11,9 @@ export default class HighlightBadgesDetailModal extends NavigationMixin(Lightnin
 
     get fieldSet() {
         let fields = [];
-        console.log(':::: fieldSet --> ' + this.badge.fieldSet);
-
         if (this.badge) {
             fields = this.badge.fieldSet.split(',');
         }
-        console.log(':::: fields --> ' + fields);
         return fields;
     }
 

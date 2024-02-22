@@ -7,7 +7,6 @@ export default class HighlightBadgesAlertsModal extends LightningElement {
     showOkay = true;
 
     handleCloseEvent() {
-        console.log('doing this close thing');
         this.dispatchEvent(new CustomEvent('close'));
     }
 

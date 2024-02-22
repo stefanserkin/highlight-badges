@@ -1,14 +1,14 @@
 <testsuite tests="12">
-  <testcase classname="HighlightBadgeQueryBuilder_Test" name="testBasicQuery" time="25" />
-  <testcase classname="HighlightBadgesController_Test" name="testGetBadges" time="951" />
-  <testcase classname="HighlightBadgesService_Test" name="testConstructor" time="75" />
-  <testcase classname="HighlightBadgesService_Test" name="testGetChildBadge" time="925" />
-  <testcase classname="HighlightBadgesService_Test" name="testGetCommonParentBadge" time="576" />
+  <testcase classname="HighlightBadgeQueryBuilder_Test" name="testBasicQuery" time="38" />
+  <testcase classname="HighlightBadgesController_Test" name="testGetBadges" time="990" />
+  <testcase classname="HighlightBadgesService_Test" name="testConstructor" time="70" />
+  <testcase classname="HighlightBadgesService_Test" name="testGetChildBadge" time="1487" />
+  <testcase classname="HighlightBadgesService_Test" name="testGetCommonParentBadge" time="578" />
   <testcase classname="HighlightBadgesService_Test" name="testGetSourceBadge" time="4" />
   <testcase classname="HighlightBadgesService_Test" name="testModalAlert" time="4" />
-  <testcase classname="HighlightBadgesService_Test" name="testNoBadgesForRecord" time="3" />
-  <testcase classname="HighlightBadgesService_Test" name="testNoDefinitions" time="491" />
-  <testcase classname="HighlightBadgesService_Test" name="testNoFieldSet" time="630" />
-  <testcase classname="HighlightBadgesService_Test" name="testSOQLLimitHandling" time="1927" />
-  <testcase classname="HighlightBadgesService_Test" name="testToastAlert" time="4" />
+  <testcase classname="HighlightBadgesService_Test" name="testNoBadgesForRecord" time="5" />
+  <testcase classname="HighlightBadgesService_Test" name="testNoDefinitions" time="492" />
+  <testcase classname="HighlightBadgesService_Test" name="testNoFieldSet" time="628" />
+  <testcase classname="HighlightBadgesService_Test" name="testSOQLLimitHandling" time="2320" />
+  <testcase classname="HighlightBadgesService_Test" name="testToastAlert" time="6" />
 </testsuite>
