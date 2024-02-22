@@ -56,16 +56,10 @@ export default class HighlightBadges extends LightningElement {
             if (badge.hasAlert) {
                 if (badge.alertType == 'Modal') {
                     if (this.alertModalMessages.includes(badge.alertMessage) === false) {
-                        console.log(':::: adding message --> ' + badge.alertMessage);
                         this.alertModalMessages.push(badge.alertMessage);
                     }
                 } else if (badge.alertType == 'Toast') {
-                    this.showToast(
-                        this.alertModalHeader, 
-                        badge.alertMessage, 
-                        badge.toastVariant,
-                        badge.toastMode
-                    );
+                    this.showToast(badge.label, badge.alertMessage, badge.toastVariant, badge.toastMode);
                 }
             }
         }
