@@ -1,14 +1,14 @@
 <testsuite tests="12">
-  <testcase classname="HighlightBadgeQueryBuilder_Test" name="testBasicQuery" time="6" />
-  <testcase classname="HighlightBadgesController_Test" name="testGetBadges" time="1306" />
-  <testcase classname="HighlightBadgesService_Test" name="testConstructor" time="78" />
-  <testcase classname="HighlightBadgesService_Test" name="testGetChildBadge" time="1183" />
-  <testcase classname="HighlightBadgesService_Test" name="testGetCommonParentBadge" time="785" />
-  <testcase classname="HighlightBadgesService_Test" name="testGetSourceBadge" time="4" />
-  <testcase classname="HighlightBadgesService_Test" name="testModalAlert" time="3" />
-  <testcase classname="HighlightBadgesService_Test" name="testNoBadgesForRecord" time="3" />
-  <testcase classname="HighlightBadgesService_Test" name="testNoDefinitions" time="1200" />
-  <testcase classname="HighlightBadgesService_Test" name="testNoFieldSet" time="694" />
-  <testcase classname="HighlightBadgesService_Test" name="testSOQLLimitHandling" time="1624" />
+  <testcase classname="HighlightBadgeQueryBuilder_Test" name="testBasicQuery" time="7" />
+  <testcase classname="HighlightBadgesController_Test" name="testGetBadges" time="1049" />
+  <testcase classname="HighlightBadgesService_Test" name="testConstructor" time="59" />
+  <testcase classname="HighlightBadgesService_Test" name="testGetChildBadge" time="1023" />
+  <testcase classname="HighlightBadgesService_Test" name="testGetCommonParentBadge" time="552" />
+  <testcase classname="HighlightBadgesService_Test" name="testGetSourceBadge" time="5" />
+  <testcase classname="HighlightBadgesService_Test" name="testModalAlert" time="5" />
+  <testcase classname="HighlightBadgesService_Test" name="testNoBadgesForRecord" time="4" />
+  <testcase classname="HighlightBadgesService_Test" name="testNoDefinitions" time="1121" />
+  <testcase classname="HighlightBadgesService_Test" name="testNoFieldSet" time="665" />
+  <testcase classname="HighlightBadgesService_Test" name="testSOQLLimitHandling" time="1418" />
   <testcase classname="HighlightBadgesService_Test" name="testToastAlert" time="4" />
 </testsuite>
