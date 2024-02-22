@@ -8,8 +8,6 @@ public with sharing class HighlightBadgesService {
     public String displayObjectType {get; private set;}
 
     public HighlightBadgesService(String recordId, String sObjectType) {
-        System.debug(':::: record id passed to service constructor --> ' + recordId);
-        System.debug(':::: source sobject type passed to service constructor --> ' + sObjectType);
         this.displayRecordId = Id.valueOf( recordId );
         this.displayObjectType = sObjectType;
     }
@@ -30,7 +28,6 @@ public with sharing class HighlightBadgesService {
      */
     public List<HighlightBadge> getBadges() {
         List<Highlight_Badge_Definition__c> lstBadgeDefinitions = queryForBadgeDefinitions(displayObjectType);
-        System.debug(':::: found ' + lstBadgeDefinitions.size() + ' active definitions');
         
         // Guard against empty list of definitions
         if (lstBadgeDefinitions.isEmpty()) {
@@ -72,7 +69,6 @@ public with sharing class HighlightBadgesService {
                 // User does not have required object, FLS, or sharing access
                 continue;
             }
-            System.debug(':::: queryResults size --> ' + queryResults.size());
 
             // Create set to store label names to avoid duplicates
             Set<String> setLabelNames = new Set<String>();
@@ -95,14 +91,13 @@ public with sharing class HighlightBadgesService {
                     ? DEFAULT_BADGE_FIELDSET
                     : definition.Source_Detail_Fields__c.replaceAll('\\s+', '');
                 badge.hasAlert = definition.Alert__c;
-                badge.alertMessage = definition.Alert_Message__c != null ? definition.Alert_Message__c : null;
+                badge.alertMessage = getBadgeAlertMessage(definition, obj);
                 badge.alertType = definition.Alert_Type__c != null ? definition.Alert_Type__c : null;
 
                 lstBadges.add(badge);
             }
         }
         
-        System.debug(':::: badges to return --> ' + lstBadges);
         return lstBadges;
     }
 
@@ -132,21 +127,15 @@ public with sharing class HighlightBadgesService {
 
         List<String> lstParentFields = new List<String>();
         lstParentFields.addAll(setParentFields);
-        System.debug('::: lstParentFields --> ' + lstParentFields);
 
         String strQuery = 'SELECT ' + String.join(lstParentFields, ', ') + 
             ' FROM ' + displayObjectType + 
             ' WHERE Id = \'' + displayRecordId + '\' LIMIT 1';
-        System.debug('::::: strQuery --> ' + strQuery);
 
         List<SObject> lstObjs = Database.query(strQuery, AccessLevel.USER_MODE);
-        System.debug('::::: query result size --> ' + lstObjs.size());
         for (String fieldName : setParentFields) {
-            System.debug('::: checking field --> ' + fieldName);
-            System.debug('::: obj has field value --> ' + lstObjs[0].get(fieldName));
             mapParentIds.put(fieldName, (Id) lstObjs[0].get(fieldName) );
         }
-        System.debug(':::: mapParentIds --> ' + mapParentIds);
         return mapParentIds;
     }
 

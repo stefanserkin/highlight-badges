@@ -1,7 +1,8 @@
 import { LightningElement, api, wire } from 'lwc';
+import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import getBadges from '@salesforce/apex/HighlightBadgesController.getBadges';
-import canViewHighlightBadges from '@salesforce/customPermission/Can_View_Highlight_Badges';
 import AlertsModal from 'c/highlightBadgesAlertsModal';
+import canViewHighlightBadges from '@salesforce/customPermission/Can_View_Highlight_Badges';
 
 export default class HighlightBadges extends LightningElement {
     @api recordId;
@@ -11,7 +12,8 @@ export default class HighlightBadges extends LightningElement {
     wiredBadges = [];
     badges;
     selectedBadge;
-    alertMessages = [];
+    alertModalMessages = [];
+    alertToastMessages = [];
     alertModalContent;
 
     error;
@@ -25,10 +27,6 @@ export default class HighlightBadges extends LightningElement {
     }
 
     get displayBadges() {
-        console.log(':::: has badge access --> ' + this.hasBadgeAccess);
-        console.log(':::: this.badges --> ');
-        console.table(this.badges);
-
         return (this.hasBadgeAccess && this.badges != null && this.badges.length > 0);
     }
 
@@ -40,22 +38,7 @@ export default class HighlightBadges extends LightningElement {
             this.badges = result.data;
             console.log(':::: loaded badges');
             console.table(this.badges);
-
-            for (let i = 0; i < this.badges.length; i++) {
-                if (this.badges[i].hasAlert) {
-                    console.log(':::: evaluating badge --> ' + this.badges[i].id);
-                    if (this.alertMessages.includes(this.badges[i].alertMessage) === false) {
-                        console.log(':::: adding message --> ' + this.badges[i].alertMessage);
-                        this.alertMessages.push(this.badges[i].alertMessage);
-                    }
-                }
-            }
-            if (this.alertMessages.length > 0) {
-                console.log(':::: setting modal content');
-                this.alertModalContent = this.alertMessages.join("\n");
-                console.log(':::: setting modal content --> ' + this.alertModalContent);
-                this.showModalAlert = true;
-            }
+            this.handleAlerts();
 
             this.error = undefined;
             this.isLoading = false;
@@ -71,7 +54,7 @@ export default class HighlightBadges extends LightningElement {
             this.isLoading = false;
         }
     }
-
+/*
     async displayAlerts() {
         this.showModalAlert = true;
 
@@ -80,7 +63,44 @@ export default class HighlightBadges extends LightningElement {
             description: 'Alerts', 
             alertsModalHeader: this.alertsModalHeader
         });
-
+    }
+*/
+    handleAlerts() {
+        for (let i = 0; i < this.badges.length; i++) {
+            let badge = this.badges[i];
+            if (badge.hasAlert) {
+                if (badge.alertType == 'Modal') {
+                    console.log(':::: evaluating badge for modal --> ' + badge.id);
+                    if (this.alertModalMessages.includes(badge.alertMessage) === false) {
+                        console.log(':::: adding message --> ' + badge.alertMessage);
+                        this.alertModalMessages.push(badge.alertMessage);
+                    }
+                } else if (badge.alertType == 'Toast') {
+                    console.log(':::: evaluating badge for toast --> ' + badge.id);
+                    if (this.alertToastMessages.includes(badge.alertMessage) === false) {
+                        console.log(':::: adding message --> ' + badge.alertMessage);
+                        this.alertToastMessages.push(badge.alertMessage);
+                    }
+                }
+            }
+        }
+        if (this.alertModalMessages.length > 0) {
+            console.log(':::: setting modal content');
+            this.alertModalContent = this.alertModalMessages.join("\n");
+            console.log(':::: setting modal content --> ' + this.alertModalContent);
+            this.showModalAlert = true;
+        }
+        if (this.alertToastMessages.length > 0) {
+            this.alertToastMessages.forEach(toast => {
+                console.log('toast --> ' + toast);
+                this.showToast(
+                    this.alertModalHeader,
+                    toast, 
+                    'warning',
+                    'sticky'
+                );
+            });
+        }
     }
 
     handleBadgeClick(event) {
@@ -100,6 +120,16 @@ export default class HighlightBadges extends LightningElement {
         console.log('handling modal close');
         this.showModal = false;
         this.showModalAlert = false;
+    }
+
+    showToast(title, message, variant, mode) {
+        const toast = new ShowToastEvent({
+            title,
+            message,
+            variant,
+            mode,
+        });
+        this.dispatchEvent(toast);
     }
 
 }

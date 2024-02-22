@@ -89,6 +89,16 @@
         <field>Highlight_Badge_Definition__c.Source_to_Parent_Path__c</field>
         <readable>true</readable>
     </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Highlight_Badge_Definition__c.Toast_Mode__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Highlight_Badge_Definition__c.Toast_Variant__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
     <hasActivationRequired>false</hasActivationRequired>
     <label>Highlight Badges Viewer</label>
     <objectPermissions>

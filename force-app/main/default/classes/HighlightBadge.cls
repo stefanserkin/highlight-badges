@@ -41,4 +41,10 @@ public with sharing class HighlightBadge {
     @AuraEnabled
     public String alertType {get;set;}
 
+    @AuraEnabled
+    public String toastVariant {get;set;}
+
+    @AuraEnabled
+    public String toastMode {get;set;}
+
 }
