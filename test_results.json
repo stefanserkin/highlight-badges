@@ -7,21 +7,61 @@
         "Outcome": "Pass",
         "StackTrace": null,
         "Stats": {
-            "duration": 26
+            "duration": 8
         },
-        "TestTimestamp": "2024-02-22T01:58:17.000+0000"
+        "TestTimestamp": "2024-02-22T01:59:35.000+0000"
     },
     {
         "Children": null,
         "ClassName": "HighlightBadgesController_Test",
         "Method": "testGetBadges",
-        "Message": "System.AuraHandledException: Script-thrown exception",
-        "Outcome": "Fail",
-        "StackTrace": "Class.HighlightBadgesController.getBadges: line 13, column 1\nClass.HighlightBadgesController_Test.testGetBadges: line 26, column 1",
+        "Message": null,
+        "Outcome": "Pass",
+        "StackTrace": null,
         "Stats": {
-            "duration": 965
+            "duration": 933,
+            "TESTING_LIMITS: Number of SOQL queries": {
+                "used": 4,
+                "allowed": 100
+            },
+            "TESTING_LIMITS: Number of Email Invocations": {
+                "used": 0,
+                "allowed": 10
+            },
+            "TESTING_LIMITS: Number of future calls": {
+                "used": 0,
+                "allowed": 50
+            },
+            "TESTING_LIMITS: Number of DML rows": {
+                "used": 1,
+                "allowed": 10000
+            },
+            "TESTING_LIMITS: Maximum CPU time": {
+                "used": 423,
+                "allowed": 10000
+            },
+            "TESTING_LIMITS: Number of query rows": {
+                "used": 4,
+                "allowed": 50000
+            },
+            "TESTING_LIMITS: Number of DML statements": {
+                "used": 1,
+                "allowed": 150
+            },
+            "TESTING_LIMITS: Number of Mobile Apex push calls": {
+                "used": 0,
+                "allowed": 10
+            },
+            "TESTING_LIMITS: Number of SOSL queries": {
+                "used": 0,
+                "allowed": 20
+            },
+            "TESTING_LIMITS: Number of callouts": {
+                "used": 0,
+                "allowed": 100
+            }
         },
-        "TestTimestamp": "2024-02-22T01:58:17.000+0000"
+        "TestTimestamp": "2024-02-22T01:59:35.000+0000"
     },
     {
         "Children": null,
@@ -31,7 +71,7 @@
         "Outcome": "Pass",
         "StackTrace": null,
         "Stats": {
-            "duration": 54,
+            "duration": 62,
             "TESTING_LIMITS: Number of SOQL queries": {
                 "used": 0,
                 "allowed": 100
@@ -49,7 +89,7 @@
                 "allowed": 10000
             },
             "TESTING_LIMITS: Maximum CPU time": {
-                "used": 16,
+                "used": 15,
                 "allowed": 10000
             },
             "TESTING_LIMITS: Number of query rows": {
@@ -73,31 +113,111 @@
                 "allowed": 100
             }
         },
-        "TestTimestamp": "2024-02-22T01:58:17.000+0000"
+        "TestTimestamp": "2024-02-22T01:59:35.000+0000"
     },
     {
         "Children": null,
         "ClassName": "HighlightBadgesService_Test",
         "Method": "testGetChildBadge",
-        "Message": "System.SObjectException: SObject row was retrieved via SOQL without querying the requested field: Highlight_Badge_Definition__c.Limit__c",
-        "Outcome": "Fail",
-        "StackTrace": "Class.HighlightBadgeQueryBuilder.getQueryFromDefinition: line 61, column 1\nClass.HighlightBadgeQueryBuilder.getQueryString: line 30, column 1\nClass.HighlightBadgesService.getBadgeWrappers: line 64, column 1\nClass.HighlightBadgesService.getBadges: line 38, column 1\nClass.HighlightBadgesService_Test.testGetChildBadge: line 42, column 1",
+        "Message": null,
+        "Outcome": "Pass",
+        "StackTrace": null,
         "Stats": {
-            "duration": 880
+            "duration": 774,
+            "TESTING_LIMITS: Number of SOQL queries": {
+                "used": 4,
+                "allowed": 100
+            },
+            "TESTING_LIMITS: Number of Email Invocations": {
+                "used": 0,
+                "allowed": 10
+            },
+            "TESTING_LIMITS: Number of future calls": {
+                "used": 0,
+                "allowed": 50
+            },
+            "TESTING_LIMITS: Number of DML rows": {
+                "used": 1,
+                "allowed": 10000
+            },
+            "TESTING_LIMITS: Maximum CPU time": {
+                "used": 374,
+                "allowed": 10000
+            },
+            "TESTING_LIMITS: Number of query rows": {
+                "used": 5,
+                "allowed": 50000
+            },
+            "TESTING_LIMITS: Number of DML statements": {
+                "used": 1,
+                "allowed": 150
+            },
+            "TESTING_LIMITS: Number of Mobile Apex push calls": {
+                "used": 0,
+                "allowed": 10
+            },
+            "TESTING_LIMITS: Number of SOSL queries": {
+                "used": 0,
+                "allowed": 20
+            },
+            "TESTING_LIMITS: Number of callouts": {
+                "used": 0,
+                "allowed": 100
+            }
         },
-        "TestTimestamp": "2024-02-22T01:58:18.000+0000"
+        "TestTimestamp": "2024-02-22T01:59:35.000+0000"
     },
     {
         "Children": null,
         "ClassName": "HighlightBadgesService_Test",
         "Method": "testGetCommonParentBadge",
-        "Message": "System.SObjectException: SObject row was retrieved via SOQL without querying the requested field: Highlight_Badge_Definition__c.Limit__c",
-        "Outcome": "Fail",
-        "StackTrace": "Class.HighlightBadgeQueryBuilder.getQueryFromDefinition: line 61, column 1\nClass.HighlightBadgeQueryBuilder.getQueryString: line 30, column 1\nClass.HighlightBadgesService.getBadgeWrappers: line 64, column 1\nClass.HighlightBadgesService.getBadges: line 38, column 1\nClass.HighlightBadgesService_Test.testGetCommonParentBadge: line 73, column 1",
+        "Message": null,
+        "Outcome": "Pass",
+        "StackTrace": null,
         "Stats": {
-            "duration": 496
+            "duration": 532,
+            "TESTING_LIMITS: Number of SOQL queries": {
+                "used": 4,
+                "allowed": 100
+            },
+            "TESTING_LIMITS: Number of Email Invocations": {
+                "used": 0,
+                "allowed": 10
+            },
+            "TESTING_LIMITS: Number of future calls": {
+                "used": 0,
+                "allowed": 50
+            },
+            "TESTING_LIMITS: Number of DML rows": {
+                "used": 1,
+                "allowed": 10000
+            },
+            "TESTING_LIMITS: Maximum CPU time": {
+                "used": 203,
+                "allowed": 10000
+            },
+            "TESTING_LIMITS: Number of query rows": {
+                "used": 5,
+                "allowed": 50000
+            },
+            "TESTING_LIMITS: Number of DML statements": {
+                "used": 1,
+                "allowed": 150
+            },
+            "TESTING_LIMITS: Number of Mobile Apex push calls": {
+                "used": 0,
+                "allowed": 10
+            },
+            "TESTING_LIMITS: Number of SOSL queries": {
+                "used": 0,
+                "allowed": 20
+            },
+            "TESTING_LIMITS: Number of callouts": {
+                "used": 0,
+                "allowed": 100
+            }
         },
-        "TestTimestamp": "2024-02-22T01:58:18.000+0000"
+        "TestTimestamp": "2024-02-22T01:59:36.000+0000"
     },
     {
         "Children": null,
@@ -109,7 +229,7 @@
         "Stats": {
             "duration": 4
         },
-        "TestTimestamp": "2024-02-22T01:58:19.000+0000"
+        "TestTimestamp": "2024-02-22T01:59:37.000+0000"
     },
     {
         "Children": null,
@@ -121,18 +241,58 @@
         "Stats": {
             "duration": 3
         },
-        "TestTimestamp": "2024-02-22T01:58:19.000+0000"
+        "TestTimestamp": "2024-02-22T01:59:37.000+0000"
     },
     {
         "Children": null,
         "ClassName": "HighlightBadgesService_Test",
         "Method": "testSOQLLimitHandling",
-        "Message": "System.SObjectException: SObject row was retrieved via SOQL without querying the requested field: Highlight_Badge_Definition__c.Limit__c",
-        "Outcome": "Fail",
-        "StackTrace": "Class.HighlightBadgeQueryBuilder.getQueryFromDefinition: line 61, column 1\nClass.HighlightBadgeQueryBuilder.getQueryString: line 30, column 1\nClass.HighlightBadgesService.getBadgeWrappers: line 64, column 1\nClass.HighlightBadgesService.getBadges: line 38, column 1\nClass.HighlightBadgesService_Test.testSOQLLimitHandling: line 122, column 1",
+        "Message": null,
+        "Outcome": "Pass",
+        "StackTrace": null,
         "Stats": {
-            "duration": 729
+            "duration": 1436,
+            "TESTING_LIMITS: Number of SOQL queries": {
+                "used": 100,
+                "allowed": 100
+            },
+            "TESTING_LIMITS: Number of Email Invocations": {
+                "used": 0,
+                "allowed": 10
+            },
+            "TESTING_LIMITS: Number of future calls": {
+                "used": 0,
+                "allowed": 50
+            },
+            "TESTING_LIMITS: Number of DML rows": {
+                "used": 102,
+                "allowed": 10000
+            },
+            "TESTING_LIMITS: Maximum CPU time": {
+                "used": 198,
+                "allowed": 10000
+            },
+            "TESTING_LIMITS: Number of query rows": {
+                "used": 199,
+                "allowed": 50000
+            },
+            "TESTING_LIMITS: Number of DML statements": {
+                "used": 2,
+                "allowed": 150
+            },
+            "TESTING_LIMITS: Number of Mobile Apex push calls": {
+                "used": 0,
+                "allowed": 10
+            },
+            "TESTING_LIMITS: Number of SOSL queries": {
+                "used": 0,
+                "allowed": 20
+            },
+            "TESTING_LIMITS: Number of callouts": {
+                "used": 0,
+                "allowed": 100
+            }
         },
-        "TestTimestamp": "2024-02-22T01:58:19.000+0000"
+        "TestTimestamp": "2024-02-22T01:59:37.000+0000"
     }
 ]
