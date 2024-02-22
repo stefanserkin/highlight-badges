@@ -1,10 +1,31 @@
 <testsuite tests="8">
-  <testcase classname="HighlightBadgeQueryBuilder_Test" name="testBasicQuery" time="29" />
-  <testcase classname="HighlightBadgesController_Test" name="testGetBadges" time="863" />
-  <testcase classname="HighlightBadgesService_Test" name="testConstructor" time="67" />
-  <testcase classname="HighlightBadgesService_Test" name="testGetChildBadge" time="980" />
-  <testcase classname="HighlightBadgesService_Test" name="testGetCommonParentBadge" time="552" />
+  <testcase classname="HighlightBadgeQueryBuilder_Test" name="testBasicQuery" time="26" />
+  <testcase classname="HighlightBadgesController_Test" name="testGetBadges" time="965">
+    <failure type="failed" message="System.AuraHandledException: Script-thrown exception"><![CDATA[Class.HighlightBadgesController.getBadges: line 13, column 1
+Class.HighlightBadgesController_Test.testGetBadges: line 26, column 1]]></failure>
+  </testcase>
+  <testcase classname="HighlightBadgesService_Test" name="testConstructor" time="54" />
+  <testcase classname="HighlightBadgesService_Test" name="testGetChildBadge" time="880">
+    <failure type="failed" message="System.SObjectException: SObject row was retrieved via SOQL without querying the requested field: Highlight_Badge_Definition__c.Limit__c"><![CDATA[Class.HighlightBadgeQueryBuilder.getQueryFromDefinition: line 61, column 1
+Class.HighlightBadgeQueryBuilder.getQueryString: line 30, column 1
+Class.HighlightBadgesService.getBadgeWrappers: line 64, column 1
+Class.HighlightBadgesService.getBadges: line 38, column 1
+Class.HighlightBadgesService_Test.testGetChildBadge: line 42, column 1]]></failure>
+  </testcase>
+  <testcase classname="HighlightBadgesService_Test" name="testGetCommonParentBadge" time="496">
+    <failure type="failed" message="System.SObjectException: SObject row was retrieved via SOQL without querying the requested field: Highlight_Badge_Definition__c.Limit__c"><![CDATA[Class.HighlightBadgeQueryBuilder.getQueryFromDefinition: line 61, column 1
+Class.HighlightBadgeQueryBuilder.getQueryString: line 30, column 1
+Class.HighlightBadgesService.getBadgeWrappers: line 64, column 1
+Class.HighlightBadgesService.getBadges: line 38, column 1
+Class.HighlightBadgesService_Test.testGetCommonParentBadge: line 73, column 1]]></failure>
+  </testcase>
   <testcase classname="HighlightBadgesService_Test" name="testGetSourceBadge" time="4" />
   <testcase classname="HighlightBadgesService_Test" name="testNoBadgesForRecord" time="3" />
-  <testcase classname="HighlightBadgesService_Test" name="testSOQLLimitHandling" time="1464" />
+  <testcase classname="HighlightBadgesService_Test" name="testSOQLLimitHandling" time="729">
+    <failure type="failed" message="System.SObjectException: SObject row was retrieved via SOQL without querying the requested field: Highlight_Badge_Definition__c.Limit__c"><![CDATA[Class.HighlightBadgeQueryBuilder.getQueryFromDefinition: line 61, column 1
+Class.HighlightBadgeQueryBuilder.getQueryString: line 30, column 1
+Class.HighlightBadgesService.getBadgeWrappers: line 64, column 1
+Class.HighlightBadgesService.getBadges: line 38, column 1
+Class.HighlightBadgesService_Test.testSOQLLimitHandling: line 122, column 1]]></failure>
+  </testcase>
 </testsuite>
