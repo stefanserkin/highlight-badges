@@ -159,15 +159,18 @@ private class HighlightBadgesService_Test {
 
     @IsTest
     static void testNoDefinitions() {
-        delete [SELECT Id FROM Highlight_Badge_Definition__c];
+        User u = TestDataFactory.createTestUser('Rey', 'Ordonez', 'Admin');
         Contact ct = [SELECT Id FROM Contact LIMIT 1];
         List<HighlightBadge> lstBadges;
         Test.startTest();
-        HighlightBadgesService service = new HighlightBadgesService(
-            ct.Id, 
-            'Contact'
-        );
-        lstBadges = service.getBadges();
+        System.runAs(u) {
+            delete [SELECT Id FROM Highlight_Badge_Definition__c];
+            HighlightBadgesService service = new HighlightBadgesService(
+                ct.Id, 
+                'Contact'
+            );
+            lstBadges = service.getBadges();
+        }
         Test.stopTest();
         Assert.isTrue(lstBadges.isEmpty(), 'Should not have received any badges');
     }
