@@ -20,6 +20,7 @@ public with sharing class HighlightBadgesService {
     private static final String DEFAULT_ICON_NAME = 'utility:info';
     private static final String MERGE_FIELD_REGEX = '\\{!.+?\\}';
     private static final String DEFAULT_BADGE_FIELDSET = 'Name';
+    private static final String ALERT_TYPE_TOAST = 'Toast';
 
     private Map<String, Id> mapParentIds;
 
@@ -93,6 +94,10 @@ public with sharing class HighlightBadgesService {
                 badge.hasAlert = definition.Alert__c;
                 badge.alertMessage = getBadgeAlertMessage(definition, obj);
                 badge.alertType = definition.Alert_Type__c != null ? definition.Alert_Type__c : null;
+                if (badge.alertType == ALERT_TYPE_TOAST) {
+                    badge.toastVariant = definition.Toast_Variant__c;
+                    badge.toastMode = definition.Toast_Mode__c;
+                }
 
                 lstBadges.add(badge);
             }
@@ -272,7 +277,9 @@ public with sharing class HighlightBadgesService {
                    Label_Color__c, 
                    Alert__c, 
                    Alert_Message__c, 
-                   Alert_Type__c
+                   Alert_Type__c, 
+                   Toast_Variant__c, 
+                   Toast_Mode__c
               FROM Highlight_Badge_Definition__c
              WHERE Display_Object__c = :sourceObject
                AND Active__c = true
