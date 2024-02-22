@@ -96,7 +96,12 @@ public class TestDataFactory {
                 Source_Detail_Fields__c = 'CaseNumber, Subject, Status, Origin', 
                 Label__c = 'Open Case #{!CaseNumber}', 
                 Icon_Name__c = 'utility:case', 
-                Sort_Order__c = 5.00
+                Sort_Order__c = 5.00, 
+                Order_By__c = 'CaseNumber ASC', 
+                Limit__c = 3, 
+                Alert__c = true, 
+                Alert_Type__c = 'Modal', 
+                Alert_Message__c = 'Test important case alert'
             )
         );
 
@@ -111,7 +116,12 @@ public class TestDataFactory {
                 Display_to_Parent_Path__c = 'AccountId', 
                 Filter_Criteria__c = 'Amount > 1000', 
                 Source_Detail_Fields__c = 'Name, StageName, Amount', 
-                Label__c = 'Big Opp'
+                Label__c = 'Big Opp', 
+                Alert__c = true, 
+                Alert_Type__c = 'Toast', 
+                Alert_Message__c = 'Test important opp alert for {!Name}', 
+                Toast_Variant__c = 'success', 
+                Toast_Mode__c = 'sticky'
             )
         );
 

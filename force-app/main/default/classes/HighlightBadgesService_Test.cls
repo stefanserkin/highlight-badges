@@ -126,4 +126,60 @@ private class HighlightBadgesService_Test {
         Test.stopTest();
     }
 
+    @IsTest
+    static void testNoFieldSet() {
+        Contact ct = [SELECT Id FROM Contact LIMIT 1];
+        User u = TestDataFactory.createTestUser('Rey', 'Ordonez', 'Admin');
+
+        List<HighlightBadge> lstBadges;
+        Test.startTest();
+        System.runas(u) {
+            List<Highlight_Badge_Definition__c> lstDefinitions = [SELECT Id, Source_Detail_Fields__c FROM Highlight_Badge_Definition__c];
+            for (Highlight_Badge_Definition__c hbd : lstDefinitions) {
+                hbd.Source_Detail_Fields__c = '';
+            }
+            update lstDefinitions;
+
+            HighlightBadgesService service = new HighlightBadgesService(
+                ct.Id, 
+                'Contact'
+            );
+            lstBadges = service.getBadges();
+        }
+        Test.stopTest();
+
+        for (HighlightBadge badge : lstBadges) {
+            if (badge.sObjectType == HighlightBadgesService.SOBJECT_CASE) {
+                Assert.areEqual('CaseNumber', badge.fieldSet, 'Should have received default case field set');
+            } else {
+                Assert.areEqual('Name', badge.fieldSet, 'Should have received default field set');
+            }
+        }
+    }
+
+    @IsTest
+    static void testNoDefinitions() {
+        delete [SELECT Id FROM Highlight_Badge_Definition__c];
+        Contact ct = [SELECT Id FROM Contact LIMIT 1];
+        List<HighlightBadge> lstBadges;
+        Test.startTest();
+        HighlightBadgesService service = new HighlightBadgesService(
+            ct.Id, 
+            'Contact'
+        );
+        lstBadges = service.getBadges();
+        Test.stopTest();
+        Assert.isTrue(lstBadges.isEmpty(), 'Should not have received any badges');
+    }
+
+    @IsTest
+    static void testToastAlert() {
+        
+    }
+
+    @IsTest
+    static void testModalAlert() {
+        
+    }
+
 }

@@ -21,6 +21,8 @@ public with sharing class HighlightBadgesService {
     private static final String MERGE_FIELD_REGEX = '\\{!.+?\\}';
     private static final String DEFAULT_BADGE_FIELDSET = 'Name';
     private static final String ALERT_TYPE_TOAST = 'Toast';
+    @TestVisible
+    private static final String SOBJECT_CASE = 'Case';
 
     private Map<String, Id> mapParentIds;
 
@@ -89,7 +91,7 @@ public with sharing class HighlightBadgesService {
                 badge.colorStyle = getBadgeColorStyle(definition);
                 badge.labelStyle = getBadgeLabelStyle(definition);
                 badge.fieldSet = String.isBlank(definition.Source_Detail_Fields__c)
-                    ? DEFAULT_BADGE_FIELDSET
+                    ? getDefaultFieldSet(definition.Source_Object__c)
                     : definition.Source_Detail_Fields__c.replaceAll('\\s+', '');
                 badge.hasAlert = definition.Alert__c;
                 badge.alertMessage = getBadgeAlertMessage(definition, obj);
@@ -251,6 +253,15 @@ public with sharing class HighlightBadgesService {
                 : result.replace(m.group(0), '');
         }
         return result;
+    }
+
+    /****************************************************
+     * Returns a valid, default field set for any sobject type
+     * @param String The api name of the sObject type
+     * @return String A comma-separated string of default fields
+     ****************************************************/
+    public static String getDefaultFieldSet(String sObjectType) {
+        return sObjectType == SOBJECT_CASE ? 'CaseNumber' : 'Name';
     }
 
     /****************************************************

@@ -62,7 +62,6 @@ public with sharing class HighlightBadgeQueryBuilder {
             query += ' LIMIT ' + Integer.valueOf(definition.Limit__c);
         }
         
-        System.debug(':::: query --> ' + query);
         return query;
     }
 
@@ -100,9 +99,10 @@ public with sharing class HighlightBadgeQueryBuilder {
         if (!String.isBlank(definition.Source_Detail_Fields__c)) {
             fieldsForSelector.addAll(definition.Source_Detail_Fields__c.replaceAll('\\s+', '').split(','));
         } else {
-            fieldsForSelector.add('Name');
+            fieldsForSelector.add(
+                HighlightBadgesService.getDefaultFieldSet(definition.Source_Object__c)
+            );
         }
-        System.debug('::::: got fields for selector --> ' + fieldsForSelector);
         return fieldsForSelector;
     }
 
