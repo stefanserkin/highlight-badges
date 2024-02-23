@@ -26,9 +26,9 @@ public with sharing class HighlightBadgesService {
 
     private Map<String, Id> mapParentIds;
 
-    /**
+    /****************************************************
      * Get active highlight badges for the source record id
-     */
+     ****************************************************/
     public List<HighlightBadge> getBadges() {
         List<Highlight_Badge_Definition__c> lstBadgeDefinitions = queryForBadgeDefinitions(displayObjectType);
         
@@ -41,6 +41,9 @@ public with sharing class HighlightBadgesService {
         return lstBadges;
     }
 
+    /****************************************************
+     * Get a list of HighlightBadge data wrappers
+     ****************************************************/
     private List<HighlightBadge> getBadgeWrappers(
         List<Highlight_Badge_Definition__c> lstBadgeDefinitions
     ) {
@@ -108,10 +111,10 @@ public with sharing class HighlightBadgesService {
         return lstBadges;
     }
 
-    /**
-     * Map of badge definition ids to the parent object id
+    /****************************************************
+     * Map of api paths to parent object id
      * Find the parent record id from the Source to Parent Path
-     */
+     ****************************************************/
     private Map<String, Id> getParentIdMap(
         List<Highlight_Badge_Definition__c> lstDefinitions
     ) {
@@ -168,7 +171,6 @@ public with sharing class HighlightBadgesService {
      *     to construct a query for
      * @param SObject The api name of the sObject type
      ****************************************************/
-    
     public static String getBadgeAlertMessage(
         Highlight_Badge_Definition__c definition, 
         SObject obj

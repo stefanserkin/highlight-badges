@@ -21,12 +21,7 @@
                 </ul>
             </div>
             <footer class="slds-modal__footer">
-                <template if:true={showCancel}>
-                    <button class="slds-button slds-button_neutral" onclick={handleCloseEvent} title="Cancel">Cancel</button>
-                </template>
-                <template if:true={showOkay}>
-                    <button class="slds-button slds-button_brand" onclick={handleCloseEvent} title="OK">OK</button>
-                </template>
+                <button class="slds-button slds-button_brand" onclick={handleCloseEvent} title="OK">OK</button>
             </footer>
         </div>
     </section>
