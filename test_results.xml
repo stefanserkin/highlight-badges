@@ -1,14 +1,14 @@
 <testsuite tests="12">
-  <testcase classname="HighlightBadgeQueryBuilder_Test" name="testBasicQuery" time="15" />
-  <testcase classname="HighlightBadgesController_Test" name="testGetBadges" time="938" />
-  <testcase classname="HighlightBadgesService_Test" name="testConstructor" time="53" />
-  <testcase classname="HighlightBadgesService_Test" name="testGetChildBadge" time="729" />
-  <testcase classname="HighlightBadgesService_Test" name="testGetCommonParentBadge" time="545" />
+  <testcase classname="HighlightBadgeQueryBuilder_Test" name="testBasicQuery" time="20" />
+  <testcase classname="HighlightBadgesController_Test" name="testGetBadges" time="2659" />
+  <testcase classname="HighlightBadgesService_Test" name="testConstructor" time="71" />
+  <testcase classname="HighlightBadgesService_Test" name="testGetChildBadge" time="1187" />
+  <testcase classname="HighlightBadgesService_Test" name="testGetCommonParentBadge" time="621" />
   <testcase classname="HighlightBadgesService_Test" name="testGetSourceBadge" time="5" />
   <testcase classname="HighlightBadgesService_Test" name="testModalAlert" time="4" />
-  <testcase classname="HighlightBadgesService_Test" name="testNoBadgesForRecord" time="4" />
-  <testcase classname="HighlightBadgesService_Test" name="testNoDefinitions" time="809" />
-  <testcase classname="HighlightBadgesService_Test" name="testNoFieldSet" time="622" />
-  <testcase classname="HighlightBadgesService_Test" name="testSOQLLimitHandling" time="1742" />
-  <testcase classname="HighlightBadgesService_Test" name="testToastAlert" time="4" />
+  <testcase classname="HighlightBadgesService_Test" name="testNoBadgesForRecord" time="5" />
+  <testcase classname="HighlightBadgesService_Test" name="testNoDefinitions" time="1754" />
+  <testcase classname="HighlightBadgesService_Test" name="testNoFieldSet" time="766" />
+  <testcase classname="HighlightBadgesService_Test" name="testSOQLLimitHandling" time="2138" />
+  <testcase classname="HighlightBadgesService_Test" name="testToastAlert" time="5" />
 </testsuite>
