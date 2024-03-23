@@ -2,7 +2,7 @@
 <WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>New_Guided</fullName>
     <availability>online</availability>
-    <description>Opens the Highlight_Badge_Quick_Start tab</description>
+    <description>Opens the Highlight_Badge_Setup tab</description>
     <displayType>massActionButton</displayType>
     <encodingKey>UTF-8</encodingKey>
     <linkType>url</linkType>
@@ -10,5 +10,5 @@
     <openType>replace</openType>
     <protected>false</protected>
     <requireRowSelection>false</requireRowSelection>
-    <url>/lightning/n/Highlight_Badge_Quick_Start</url>
+    <url>/lightning/n/Highlight_Badge_Setup</url>
 </WebLink>
