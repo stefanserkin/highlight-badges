@@ -24,7 +24,7 @@ public with sharing class HighlightBadgesService {
     @TestVisible
     private static final String SOBJECT_CASE = 'Case';
 
-    private Map<String, Id> mapParentIds;
+    private Map<String, Id> mapAncestorIds;
 
     /****************************************************
      * Get active highlight badges for the source record id
@@ -49,7 +49,7 @@ public with sharing class HighlightBadgesService {
     ) {
         List<HighlightBadge> lstBadges = new List<HighlightBadge>();
 
-        Map<String, Id> mapFieldNameToParentId = getParentIdMap(lstBadgeDefinitions);
+        Map<String, Id> mapFieldNameToAncestorId = getAncestorIdMap(lstBadgeDefinitions);
 
         // For each badge definition, get relevant badges
         for (Highlight_Badge_Definition__c definition : lstBadgeDefinitions) {
@@ -58,13 +58,13 @@ public with sharing class HighlightBadgesService {
                 break;
             }
 
-            String parentId = definition.Common_Parent_Object__c == definition.Display_Object__c 
+            String ancestorId = definition.Common_Ancestor_Object__c == definition.Display_Object__c 
                 ? displayRecordId 
-                : mapFieldNameToParentId.get(definition.Display_to_Parent_Path__c);
+                : mapFieldNameToAncestorId.get(definition.Display_to_Ancestor_Path__c);
             HighlightBadgeQueryBuilder queryBuilder = new HighlightBadgeQueryBuilder(
                 definition, 
                 displayRecordId, 
-                parentId
+                ancestorId
             );
             String strQuery = queryBuilder.getQueryString();
 
@@ -112,41 +112,41 @@ public with sharing class HighlightBadgesService {
     }
 
     /****************************************************
-     * Map of api paths to parent object id
-     * Find the parent record id from the Source to Parent Path
+     * Map of api paths to ancestor object id
+     * Find the ancestor record id from the Source to Ancestor Path
      ****************************************************/
-    private Map<String, Id> getParentIdMap(
+    private Map<String, Id> getAncestorIdMap(
         List<Highlight_Badge_Definition__c> lstDefinitions
     ) {
-        if (mapParentIds != null) {
-            return mapParentIds;
+        if (mapAncestorIds != null) {
+            return mapAncestorIds;
         }
         
-        mapParentIds = new Map<String, Id>();
-        Set<String> setParentFields = new Set<String>();
+        mapAncestorIds = new Map<String, Id>();
+        Set<String> setAncestorFields = new Set<String>();
         for (Highlight_Badge_Definition__c def : lstDefinitions) {
-            if (def.Display_Object__c != def.Common_Parent_Object__c) {
-                setParentFields.add(def.Display_to_Parent_Path__c);
+            if (def.Display_Object__c != def.Common_Ancestor_Object__c) {
+                setAncestorFields.add(def.Display_to_Ancestor_Path__c);
             }
         }
 
-        // No need to query if the only parent ids are the record id of the source record
-        if (setParentFields.isEmpty()) {
-            return mapParentIds;
+        // No need to query if the only ancestor id is the record id of the display record
+        if (setAncestorFields.isEmpty()) {
+            return mapAncestorIds;
         }
 
-        List<String> lstParentFields = new List<String>();
-        lstParentFields.addAll(setParentFields);
+        List<String> lstAncestorFields = new List<String>();
+        lstAncestorFields.addAll(setAncestorFields);
 
-        String strQuery = 'SELECT ' + String.join(lstParentFields, ', ') + 
+        String strQuery = 'SELECT ' + String.join(lstAncestorFields, ', ') + 
             ' FROM ' + displayObjectType + 
             ' WHERE Id = \'' + displayRecordId + '\' LIMIT 1';
 
         List<SObject> lstObjs = Database.query(strQuery, AccessLevel.USER_MODE);
-        for (String fieldName : setParentFields) {
-            mapParentIds.put(fieldName, (Id) lstObjs[0].get(fieldName) );
+        for (String fieldName : setAncestorFields) {
+            mapAncestorIds.put(fieldName, (Id) lstObjs[0].get(fieldName) );
         }
-        return mapParentIds;
+        return mapAncestorIds;
     }
 
     /****************************************************
@@ -277,10 +277,10 @@ public with sharing class HighlightBadgesService {
             SELECT Id, 
                    Name, 
                    Display_Object__c, 
-                   Common_Parent_Object__c, 
+                   Common_Ancestor_Object__c, 
                    Source_Object__c, 
-                   Source_to_Parent_Path__c, 
-                   Display_to_Parent_Path__c, 
+                   Source_to_Ancestor_Path__c, 
+                   Display_to_Ancestor_Path__c, 
                    Filter_Criteria__c, 
                    Order_By__c, 
                    Limit__c, 

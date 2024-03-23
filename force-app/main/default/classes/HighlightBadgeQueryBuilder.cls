@@ -14,16 +14,16 @@ public with sharing class HighlightBadgeQueryBuilder {
 
     private Highlight_Badge_Definition__c definition;
     private Id recordId;
-    private Id parentId;
+    private Id ancestorId;
 
     public HighlightBadgeQueryBuilder(
         Highlight_Badge_Definition__c definition, 
         Id recordId, 
-        Id parentId
+        Id ancestorId
     ) {
         this.definition = definition;
         this.recordId = recordId;
-        this.parentId = parentId;
+        this.ancestorId = ancestorId;
     }
 
     public String getQueryString() {
@@ -47,7 +47,7 @@ public with sharing class HighlightBadgeQueryBuilder {
         query += 'FROM ' + definition.Source_Object__c + ' ';
 
         // WHERE
-        query += 'WHERE ' + definition.Source_to_Parent_Path__c + ' = :parentId ';
+        query += 'WHERE ' + definition.Source_to_Ancestor_Path__c + ' = :ancestorId ';
         if (!String.isBlank(definition.Filter_Criteria__c)) {
             query += 'AND ' + definition.Filter_Criteria__c + ' ';
         }

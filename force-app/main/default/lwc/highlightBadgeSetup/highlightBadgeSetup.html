@@ -3,118 +3,132 @@
     <lightning-card title="Highlight Badge Setup" icon-name="standard:scan_card">
         <lightning-spinner lwc:if={isLoading} alternative-text="Loading..." variant="base" size="medium"></lightning-spinner>
         
+        <div slot="actions">
+            <lightning-button variant="neutral" title="Cancel" label="Cancel" onclick={handleCancel}></lightning-button>
+        </div>
+
         <template lwc:if={displayObjects}>
-            <!-- BADGE DEFINITION NAME -->
-            <lightning-input
-                name="badgeDefinitionNameField" 
-                label="Highlight Badge Definition Name" 
-                value={badgeDefinitionName} 
-                field-level-help="An internal name for the the badge definition"
-                onchange={handleNameChange} 
-                class="slds-var-m-around_medium" 
-            ></lightning-input>
-            <!-- DISPLAY OBJECT -->
-            <lightning-combobox
-                name="displayObjectPicklist" 
-                label="Select Display Object" 
-                value={selectedDisplayObject} 
-                options={displayObjectOptions} 
-                onchange={handleDisplayObjectChange} 
-                disabled={isDisabled} 
-                field-level-help="The badge will be displayed on this object's record pages" 
-                class="slds-var-m-around_medium" 
-                required
-            ></lightning-combobox>
 
-            <!-- SOURCE TYPE -->
-            <lightning-combobox
-                name="sourceRelationshipPicklist"
-                label="What object is the badge information based on?"
-                value={selectedSourceObjectRelationship}
-                options={sourceObjectRelationshipOptions} 
-                onchange={handleSourceObjectRelationshipChange} 
-                disabled={isDisabled} 
-                class="slds-var-m-around_medium"
-                required
-            ></lightning-combobox>
-
-            <template lwc:if={sourceIsRelatedObject}>
-                <!-- SOURCE OBJECT -->
-                <lightning-combobox
-                    lwc:if={hasLoadedChildObjects} 
-                    name="sourceObjectPicklist" 
-                    label="Select Source Object" 
-                    value={selectedDisplayChildRelationship} 
-                    options={childObjectOptions} 
-                    onchange={handleSourceObjectChange} 
-                    disabled={isDisabled} 
-                    field-level-help="The object that this badge's data is based on"
-                    class="slds-var-m-around_medium"
-                    required
-                ></lightning-combobox>
-
-                <!-- ANCESTOR TYPE -->
-                <p class="slds-var-m-horizontal_medium slds-var-m-top_medium slds-var-m-bottom_small">
-                    You can show {selectedSourceObject} records directly related to the {selectedDisplayObject} record the user is viewing, or all {selectedSourceObject} records related to a common ancestor.
-                </p>
-                <lightning-combobox
-                    name="ancestorTypePicklist"
-                    label="Show records related to"
-                    value={selectedAncestorType}
-                    options={ancestorTypeOptions} 
-                    onchange={handleAncestorTypeChange} 
-                    disabled={isDisabled} 
-                    class="slds-var-m-horizontal_medium slds-var-m-bottom_medium"
-                    required
-                ></lightning-combobox>
-                
-                <!-- ANCESTOR OBJECT -->
-                <lightning-combobox
-                    lwc:if={showCommonAncestorPicklist}
-                    name="commonParentObjectPicklist"
-                    label="Select the common ancestor between display and child objects"
-                    value={selectedCommonParentObject}
-                    options={commonAncestorOptions} 
-                    onchange={handleCommonParentObjectChange} 
-                    disabled={isDisabled} 
-                    class="slds-var-m-around_medium"
-                    required
-                ></lightning-combobox>
-
-                <template lwc:if={hasLoadedRelationshipPaths}>
-                    <!-- DISPLAY TO ANCESTOR PATH -->
+            <lightning-layout>
+                <lightning-layout-item size="3"></lightning-layout-item>
+                <!-- SET UP OBJECT RELATIONSHIPS -->
+                <lightning-layout-item size="6">
+                    <!-- BADGE DEFINITION NAME -->
+                    <lightning-input
+                        name="badgeDefinitionNameField" 
+                        label="Highlight Badge Definition Name" 
+                        value={badgeDefinitionName} 
+                        field-level-help="An internal name for the the badge definition"
+                        onchange={handleNameChange} 
+                        class="slds-var-m-around_medium input-field" 
+                    ></lightning-input>
+                    <!-- DISPLAY OBJECT -->
                     <lightning-combobox
-                        name="displayToAncestorPathPicklist"
-                        label="API Path from the display object to the common ancestor"
-                        value={selectedDisplayRelationshipPath}
-                        options={displayPathOptions} 
-                        onchange={handleSelectedDisplayPath} 
+                        name="displayObjectPicklist" 
+                        label="Select Display Object" 
+                        value={selectedDisplayObject} 
+                        options={displayObjectOptions} 
+                        onchange={handleDisplayObjectChange} 
                         disabled={isDisabled} 
-                        class="slds-var-m-around_medium"
+                        field-level-help="The badge will be displayed on this object's record pages" 
+                        class="slds-var-m-around_medium input-field" 
                         required
                     ></lightning-combobox>
-                    <!-- SOURCE TO ANCESTOR PATH -->
+
+                    <!-- SOURCE TYPE -->
                     <lightning-combobox
-                        name="sourceToAncestorPathPicklist"
-                        label="API Path from the source object to the common ancestor"
-                        value={selectedSourceRelationshipPath}
-                        options={sourcePathOptions} 
-                        onchange={handleSelectedSourcePath} 
+                        name="sourceRelationshipPicklist"
+                        label="What object is the badge information based on?"
+                        value={selectedSourceObjectRelationship}
+                        options={sourceObjectRelationshipOptions} 
+                        onchange={handleSourceObjectRelationshipChange} 
                         disabled={isDisabled} 
-                        class="slds-var-m-around_medium"
+                        class="slds-var-m-around_medium input-field"
                         required
                     ></lightning-combobox>
-                </template>
-            </template>
 
-            <lightning-button 
-                variant="brand" 
-                title="Save" 
-                label="Save" 
-                onclick={handleSave}
-                disabled={saveDisabled} 
-                class="slds-var-m-around_medium"
-            ></lightning-button>
+                    <template lwc:if={sourceIsRelatedObject}>
+                        <!-- SOURCE OBJECT -->
+                        <lightning-combobox
+                            lwc:if={hasLoadedChildObjects} 
+                            name="sourceObjectPicklist" 
+                            label="Select Source Object" 
+                            value={selectedDisplayChildRelationship} 
+                            options={childObjectOptions} 
+                            onchange={handleSourceObjectChange} 
+                            disabled={isDisabled} 
+                            field-level-help="The object that this badge's data is based on"
+                            class="slds-var-m-around_medium input-field"
+                            required
+                        ></lightning-combobox>
+
+                        <!-- ANCESTOR TYPE -->
+                        <p class="slds-var-m-horizontal_medium slds-var-m-top_medium slds-var-m-bottom_small">
+                            You can show {selectedSourceObject} records directly related to the {selectedDisplayObject} record the user is viewing, or all {selectedSourceObject} records related to a common ancestor.
+                        </p>
+                        <lightning-combobox
+                            name="ancestorTypePicklist"
+                            label="Show records related to"
+                            value={selectedAncestorType}
+                            options={ancestorTypeOptions} 
+                            onchange={handleAncestorTypeChange} 
+                            disabled={isDisabled} 
+                            class="slds-var-m-horizontal_medium slds-var-m-bottom_medium input-field"
+                            required
+                        ></lightning-combobox>
+                        
+                        <!-- ANCESTOR OBJECT -->
+                        <lightning-combobox
+                            lwc:if={showCommonAncestorPicklist}
+                            name="commonParentObjectPicklist"
+                            label="Select the common ancestor between display and child objects"
+                            value={selectedCommonParentObject}
+                            options={commonAncestorOptions} 
+                            onchange={handleCommonParentObjectChange} 
+                            disabled={isDisabled} 
+                            class="slds-var-m-around_medium input-field"
+                            required
+                        ></lightning-combobox>
+
+                        <template lwc:if={hasLoadedRelationshipPaths}>
+                            <!-- DISPLAY TO ANCESTOR PATH -->
+                            <lightning-combobox
+                                name="displayToAncestorPathPicklist"
+                                label={displayToAncestorPathLabel}
+                                value={selectedDisplayRelationshipPath}
+                                options={displayPathOptions} 
+                                onchange={handleSelectedDisplayPath} 
+                                disabled={isDisabled} 
+                                class="slds-var-m-around_medium input-field"
+                                required
+                            ></lightning-combobox>
+                            <!-- SOURCE TO ANCESTOR PATH -->
+                            <lightning-combobox
+                                name="sourceToAncestorPathPicklist"
+                                label="API Path from the source object to the common ancestor"
+                                value={selectedSourceRelationshipPath}
+                                options={sourcePathOptions} 
+                                onchange={handleSelectedSourcePath} 
+                                disabled={isDisabled} 
+                                class="slds-var-m-around_medium input-field"
+                                required
+                            ></lightning-combobox>
+                        </template>
+                    </template>
+
+                    <!-- SAVE BUTTON -->
+                    <lightning-button 
+                        variant="brand" 
+                        title="Save" 
+                        label="Save" 
+                        onclick={handleSave}
+                        disabled={saveDisabled} 
+                        class="slds-var-m-around_medium"
+                    ></lightning-button>
+                </lightning-layout-item>
+                <lightning-layout-item size="3"></lightning-layout-item>
+            </lightning-layout>
+
         </template>
     </lightning-card>
 

@@ -62,7 +62,7 @@ private class HighlightBadgesService_Test {
     }
 
     @IsTest
-    static void testGetCommonParentBadge() {
+    static void testGetCommonAncestorBadge() {
         Contact ct = [SELECT Id, (SELECT Id FROM Opportunities WHERE Amount > 100) FROM Contact LIMIT 1];
         Assert.isFalse(ct.Opportunities.isEmpty(), 'Test contact should have an eligible opportunity');
 
@@ -80,7 +80,7 @@ private class HighlightBadgesService_Test {
             }
             Assert.isTrue(
                 hasOppBadge, 
-                'Should have received a badge for opportunities over $100 from the parent account'
+                'Should have received a badge for opportunities over $100 from the ancestor account'
             );
         }
     }
@@ -107,9 +107,9 @@ private class HighlightBadgesService_Test {
                         Name = 'Opp Over ' + String.valueOf(i), 
                         Display_Object__c = 'Contact', 
                         Source_Object__c = 'Opportunity', 
-                        Common_Parent_Object__c = 'Account', 
-                        Source_to_Parent_Path__c = 'AccountId', 
-                        Display_to_Parent_Path__c = 'AccountId', 
+                        Common_Ancestor_Object__c = 'Account', 
+                        Source_to_Ancestor_Path__c = 'AccountId', 
+                        Display_to_Ancestor_Path__c = 'AccountId', 
                         Filter_Criteria__c = 'Amount > ' + String.valueOf(i), 
                         Source_Detail_Fields__c = 'Name, StageName, Amount', 
                         Label__c = 'Big Opp'
