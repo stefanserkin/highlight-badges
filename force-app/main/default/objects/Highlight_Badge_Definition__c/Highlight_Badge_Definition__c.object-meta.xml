@@ -161,6 +161,7 @@
     </nameField>
     <pluralLabel>Highlight Badge Definitions</pluralLabel>
     <searchLayouts>
+        <listViewButtons>New_Guided</listViewButtons>
         <searchResultsAdditionalFields>Display_Object__c</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>Active__c</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>Sort_Order__c</searchResultsAdditionalFields>
