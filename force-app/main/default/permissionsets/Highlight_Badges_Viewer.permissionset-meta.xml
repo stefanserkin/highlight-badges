@@ -36,12 +36,12 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Highlight_Badge_Definition__c.Common_Parent_Object__c</field>
+        <field>Highlight_Badge_Definition__c.Common_Ancestor_Object__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Highlight_Badge_Definition__c.Display_to_Parent_Path__c</field>
+        <field>Highlight_Badge_Definition__c.Display_to_Ancestor_Path__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -91,7 +91,7 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Highlight_Badge_Definition__c.Source_to_Parent_Path__c</field>
+        <field>Highlight_Badge_Definition__c.Source_to_Ancestor_Path__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
