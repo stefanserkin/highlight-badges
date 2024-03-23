@@ -1,14 +1,14 @@
 <testsuite tests="12">
-  <testcase classname="HighlightBadgeQueryBuilder_Test" name="testBasicQuery" time="6" />
-  <testcase classname="HighlightBadgesController_Test" name="testGetBadges" time="1121" />
-  <testcase classname="HighlightBadgesService_Test" name="testConstructor" time="76" />
-  <testcase classname="HighlightBadgesService_Test" name="testGetChildBadge" time="1246" />
-  <testcase classname="HighlightBadgesService_Test" name="testGetCommonParentBadge" time="801" />
+  <testcase classname="HighlightBadgeQueryBuilder_Test" name="testBasicQuery" time="7" />
+  <testcase classname="HighlightBadgesController_Test" name="testGetBadges" time="957" />
+  <testcase classname="HighlightBadgesService_Test" name="testConstructor" time="67" />
+  <testcase classname="HighlightBadgesService_Test" name="testGetChildBadge" time="862" />
+  <testcase classname="HighlightBadgesService_Test" name="testGetCommonParentBadge" time="530" />
   <testcase classname="HighlightBadgesService_Test" name="testGetSourceBadge" time="4" />
-  <testcase classname="HighlightBadgesService_Test" name="testModalAlert" time="4" />
+  <testcase classname="HighlightBadgesService_Test" name="testModalAlert" time="3" />
   <testcase classname="HighlightBadgesService_Test" name="testNoBadgesForRecord" time="3" />
-  <testcase classname="HighlightBadgesService_Test" name="testNoDefinitions" time="1184" />
-  <testcase classname="HighlightBadgesService_Test" name="testNoFieldSet" time="661" />
-  <testcase classname="HighlightBadgesService_Test" name="testSOQLLimitHandling" time="1695" />
-  <testcase classname="HighlightBadgesService_Test" name="testToastAlert" time="15" />
+  <testcase classname="HighlightBadgesService_Test" name="testNoDefinitions" time="981" />
+  <testcase classname="HighlightBadgesService_Test" name="testNoFieldSet" time="601" />
+  <testcase classname="HighlightBadgesService_Test" name="testSOQLLimitHandling" time="1381" />
+  <testcase classname="HighlightBadgesService_Test" name="testToastAlert" time="4" />
 </testsuite>
