@@ -271,7 +271,7 @@ public with sharing class HighlightBadgesService {
      * @param The api name of the source object
      ****************************************************/
     private List<Highlight_Badge_Definition__c> queryForBadgeDefinitions(
-        String sourceObject
+        String displayObject
     ) {
         return [
             SELECT Id, 
@@ -295,7 +295,7 @@ public with sharing class HighlightBadgesService {
                    Toast_Variant__c, 
                    Toast_Mode__c
               FROM Highlight_Badge_Definition__c
-             WHERE Display_Object__c = :sourceObject
+             WHERE Display_Object__c = :displayObject
                AND Active__c = true
               WITH USER_MODE
              ORDER BY Sort_Order__c ASC
