@@ -3,6 +3,7 @@
     <apiVersion>59.0</apiVersion>
     <isExposed>true</isExposed>
     <masterLabel>Highlight Badge Setup</masterLabel>
+    <description>Setup wizard for a new Highlight Badge Definition</description>
     <targets>
         <target>lightning__Tab</target>
     </targets>
