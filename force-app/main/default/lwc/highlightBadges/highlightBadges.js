@@ -83,7 +83,7 @@ export default class HighlightBadges extends LightningElement {
         this.showModalAlert = false;
     }
 
-    showToast(title, message, variant, mode) {
+    showToast(title = 'Alert', message = 'Undefined alert', variant = 'info', mode = 'dismissible') {
         const toast = new ShowToastEvent({
             title,
             message,
