@@ -1,19 +1,19 @@
 <testsuite tests="17">
-  <testcase classname="HighlightBadgeQueryBuilder_Test" name="testBasicQuery" time="4" />
-  <testcase classname="HighlightBadgeSetupController_Test" name="testFindInverseRelationshipField" time="1096" />
-  <testcase classname="HighlightBadgeSetupController_Test" name="testGetChildObjects" time="312" />
-  <testcase classname="HighlightBadgeSetupController_Test" name="testGetCommonParentObjects" time="129" />
-  <testcase classname="HighlightBadgeSetupController_Test" name="testGetDisplayObjects" time="89" />
+  <testcase classname="HighlightBadgeQueryBuilder_Test" name="testBasicQuery" time="6" />
+  <testcase classname="HighlightBadgeSetupController_Test" name="testFindInverseRelationshipField" time="1418" />
+  <testcase classname="HighlightBadgeSetupController_Test" name="testGetChildObjects" time="730" />
+  <testcase classname="HighlightBadgeSetupController_Test" name="testGetCommonParentObjects" time="124" />
+  <testcase classname="HighlightBadgeSetupController_Test" name="testGetDisplayObjects" time="92" />
   <testcase classname="HighlightBadgeSetupController_Test" name="testGetPossibleAncestorPaths" time="104" />
-  <testcase classname="HighlightBadgesController_Test" name="testGetBadges" time="975" />
-  <testcase classname="HighlightBadgesService_Test" name="testConstructor" time="77" />
-  <testcase classname="HighlightBadgesService_Test" name="testGetChildBadge" time="867" />
-  <testcase classname="HighlightBadgesService_Test" name="testGetCommonAncestorBadge" time="632" />
-  <testcase classname="HighlightBadgesService_Test" name="testGetSourceBadge" time="4" />
+  <testcase classname="HighlightBadgesController_Test" name="testGetBadges" time="1045" />
+  <testcase classname="HighlightBadgesService_Test" name="testConstructor" time="64" />
+  <testcase classname="HighlightBadgesService_Test" name="testGetChildBadge" time="840" />
+  <testcase classname="HighlightBadgesService_Test" name="testGetCommonAncestorBadge" time="541" />
+  <testcase classname="HighlightBadgesService_Test" name="testGetSourceBadge" time="3" />
   <testcase classname="HighlightBadgesService_Test" name="testModalAlert" time="3" />
   <testcase classname="HighlightBadgesService_Test" name="testNoBadgesForRecord" time="4" />
-  <testcase classname="HighlightBadgesService_Test" name="testNoDefinitions" time="2107" />
-  <testcase classname="HighlightBadgesService_Test" name="testNoFieldSet" time="594" />
-  <testcase classname="HighlightBadgesService_Test" name="testSOQLLimitHandling" time="1420" />
+  <testcase classname="HighlightBadgesService_Test" name="testNoDefinitions" time="15044" />
+  <testcase classname="HighlightBadgesService_Test" name="testNoFieldSet" time="782" />
+  <testcase classname="HighlightBadgesService_Test" name="testSOQLLimitHandling" time="1557" />
   <testcase classname="HighlightBadgesService_Test" name="testToastAlert" time="4" />
 </testsuite>
