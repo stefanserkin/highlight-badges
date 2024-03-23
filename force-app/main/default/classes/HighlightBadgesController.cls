@@ -1,5 +1,5 @@
 /**
- * Controller for the highlightsBadges lwc
+ * Controller for the highlightBadges lwc
  * @date 2024
  */
 public with sharing class HighlightBadgesController {
