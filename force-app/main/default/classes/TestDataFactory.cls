@@ -125,6 +125,22 @@ public class TestDataFactory {
             )
         );
 
+        // Complex field path - cases with opportunities from shared contact.account
+        lstDefinitions.add(
+            new Highlight_Badge_Definition__c(
+                Active__c = true, 
+                Name = 'Cases with Opps from Shared Account', 
+                Display_Object__c = 'Case', 
+                Source_Object__c = 'Opportunity', 
+                Common_Ancestor_Object__c = 'Account', 
+                Source_to_Ancestor_Path__c = 'AccountId', 
+                Display_to_Ancestor_Path__c = 'Contact.AccountId', 
+                Filter_Criteria__c = '', 
+                Source_Detail_Fields__c = 'StageName, AccountId, Amount', 
+                Label__c = 'Account has an open opportunity'
+            )
+        );
+
         return lstDefinitions;
     }
 

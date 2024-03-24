@@ -144,9 +144,43 @@ public with sharing class HighlightBadgesService {
 
         List<SObject> lstObjs = Database.query(strQuery, AccessLevel.USER_MODE);
         for (String fieldName : setAncestorFields) {
-            mapAncestorIds.put(fieldName, (Id) lstObjs[0].get(fieldName) );
+            // If the field path traverses objects, we have to do some more work to find the record id
+            if (fieldName.contains('.')) {
+                // Resolve field path that uses dot notation
+                mapAncestorIds.put(fieldName, resolveFieldPath(lstObjs[0], fieldName));
+            } else {
+                // Direct field access
+                mapAncestorIds.put(fieldName, (Id) lstObjs[0].get(fieldName) );
+            }
         }
         return mapAncestorIds;
+    }
+
+    /****************************************************
+     * Returns the value for a given sObject and field path
+     * @param sObject The base object
+     * @param String The field path for the value to return
+     ****************************************************/
+    private static Id resolveFieldPath(
+        sObject record,
+        String fieldPath
+    ) {
+        List<String> pathParts = fieldPath.split('\\.');
+        sObject currentRecord = record;
+
+        for (Integer i = 0; i < pathParts.size() - 1; i++) {
+            String part = pathParts[i];
+            currentRecord = (sObject) currentRecord.getSObject(part);
+
+            if (currentRecord == null) {
+                // Early exit if the relationship does not exist or is null
+                return null;
+            }
+        }
+
+        // Get final part of string to find value from the top level object
+        String finalPart = pathParts[pathParts.size() - 1];
+        return (Id) currentRecord.get(finalPart);
     }
 
     /****************************************************

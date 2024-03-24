@@ -175,6 +175,32 @@ private class HighlightBadgesService_Test {
         Assert.isTrue(lstBadges.isEmpty(), 'Should not have received any badges');
     }
 
+    @IsTest 
+    static void testComplexFieldPath() {
+        User u = TestDataFactory.createTestUser('Rey', 'Ordonez', 'Admin');
+
+        // Get contacts with child cases and opportunities
+        Contact ct = [
+            SELECT Id, AccountId,
+                   (SELECT Id FROM Cases),
+                   (SELECT Id FROM Opportunities)
+              FROM Contact 
+             LIMIT 1
+        ];
+
+        List<HighlightBadge> lstBadges;
+        Test.startTest();
+        HighlightBadgesService service = new HighlightBadgesService(
+            ct.Cases[0].Id,
+            'Case'
+        );
+        lstBadges = service.getBadges();
+        Test.stopTest();
+
+        Assert.isFalse(lstBadges.isEmpty(), 'List of badges should not be empty');
+        Assert.areEqual('Opportunity', lstBadges[0].sObjectType, 'Should have received the opportunity badge with the shared account');
+    }
+
     @IsTest
     static void testToastAlert() {
         
