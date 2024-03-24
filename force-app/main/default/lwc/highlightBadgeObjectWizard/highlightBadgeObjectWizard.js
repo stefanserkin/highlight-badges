@@ -1,22 +1,24 @@
-import { LightningElement, wire } from 'lwc';
-import { NavigationMixin } from 'lightning/navigation';
-import { createRecord } from 'lightning/uiRecordApi';
+import { LightningElement, api, wire } from 'lwc';
+import { updateRecord } from 'lightning/uiRecordApi';
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
 import getDisplayObjects from '@salesforce/apex/HighlightBadgeSetupController.getDisplayObjects';
 import getChildObjects from '@salesforce/apex/HighlightBadgeSetupController.getChildObjects';
-import getCommonParentObjects from '@salesforce/apex/HighlightBadgeSetupController.getCommonAncestorObjects';
+import getCommonAncestorObjects from '@salesforce/apex/HighlightBadgeSetupController.getCommonAncestorObjects';
 import findInverseRelationshipField from '@salesforce/apex/HighlightBadgeSetupController.findInverseRelationshipField';
 import findRelationshipFields from '@salesforce/apex/HighlightBadgeSetupController.getPossibleAncestorPaths';
 
 import BADGE_DEFINITION_OBJECT from '@salesforce/schema/Highlight_Badge_Definition__c';
-import NAME_FIELD from '@salesforce/schema/Highlight_Badge_Definition__c.Name';
+import ID_FIELD from '@salesforce/schema/Highlight_Badge_Definition__c.Id';
 import DISPLAY_OBJ_FIELD from '@salesforce/schema/Highlight_Badge_Definition__c.Display_Object__c';
 import SOURCE_OBJ_FIELD from '@salesforce/schema/Highlight_Badge_Definition__c.Source_Object__c';
 import ANCESTOR_OBJ_FIELD from '@salesforce/schema/Highlight_Badge_Definition__c.Common_Ancestor_Object__c';
 import SOURCE_PATH_FIELD from '@salesforce/schema/Highlight_Badge_Definition__c.Source_to_Ancestor_Path__c';
 import DISPLAY_PATH_FIELD from '@salesforce/schema/Highlight_Badge_Definition__c.Display_to_Ancestor_Path__c';
+import SORT_ORDER_FIELD from '@salesforce/schema/Highlight_Badge_Definition__c.Sort_Order__c';
 
-export default class HighlightBadgeSetup extends NavigationMixin(LightningElement) {
+export default class HighlightBadgeObjectWizard extends LightningElement {
+    @api recordId;
+
     isLoading = false;
     error;
 
@@ -25,15 +27,15 @@ export default class HighlightBadgeSetup extends NavigationMixin(LightningElemen
     childObjects;
     commonAncestorObjects;
 
-    badgeDefinitionName = '';
     selectedDisplayObject;
+    sortOrder = 1.00;
     selectedSourceObject;
     selectedDisplayChildRelationship;
     selectedCommonAncestorObject;
     selectedSourceObjectRelationship;
     selectedAncestorType;
     hasLoadedChildObjects = false;
-    hasLoadedCommonParents = false;
+    hasLoadedCommonAncestors = false;
     hasLoadedRelationshipPaths = false;
 
     ancestorRelationshipPaths;
@@ -63,7 +65,6 @@ export default class HighlightBadgeSetup extends NavigationMixin(LightningElemen
 
     get saveDisabled() {
         return (
-            this.badgeDefinitionName == null || 
             this.selectedDisplayObject == null || 
             this.selectedSourceObject == null || 
             this.selectedCommonAncestorObject == null || 
@@ -121,18 +122,17 @@ export default class HighlightBadgeSetup extends NavigationMixin(LightningElemen
     }
 
     get showCommonAncestorPicklist() {
-        return this.selectedAncestorType == 'ancestor' && this.hasLoadedCommonParents;
-    }
-
-    handleNameChange(event) {
-        this.badgeDefinitionName = event.detail.value;
+        return this.selectedAncestorType == 'ancestor' && this.hasLoadedCommonAncestors;
     }
 
     handleDisplayObjectChange(event) {
         const selectedObj = event.detail.value;
         this.selectedDisplayObject = selectedObj;
-        this.resetForm();
         this.loadChildObjects();
+    }
+
+    handleSortOrderChange(event) {
+        this.sortOrder = event.detail.value;
     }
 
     handleSourceObjectRelationshipChange(event) {
@@ -155,7 +155,7 @@ export default class HighlightBadgeSetup extends NavigationMixin(LightningElemen
         this.selectedSourceObject = childObj.name;
 
         if (this.selectedAncestorType == 'ancestor') {
-            this.loadParentObjects();
+            this.loadAncestorObjects();
         }
     }
 
@@ -166,7 +166,7 @@ export default class HighlightBadgeSetup extends NavigationMixin(LightningElemen
             this.selectedCommonAncestorObject = this.selectedDisplayObject;
 
             findInverseRelationshipField({
-                parentObjectName: this.selectedDisplayObject, 
+                ancestorObjectName: this.selectedDisplayObject, 
                 childObjectName: this.selectedSourceObject, 
                 relationshipName: this.selectedDisplayChildRelationship
             })
@@ -178,11 +178,11 @@ export default class HighlightBadgeSetup extends NavigationMixin(LightningElemen
             });
             
         } else if (this.selectedAncestorType == 'ancestor') {
-            this.loadParentObjects();
+            this.loadAncestorObjects();
         }
     }
 
-    handleCommonParentObjectChange(event) {
+    handleCommonAncestorObjectChange(event) {
         const selectedObj = event.detail.value;
         this.selectedCommonAncestorObject = selectedObj;
         this.fetchRelationshipPaths();
@@ -210,15 +210,15 @@ export default class HighlightBadgeSetup extends NavigationMixin(LightningElemen
         }
     }
 
-    loadParentObjects() {
+    loadAncestorObjects() {
         if (this.selectedDisplayObject && this.selectedSourceObject) {
-            getCommonParentObjects({
+            getCommonAncestorObjects({
                 displayObject: this.selectedDisplayObject, 
                 sourceObject: this.selectedSourceObject
             })
             .then(result => {
                 this.commonAncestorObjects = result;
-                this.hasLoadedCommonParents = true;
+                this.hasLoadedCommonAncestors = true;
                 this.error = undefined;
             })
             .catch(error => {
@@ -235,7 +235,7 @@ export default class HighlightBadgeSetup extends NavigationMixin(LightningElemen
         findRelationshipFields({ 
             displayObjectApiName: this.selectedDisplayObject,
             sourceObjectApiName: this.selectedSourceObject,
-            commonParentApiName: this.selectedCommonAncestorObject
+            commonAncestorApiName: this.selectedCommonAncestorObject
         })
         .then(result => {
             this.ancestorRelationshipPaths = result;
@@ -257,37 +257,27 @@ export default class HighlightBadgeSetup extends NavigationMixin(LightningElemen
         this.isLoading = true;
 
         const fields = {};
-        fields[NAME_FIELD.fieldApiName] = this.badgeDefinitionName;
+        fields[ID_FIELD.fieldApiName] = this.recordId;
         fields[DISPLAY_OBJ_FIELD.fieldApiName] = this.selectedDisplayObject;
         fields[SOURCE_OBJ_FIELD.fieldApiName] = this.selectedSourceObjectRelationship == 'same' ? this.selectedDisplayObject : this.selectedSourceObject;
         fields[ANCESTOR_OBJ_FIELD.fieldApiName] = this.selectedCommonAncestorObject;
         fields[DISPLAY_PATH_FIELD.fieldApiName] = this.selectedDisplayRelationshipPath;
         fields[SOURCE_PATH_FIELD.fieldApiName] = this.selectedSourceObjectRelationship == 'same' ? 'Id' : this.selectedSourceRelationshipPath;
+        fields[SORT_ORDER_FIELD.fieldApiName] = this.sortOrder;
         
-        const recordInput = { apiName: BADGE_DEFINITION_OBJECT.objectApiName, fields };
+        const recordInput = { fields };
 
-        createRecord(recordInput)
-            .then((badgeDef) => {
-                this.badgeDefinitionId = badgeDef.id;
-                this.resetForm();
-                this.badgeDefinitionName = null;
-                this.selectedDisplayObject = null;
+        updateRecord(recordInput)
+            .then(() => {
                 this.dispatchEvent(
                     new ShowToastEvent({
                         title: "Success",
-                        message: "The Highlight Badge Definition was created",
+                        message: "The object settings were updated",
                         variant: "success",
                     }),
                 );
                 this.isLoading = false;
-                // Open edit page for new definition
-                this[NavigationMixin.Navigate]({
-                    type: "standard__recordPage",
-                    attributes: {
-                        recordId: this.badgeDefinitionId,
-                        actionName: "view",
-                    },
-                });
+                this.handleClose();
             })
             .catch((error) => {
                 this.dispatchEvent(
@@ -301,29 +291,8 @@ export default class HighlightBadgeSetup extends NavigationMixin(LightningElemen
             });
     }
 
-    handleCancel() {
-        setTimeout(
-            function() {
-                window.history.back();
-            },
-            1000
-        );
-    }
-
-    resetForm() {
-        this.selectedSourceObject = null;
-        this.selectedCommonAncestorObject = null;
-        this.selectedSourceObjectRelationship = null;
-        this.selectedDisplayChildRelationship = null;
-        this.selectedAncestorType = null;
-        this.hasLoadedChildObjects = false;
-        this.hasLoadedCommonParents = false;
-        this.hasLoadedRelationshipPaths = false;
-        this.ancestorRelationshipPaths = null;
-        this.displayRelationshipPaths = null;
-        this.sourceRelationshipPaths = null;
-        this.selectedDisplayRelationshipPath = null;
-        this.selectedSourceRelationshipPath = null;
+    handleClose() {
+        this.dispatchEvent(new CustomEvent('close'));
     }
 
     /**

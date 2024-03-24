@@ -18,10 +18,10 @@ private class HighlightBadgeSetupController_Test {
     }
 
     @IsTest
-    static void testGetCommonParentObjects() {
+    static void testGetCommonAncestorObjects() {
         List<HighlightBadgeSetupController.ObjectSelectOption> lstOptions;
         Test.startTest();
-        lstOptions = HighlightBadgeSetupController.getCommonParentObjects(
+        lstOptions = HighlightBadgeSetupController.getCommonAncestorObjects(
             'Contact',
             'Case'
         );

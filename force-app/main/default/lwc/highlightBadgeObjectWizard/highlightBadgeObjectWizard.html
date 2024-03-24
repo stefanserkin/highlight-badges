@@ -1,0 +1,153 @@
+<template>
+    <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+        <div class="slds-modal__container">
+            <!-- HEADER -->
+            <header class="slds-modal__header">
+                <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={handleClose}>
+                    <lightning-icon icon-name="utility:close"
+                        alternative-text="close"
+                        variant="inverse"
+                        size="small" ></lightning-icon>
+                    <span class="slds-assistive-text">Close</span>
+                </button>
+                <label></label>
+                <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Guided Object Setup</h2>
+            </header>
+
+            <!-- FORM -->
+            <div class="slds-modal__content slds-var-p-around_medium" id="modal-content-id-1">
+                <template lwc:if={displayObjects}>
+                    <lightning-layout>
+                        <!-- SET UP OBJECT RELATIONSHIPS -->
+                        <lightning-layout-item size="12">
+                            <!-- DISPLAY OBJECT -->
+                            <lightning-combobox
+                                name="displayObjectPicklist" 
+                                label="Select Display Object" 
+                                value={selectedDisplayObject} 
+                                options={displayObjectOptions} 
+                                onchange={handleDisplayObjectChange} 
+                                disabled={isDisabled} 
+                                field-level-help="The badge will be displayed on this object's record pages" 
+                                class="slds-var-m-around_medium" 
+                                required
+                            ></lightning-combobox>
+
+                            <lightning-input 
+                                type="number" 
+                                name="sortOrder" 
+                                label="Sort Order" 
+                                value={sortOrder} 
+                                step="0.01"
+                                field-level-help="The badge will be displayed on this object's record pages" 
+                                class="slds-var-m-around_medium" 
+                                onchange={handleSortOrderChange} 
+                            ></lightning-input>
+        
+                            <!-- SOURCE TYPE -->
+                            <lightning-combobox
+                                name="sourceRelationshipPicklist"
+                                label="What object is the badge information based on?"
+                                value={selectedSourceObjectRelationship}
+                                options={sourceObjectRelationshipOptions} 
+                                onchange={handleSourceObjectRelationshipChange} 
+                                disabled={isDisabled} 
+                                class="slds-var-m-around_medium"
+                                required
+                            ></lightning-combobox>
+        
+                            <template lwc:if={sourceIsRelatedObject}>
+                                <!-- SOURCE OBJECT -->
+                                <lightning-combobox
+                                    lwc:if={hasLoadedChildObjects} 
+                                    name="sourceObjectPicklist" 
+                                    label="Select Source Object" 
+                                    value={selectedDisplayChildRelationship} 
+                                    options={childObjectOptions} 
+                                    onchange={handleSourceObjectChange} 
+                                    disabled={isDisabled} 
+                                    field-level-help="The object that this badge's data is based on"
+                                    class="slds-var-m-around_medium"
+                                    required
+                                ></lightning-combobox>
+        
+                                <!-- ANCESTOR TYPE -->
+                                <p class="slds-var-m-horizontal_medium slds-var-m-top_medium slds-var-m-bottom_small">
+                                    You can show {selectedSourceObject} records directly related to the {selectedDisplayObject} record the user is viewing, or all {selectedSourceObject} records related to a common ancestor.
+                                </p>
+                                <lightning-combobox
+                                    name="ancestorTypePicklist"
+                                    label="Show records related to"
+                                    value={selectedAncestorType}
+                                    options={ancestorTypeOptions} 
+                                    onchange={handleAncestorTypeChange} 
+                                    disabled={isDisabled} 
+                                    class="slds-var-m-horizontal_medium slds-var-m-bottom_medium"
+                                    required
+                                ></lightning-combobox>
+                                
+                                <!-- ANCESTOR OBJECT -->
+                                <lightning-combobox
+                                    lwc:if={showCommonAncestorPicklist}
+                                    name="commonAncestorObjectPicklist"
+                                    label="Select the common ancestor between display and child objects"
+                                    value={selectedCommonAncestorObject}
+                                    options={commonAncestorOptions} 
+                                    onchange={handleCommonAncestorObjectChange} 
+                                    disabled={isDisabled} 
+                                    class="slds-var-m-around_medium"
+                                    required
+                                ></lightning-combobox>
+        
+                                <template lwc:if={hasLoadedRelationshipPaths}>
+                                    <!-- DISPLAY TO ANCESTOR PATH -->
+                                    <lightning-combobox
+                                        name="displayToAncestorPathPicklist"
+                                        label={displayToAncestorPathLabel}
+                                        value={selectedDisplayRelationshipPath}
+                                        options={displayPathOptions} 
+                                        onchange={handleSelectedDisplayPath} 
+                                        disabled={isDisabled} 
+                                        class="slds-var-m-around_medium"
+                                        required
+                                    ></lightning-combobox>
+                                    <!-- SOURCE TO ANCESTOR PATH -->
+                                    <lightning-combobox
+                                        name="sourceToAncestorPathPicklist"
+                                        label={sourceToAncestorPathLabel}
+                                        value={selectedSourceRelationshipPath}
+                                        options={sourcePathOptions} 
+                                        onchange={handleSelectedSourcePath} 
+                                        disabled={isDisabled} 
+                                        class="slds-var-m-around_medium"
+                                        required
+                                    ></lightning-combobox>
+                                </template>
+                            </template>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </template>
+            </div>
+
+            <!-- FOOTER -->
+            <footer class="slds-modal__footer">
+                <lightning-button 
+                    variant="neutral" 
+                    label="Cancel" 
+                    title="Cancel" 
+                    onclick={handleClose} 
+                    class="slds-m-left_x-small"
+                ></lightning-button>
+                <lightning-button 
+                    variant="brand"
+                    label="Save" 
+                    title="Save" 
+                    onclick={handleSave} 
+                    disabled={saveDisabled} 
+                    class="slds-m-left_x-small"
+                ></lightning-button>
+            </footer>
+        </div>
+    </section>
+    <div class="slds-backdrop slds-backdrop_open"></div>
+</template>

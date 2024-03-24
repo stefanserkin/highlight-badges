@@ -64,7 +64,7 @@ public with sharing class HighlightBadgeSetupController {
     }
 
     @AuraEnabled(cacheable=true)
-    public static List<ObjectSelectOption> getCommonParentObjects(
+    public static List<ObjectSelectOption> getCommonAncestorObjects(
         String displayObject,
         String sourceObject
     ) {
@@ -119,12 +119,12 @@ public with sharing class HighlightBadgeSetupController {
 
     @AuraEnabled(cacheable=true)
     public static String findInverseRelationshipField(
-        String parentObjectName, 
+        String ancestorObjectName, 
         String childObjectName, 
         String relationshipName
     ) {
         Schema.SObjectType childType = getObjectTypeMap().get(childObjectName);
-        Schema.SObjectType parentType = getObjectTypeMap().get(parentObjectName);
+        Schema.SObjectType ancestorType = getObjectTypeMap().get(ancestorObjectName);
 
         Schema.DescribeSObjectResult childDescribe = childType.getDescribe();
         Map<String, Schema.SObjectField> fields = childDescribe.fields.getMap();
@@ -137,7 +137,7 @@ public with sharing class HighlightBadgeSetupController {
                 List<Schema.SObjectType> referenceToTypes = fieldDescribe.getReferenceTo();
                 
                 for (Schema.SObjectType refType : referenceToTypes) {
-                    if (refType == parentType) {
+                    if (refType == ancestorType) {
                         Schema.DescribeSObjectResult refDescribe = refType.getDescribe();
                         List<Schema.ChildRelationship> childRelationships = refDescribe.getChildRelationships();
                         
@@ -158,22 +158,22 @@ public with sharing class HighlightBadgeSetupController {
     public static List<AncestorRelationship> getPossibleAncestorPaths(
         String displayObjectApiName, 
         String sourceObjectApiName, 
-        String commonParentApiName
+        String commonAncestorApiName
     ) {
         List<AncestorRelationship> lstRelationships = new List<AncestorRelationship>();
 
         AncestorRelationship displayWrapper = new AncestorRelationship();
         displayWrapper.childObject = displayObjectApiName;
-        displayWrapper.parentObject = commonParentApiName;
+        displayWrapper.ancestorObject = commonAncestorApiName;
         displayWrapper.type = 'display';
-        displayWrapper.relationships = findRelationshipFields(displayObjectApiName, commonParentApiName);
+        displayWrapper.relationships = findRelationshipFields(displayObjectApiName, commonAncestorApiName);
         lstRelationships.add(displayWrapper);
 
         AncestorRelationship sourceWrapper = new AncestorRelationship();
         sourceWrapper.childObject = sourceObjectApiName;
-        sourceWrapper.parentObject = commonParentApiName;
+        sourceWrapper.ancestorObject = commonAncestorApiName;
         sourceWrapper.type = 'source';
-        sourceWrapper.relationships = findRelationshipFields(sourceObjectApiName, commonParentApiName);
+        sourceWrapper.relationships = findRelationshipFields(sourceObjectApiName, commonAncestorApiName);
         lstRelationships.add(sourceWrapper);
 
         return lstRelationships;
@@ -257,7 +257,7 @@ public with sharing class HighlightBadgeSetupController {
         @AuraEnabled
         public String childObject {get;set;}
         @AuraEnabled
-        public String parentObject {get;set;}
+        public String ancestorObject {get;set;}
         @AuraEnabled
         public String type {get;set;}
         @AuraEnabled

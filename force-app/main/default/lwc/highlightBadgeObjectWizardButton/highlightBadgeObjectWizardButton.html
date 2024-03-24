@@ -1,0 +1,20 @@
+<template>
+
+    <template lwc:if={showModal}>
+        <c-highlight-badge-object-wizard
+            record-id={recordId}
+            onclose={handleCloseModal}
+        ></c-highlight-badge-object-wizard>
+    </template>
+
+    <div>
+        <lightning-button
+            variant="brand-outline"
+            label="Guided Setup"
+            title="Guided Setup"
+            icon-name="utility:guidance"
+            onclick={handleOpenModal}
+            class="slds-align_absolute-center"
+        ></lightning-button>
+    </div>
+</template>
