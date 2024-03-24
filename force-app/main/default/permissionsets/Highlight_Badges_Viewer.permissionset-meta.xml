@@ -41,6 +41,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Highlight_Badge_Definition__c.Display_Object__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Highlight_Badge_Definition__c.Display_to_Ancestor_Path__c</field>
         <readable>true</readable>
     </fieldPermissions>
