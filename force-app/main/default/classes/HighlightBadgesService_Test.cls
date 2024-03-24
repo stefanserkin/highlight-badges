@@ -190,11 +190,13 @@ private class HighlightBadgesService_Test {
 
         List<HighlightBadge> lstBadges;
         Test.startTest();
-        HighlightBadgesService service = new HighlightBadgesService(
-            ct.Cases[0].Id,
-            'Case'
-        );
-        lstBadges = service.getBadges();
+        System.runAs(u) {
+            HighlightBadgesService service = new HighlightBadgesService(
+                ct.Cases[0].Id,
+                'Case'
+            );
+            lstBadges = service.getBadges();
+        }
         Test.stopTest();
 
         Assert.isFalse(lstBadges.isEmpty(), 'List of badges should not be empty');
