@@ -6,7 +6,7 @@
     <inlineHelpText>The API Name of the Salesforce object where the Highlight Badge will appear</inlineHelpText>
     <label>Display Object</label>
     <length>100</length>
-    <required>true</required>
+    <required>false</required>
     <trackTrending>false</trackTrending>
     <type>Text</type>
     <unique>false</unique>

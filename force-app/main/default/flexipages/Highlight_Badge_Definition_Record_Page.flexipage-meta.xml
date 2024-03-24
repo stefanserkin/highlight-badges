@@ -137,7 +137,7 @@
             <fieldInstance>
                 <fieldInstanceProperties>
                     <name>uiBehavior</name>
-                    <value>required</value>
+                    <value>none</value>
                 </fieldInstanceProperties>
                 <fieldItem>Record.Display_Object__c</fieldItem>
                 <identifier>RecordDisplay_Object_cField</identifier>
