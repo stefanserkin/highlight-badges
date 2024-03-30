@@ -852,6 +852,12 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
+                <componentName>highlightBadgePreview</componentName>
+                <identifier>c_highlightBadgePreview</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
                 <componentInstanceProperties>
                     <name>columns</name>
                     <value>Facet-3be6a494-c803-4961-994c-c739370f9b81</value>
