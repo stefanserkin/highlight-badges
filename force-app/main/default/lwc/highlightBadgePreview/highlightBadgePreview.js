@@ -1,5 +1,5 @@
 import { LightningElement, api, wire } from 'lwc';
-import { getRecord } from 'lightning/uiRecordApi';
+import { getRecord, getFieldValue } from 'lightning/uiRecordApi';
 import LABEL_FIELD from '@salesforce/schema/Highlight_Badge_Definition__c.Label__c';
 import ICON_NAME_FIELD from '@salesforce/schema/Highlight_Badge_Definition__c.Icon_Name__c';
 import LABEL_COLOR_FIELD from '@salesforce/schema/Highlight_Badge_Definition__c.Label_Color__c';
@@ -40,10 +40,10 @@ export default class HighlightBadgePreview extends LightningElement {
             );
         } else if (data) {
             this.definition = data;
-            this.label = this.definition.fields.Label__c.value;
-            this.iconName = this.definition.fields.Icon_Name__c.value;
-            this.labelColor = this.definition.fields.Label_Color__c.value;
-            this.bgColor = this.definition.fields.Background_Color__c.value;
+            this.label = getFieldValue(this.definition, LABEL_FIELD);
+            this.iconName = getFieldValue(this.definition, ICON_NAME_FIELD);
+            this.labelColor = getFieldValue(this.definition, LABEL_COLOR_FIELD);
+            this.bgColor = getFieldValue(this.definition, BG_COLOR_FIELD);
         }
     }
 
