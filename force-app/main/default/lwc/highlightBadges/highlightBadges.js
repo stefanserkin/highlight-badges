@@ -50,9 +50,9 @@ export default class HighlightBadges extends LightningElement {
         }
     }
 
-    handleAlerts(bdgs) {
-        for (let i = 0; i < bdgs.length; i++) {
-            const badge = bdgs[i];
+    handleAlerts(objs) {
+        for (let i = 0; i < objs.length; i++) {
+            const badge = objs[i];
             if (badge.hasAlert) {
                 if (badge.alertType == 'Modal') {
                     if (this.alertModalMessages.includes(badge.alertMessage) === false) {
