@@ -34,7 +34,7 @@ export default class HighlightBadges extends LightningElement {
         this.wiredBadges = result;
         if (result.data) {
             this.badges = result.data;
-            this.handleAlerts();
+            this.handleAlerts(this.badges);
             this.error = undefined;
             this.isLoading = false;
         } else if (result.error) {
@@ -50,9 +50,9 @@ export default class HighlightBadges extends LightningElement {
         }
     }
 
-    handleAlerts() {
-        for (let i = 0; i < this.badges.length; i++) {
-            const badge = this.badges[i];
+    handleAlerts(bdgs) {
+        for (let i = 0; i < bdgs.length; i++) {
+            const badge = bdgs[i];
             if (badge.hasAlert) {
                 if (badge.alertType == 'Modal') {
                     if (this.alertModalMessages.includes(badge.alertMessage) === false) {
