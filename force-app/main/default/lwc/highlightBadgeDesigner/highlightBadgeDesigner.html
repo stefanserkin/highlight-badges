@@ -31,15 +31,26 @@
             </div>
     
             <lightning-layout multiple-rows="true">
-                <!-- LABEL -->
+                <!-- ICON -->
                 <lightning-layout-item padding="around-small" size="6">
-                    <lightning-input 
-                        type="text" 
-                        label="Badge Label" 
-                        value={label} 
-                        read-only={isEditDisabled}
-                        onchange={handleLabelChange}
-                    ></lightning-input>
+                    <template lwc:if={isEditDisabled}>
+                        <div class="slds-form-element">
+                            <label class="slds-form-element__label" for="customIcon">Icon</label>
+                            <div class="slds-form-element__control">
+                                <lightning-icon 
+                                    icon-name={iconName} 
+                                    alternative-text={iconName} 
+                                    title={iconName}
+                                ></lightning-icon>
+                            </div>
+                        </div>
+                    </template>
+                    <template lwc:else>
+                        <c-icon-picker 
+                            icon-name={iconName}
+                            oniconselection={handleSelectedIcon} 
+                        ></c-icon-picker>
+                    </template>
                 </lightning-layout-item>
     
                 <!-- LABEL COLOR PICKER -->
@@ -52,22 +63,16 @@
                         onchange={handleSelectedLabelColor}
                     ></lightning-input>
                 </lightning-layout-item>
-    
-                <!-- ICON -->
+
+                <!-- LABEL -->
                 <lightning-layout-item padding="around-small" size="6">
-                    <template lwc:if={isEditDisabled}>
-                        <lightning-icon 
-                            icon-name={iconName} 
-                            alternative-text={iconName} 
-                            title={iconName}
-                        ></lightning-icon>
-                    </template>
-                    <template lwc:else>
-                        <c-icon-picker 
-                            icon-name={iconName}
-                            oniconselection={handleSelectedIcon} 
-                        ></c-icon-picker>
-                    </template>
+                    <lightning-input 
+                        type="text" 
+                        label="Badge Label" 
+                        value={label} 
+                        read-only={isEditDisabled}
+                        onchange={handleLabelChange}
+                    ></lightning-input>
                 </lightning-layout-item>
     
                 <!-- BACKGROUND COLOR PICKER -->
