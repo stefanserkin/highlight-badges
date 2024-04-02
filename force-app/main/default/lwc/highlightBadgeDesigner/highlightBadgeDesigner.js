@@ -38,9 +38,10 @@ export default class HighlightBadgeDesigner extends LightningElement {
         return !this.isUpdateMode;
     }
 
-    /**
+    /**************************
      * Get highlight badge definition
-     */
+     **************************/
+    
     @wire(getRecord, {recordId: '$recordId', fields: FIELDS})
     wiredRecord({ error, data }) {
         if (error) {
@@ -65,9 +66,18 @@ export default class HighlightBadgeDesigner extends LightningElement {
         }
     }
 
+    setDefaultProperties(definition) {
+        this.label = getFieldValue(definition, LABEL_FIELD);
+        this.iconName = getFieldValue(definition, ICON_NAME_FIELD);
+        this.labelColor = getFieldValue(definition, LABEL_COLOR_FIELD);
+        this.bgColor = getFieldValue(definition, BG_COLOR_FIELD);
+        this.sourceDetailFields = getFieldValue(definition, SOURCE_FIELDS_FIELD);
+    }
+
     /**************************
      * Events
      **************************/
+
     handleSelectedIcon(event) {
         this.iconName = event.detail;
     }
@@ -87,6 +97,10 @@ export default class HighlightBadgeDesigner extends LightningElement {
     handleSourceDetailFieldsChange(event) {
         this.sourceDetailFields = event.detail.value;
     }
+
+    /**************************
+     * Actions
+     **************************/
 
     handleSave() {
         const fields = {};
@@ -129,14 +143,6 @@ export default class HighlightBadgeDesigner extends LightningElement {
     handleCancel() {
         this.setDefaultProperties(this.originalDefinition);
         this.isUpdateMode = false;
-    }
-
-    setDefaultProperties(definition) {
-        this.label = getFieldValue(definition, LABEL_FIELD);
-        this.iconName = getFieldValue(definition, ICON_NAME_FIELD);
-        this.labelColor = getFieldValue(definition, LABEL_COLOR_FIELD);
-        this.bgColor = getFieldValue(definition, BG_COLOR_FIELD);
-        this.sourceDetailFields = getFieldValue(definition, SOURCE_FIELDS_FIELD);
     }
 
 }
