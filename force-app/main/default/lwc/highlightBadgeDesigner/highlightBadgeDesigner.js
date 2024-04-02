@@ -141,7 +141,9 @@ export default class HighlightBadgeDesigner extends LightningElement {
     }
 
     handleCancel() {
-        this.setDefaultProperties(this.originalDefinition);
+        if (this.originalDefinition) {
+            this.setDefaultProperties(this.originalDefinition);
+        }
         this.isUpdateMode = false;
     }
 
