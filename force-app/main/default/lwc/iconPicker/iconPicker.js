@@ -1166,7 +1166,7 @@ export default class IconPicker extends LightningElement {
     }
 
     @api mode = 'combobox';
-    @api label = 'Pick an Icon';
+    @api label = 'Select an Icon';
 
     // accordionMode is a legacy property added for backwards compatability and is not recommended for future use
     @api

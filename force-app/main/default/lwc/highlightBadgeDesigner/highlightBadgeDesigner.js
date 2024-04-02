@@ -22,6 +22,11 @@ export default class HighlightBadgeDesigner extends LightningElement {
     bgColor;
 
     cardTitle = 'Badge Design Settings';
+    isUpdateMode = false;
+
+    get isEditDisabled() {
+        return !this.isUpdateMode;
+    }
 
     /**
      * Get highlight badge definition
@@ -90,6 +95,7 @@ export default class HighlightBadgeDesigner extends LightningElement {
                         variant: "success",
                     }),
                 );
+                this.isUpdateMode = false;
             })
             .catch((error) => {
                 // The form is not valid
@@ -101,6 +107,15 @@ export default class HighlightBadgeDesigner extends LightningElement {
                     })
                 );
             });
+    }
+
+    handleEdit() {
+        this.isUpdateMode = true;
+    }
+
+    handleCancel() {
+        console.log('handle cancel');
+        this.isUpdateMode = false;
     }
 
 }
