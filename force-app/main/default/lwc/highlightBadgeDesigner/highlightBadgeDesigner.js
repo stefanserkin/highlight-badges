@@ -22,6 +22,7 @@ const FIELDS = [
 export default class HighlightBadgeDesigner extends LightningElement {
     @api recordId;
     error;
+    originalDefinition;
     definition;
 
     label;
@@ -58,12 +59,9 @@ export default class HighlightBadgeDesigner extends LightningElement {
                 }),
             );
         } else if (data) {
+            this.originalDefinition = data;
             this.definition = data;
-            this.label = getFieldValue(this.definition, LABEL_FIELD);
-            this.iconName = getFieldValue(this.definition, ICON_NAME_FIELD);
-            this.labelColor = getFieldValue(this.definition, LABEL_COLOR_FIELD);
-            this.bgColor = getFieldValue(this.definition, BG_COLOR_FIELD);
-            this.sourceDetailFields = getFieldValue(this.definition, SOURCE_FIELDS_FIELD);
+            this.setDefaultProperties(this.definition);
         }
     }
 
@@ -87,8 +85,7 @@ export default class HighlightBadgeDesigner extends LightningElement {
     }
 
     handleSourceDetailFieldsChange(event) {
-        console.log(event);
-        console.log(event.detail.value);
+        this.sourceDetailFields = event.detail.value;
     }
 
     handleSave() {
@@ -130,8 +127,16 @@ export default class HighlightBadgeDesigner extends LightningElement {
     }
 
     handleCancel() {
-        console.log('handle cancel');
+        this.setDefaultProperties(this.originalDefinition);
         this.isUpdateMode = false;
+    }
+
+    setDefaultProperties(definition) {
+        this.label = getFieldValue(definition, LABEL_FIELD);
+        this.iconName = getFieldValue(definition, ICON_NAME_FIELD);
+        this.labelColor = getFieldValue(definition, LABEL_COLOR_FIELD);
+        this.bgColor = getFieldValue(definition, BG_COLOR_FIELD);
+        this.sourceDetailFields = getFieldValue(definition, SOURCE_FIELDS_FIELD);
     }
 
 }
