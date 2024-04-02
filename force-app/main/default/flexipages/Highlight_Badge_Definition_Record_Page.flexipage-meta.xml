@@ -526,6 +526,12 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
+                <componentName>highlightBadgeDesigner</componentName>
+                <identifier>c_highlightBadgeDesigner</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
                 <componentInstanceProperties>
                     <name>columns</name>
                     <value>Facet-14cf7dea-b755-4377-b0b8-8bddc7fe629d</value>
@@ -758,7 +764,7 @@
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>title</name>
-                    <value>Display</value>
+                    <value>Design</value>
                 </componentInstanceProperties>
                 <componentName>flexipage:tab</componentName>
                 <identifier>flexipage_tab</identifier>
