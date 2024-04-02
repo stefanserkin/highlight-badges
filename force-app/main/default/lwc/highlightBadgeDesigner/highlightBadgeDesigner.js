@@ -8,8 +8,16 @@ import LABEL_FIELD from '@salesforce/schema/Highlight_Badge_Definition__c.Label_
 import ICON_NAME_FIELD from '@salesforce/schema/Highlight_Badge_Definition__c.Icon_Name__c';
 import LABEL_COLOR_FIELD from '@salesforce/schema/Highlight_Badge_Definition__c.Label_Color__c';
 import BG_COLOR_FIELD from '@salesforce/schema/Highlight_Badge_Definition__c.Background_Color__c';
+import SOURCE_FIELDS_FIELD from '@salesforce/schema/Highlight_Badge_Definition__c.Source_Detail_Fields__c';
 
-const FIELDS = [ID_FIELD, LABEL_FIELD, ICON_NAME_FIELD, LABEL_COLOR_FIELD, BG_COLOR_FIELD];
+const FIELDS = [
+    ID_FIELD, 
+    LABEL_FIELD, 
+    ICON_NAME_FIELD, 
+    LABEL_COLOR_FIELD, 
+    BG_COLOR_FIELD, 
+    SOURCE_FIELDS_FIELD
+];
 
 export default class HighlightBadgeDesigner extends LightningElement {
     @api recordId;
@@ -20,6 +28,7 @@ export default class HighlightBadgeDesigner extends LightningElement {
     iconName;
     labelColor;
     bgColor;
+    sourceDetailFields;
 
     cardTitle = 'Badge Design Settings';
     isUpdateMode = false;
@@ -54,6 +63,7 @@ export default class HighlightBadgeDesigner extends LightningElement {
             this.iconName = getFieldValue(this.definition, ICON_NAME_FIELD);
             this.labelColor = getFieldValue(this.definition, LABEL_COLOR_FIELD);
             this.bgColor = getFieldValue(this.definition, BG_COLOR_FIELD);
+            this.sourceDetailFields = getFieldValue(this.definition, SOURCE_FIELDS_FIELD);
         }
     }
 
@@ -76,6 +86,11 @@ export default class HighlightBadgeDesigner extends LightningElement {
         this.label = event.detail.value;
     }
 
+    handleSourceDetailFieldsChange(event) {
+        console.log(event);
+        console.log(event.detail.value);
+    }
+
     handleSave() {
         const fields = {};
         fields[ID_FIELD.fieldApiName] = this.recordId;
@@ -83,6 +98,7 @@ export default class HighlightBadgeDesigner extends LightningElement {
         fields[ICON_NAME_FIELD.fieldApiName] = this.iconName;
         fields[BG_COLOR_FIELD.fieldApiName] = this.bgColor;
         fields[LABEL_COLOR_FIELD.fieldApiName] = this.labelColor;
+        fields[SOURCE_FIELDS_FIELD.fieldApiName] = this.sourceDetailFields;
 
         const recordInput = { fields };
 

@@ -1,81 +1,98 @@
 <template>
-    <lightning-card title={cardTitle}>
+    <div class="slds-var-m-around_medium">
+        <lightning-card title={cardTitle}>
 
-        <!-- EDIT/SAVE ACTIONS -->
-        <div slot="actions">
-            <template lwc:if={isUpdateMode}>
-                <lightning-button 
-                    variant="neutral" 
-                    title="Cancel" 
-                    label="Cancel" 
-                    onclick={handleCancel} 
-                ></lightning-button>
-                <lightning-button 
-                    variant="brand" 
-                    title="Save" 
-                    label="Save" 
-                    onclick={handleSave} 
-                    class="slds-var-p-left_small"
-                ></lightning-button>
-            </template>
-
-            <template lwc:else>
-                <lightning-button 
-                    variant="neutral" 
-                    title="Edit" 
-                    label="Edit" 
-                    onclick={handleEdit} 
-                ></lightning-button>
-            </template>
-        </div>
-
-        <lightning-layout multiple-rows="true">
-            <!-- LABEL -->
-            <lightning-layout-item padding="around-small" size="6">
-                <lightning-input 
-                    type="text" 
-                    label="Badge Label" 
-                    value={label} 
-                    read-only={isEditDisabled}
-                    onchange={handleLabelChange}
-                ></lightning-input>
-            </lightning-layout-item>
-
-            <!-- LABEL COLOR PICKER -->
-            <lightning-layout-item padding="around-small" size="6">
-                <lightning-input 
-                    type="color" 
-                    label="Label Color" 
-                    value={labelColor} 
-                    disabled={isEditDisabled} 
-                    onchange={handleSelectedLabelColor}
-                ></lightning-input>
-            </lightning-layout-item>
-
-            <!-- ICON -->
-            <lightning-layout-item padding="around-small" size="6">
-                <template lwc:if={isEditDisabled}>
-                    <lightning-icon icon-name={iconName} alternative-text={iconName} title={iconName}></lightning-icon>
+            <!-- EDIT/SAVE ACTIONS -->
+            <div slot="actions">
+                <template lwc:if={isUpdateMode}>
+                    <lightning-button 
+                        variant="neutral" 
+                        title="Cancel" 
+                        label="Cancel" 
+                        onclick={handleCancel} 
+                    ></lightning-button>
+                    <lightning-button 
+                        variant="brand" 
+                        title="Save" 
+                        label="Save" 
+                        onclick={handleSave} 
+                        class="slds-var-p-left_small"
+                    ></lightning-button>
                 </template>
+    
                 <template lwc:else>
-                    <c-icon-picker 
-                        icon-name={iconName}
-                        oniconselection={handleSelectedIcon} 
-                    ></c-icon-picker>
+                    <lightning-button 
+                        variant="neutral" 
+                        title="Edit" 
+                        label="Edit" 
+                        onclick={handleEdit} 
+                    ></lightning-button>
                 </template>
-            </lightning-layout-item>
-
-            <!-- BACKGROUND COLOR PICKER -->
-            <lightning-layout-item padding="around-small" size="6">
-                <lightning-input 
-                    type="color" 
-                    label="Background Color" 
-                    value={bgColor} 
-                    disabled={isEditDisabled} 
-                    onchange={handleSelectedBgColor}
-                ></lightning-input>
-            </lightning-layout-item>
-
-        </lightning-layout>
-    </lightning-card>
+            </div>
+    
+            <lightning-layout multiple-rows="true">
+                <!-- LABEL -->
+                <lightning-layout-item padding="around-small" size="6">
+                    <lightning-input 
+                        type="text" 
+                        label="Badge Label" 
+                        value={label} 
+                        read-only={isEditDisabled}
+                        onchange={handleLabelChange}
+                    ></lightning-input>
+                </lightning-layout-item>
+    
+                <!-- LABEL COLOR PICKER -->
+                <lightning-layout-item padding="around-small" size="6">
+                    <lightning-input 
+                        type="color" 
+                        label="Label Color" 
+                        value={labelColor} 
+                        disabled={isEditDisabled} 
+                        onchange={handleSelectedLabelColor}
+                    ></lightning-input>
+                </lightning-layout-item>
+    
+                <!-- ICON -->
+                <lightning-layout-item padding="around-small" size="6">
+                    <template lwc:if={isEditDisabled}>
+                        <lightning-icon 
+                            icon-name={iconName} 
+                            alternative-text={iconName} 
+                            title={iconName}
+                        ></lightning-icon>
+                    </template>
+                    <template lwc:else>
+                        <c-icon-picker 
+                            icon-name={iconName}
+                            oniconselection={handleSelectedIcon} 
+                        ></c-icon-picker>
+                    </template>
+                </lightning-layout-item>
+    
+                <!-- BACKGROUND COLOR PICKER -->
+                <lightning-layout-item padding="around-small" size="6">
+                    <lightning-input 
+                        type="color" 
+                        label="Background Color" 
+                        value={bgColor} 
+                        disabled={isEditDisabled} 
+                        onchange={handleSelectedBgColor}
+                    ></lightning-input>
+                </lightning-layout-item>
+    
+                <!-- SOURCE DETAIL FIELDS -->
+                <lightning-layout-item padding="around-small" size="12">
+                    <lightning-textarea 
+                        name="sourceDetailFields" 
+                        label="Source Detail Fields" 
+                        value={sourceDetailFields}
+                        disabled={isEditDisabled}
+                        onchange={handleSourceDetailFieldsChange}
+                    ></lightning-textarea>
+                </lightning-layout-item>
+    
+            </lightning-layout>
+        </lightning-card>
+    </div>
 </template>
