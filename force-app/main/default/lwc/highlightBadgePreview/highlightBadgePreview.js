@@ -48,12 +48,12 @@ export default class HighlightBadgePreview extends LightningElement {
     }
 
     get colorStyle() {
-        const hexColor = !this.bgColor ? this.defaultBgColor: '#' + this.bgColor;
+        const hexColor = !this.bgColor ? this.defaultBgColor : this.bgColor;
         return '--sds-c-badge-color-background:' + hexColor + ';';
     }
 
     get labelStyle() {
-        const hexColor = !this.labelColor ? this.defaultLabelColor : '#' + this.labelColor;
+        const hexColor = !this.labelColor ? this.defaultLabelColor : this.labelColor;
         return '--sds-c-badge-text-color:' + hexColor + ';--slds-c-badge-icon-color-foreground:' + hexColor;
     }
 

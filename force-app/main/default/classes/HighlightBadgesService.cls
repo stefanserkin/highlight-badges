@@ -234,7 +234,7 @@ public with sharing class HighlightBadgesService {
     public static String getBadgeColorStyle(
         Highlight_Badge_Definition__c definition
     ) {
-        String hexColor = definition.Background_Color__c != null ? '#' + definition.Background_Color__c : DEFAULT_BACKGROUND_COLOR;
+        String hexColor = definition.Background_Color__c != null ? definition.Background_Color__c : DEFAULT_BACKGROUND_COLOR;
         String badgeColorStyle = '--sds-c-badge-color-background:' + hexColor + ';';
         return badgeColorStyle;
     }
@@ -248,7 +248,7 @@ public with sharing class HighlightBadgesService {
     public static String getBadgeLabelStyle(
         Highlight_Badge_Definition__c definition
     ) {
-        String labelHexColor = definition.Label_Color__c != null ? '#' + definition.Label_Color__c : DEFAULT_LABEL_COLOR;
+        String labelHexColor = definition.Label_Color__c != null ? definition.Label_Color__c : DEFAULT_LABEL_COLOR;
         String badgeLabelStyle = '--sds-c-badge-text-color:' + labelHexColor + ';--slds-c-badge-icon-color-foreground:' + labelHexColor;
         return badgeLabelStyle;
     }

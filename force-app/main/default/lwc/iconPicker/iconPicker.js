@@ -1136,6 +1136,7 @@ const DEFAULT_MAX_RESULTS = 100;
 const columns = [
     { label: 'Icon', fieldName: 'id', cellAttributes: { iconName: { fieldName: 'iconName' } } }
 ];
+
 export default class IconPicker extends LightningElement {
 
     @track actionIcons = ACTION_ICONS;

@@ -60,13 +60,11 @@ export default class HighlightBadgeDesigner extends LightningElement {
     }
 
     handleSelectedLabelColor(event) {
-        let color = event.detail.value;
-        this.labelColor = color.slice(-6);
+        this.labelColor = event.detail.value;
     }
 
     handleSelectedBgColor(event) {
-        let color = event.detail.value.toString();
-        this.bgColor = color.slice(-6);
+        this.bgColor = event.detail.value;
     }
 
     handleLabelChange(event) {

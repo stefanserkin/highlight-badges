@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>EnforceHexColorFormat</fullName>
+    <active>true</active>
+    <description>Enforce the formatting of hexadecimal numbers</description>
+    <errorConditionFormula>OR(
+ LEFT( Label_Color__c, 1 ) &lt;&gt; &quot;#&quot;, 
+ LEN( Label_Color__c ) &lt; 7, 
+ LEFT( Background_Color__c, 1 ) &lt;&gt; &quot;#&quot;, 
+ LEN( Background_Color__c ) &lt; 7
+)</errorConditionFormula>
+    <errorMessage>Hexadecimal numbers should include a leading &quot;#&quot; and must have a valid length</errorMessage>
+</ValidationRule>

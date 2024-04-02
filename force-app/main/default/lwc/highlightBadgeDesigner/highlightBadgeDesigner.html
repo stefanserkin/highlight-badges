@@ -2,23 +2,27 @@
     <lightning-card title={cardTitle}>
         <lightning-layout multiple-rows="true">
             <!-- LABEL -->
-            <lightning-layout-item padding="around-small" size="6">
-                <lightning-input type="text" label="Badge Label" onchange={handleLabelChange} class="slds-var-m-around_medium"></lightning-input>
-            </lightning-layout-item>
-
-            <!-- BACKGROUND COLOR PICKER -->
-            <lightning-layout-item padding="around-small" size="6">
-                <lightning-input type="color" label="Background Color" onchange={handleSelectedBgColor} class="slds-var-m-around_medium"></lightning-input>
+            <lightning-layout-item padding="around-small" size="12">
+                <lightning-input type="text" label="Badge Label" value={label} onchange={handleLabelChange}></lightning-input>
             </lightning-layout-item>
 
             <!-- ICON COMBOBOX -->
-            <lightning-layout-item padding="around-small" size="6">
-                <c-icon-picker oniconselection={handleSelectedIcon}></c-icon-picker>
+            <lightning-layout-item padding="around-small" size="4">
+                <c-icon-picker 
+                    icon-name={iconName}
+                    oniconselection={handleSelectedIcon} 
+                    class="slds-var-m-around_medium"
+                ></c-icon-picker>
+            </lightning-layout-item>
+
+            <!-- BACKGROUND COLOR PICKER -->
+            <lightning-layout-item padding="around-small" size="4">
+                <lightning-input type="color" label="Background Color" value={bgColor} onchange={handleSelectedBgColor}></lightning-input>
             </lightning-layout-item>
 
             <!-- LABEL COLOR PICKER -->
-            <lightning-layout-item padding="around-small" size="6">
-                <lightning-input type="color" label="Label Color" onchange={handleSelectedLabelColor} class="slds-var-m-around_medium"></lightning-input>
+            <lightning-layout-item padding="around-small" size="4">
+                <lightning-input type="color" label="Label Color" value={labelColor} onchange={handleSelectedLabelColor}></lightning-input>
             </lightning-layout-item>
 
             <!-- SAVE ACTION -->
