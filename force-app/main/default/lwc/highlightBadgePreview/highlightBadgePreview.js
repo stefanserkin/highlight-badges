@@ -57,6 +57,10 @@ export default class HighlightBadgePreview extends LightningElement {
         return '--sds-c-badge-text-color:' + hexColor + ';--slds-c-badge-icon-color-foreground:' + hexColor;
     }
 
+    get styles() {
+        return this.colorStyle + this.labelStyle;
+    }
+
     get icon() {
         return !this.iconName ? this.defaultIconName : this.iconName;
     }

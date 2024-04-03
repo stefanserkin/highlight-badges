@@ -2,14 +2,12 @@
     <lightning-card title="Highlight Badge Preview">
         <!-- DISPLAY BADGE -->
         <template lwc:if={definition}>
-            <div style={colorStyle}>
-                <div style={labelStyle}>
-                    <lightning-badge 
-                        icon-name={icon}
-                        label={label} 
-                        class="slds-var-m-horizontal_small slds-var-m-bottom_small" 
-                    ></lightning-badge>
-                </div>
+            <div style={styles}>
+                <lightning-badge 
+                    icon-name={icon}
+                    label={label} 
+                    class="slds-var-m-horizontal_small slds-var-m-bottom_small" 
+                ></lightning-badge>
             </div>
         </template>
     </lightning-card>

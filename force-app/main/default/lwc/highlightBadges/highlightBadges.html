@@ -24,14 +24,12 @@
                 data-id={badge.id} 
                 onclick={handleBadgeClick} 
                 class="highlight-badge">
-                <div style={badge.colorStyle}>
-                    <div style={badge.labelStyle}>
-                        <lightning-badge 
-                            icon-name={badge.iconName}
-                            label={badge.label} 
-                            class="slds-var-m-horizontal_small slds-var-m-bottom_small" 
-                        ></lightning-badge>
-                    </div>
+                <div style={badge.styles}>
+                    <lightning-badge 
+                        icon-name={badge.iconName}
+                        label={badge.label} 
+                        class="slds-var-m-horizontal_small slds-var-m-bottom_small" 
+                    ></lightning-badge>
                 </div>
             </div>
         </template>

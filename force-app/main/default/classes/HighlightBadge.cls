@@ -27,10 +27,7 @@ public with sharing class HighlightBadge {
     public String fieldSet {get;set;}
 
     @AuraEnabled
-    public String colorStyle {get;set;}
-
-    @AuraEnabled
-    public String labelStyle {get;set;}
+    public String styles {get;set;}
 
     @AuraEnabled
     public Boolean hasAlert {get;set;}

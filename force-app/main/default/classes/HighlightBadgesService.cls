@@ -91,8 +91,7 @@ public with sharing class HighlightBadgesService {
                     setLabelNames.add(badge.label);
                 }
                 badge.iconName = getBadgeIconName(definition);
-                badge.colorStyle = getBadgeColorStyle(definition);
-                badge.labelStyle = getBadgeLabelStyle(definition);
+                badge.styles = getBadgeColorStyle(definition) + getBadgeLabelStyle(definition);
                 badge.fieldSet = String.isBlank(definition.Source_Detail_Fields__c)
                     ? getDefaultFieldSet(definition.Source_Object__c)
                     : definition.Source_Detail_Fields__c.replaceAll('\\s+', '');
