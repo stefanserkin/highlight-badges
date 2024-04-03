@@ -81,7 +81,6 @@ export default class HighlightBadgeDesigner extends LightningElement {
         this.bgColor = getFieldValue(definition, BG_COLOR_FIELD);
         this.sourceDetailFields = getFieldValue(definition, SOURCE_FIELDS_FIELD);
         this.sourceObject = getFieldValue(definition, SOURCE_OBJECT_FIELD);
-        console.log('source obj --> ',this.sourceObject);
     }
 
     /**************************
@@ -131,7 +130,6 @@ export default class HighlightBadgeDesigner extends LightningElement {
     handleSourceDetailFieldsChange(event) {
         this.selectedSourceDetailFields = event.detail.value;
         this.sourceDetailFields = this.selectedSourceDetailFields.join(',');
-        console.log(':::: selected --> ',this.sourceDetailFields);
     }
 
     /**************************
