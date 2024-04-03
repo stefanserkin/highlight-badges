@@ -131,6 +131,7 @@ export default class HighlightBadgeDesigner extends LightningElement {
     handleSourceDetailFieldsChange(event) {
         this.selectedSourceDetailFields = event.detail.value;
         this.sourceDetailFields = this.selectedSourceDetailFields.join(',');
+        console.log(':::: selected --> ',this.sourceDetailFields);
     }
 
     /**************************

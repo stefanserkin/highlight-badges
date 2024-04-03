@@ -40,6 +40,11 @@ public with sharing class HighlightBadgeQueryBuilder {
         String query = 'SELECT Id ';
         Set<String> setDetailFields = getFieldsForSelector(definition);
         for (String field : setDetailFields) {
+            // Guard against duplicate field request for record id
+            if (field == 'Id') {
+                continue;
+            }
+            // Add field to select statement
             query += ', ' + field + ' ';
         }
 
