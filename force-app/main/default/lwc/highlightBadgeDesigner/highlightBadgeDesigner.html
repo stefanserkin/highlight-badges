@@ -89,6 +89,7 @@
     
                 <!-- SOURCE DETAIL FIELDS -->
                 <lightning-layout-item padding="around-small" size="12">
+                    <!--
                     <lightning-textarea 
                         name="sourceDetailFields" 
                         label="Source Detail Fields" 
@@ -96,6 +97,18 @@
                         disabled={isEditDisabled}
                         onchange={handleSourceDetailFieldsChange}
                     ></lightning-textarea>
+                    -->
+                    <lightning-dual-listbox 
+                        name="sourceDetailFields"
+                        label="Source Detail Fields"
+                        source-label="Available"
+                        selected-label="Selected"
+                        field-level-help="Select the detail fields to display when a badge is selected"
+                        options={sourceDetailFieldOptions}
+                        value={selectedSourceDetailFields}
+                        disabled={isEditDisabled}
+                        onchange={handleSourceDetailFieldsChange}
+                    ></lightning-dual-listbox>
                 </lightning-layout-item>
     
             </lightning-layout>

@@ -35,7 +35,6 @@ public with sharing class HighlightBadgeSetupController {
     @AuraEnabled(cacheable=true)
     public static List<ObjectSelectOption> getChildObjects(String objName) {
         try {
-            System.debug('::::: entered get child objects');
             List<ObjectSelectOption> lstOptions = new List<ObjectSelectOption>();
             Schema.SObjectType displayObjType = getObjectTypeMap().get(objName);
             List<Schema.ChildRelationship> childRelationships = displayObjType.getDescribe().getChildRelationships();
@@ -179,6 +178,29 @@ public with sharing class HighlightBadgeSetupController {
         return lstRelationships;
     }
 
+    @AuraEnabled(cacheable=true)
+    public static List<FieldOption> getObjectFields(
+        String objectApiName
+    ) {
+        try {
+            Map<String, Schema.SObjectType> gd = Schema.getGlobalDescribe();
+            Map<String, Schema.SObjectField> mapFields = gd.get(objectApiName).getDescribe().fields.getMap();
+            List<FieldOption> lstResults = new List<FieldOption>();
+            for (String fieldName : mapFields.keySet()) {
+                Schema.DescribeFieldResult fieldResult = mapFields.get(fieldName).getDescribe();
+                if (fieldResult.isAccessible()) {
+                    FieldOption fo = new FieldOption();
+                    fo.label = fieldResult.getLabel();
+                    fo.name = fieldResult.getName();
+                    lstResults.add(fo);
+                }
+            }
+            return lstResults;
+        } catch (Exception e) {
+            throw new AuraHandledException(e.getMessage());
+        }
+    }
+
     private static List<String> findRelationshipFields(
         String fromObjectApiName, 
         String toObjectApiName
@@ -262,6 +284,13 @@ public with sharing class HighlightBadgeSetupController {
         public String type {get;set;}
         @AuraEnabled
         public List<String> relationships {get;set;}
+    }
+
+    public class FieldOption {
+        @AuraEnabled
+        public String label {get;set;}
+        @AuraEnabled
+        public String name {get;set;}
     }
 
 }

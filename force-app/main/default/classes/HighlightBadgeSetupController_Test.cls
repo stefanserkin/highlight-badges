@@ -59,4 +59,32 @@ private class HighlightBadgeSetupController_Test {
         Assert.isTrue(setPaths.contains('accountid'), 'Should have found the path to the account');
     }
 
+    @IsTest
+    static void testGetObjectFields() {
+        List<HighlightBadgeSetupController.FieldOption> results;
+        Test.startTest();
+        results = HighlightBadgeSetupController.getObjectFields('Case');
+        Test.stopTest();
+        Set<String> setFields = new Set<String>();
+        for (HighlightBadgeSetupController.FieldOption fo : results) {
+            setFields.add(fo.label);
+        }
+        Assert.isTrue(setFields.contains('Subject'), 'Should have received the Subject field for the Case object');
+        Assert.isTrue(setFields.contains('Description'), 'Should have received the Description field for the Case object');
+    }
+
+    @IsTest
+    static void testGetObjectFieldsWithException() {
+        List<HighlightBadgeSetupController.FieldOption> results;
+        Boolean hasException = false;
+        Test.startTest();
+        try {
+            results = HighlightBadgeSetupController.getObjectFields('FakeObjectWontWork');
+        } catch (Exception e) {
+            hasException = true;
+        }
+        Test.stopTest();
+        Assert.isTrue(hasException, 'Should have received an exception for the fake object');
+    }
+
 }

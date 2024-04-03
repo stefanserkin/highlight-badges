@@ -2,6 +2,7 @@ import { LightningElement, api, wire } from 'lwc';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import { updateRecord } from 'lightning/uiRecordApi';
 import { getRecord, getFieldValue } from 'lightning/uiRecordApi';
+import getObjectFields from '@salesforce/apex/HighlightBadgeSetupController.getObjectFields';
 
 import ID_FIELD from '@salesforce/schema/Highlight_Badge_Definition__c.Id';
 import LABEL_FIELD from '@salesforce/schema/Highlight_Badge_Definition__c.Label__c';
@@ -9,6 +10,7 @@ import ICON_NAME_FIELD from '@salesforce/schema/Highlight_Badge_Definition__c.Ic
 import LABEL_COLOR_FIELD from '@salesforce/schema/Highlight_Badge_Definition__c.Label_Color__c';
 import BG_COLOR_FIELD from '@salesforce/schema/Highlight_Badge_Definition__c.Background_Color__c';
 import SOURCE_FIELDS_FIELD from '@salesforce/schema/Highlight_Badge_Definition__c.Source_Detail_Fields__c';
+import SOURCE_OBJECT_FIELD from '@salesforce/schema/Highlight_Badge_Definition__c.Source_Object__c';
 
 const FIELDS = [
     ID_FIELD, 
@@ -16,7 +18,8 @@ const FIELDS = [
     ICON_NAME_FIELD, 
     LABEL_COLOR_FIELD, 
     BG_COLOR_FIELD, 
-    SOURCE_FIELDS_FIELD
+    SOURCE_FIELDS_FIELD, 
+    SOURCE_OBJECT_FIELD
 ];
 
 export default class HighlightBadgeDesigner extends LightningElement {
@@ -30,6 +33,11 @@ export default class HighlightBadgeDesigner extends LightningElement {
     labelColor;
     bgColor;
     sourceDetailFields;
+
+    sourceObject;
+    availableSourceDetailFields = [];
+    selectedSourceDetailFields = [];
+    sourceDetailFieldOptions = [];
 
     cardTitle = 'Badge Design Settings';
     isUpdateMode = false;
@@ -72,6 +80,32 @@ export default class HighlightBadgeDesigner extends LightningElement {
         this.labelColor = getFieldValue(definition, LABEL_COLOR_FIELD);
         this.bgColor = getFieldValue(definition, BG_COLOR_FIELD);
         this.sourceDetailFields = getFieldValue(definition, SOURCE_FIELDS_FIELD);
+        this.sourceObject = getFieldValue(definition, SOURCE_OBJECT_FIELD);
+        console.log('source obj --> ',this.sourceObject);
+    }
+
+    /**************************
+     * Get available fields for source object
+     **************************/
+    @wire(getObjectFields, {objectApiName: '$sourceObject'})
+    wiredObjectFields(result) {
+        if (result.data) {
+            this.availableSourceDetailFields = JSON.parse(JSON.stringify(result.data));
+            this.sourceDetailFieldOptions = [];
+            this.availableSourceDetailFields.forEach(row => {
+                const option = {
+                    label: row.label, 
+                    value: row.name
+                }
+                this.sourceDetailFieldOptions.push(option);
+            });
+            if (this.sourceDetailFields) {
+                this.selectedSourceDetailFields = this.sourceDetailFields.split(',');
+            }
+        } else if (result.error) {
+            this.error = result.error;
+            console.error(this.error);
+        }
     }
 
     /**************************
@@ -95,7 +129,8 @@ export default class HighlightBadgeDesigner extends LightningElement {
     }
 
     handleSourceDetailFieldsChange(event) {
-        this.sourceDetailFields = event.detail.value;
+        this.selectedSourceDetailFields = event.detail.value;
+        this.sourceDetailFields = this.selectedSourceDetailFields.join(',');
     }
 
     /**************************
