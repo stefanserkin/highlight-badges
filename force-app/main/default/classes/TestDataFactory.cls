@@ -1,6 +1,8 @@
 @IsTest
 public class TestDataFactory {
     
+    private static final String ALERT_FREQUENCY_ALWAYS = 'Always';
+    private static final String ALERT_FREQUENCY_ONCE_PER_SESSION = 'Once Per Session';
     private static final String DEFAULT_CASE_STATUS = 'New';
     private static final String DEFAULT_CASE_ORIGIN = 'Phone';
     private static final String DEFAULT_OPP_STAGE = 'Prospecting';
@@ -101,7 +103,8 @@ public class TestDataFactory {
                 Limit__c = 3, 
                 Alert__c = true, 
                 Alert_Type__c = 'Modal', 
-                Alert_Message__c = 'Test important case alert'
+                Alert_Message__c = 'Test important case alert',
+                Alert_Frequency__c = ALERT_FREQUENCY_ALWAYS
             )
         );
 
@@ -120,6 +123,7 @@ public class TestDataFactory {
                 Alert__c = true, 
                 Alert_Type__c = 'Toast', 
                 Alert_Message__c = 'Test important opp alert for {!Name}', 
+                Alert_Frequency__c = ALERT_FREQUENCY_ONCE_PER_SESSION, 
                 Toast_Variant__c = 'success', 
                 Toast_Mode__c = 'sticky'
             )

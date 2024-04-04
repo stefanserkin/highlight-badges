@@ -16,7 +16,7 @@ public with sharing class HighlightBadgesService {
      * Constants
      ****************************************************/
     private static final String CACHE_KEY_PREFIX = 'bdgs';
-    private static final String CACHE_PARTITION_NAME = 'bdgs.HighlightBadges';
+    private static final String CACHE_PARTITION_NAME = 'local.HighlightBadges';
     private static final String DEFAULT_BACKGROUND_COLOR = '#D3D3D3';
     private static final String DEFAULT_LABEL_COLOR = '#000000';
     private static final String DEFAULT_ICON_NAME = 'utility:info';
@@ -361,7 +361,8 @@ public with sharing class HighlightBadgesService {
                    Alert_Message__c, 
                    Alert_Type__c, 
                    Toast_Variant__c, 
-                   Toast_Mode__c
+                   Toast_Mode__c, 
+                   Alert_Frequency__c
               FROM Highlight_Badge_Definition__c
              WHERE Display_Object__c = :displayObject
                AND Active__c = true
