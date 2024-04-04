@@ -16,6 +16,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Highlight_Badge_Definition__c.Alert_Frequency__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Highlight_Badge_Definition__c.Alert_Message__c</field>
         <readable>true</readable>
     </fieldPermissions>

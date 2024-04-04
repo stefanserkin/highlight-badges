@@ -464,18 +464,8 @@
                     <name>uiBehavior</name>
                     <value>none</value>
                 </fieldInstanceProperties>
-                <fieldItem>Record.Toast_Variant__c</fieldItem>
-                <identifier>RecordToast_Variant_cField</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
-                    <value>none</value>
-                </fieldInstanceProperties>
-                <fieldItem>Record.Toast_Mode__c</fieldItem>
-                <identifier>RecordToast_Mode_cField</identifier>
+                <fieldItem>Record.Alert_Frequency__c</fieldItem>
+                <identifier>RecordAlert_Frequency_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <name>Facet-ec3a0c4b-1e8b-4b38-a7c9-4b69ebeed462</name>
@@ -503,6 +493,58 @@
             </componentInstance>
         </itemInstances>
         <name>Facet-39f71571-67a7-4432-a256-0d275dbef7f8</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Toast_Variant__c</fieldItem>
+                <identifier>RecordToast_Variant_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <name>Facet-84ff9a7c-ec4c-4673-af0a-65777bdc53e6</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Toast_Mode__c</fieldItem>
+                <identifier>RecordToast_Mode_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <name>Facet-f272056d-591d-4af7-90ed-fdea49bf5adc</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>body</name>
+                    <value>Facet-84ff9a7c-ec4c-4673-af0a-65777bdc53e6</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:column</componentName>
+                <identifier>flexipage_column8</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>body</name>
+                    <value>Facet-f272056d-591d-4af7-90ed-fdea49bf5adc</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:column</componentName>
+                <identifier>flexipage_column9</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>Facet-10d27496-f5fc-4dd7-933c-128f5361cee3</name>
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
@@ -550,6 +592,31 @@
                 </componentInstanceProperties>
                 <componentName>flexipage:fieldSection</componentName>
                 <identifier>flexipage_fieldSection7</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>columns</name>
+                    <value>Facet-10d27496-f5fc-4dd7-933c-128f5361cee3</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>horizontalAlignment</name>
+                    <value>false</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>label</name>
+                    <value>Toast Settings</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:fieldSection</componentName>
+                <identifier>flexipage_fieldSection5</identifier>
+                <visibilityRule>
+                    <criteria>
+                        <leftValue>{!Record.Alert_Type__c}</leftValue>
+                        <operator>EQUAL</operator>
+                        <rightValue>Toast</rightValue>
+                    </criteria>
+                </visibilityRule>
             </componentInstance>
         </itemInstances>
         <itemInstances>

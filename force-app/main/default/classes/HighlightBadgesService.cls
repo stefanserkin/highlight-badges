@@ -15,6 +15,8 @@ public with sharing class HighlightBadgesService {
     /****************************************************
      * Constants
      ****************************************************/
+    private static final String CACHE_KEY_PREFIX = 'bdgs';
+    private static final String CACHE_PARTITION_NAME = 'bdgs.HighlightBadges';
     private static final String DEFAULT_BACKGROUND_COLOR = '#D3D3D3';
     private static final String DEFAULT_LABEL_COLOR = '#000000';
     private static final String DEFAULT_ICON_NAME = 'utility:info';
@@ -262,6 +264,27 @@ public with sharing class HighlightBadgesService {
     ) {
         String iconName = !String.isBlank(definition.Icon_Name__c) ? definition.Icon_Name__c : DEFAULT_ICON_NAME;
         return iconName;
+    }
+
+    /****************************************************
+     * Returns true if this is the running user's first visit to this
+     *     record page in the current session and caches the current
+     *     visit. Returns false if a visit is found in the session cache
+     * @param String Record Id
+     ****************************************************/
+     private static Boolean verifyFirstSessionVisit(String recordId) {
+        Boolean isFirstVisit = true;
+        // Create cache key out of user and contact ids
+        String userId = UserInfo.getUserId();
+        String cacheContactKey = CACHE_KEY_PREFIX + userId + recordId;
+        // Create instance of session partition
+        Cache.SessionPartition part = Cache.Session.getPartition(CACHE_PARTITION_NAME);
+        if (part.contains(cacheContactKey)) {
+            isFirstVisit = false;
+        } else {
+            part.put(cacheContactKey, Datetime.now());
+        }
+        return isFirstVisit;
     }
 
     /****************************************************
