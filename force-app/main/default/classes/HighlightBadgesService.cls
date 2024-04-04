@@ -23,6 +23,7 @@ public with sharing class HighlightBadgesService {
     private static final String MERGE_FIELD_REGEX = '\\{!.+?\\}';
     private static final String DEFAULT_BADGE_FIELDSET = 'Name';
     private static final String ALERT_TYPE_TOAST = 'Toast';
+    private static final String ALERT_FREQUENCY_ALWAYS = 'Always';
     @TestVisible
     private static final String SOBJECT_CASE = 'Case';
 
@@ -50,6 +51,9 @@ public with sharing class HighlightBadgesService {
         List<Highlight_Badge_Definition__c> lstBadgeDefinitions
     ) {
         List<HighlightBadge> lstBadges = new List<HighlightBadge>();
+
+        // Check platform cache for previous visits in the current session
+        Boolean isFirstVisit = verifyFirstSessionVisit(displayRecordId);
 
         Map<String, Id> mapFieldNameToAncestorId = getAncestorIdMap(lstBadgeDefinitions);
 
@@ -97,14 +101,22 @@ public with sharing class HighlightBadgesService {
                 badge.fieldSet = String.isBlank(definition.Source_Detail_Fields__c)
                     ? getDefaultFieldSet(definition.Source_Object__c)
                     : definition.Source_Detail_Fields__c.replaceAll('\\s+', '');
-                badge.hasAlert = definition.Alert__c;
-                badge.alertMessage = getBadgeAlertMessage(definition, obj);
-                badge.alertType = definition.Alert_Type__c != null ? definition.Alert_Type__c : null;
-                if (badge.alertType == ALERT_TYPE_TOAST) {
-                    badge.toastVariant = definition.Toast_Variant__c;
-                    badge.toastMode = definition.Toast_Mode__c;
+                // Badge has alert if alerts are enabled and either set to show every time, or this is the first user visit
+                if (
+                    definition.Alert__c && 
+                    (isFirstVisit || definition.Alert_Frequency__c == ALERT_FREQUENCY_ALWAYS)
+                ) {
+                    badge.hasAlert = true;
+                    badge.alertMessage = getBadgeAlertMessage(definition, obj);
+                    badge.alertType = definition.Alert_Type__c != null ? definition.Alert_Type__c : null;
+                    if (badge.alertType == ALERT_TYPE_TOAST) {
+                        badge.toastVariant = definition.Toast_Variant__c;
+                        badge.toastMode = definition.Toast_Mode__c;
+                    }
+                } else {
+                    badge.hasAlert = false;
                 }
-
+                
                 lstBadges.add(badge);
             }
         }

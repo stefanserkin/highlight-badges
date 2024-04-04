@@ -13,9 +13,9 @@
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
-                <fullName>Every Time</fullName>
+                <fullName>Always</fullName>
                 <default>false</default>
-                <label>Every Time</label>
+                <label>Always</label>
             </value>
             <value>
                 <fullName>Once Per Session</fullName>
