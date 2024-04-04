@@ -1,26 +1,22 @@
-<testsuite tests="21">
-  <testcase classname="HighlightBadgeQueryBuilder_Test" name="testBasicQuery" time="21" />
-  <testcase classname="HighlightBadgeSetupController_Test" name="testFindInverseRelationshipField" time="1596" />
-  <testcase classname="HighlightBadgeSetupController_Test" name="testGetChildObjects" time="455" />
-  <testcase classname="HighlightBadgeSetupController_Test" name="testGetCommonAncestorObjects" time="127" />
-  <testcase classname="HighlightBadgeSetupController_Test" name="testGetDisplayObjects" time="86" />
-  <testcase classname="HighlightBadgeSetupController_Test" name="testGetObjectFields" time="40" />
-  <testcase classname="HighlightBadgeSetupController_Test" name="testGetObjectFieldsWithException" time="33" />
-  <testcase classname="HighlightBadgeSetupController_Test" name="testGetPossibleAncestorPaths" time="145" />
-  <testcase classname="HighlightBadgesController_Test" name="testGetBadges" time="955" />
-  <testcase classname="HighlightBadgesService_Test" name="testComplexFieldPath" time="1191" />
-  <testcase classname="HighlightBadgesService_Test" name="testConstructor" time="74" />
-  <testcase classname="HighlightBadgesService_Test" name="testGetChildBadge" time="698" />
-  <testcase classname="HighlightBadgesService_Test" name="testGetCommonAncestorBadge" time="637" />
+<testsuite tests="20">
+  <testcase classname="HighlightBadgeQueryBuilder_Test" name="testBasicQuery" time="6" />
+  <testcase classname="HighlightBadgeSetupController_Test" name="testFindInverseRelationshipField" time="3980" />
+  <testcase classname="HighlightBadgeSetupController_Test" name="testGetChildObjects" time="3910" />
+  <testcase classname="HighlightBadgeSetupController_Test" name="testGetCommonAncestorObjects" time="115" />
+  <testcase classname="HighlightBadgeSetupController_Test" name="testGetDisplayObjects" time="98" />
+  <testcase classname="HighlightBadgeSetupController_Test" name="testGetObjectFields" time="28" />
+  <testcase classname="HighlightBadgeSetupController_Test" name="testGetObjectFieldsWithException" time="20" />
+  <testcase classname="HighlightBadgeSetupController_Test" name="testGetPossibleAncestorPaths" time="93" />
+  <testcase classname="HighlightBadgesController_Test" name="testGetBadges" time="919" />
+  <testcase classname="HighlightBadgesService_Test" name="testComplexFieldPath" time="1039" />
+  <testcase classname="HighlightBadgesService_Test" name="testConstructor" time="61" />
+  <testcase classname="HighlightBadgesService_Test" name="testGetChildBadge" time="585" />
+  <testcase classname="HighlightBadgesService_Test" name="testGetCommonAncestorBadge" time="555" />
   <testcase classname="HighlightBadgesService_Test" name="testGetSourceBadge" time="4" />
-  <testcase classname="HighlightBadgesService_Test" name="testModalAlert" time="4" />
-  <testcase classname="HighlightBadgesService_Test" name="testNoBadgesForRecord" time="5" />
-  <testcase classname="HighlightBadgesService_Test" name="testNoDefinitions" time="1269" />
-  <testcase classname="HighlightBadgesService_Test" name="testNoFieldSet" time="715" />
-  <testcase classname="HighlightBadgesService_Test" name="testOncePerSessionAlert" time="671">
-    <failure type="failed" message="System.AssertException: Assertion Failed: The second request should not have an alert"><![CDATA[External entry point
-(bdgs)]]></failure>
-  </testcase>
-  <testcase classname="HighlightBadgesService_Test" name="testSOQLLimitHandling" time="1732" />
-  <testcase classname="HighlightBadgesService_Test" name="testToastAlert" time="5" />
+  <testcase classname="HighlightBadgesService_Test" name="testModalAlert" time="3" />
+  <testcase classname="HighlightBadgesService_Test" name="testNoBadgesForRecord" time="2" />
+  <testcase classname="HighlightBadgesService_Test" name="testNoDefinitions" time="3714" />
+  <testcase classname="HighlightBadgesService_Test" name="testNoFieldSet" time="589" />
+  <testcase classname="HighlightBadgesService_Test" name="testSOQLLimitHandling" time="1356" />
+  <testcase classname="HighlightBadgesService_Test" name="testToastAlert" time="4" />
 </testsuite>
