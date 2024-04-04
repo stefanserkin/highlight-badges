@@ -29,6 +29,8 @@ public with sharing class HighlightBadgesService {
 
     private Map<String, Id> mapAncestorIds;
 
+    private static Cache.SessionPartition sessionCachePartition;
+
     /****************************************************
      * Get active highlight badges for the source record id
      ****************************************************/
@@ -51,10 +53,6 @@ public with sharing class HighlightBadgesService {
         List<Highlight_Badge_Definition__c> lstBadgeDefinitions
     ) {
         List<HighlightBadge> lstBadges = new List<HighlightBadge>();
-
-        // Check platform cache for previous visits in the current session
-        Boolean isFirstVisit = verifyFirstSessionVisit(displayRecordId);
-
         Map<String, Id> mapFieldNameToAncestorId = getAncestorIdMap(lstBadgeDefinitions);
 
         // For each badge definition, get relevant badges
@@ -104,7 +102,7 @@ public with sharing class HighlightBadgesService {
                 // Badge has alert if alerts are enabled and either set to show every time, or this is the first user visit
                 if (
                     definition.Alert__c && 
-                    (isFirstVisit || definition.Alert_Frequency__c == ALERT_FREQUENCY_ALWAYS)
+                    (verifyFirstBadgeView(badge.recordId) || definition.Alert_Frequency__c == ALERT_FREQUENCY_ALWAYS)
                 ) {
                     badge.hasAlert = true;
                     badge.alertMessage = getBadgeAlertMessage(definition, obj);
@@ -284,19 +282,34 @@ public with sharing class HighlightBadgesService {
      *     visit. Returns false if a visit is found in the session cache
      * @param String Record Id
      ****************************************************/
-     private static Boolean verifyFirstSessionVisit(String recordId) {
-        Boolean isFirstVisit = true;
-        // Create cache key out of user and contact ids
+    private static Boolean verifyFirstBadgeView(
+        String badgeId
+    ) {
+        Boolean isFirstView = true;
+        // Create cache key out of user and badge ids
         String userId = UserInfo.getUserId();
-        String cacheContactKey = CACHE_KEY_PREFIX + userId + recordId;
+        String cacheBadgeKey = CACHE_KEY_PREFIX + userId + badgeId;
         // Create instance of session partition
-        Cache.SessionPartition part = Cache.Session.getPartition(CACHE_PARTITION_NAME);
-        if (part.contains(cacheContactKey)) {
-            isFirstVisit = false;
+        Cache.SessionPartition part = getSessionCachePartition(CACHE_PARTITION_NAME);
+        if (part.contains(cacheBadgeKey)) {
+            isFirstView = false;
         } else {
-            part.put(cacheContactKey, Datetime.now());
+            part.put(cacheBadgeKey, Datetime.now());
         }
-        return isFirstVisit;
+        return isFirstView;
+    }
+
+    /****************************************************
+     * Ensures session cache partition is only retrieved a single time
+     * @param String Session cache partition name
+     ****************************************************/
+    private static Cache.SessionPartition getSessionCachePartition(
+        String cachePartitionName
+    ) {
+        if (sessionCachePartition == null) {
+            sessionCachePartition = Cache.Session.getPartition(cachePartitionName);
+        }
+        return sessionCachePartition;
     }
 
     /****************************************************
