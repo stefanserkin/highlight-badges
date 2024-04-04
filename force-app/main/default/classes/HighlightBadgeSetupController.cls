@@ -1,3 +1,9 @@
+/************************************************************************
+ * @description Controller for highlight badge definition configuration
+ * 
+ * @author SerkinSolutions
+ * @date 2024
+ ************************************************************************/
 public with sharing class HighlightBadgeSetupController {
 
     private static final Set<String> ALLOWED_STANDARD_OBJECTS = new Set<String>{

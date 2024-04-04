@@ -1,7 +1,9 @@
-/**
- * The HighlightBadgesService provides badges relevant to a particular user and record page
+/************************************************************************
+ * @description The HighlightBadgesService provides badges relevant to a particular user and record page
+ * 
+ * @author SerkinSolutions
  * @date 2024
- */
+ ************************************************************************/
 public with sharing class HighlightBadgesService {
 
     public Id displayRecordId {get; private set;}

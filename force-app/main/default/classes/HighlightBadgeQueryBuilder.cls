@@ -1,7 +1,9 @@
-/**
- * Used to construct queries from Highlight Badge Definition configuration
+/************************************************************************
+ * @description Used to construct queries from Highlight Badge Definition configuration
+ * 
+ * @author SerkinSolutions
  * @date 2024
- */
+ ************************************************************************/
 public with sharing class HighlightBadgeQueryBuilder {
 
     /****************************************************

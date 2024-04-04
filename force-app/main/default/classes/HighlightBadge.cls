@@ -1,7 +1,9 @@
-/**
- * Data wrapper to represent an individual highlight badge
+/************************************************************************
+ * @description Data wrapper to represent an individual highlight badge
+ * 
+ * @author SerkinSolutions
  * @date 2024
- */
+ ************************************************************************/
 public with sharing class HighlightBadge {
 
     /**

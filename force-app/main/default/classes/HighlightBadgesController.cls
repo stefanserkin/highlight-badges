@@ -1,7 +1,9 @@
-/**
- * Controller for the highlightBadges lwc
+/************************************************************************
+ * @description Controller for the highlightBadges lwc
+ * 
+ * @author SerkinSolutions
  * @date 2024
- */
+ ************************************************************************/
 public with sharing class HighlightBadgesController {
     
     @AuraEnabled(cacheable=true)
