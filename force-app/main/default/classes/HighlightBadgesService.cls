@@ -15,21 +15,36 @@ public with sharing class HighlightBadgesService {
     /****************************************************
      * Constants
      ****************************************************/
+    // Platform cache
     private static final String CACHE_KEY_PREFIX = 'bdgs';
-    private static final String CACHE_PARTITION_NAME = 'local.HighlightBadges';
+    private static final String CACHE_PARTITION_NAME = 'HighlightBadges';
+
+    // Alerts
+    private static final String ALERT_FREQUENCY_ALWAYS = 'Always';
+    private static final String ALERT_TYPE_TOAST = 'Toast';
+
+    // Badge styles and display
     private static final String DEFAULT_BACKGROUND_COLOR = '#D3D3D3';
     private static final String DEFAULT_LABEL_COLOR = '#000000';
     private static final String DEFAULT_ICON_NAME = 'utility:info';
-    private static final String MERGE_FIELD_REGEX = '\\{!.+?\\}';
     private static final String DEFAULT_BADGE_FIELDSET = 'Name';
-    private static final String ALERT_TYPE_TOAST = 'Toast';
-    private static final String ALERT_FREQUENCY_ALWAYS = 'Always';
+    private static final String MERGE_FIELD_REGEX = '\\{!.+?\\}';
+    
+    // sObjects
     @TestVisible
     private static final String SOBJECT_CASE = 'Case';
 
-    private Map<String, Id> mapAncestorIds;
-
+    /**
+     * Platform Cache - Session partition
+     */
     private static Cache.SessionPartition sessionCachePartition;
+
+    /**
+     * A map of field names to their common ancestor id
+     * The field name is the api path from source to ancestor object
+     * The ancestor id is the record id at the end of it
+     */
+    private Map<String, Id> mapAncestorIds;
 
     /****************************************************
      * Get active highlight badges for the source record id
@@ -290,7 +305,7 @@ public with sharing class HighlightBadgesService {
         String userId = UserInfo.getUserId();
         String cacheBadgeKey = CACHE_KEY_PREFIX + userId + badgeId;
         // Create instance of session partition
-        Cache.SessionPartition part = getSessionCachePartition(CACHE_PARTITION_NAME);
+        Cache.SessionPartition part = getSessionCachePartition( Util.prefixCacheNamespace(CACHE_PARTITION_NAME) );
         if (part.contains(cacheBadgeKey)) {
             isFirstView = false;
         } else {
