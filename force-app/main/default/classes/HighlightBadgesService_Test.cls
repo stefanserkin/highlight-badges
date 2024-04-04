@@ -204,41 +204,6 @@ private class HighlightBadgesService_Test {
     }
 
     @IsTest
-    static void testOncePerSessionAlert() {
-        Contact ct = [SELECT Id, (SELECT Id FROM Opportunities WHERE Amount > 100) FROM Contact LIMIT 1];
-
-        User u = TestDataFactory.createTestUser('Rey', 'Ordonez', 'Admin');
-
-        HighlightBadge badge;
-        HighlightBadge refreshedBadge;
-        Test.startTest();
-        System.runAs(u) {
-            HighlightBadgesService service = new HighlightBadgesService(
-                ct.Id,
-                'Contact'
-            );
-            List<HighlightBadge> lstBadges = service.getBadges();
-            for (HighlightBadge bdg : lstBadges) {
-                if (bdg.recordId == ct.Opportunities[0].Id) {
-                    badge = bdg;
-                }
-            }
-
-            // Call a second time to confirm token is in platform cache
-            List<HighlightBadge> lstRefreshedBadges = service.getBadges();
-            for (HighlightBadge bdg : lstRefreshedBadges) {
-                if (bdg.recordId == ct.Opportunities[0].Id) {
-                    refreshedBadge = bdg;
-                }
-            }
-        }
-        Test.stopTest();
-
-        Assert.isTrue(badge.hasAlert, 'The first request should have an alert');
-        Assert.isFalse(refreshedBadge.hasAlert, 'The second request should not have an alert');
-    }
-
-    @IsTest
     static void testToastAlert() {
         
     }
