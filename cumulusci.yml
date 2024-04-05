@@ -1,8 +1,8 @@
 minimum_cumulusci_version: '3.84.1'
 project:
-    name: HighlightBadges
+    name: Highlight Badges
     package:
-        name: HighlightBadges
+        name: Highlight Badges
         namespace: bdgs
         api_version: '59.0'
     git:
