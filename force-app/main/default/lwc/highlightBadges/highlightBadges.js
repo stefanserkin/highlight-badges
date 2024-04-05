@@ -74,6 +74,8 @@ export default class HighlightBadges extends NavigationMixin(LightningElement) {
                             },
                         }).then((url) => {
                             const event = new ShowToastEvent({
+                                variant: badge.toastVariant, 
+                                mode: badge.toastMode, 
                                 title: badge.label,
                                 message: badge.alertMessage + ' - {0}',
                                 messageData: [

@@ -610,13 +610,6 @@
                 </componentInstanceProperties>
                 <componentName>flexipage:fieldSection</componentName>
                 <identifier>flexipage_fieldSection5</identifier>
-                <visibilityRule>
-                    <criteria>
-                        <leftValue>{!Record.Alert_Type__c}</leftValue>
-                        <operator>EQUAL</operator>
-                        <rightValue>Toast</rightValue>
-                    </criteria>
-                </visibilityRule>
             </componentInstance>
         </itemInstances>
         <itemInstances>
