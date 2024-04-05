@@ -55,15 +55,18 @@ export default class HighlightBadges extends NavigationMixin(LightningElement) {
         for (let i = 0; i < objs.length; i++) {
             const badge = objs[i];
             if (badge.hasAlert) {
+                // Modal alerts
                 if (badge.alertType == 'Modal') {
-                    if (this.alertModalMessages.includes(badge.alertMessage) === false) {
+                    if (!this.alertModalMessages.includes(badge.alertMessage)) {
                         // Add record link to alert message
                         if (badge.recordId != this.recordId) {
                             badge.alertMessage += ' - <a href="/' + badge.recordId + '">View Record</a>';
                         }
                         this.alertModalMessages.push(badge.alertMessage);
                     }
-                } else if (badge.alertType == 'Toast') {
+                } 
+                // Toast alerts
+                else if (badge.alertType == 'Toast') {
                     if (badge.recordId != this.recordId) {
                         // Add record link to alert message
                         this[NavigationMixin.GenerateUrl]({
@@ -73,21 +76,14 @@ export default class HighlightBadges extends NavigationMixin(LightningElement) {
                                 actionName: 'view',
                             },
                         }).then((url) => {
-                            const event = new ShowToastEvent({
-                                variant: badge.toastVariant, 
-                                mode: badge.toastMode, 
-                                title: badge.label,
-                                message: badge.alertMessage + ' - {0}',
-                                messageData: [
-                                    {
-                                        url,
-                                        label: 'View Record',
-                                    },
-                                ],
-                            });
-                            this.dispatchEvent(event);
+                            const badgeAlertMessage = badge.alertMessage + ' - {0}';
+                            const messageData = [ 
+                                {url, label: 'View Record'} 
+                            ];
+                            this.showToast(badge.label, badgeAlertMessage, badge.toastVariant, badge.toastMode, messageData);
                         });
-                    } else {
+                    }
+                    else {
                         this.showToast(badge.label, badge.alertMessage, badge.toastVariant, badge.toastMode);
                     }
                 }
@@ -113,13 +109,29 @@ export default class HighlightBadges extends NavigationMixin(LightningElement) {
         this.showModalAlert = false;
     }
 
-    showToast(title = 'Alert', message = ' ', variant = 'info', mode = 'dismissible') {
-        const toast = new ShowToastEvent({
+    /**
+     * @description Show toast message
+     * @param context - The Lightning Web Component instance that calls this function
+     * @param title - The title of the toast
+     * @param message - The message of the toast
+     * @param variant - The variant of the toast
+     * @param mode - The mode of the toast
+     * @param messageData - Optional data for the message template
+     */
+    showToast(title = 'Alert', message = ' ', variant = 'info', mode = 'dismissible', messageData = null) {
+        const eventConfig = {
             title,
             message,
             variant,
             mode
-        });
+        };
+    
+        // If messageData is provided, add property to eventConfig
+        if (messageData) {
+            eventConfig.messageData = messageData;
+        }
+    
+        const toast = new ShowToastEvent(eventConfig);
         this.dispatchEvent(toast);
     }
 

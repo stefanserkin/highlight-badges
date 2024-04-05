@@ -89,8 +89,8 @@ export default class HighlightBadgeDesigner extends LightningElement {
     @wire(getObjectFields, {objectApiName: '$sourceObject'})
     wiredObjectFields(result) {
         if (result.data) {
-            console.log('returned data for source detail fields');
             this.availableSourceDetailFields = JSON.parse(JSON.stringify(result.data));
+            // Create picklist options for each field result
             this.sourceDetailFieldOptions = [];
             this.availableSourceDetailFields.forEach(row => {
                 const option = {
@@ -103,8 +103,10 @@ export default class HighlightBadgeDesigner extends LightningElement {
             this.sourceDetailFieldOptions.sort((a, b) => {
                 return a.label.localeCompare(b.label);
             });
+            // Set default values
             if (this.sourceDetailFields) {
-                this.selectedSourceDetailFields = this.sourceDetailFields.split(',');
+                this.selectedSourceDetailFields = this.sourceDetailFields.split(',')
+                    .map(field => field.trim());
             }
         } else if (result.error) {
             this.error = result.error;
@@ -156,9 +158,9 @@ export default class HighlightBadgeDesigner extends LightningElement {
             .then(() => {
                 this.dispatchEvent(
                     new ShowToastEvent({
-                        title: "Success",
-                        message: "Badge definition updated",
-                        variant: "success",
+                        title: 'Success',
+                        message: 'Badge definition updated',
+                        variant: 'success',
                     }),
                 );
                 this.isUpdateMode = false;
@@ -167,9 +169,9 @@ export default class HighlightBadgeDesigner extends LightningElement {
                 // The form is not valid
                 this.dispatchEvent(
                     new ShowToastEvent({
-                        title: "Hmm... something went wrong",
-                        message: "Check your input and try again.",
-                        variant: "error",
+                        title: 'Hmm... something went wrong',
+                        message: 'Check your input and try again.',
+                        variant: 'error',
                     })
                 );
             });
