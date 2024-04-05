@@ -16,7 +16,9 @@
             <div class="slds-modal__content slds-var-p-around_medium" id="modal-content-id-1">
                 <ul class="slds-list_dotted slds-var-m-around_medium">
                     <template for:each={alertMessages} for:item="alert">
-                        <li key={alert} class="slds-var-m-around_small">{alert}</li>
+                        <li key={alert} class="slds-var-m-around_small">
+                            <lightning-formatted-rich-text value={alert}></lightning-formatted-rich-text>
+                        </li>
                     </template>
                 </ul>
             </div>

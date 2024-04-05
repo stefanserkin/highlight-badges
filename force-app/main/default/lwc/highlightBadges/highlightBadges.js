@@ -1,9 +1,10 @@
 import { LightningElement, api, wire } from 'lwc';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
+import { NavigationMixin } from 'lightning/navigation';
 import getBadges from '@salesforce/apex/HighlightBadgesController.getBadges';
 import canViewHighlightBadges from '@salesforce/customPermission/Can_View_Highlight_Badges';
 
-export default class HighlightBadges extends LightningElement {
+export default class HighlightBadges extends NavigationMixin(LightningElement) {
     @api recordId;
     @api objectApiName;
     @api alertModalHeader;
@@ -33,7 +34,7 @@ export default class HighlightBadges extends LightningElement {
         this.isLoading = true;
         this.wiredBadges = result;
         if (result.data) {
-            this.badges = result.data;
+            this.badges = JSON.parse( JSON.stringify(result.data) );
             this.handleAlerts(this.badges);
             this.error = undefined;
             this.isLoading = false;
@@ -56,10 +57,37 @@ export default class HighlightBadges extends LightningElement {
             if (badge.hasAlert) {
                 if (badge.alertType == 'Modal') {
                     if (this.alertModalMessages.includes(badge.alertMessage) === false) {
+                        // Add record link to alert message
+                        if (badge.recordId != this.recordId) {
+                            badge.alertMessage += ' - <a href="/' + badge.recordId + '">View Record</a>';
+                        }
                         this.alertModalMessages.push(badge.alertMessage);
                     }
                 } else if (badge.alertType == 'Toast') {
-                    this.showToast(badge.label, badge.alertMessage, badge.toastVariant, badge.toastMode);
+                    if (badge.recordId != this.recordId) {
+                        // Add record link to alert message
+                        this[NavigationMixin.GenerateUrl]({
+                            type: 'standard__recordPage',
+                            attributes: {
+                                recordId: badge.recordId,
+                                actionName: 'view',
+                            },
+                        }).then((url) => {
+                            const event = new ShowToastEvent({
+                                title: badge.label,
+                                message: badge.alertMessage + ' - {0}',
+                                messageData: [
+                                    {
+                                        url,
+                                        label: 'View Record',
+                                    },
+                                ],
+                            });
+                            this.dispatchEvent(event);
+                        });
+                    } else {
+                        this.showToast(badge.label, badge.alertMessage, badge.toastVariant, badge.toastMode);
+                    }
                 }
             }
         }
