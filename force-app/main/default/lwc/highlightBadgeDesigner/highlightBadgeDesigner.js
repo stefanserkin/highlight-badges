@@ -89,6 +89,7 @@ export default class HighlightBadgeDesigner extends LightningElement {
     @wire(getObjectFields, {objectApiName: '$sourceObject'})
     wiredObjectFields(result) {
         if (result.data) {
+            console.log('returned data for source detail fields');
             this.availableSourceDetailFields = JSON.parse(JSON.stringify(result.data));
             this.sourceDetailFieldOptions = [];
             this.availableSourceDetailFields.forEach(row => {
@@ -97,6 +98,10 @@ export default class HighlightBadgeDesigner extends LightningElement {
                     value: row.name
                 }
                 this.sourceDetailFieldOptions.push(option);
+            });
+            // Sort by label
+            this.sourceDetailFieldOptions.sort((a, b) => {
+                return a.label.localeCompare(b.label);
             });
             if (this.sourceDetailFields) {
                 this.selectedSourceDetailFields = this.sourceDetailFields.split(',');
