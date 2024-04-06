@@ -59,15 +59,6 @@ export default class HighlightBadges extends NavigationMixin(LightningElement) {
                 // Modal alerts
                 if (badge.alertType == 'Modal') {
                     this.alertModalBadges.push(badge);
-                    /*
-                    if (!this.alertModalMessages.includes(badge.alertMessage)) {
-                        // Add record link to alert message
-                        if (badge.recordId != this.recordId) {
-                            badge.alertMessage += ' - <a href="/' + badge.recordId + '">View Record</a>';
-                        }
-                        this.alertModalMessages.push(badge.alertMessage);
-                    }
-                    */
                 } 
                 // Toast alerts
                 else if (badge.alertType == 'Toast') {
@@ -98,13 +89,6 @@ export default class HighlightBadges extends NavigationMixin(LightningElement) {
         if (this.alertModalBadges && this.alertModalBadges.length > 0) {
             this.showModalAlert = true;
         }
-        // Modal alerts are displayed together in a single modal
-        /*
-        if (this.alertModalMessages.length > 0) {
-            this.alertModalContent = this.alertModalMessages.join("\n");
-            this.showModalAlert = true;
-        }
-        */
     }
 
     handleBadgeClick(event) {
