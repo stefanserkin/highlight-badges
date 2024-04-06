@@ -66,6 +66,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Highlight_Badge_Definition__c.Include_Label_in_Toast__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Highlight_Badge_Definition__c.Label_Color__c</field>
         <readable>true</readable>
     </fieldPermissions>
