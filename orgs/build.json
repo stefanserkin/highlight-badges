@@ -1,6 +1,6 @@
 {
   "orgName": "HighlightBadges - Release Build Org",
-  "edition": "Enterprise",
+  "edition": "Developer",
   "settings": {
     "lightningExperienceSettings": {
       "enableS1DesktopEnabled": true
