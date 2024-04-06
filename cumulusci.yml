@@ -61,3 +61,8 @@ flows:
                 task: configure_scratch_user
             11:
                 task: assign_badges_admin_permset
+
+orgs:
+    scratch:
+        build:
+            config_file: orgs/build.json
