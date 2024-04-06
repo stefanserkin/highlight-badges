@@ -97,48 +97,61 @@ public with sharing class HighlightBadgesService {
                 continue;
             }
 
-            // Create set to store label names to avoid duplicates
-            Set<String> setLabelNames = new Set<String>();
-
-            for (SObject obj : queryResults) {
-                HighlightBadge badge = new HighlightBadge();
-                badge.recordId = obj.Id;
-                badge.sObjectType = definition.Source_Object__c;
-                badge.label = getBadgeLabel(definition, obj);
-                // Prevent duplicates
-                if (setLabelNames.contains(badge.label)) {
-                    continue;
-                } else {
-                    setLabelNames.add(badge.label);
-                }
-                badge.iconName = getBadgeIconName(definition);
-                badge.styles = getBadgeColorStyle(definition) + getBadgeLabelStyle(definition);
-                badge.backgroundColor = definition.Background_Color__c ?? DEFAULT_BACKGROUND_COLOR;
-                badge.labelColor = definition.Label_Color__c ?? DEFAULT_LABEL_COLOR;
-                badge.fieldSet = String.isBlank(definition.Source_Detail_Fields__c)
-                    ? getDefaultFieldSet(definition.Source_Object__c)
-                    : definition.Source_Detail_Fields__c.replaceAll('\\s+', '');
-                // Badge has alert if alerts are enabled and either set to show every time, or this is the first user visit
-                if (
-                    definition.Alert__c && 
-                    (definition.Alert_Frequency__c == ALERT_FREQUENCY_ALWAYS || verifyFirstBadgeView(badge.recordId))
-                ) {
-                    badge.hasAlert = true;
-                    badge.alertMessage = getBadgeAlertMessage(definition, obj);
-                    badge.alertType = definition.Alert_Type__c != null ? definition.Alert_Type__c : null;
-                    if (badge.alertType == ALERT_TYPE_TOAST) {
-                        badge.toastVariant = definition.Toast_Variant__c;
-                        badge.toastMode = definition.Toast_Mode__c;
-                        badge.includeLabelInToast = definition.Include_Label_in_Toast__c;
-                    }
-                } else {
-                    badge.hasAlert = false;
-                }
-                
-                lstBadges.add(badge);
-            }
+            lstBadges.addAll( 
+                constructHighlightBadges(queryResults, definition) 
+            );
         }
         
+        return lstBadges;
+    }
+
+    /****************************************************
+     * Builds and returns a HighlightBadge object from the SObject and definition
+     ****************************************************/
+    private List<HighlightBadge> constructHighlightBadges(List<SObject> objs, Highlight_Badge_Definition__c definition) {
+        List<HighlightBadge> lstBadges = new List<HighlightBadge>();
+
+        // Create set to store label names to avoid duplicates
+        Set<String> setLabelNames = new Set<String>();
+
+        for (SObject obj : objs) {
+            HighlightBadge badge = new HighlightBadge();
+            badge.recordId = obj.Id;
+            badge.sObjectType = definition.Source_Object__c;
+            badge.label = getBadgeLabel(definition, obj);
+            // Prevent duplicates
+            if (setLabelNames.contains(badge.label)) {
+                continue;
+            } else {
+                setLabelNames.add(badge.label);
+            }
+            badge.iconName = getBadgeIconName(definition);
+            badge.styles = getBadgeColorStyle(definition) + getBadgeLabelStyle(definition);
+            badge.backgroundColor = definition.Background_Color__c ?? DEFAULT_BACKGROUND_COLOR;
+            badge.labelColor = definition.Label_Color__c ?? DEFAULT_LABEL_COLOR;
+            badge.fieldSet = String.isBlank(definition.Source_Detail_Fields__c)
+                ? getDefaultFieldSet(definition.Source_Object__c)
+                : definition.Source_Detail_Fields__c.replaceAll('\\s+', '');
+            // Badge has alert if alerts are enabled and either set to show every time, or this is the first user visit
+            if (
+                definition.Alert__c && 
+                (definition.Alert_Frequency__c == ALERT_FREQUENCY_ALWAYS || verifyFirstBadgeView(badge.recordId))
+            ) {
+                badge.hasAlert = true;
+                badge.alertMessage = getBadgeAlertMessage(definition, obj);
+                badge.alertType = definition.Alert_Type__c != null ? definition.Alert_Type__c : null;
+                if (badge.alertType == ALERT_TYPE_TOAST) {
+                    badge.toastVariant = definition.Toast_Variant__c;
+                    badge.toastMode = definition.Toast_Mode__c;
+                    badge.includeLabelInToast = definition.Include_Label_in_Toast__c;
+                }
+            } else {
+                badge.hasAlert = false;
+            }
+            
+            lstBadges.add(badge);
+        }
+
         return lstBadges;
     }
 
