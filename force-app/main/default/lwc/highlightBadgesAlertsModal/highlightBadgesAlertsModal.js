@@ -3,10 +3,19 @@ import { NavigationMixin } from 'lightning/navigation';
 
 export default class HighlightBadgesAlertsModal extends NavigationMixin(LightningElement) {
     @api modalHeader;
-    @api badges;
 
-    handleCloseEvent() {
-        this.dispatchEvent(new CustomEvent('close'));
+    _badges;
+    @api
+    get badges() {
+        return this._badges;
+    }
+    set badges(value) {
+        let rows = JSON.parse( JSON.stringify(value) );
+        rows.forEach(row => {
+            row.iconStyle = this.getHeaderIconStyle(row);
+            row.viewRecordButtonLabel = this.getViewRecordButtonLabel(row);
+        });
+        this._badges = rows;
     }
 
     handleGoToRecord(event) {
@@ -25,6 +34,18 @@ export default class HighlightBadgesAlertsModal extends NavigationMixin(Lightnin
         }).then(url => {
             window.open(url, '_blank');
         });
+    }
+
+    getHeaderIconStyle(badge) {
+        return `--slds-c-icon-color-background: ${badge.backgroundColor}; --slds-c-icon-color-foreground: ${badge.labelColor}`;
+    }
+
+    getViewRecordButtonLabel(badge) {
+        return `View ${badge.sObjectType}`;
+    }
+
+    handleCloseEvent() {
+        this.dispatchEvent(new CustomEvent('close'));
     }
 
 }

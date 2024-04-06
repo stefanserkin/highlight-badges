@@ -18,14 +18,24 @@
             <!-- MODAL BODY -->
             <div class="slds-modal__content slds-var-p-around_medium" id="modal-content-id-1">
                 <template for:each={badges} for:item="badge">
-                    <lightning-card key={badge.id} title={badge.label} icon-name={badge.iconName}>
+                    <lightning-card key={badge.id}>
+                        <div slot="title" style={badge.styles}>
+                            <lightning-badge 
+                                icon-name={badge.iconName}
+                                label={badge.label} 
+                                class="slds-var-m-horizontal_small slds-var-m-bottom_small" 
+                            ></lightning-badge>
+                        </div>
                         <!-- NAVIGATE TO RECORD BUTTON -->
                         <div slot="actions">
                             <lightning-button 
                                 variant="neutral" 
-                                label="View Record" 
-                                data-id={badge.id}
-                                onclick={handleGoToRecord}
+                                icon-name="utility:new_window" 
+                                icon-position="right" 
+                                label={badge.viewRecordButtonLabel} 
+                                data-id={badge.id} 
+                                onclick={handleGoToRecord} 
+                                class="slds-align_absolute-center"
                             ></lightning-button>
                         </div>
 

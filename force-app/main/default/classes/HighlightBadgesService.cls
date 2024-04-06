@@ -113,6 +113,8 @@ public with sharing class HighlightBadgesService {
                 }
                 badge.iconName = getBadgeIconName(definition);
                 badge.styles = getBadgeColorStyle(definition) + getBadgeLabelStyle(definition);
+                badge.backgroundColor = definition.Background_Color__c ?? DEFAULT_BACKGROUND_COLOR;
+                badge.labelColor = definition.Label_Color__c ?? DEFAULT_LABEL_COLOR;
                 badge.fieldSet = String.isBlank(definition.Source_Detail_Fields__c)
                     ? getDefaultFieldSet(definition.Source_Object__c)
                     : definition.Source_Detail_Fields__c.replaceAll('\\s+', '');

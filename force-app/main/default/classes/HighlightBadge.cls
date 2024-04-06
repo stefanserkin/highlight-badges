@@ -54,6 +54,18 @@ public with sharing class HighlightBadge {
     public String styles {get;set;}
 
     /**
+     * Hexadecimal color code for background
+     */
+    @AuraEnabled
+    public String backgroundColor {get;set;}
+
+    /**
+     * Hexadecimal color code for label and icon
+     */
+    @AuraEnabled
+    public String labelColor {get;set;}
+
+    /**
      * If true, an alert will be displayed when this badge is returned for a record
      */
     @AuraEnabled

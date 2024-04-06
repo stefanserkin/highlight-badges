@@ -2,7 +2,7 @@
     <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
         <div class="slds-modal__container">
             <!-- MODAL HEADER -->
-            <header class="slds-modal__header">
+            <header class="slds-modal__header" style={headerStyle}>
                 <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={handleClose}>
                     <lightning-icon icon-name="utility:close"
                         alternative-text="close"
@@ -11,7 +11,19 @@
                     <span class="slds-assistive-text">Close</span>
                 </button>
                 <label></label>
-                <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">{badge.label}</h2>
+                <!-- BADGE ICON AND LABEL -->
+                <div class="slds-media">
+                    <div class="slds-align_absolute-center header-container">
+                        <div class="slds-media slds-media_center">
+                            <div class="slds-media__figure" style={headerIconStyle}>
+                                <lightning-icon icon-name={badge.iconName} alternative-text="Badge Icon" title="Badge Icon" size="small"></lightning-icon>
+                            </div>
+                            <div class="slds-media__body slds-p-left_small">
+                                <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate" style={headerTextStyle}>{badge.label}</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </header>
 
             <!-- MODAL BODY -->
@@ -62,7 +74,7 @@
                 <lightning-button 
                     lwc:if={navigationEnabled} 
                     variant="brand"
-                    label="View Record" 
+                    label={viewRecordButtonLabel} 
                     title="View Record" 
                     onclick={handleGoToRecord} 
                     class="slds-m-left_x-small"

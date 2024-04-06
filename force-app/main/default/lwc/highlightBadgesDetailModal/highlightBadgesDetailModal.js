@@ -25,6 +25,22 @@ export default class HighlightBadgesDetailModal extends NavigationMixin(Lightnin
         return `${this.badge.sObjectType} Details`;
     }
 
+    get headerStyle() {
+        return `background-color: ${this.badge.backgroundColor}; padding: 1rem; width: 100%;`;
+    }
+
+    get headerIconStyle() {
+        return `--slds-c-icon-color-background: ${this.badge.backgroundColor}; --slds-c-icon-color-foreground: ${this.badge.labelColor}`;
+    }
+
+    get headerTextStyle() {
+        return `color: ${this.badge.labelColor};`;
+    }
+
+    get viewRecordButtonLabel() {
+        return `View ${this.badge.sObjectType}`;
+    }
+
     handleGoToRecord() {
         this[NavigationMixin.Navigate]({
             type: 'standard__recordPage',
