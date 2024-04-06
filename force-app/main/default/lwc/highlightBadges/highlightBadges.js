@@ -75,11 +75,11 @@ export default class HighlightBadges extends NavigationMixin(LightningElement) {
                             const messageData = [ 
                                 {url, label: ` 🔍 View ${badge.sObjectType}`} 
                             ];
-                            this.showToast(badge.label, badgeAlertMessage, badge.toastVariant, badge.toastMode, messageData);
+                            this.showToast(badge.label, badgeAlertMessage, badge.toastVariant, badge.toastMode, badge.includeLabelInToast, messageData);
                         });
                     }
                     else {
-                        this.showToast(badge.label, badge.alertMessage, badge.toastVariant, badge.toastMode);
+                        this.showToast(badge.label, badge.alertMessage, badge.toastVariant, badge.toastMode, badge.includeLabelInToast);
                     }
                 }
             }
@@ -112,13 +112,17 @@ export default class HighlightBadges extends NavigationMixin(LightningElement) {
      * @param mode - The mode of the toast
      * @param messageData - Optional data for the message template
      */
-    showToast(title = 'Alert', message = ' ', variant = 'info', mode = 'dismissible', messageData = null) {
+    showToast(title = 'Alert', message = ' ', variant = 'info', mode = 'dismissible', includeLabel = false, messageData = null) {
         const eventConfig = {
-            title,
             message,
             variant,
             mode
         };
+
+        // Set title if label should be included
+        if (includeLabel) {
+            eventConfig.title = title;
+        }
     
         // If messageData is provided, add property to eventConfig
         if (messageData) {

@@ -129,6 +129,7 @@ public with sharing class HighlightBadgesService {
                     if (badge.alertType == ALERT_TYPE_TOAST) {
                         badge.toastVariant = definition.Toast_Variant__c;
                         badge.toastMode = definition.Toast_Mode__c;
+                        badge.includeLabelInToast = definition.Include_Label_in_Toast__c;
                     }
                 } else {
                     badge.hasAlert = false;
@@ -427,7 +428,8 @@ public with sharing class HighlightBadgesService {
                    Alert_Type__c, 
                    Toast_Variant__c, 
                    Toast_Mode__c, 
-                   Alert_Frequency__c
+                   Alert_Frequency__c, 
+                   Include_Label_in_Toast__c
               FROM Highlight_Badge_Definition__c
              WHERE Display_Object__c = :displayObject
                AND Active__c = true

@@ -88,7 +88,11 @@ public with sharing class HighlightBadge {
      */
     @AuraEnabled
     public String toastVariant {get;set;}
+
     @AuraEnabled
     public String toastMode {get;set;}
+
+    @AuraEnabled
+    public Boolean includeLabelInToast {get;set;}
 
 }
