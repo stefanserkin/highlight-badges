@@ -71,9 +71,9 @@ export default class HighlightBadges extends NavigationMixin(LightningElement) {
                                 actionName: 'view',
                             },
                         }).then((url) => {
-                            const badgeAlertMessage = badge.alertMessage + ' - {0}';
+                            const badgeAlertMessage = badge.alertMessage + ' | {0}';
                             const messageData = [ 
-                                {url, label: 'View Record'} 
+                                {url, label: ` 🔍 View ${badge.sObjectType}`} 
                             ];
                             this.showToast(badge.label, badgeAlertMessage, badge.toastVariant, badge.toastMode, messageData);
                         });
