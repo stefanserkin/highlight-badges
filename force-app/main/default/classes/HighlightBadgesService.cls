@@ -340,19 +340,52 @@ public with sharing class HighlightBadgesService {
         SObject obj
     ) {
         String result = input;
+        Map<String, Schema.SObjectField> fieldMap = obj.getSObjectType().getDescribe().fields.getMap();
         Map<String,Object> mapObjFields = obj.getPopulatedFieldsAsMap();
+
         Pattern p = Pattern.compile(MERGE_FIELD_REGEX);
         Matcher m = p.matcher(result);
+
         while(m.find()) {
-            String fieldApiName = m.group().substring(
-                2, 
-                m.group().length() - 1
-            );
-            result = mapObjFields.containsKey(fieldApiName)
-                ? result.replace(m.group(0), String.valueOf(mapObjFields.get(fieldApiName)))
-                : result.replace(m.group(0), '');
+            String fieldApiName = m.group().substring(2, m.group().length() - 1);
+            if (mapObjFields.containsKey(fieldApiName)) {
+                Object fieldValue = mapObjFields.get(fieldApiName);
+                Schema.DescribeFieldResult fieldDescribe = fieldMap.get(fieldApiName).getDescribe();
+                String formattedValue = formatFieldValue(fieldValue, fieldDescribe);
+                result = result.replace(m.group(0), formattedValue);
+            } else {
+                result = result.replace(m.group(0), '');
+            }
         }
         return result;
+    }
+
+    /****************************************************
+     * Format field values based on data type
+     * @param Object The field value
+     * @param Schema.DescribeFieldResult field describe for the provided field
+     * @return String Formatted field value
+     ****************************************************/
+    private static String formatFieldValue(
+        Object fieldValue, 
+        Schema.DescribeFieldResult fieldDescribe
+    ) {
+        if (fieldValue == null) return '';
+
+        Schema.DisplayType fieldType = fieldDescribe.getType();
+
+        if (fieldType == Schema.DisplayType.DATE) {
+            Date dateValue = (Date) fieldValue;
+            return dateValue.format();
+        } else if (fieldType == Schema.DisplayType.DATETIME) {
+            Datetime datetimeValue = (Datetime) fieldValue;
+            return datetimeValue.format('yyyy-MM-dd HH:mm:ss');
+        } else if (fieldType == Schema.DisplayType.CURRENCY) {
+            Decimal currencyValue = (Decimal) fieldValue;
+            return '$' + currencyValue.format();
+        } else {
+            return String.valueOf(fieldValue);
+        }
     }
 
     /****************************************************
