@@ -379,7 +379,7 @@ public with sharing class HighlightBadgesService {
             return dateValue.format();
         } else if (fieldType == Schema.DisplayType.DATETIME) {
             Datetime datetimeValue = (Datetime) fieldValue;
-            return datetimeValue.format('yyyy-MM-dd HH:mm:ss');
+            return datetimeValue.format();
         } else if (fieldType == Schema.DisplayType.CURRENCY) {
             Decimal currencyValue = (Decimal) fieldValue;
             return '$' + currencyValue.format();

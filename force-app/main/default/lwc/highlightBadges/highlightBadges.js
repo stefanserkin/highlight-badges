@@ -14,6 +14,7 @@ export default class HighlightBadges extends NavigationMixin(LightningElement) {
     selectedBadge;
     alertModalMessages = [];
     alertModalContent;
+    alertModalBadges = [];
 
     error;
     errorMessage;
@@ -57,6 +58,8 @@ export default class HighlightBadges extends NavigationMixin(LightningElement) {
             if (badge.hasAlert) {
                 // Modal alerts
                 if (badge.alertType == 'Modal') {
+                    this.alertModalBadges.push(badge);
+                    /*
                     if (!this.alertModalMessages.includes(badge.alertMessage)) {
                         // Add record link to alert message
                         if (badge.recordId != this.recordId) {
@@ -64,6 +67,7 @@ export default class HighlightBadges extends NavigationMixin(LightningElement) {
                         }
                         this.alertModalMessages.push(badge.alertMessage);
                     }
+                    */
                 } 
                 // Toast alerts
                 else if (badge.alertType == 'Toast') {
@@ -89,11 +93,18 @@ export default class HighlightBadges extends NavigationMixin(LightningElement) {
                 }
             }
         }
+
+        // Show modal
+        if (this.alertModalBadges && this.alertModalBadges.length > 0) {
+            this.showModalAlert = true;
+        }
         // Modal alerts are displayed together in a single modal
+        /*
         if (this.alertModalMessages.length > 0) {
             this.alertModalContent = this.alertModalMessages.join("\n");
             this.showModalAlert = true;
         }
+        */
     }
 
     handleBadgeClick(event) {
@@ -111,7 +122,6 @@ export default class HighlightBadges extends NavigationMixin(LightningElement) {
 
     /**
      * @description Show toast message
-     * @param context - The Lightning Web Component instance that calls this function
      * @param title - The title of the toast
      * @param message - The message of the toast
      * @param variant - The variant of the toast

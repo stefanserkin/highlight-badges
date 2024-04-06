@@ -1,6 +1,7 @@
 <template>
     <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
         <div class="slds-modal__container">
+            <!-- MODAL HEADER -->
             <header class="slds-modal__header">
                 <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={handleClose}>
                     <lightning-icon icon-name="utility:close"
@@ -12,17 +13,44 @@
                 <label></label>
                 <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">{badge.label}</h2>
             </header>
+
+            <!-- MODAL BODY -->
             <div class="slds-modal__content slds-var-p-around_medium" id="modal-content-id-1">
+
                 <template if:true={badge}>
-                    <lightning-record-view-form record-id={badge.recordId} object-api-name={badge.sObjectType}>
-                        <template for:each={fieldSet} for:item="field">
-                            <div key={field}>
-                                <lightning-output-field field-name={field}></lightning-output-field>
+                    <lightning-layout multiple-rows="true">
+
+                        <!-- ALERT MESSAGE -->
+                        <lightning-layout-item lwc:if={hasAlert} size="12" padding="around-small">
+                            <h3 class="slds-text-heading_medium slds-var-m-bottom_small">Alert</h3>
+                            <div class="slds-var-m-left_medium">
+                                <lightning-formatted-rich-text
+                                    value={badge.alertMessage}
+                                ></lightning-formatted-rich-text>
                             </div>
-                        </template>
-                    </lightning-record-view-form>
+                        </lightning-layout-item>
+
+                        <!-- BADGE DETAIL FIELDS -->
+                        <lightning-layout-item size="12" padding="around-small">
+                            <h3 class="slds-text-heading_medium slds-var-m-bottom_small">{detailsHeader}</h3>
+                            <div class="slds-var-m-left_medium">
+                                <lightning-record-view-form record-id={badge.recordId} 
+                                                            object-api-name={badge.sObjectType}
+                                                            density="compact">
+                                    <template for:each={fieldSet} for:item="field">
+                                        <div key={field}>
+                                            <lightning-output-field field-name={field}></lightning-output-field>
+                                        </div>
+                                    </template>
+                                </lightning-record-view-form>
+                            </div>
+                        </lightning-layout-item>
+
+                    </lightning-layout>
                 </template>
             </div>
+
+            <!-- MODAL FOOTER -->
             <footer class="slds-modal__footer">
                 <lightning-button 
                     variant="neutral" 

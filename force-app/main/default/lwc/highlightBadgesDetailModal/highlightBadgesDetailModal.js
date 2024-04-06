@@ -17,6 +17,14 @@ export default class HighlightBadgesDetailModal extends NavigationMixin(Lightnin
         return fields;
     }
 
+    get hasAlert() {
+        return this.badge.hasAlert && this.badge.alertMessage;
+    }
+
+    get detailsHeader() {
+        return `${this.badge.sObjectType} Details`;
+    }
+
     handleGoToRecord() {
         this[NavigationMixin.Navigate]({
             type: 'standard__recordPage',
