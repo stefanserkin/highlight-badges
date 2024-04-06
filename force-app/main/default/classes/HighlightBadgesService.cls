@@ -119,7 +119,7 @@ public with sharing class HighlightBadgesService {
                 // Badge has alert if alerts are enabled and either set to show every time, or this is the first user visit
                 if (
                     definition.Alert__c && 
-                    (verifyFirstBadgeView(badge.recordId) || definition.Alert_Frequency__c == ALERT_FREQUENCY_ALWAYS)
+                    (definition.Alert_Frequency__c == ALERT_FREQUENCY_ALWAYS || verifyFirstBadgeView(badge.recordId))
                 ) {
                     badge.hasAlert = true;
                     badge.alertMessage = getBadgeAlertMessage(definition, obj);
