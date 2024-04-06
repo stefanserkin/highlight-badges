@@ -103,6 +103,10 @@ public with sharing class HighlightBadgeQueryBuilder {
         }
         
         // Add all additional fields for the modal
+        // NOTE - The source detail fields aren't currently needed, since they will 
+        //          be displayed in a lightning record view form.
+        //          Leaving this in case those field values are helpful in the future.
+        /*
         if (!String.isBlank(definition.Source_Detail_Fields__c)) {
             fieldsForSelector.addAll(definition.Source_Detail_Fields__c.replaceAll('\\s+', '').split(','));
         } else {
@@ -110,6 +114,8 @@ public with sharing class HighlightBadgeQueryBuilder {
                 HighlightBadgesService.getDefaultFieldSet(definition.Source_Object__c)
             );
         }
+        */
+
         return fieldsForSelector;
     }
 
