@@ -4,6 +4,7 @@
     <c-highlight-badges-alerts-modal
         lwc:if={showModalAlert}
         modal-header={alertModalHeader}
+        record-id={recordId}
         badges={alertModalBadges}
         onclose={handleModalClose}
     ></c-highlight-badges-alerts-modal>
@@ -11,24 +12,24 @@
     <!-- MODAL DETAIL DISPLAY -->
     <c-highlight-badges-detail-modal 
         lwc:if={showModal}
-        badge={selectedBadge} 
-        record-id={recordId} 
+        badge={selectedBadge}
+        record-id={recordId}
         onclose={handleModalClose}
     ></c-highlight-badges-detail-modal>
 
     <!-- ROW OF BADGES -->
     <lightning-card lwc:if={displayBadges}>
         <template for:each={badges} for:item="badge" for:index="index">
-            <div key={badge.id} 
-                style="display:inline-block;" 
-                data-id={badge.id} 
-                onclick={handleBadgeClick} 
+            <div key={badge.id}
+                style="display:inline-block;"
+                data-id={badge.id}
+                onclick={handleBadgeClick}
                 class="highlight-badge">
                 <div style={badge.styles}>
                     <lightning-badge 
                         icon-name={badge.iconName}
-                        label={badge.label} 
-                        class="slds-var-m-horizontal_small slds-var-m-bottom_small" 
+                        label={badge.label}
+                        class="slds-var-m-horizontal_small slds-var-m-bottom_small"
                     ></lightning-badge>
                 </div>
             </div>

@@ -28,7 +28,7 @@
                         </div>
                         <!-- NAVIGATE TO RECORD BUTTON -->
                         <div slot="actions">
-                            <lightning-button 
+                            <lightning-button lwc:if={badge.navigationEnabled}
                                 variant="neutral" 
                                 icon-name="utility:new_window" 
                                 icon-position="right" 

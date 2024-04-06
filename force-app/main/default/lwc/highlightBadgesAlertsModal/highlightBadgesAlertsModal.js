@@ -3,6 +3,7 @@ import { NavigationMixin } from 'lightning/navigation';
 
 export default class HighlightBadgesAlertsModal extends NavigationMixin(LightningElement) {
     @api modalHeader;
+    @api recordId;
 
     _badges;
     @api
@@ -13,6 +14,7 @@ export default class HighlightBadgesAlertsModal extends NavigationMixin(Lightnin
         let rows = JSON.parse( JSON.stringify(value) );
         rows.forEach(row => {
             row.iconStyle = this.getHeaderIconStyle(row);
+            row.navigationEnabled = (row.recordId != this.recordId);
             row.viewRecordButtonLabel = this.getViewRecordButtonLabel(row);
         });
         this._badges = rows;
