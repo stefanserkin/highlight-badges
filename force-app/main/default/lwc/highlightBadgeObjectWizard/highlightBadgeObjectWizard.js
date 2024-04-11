@@ -90,7 +90,6 @@ export default class HighlightBadgeObjectWizard extends LightningElement {
         this.displayRelationshipPaths.forEach(path => {
             options.push({label: path, value: path});
         });
-        console.log(options);
         return options;
     }
 
@@ -99,7 +98,6 @@ export default class HighlightBadgeObjectWizard extends LightningElement {
         this.sourceRelationshipPaths.forEach(path => {
             options.push({label: path, value: path});
         });
-        console.log(options);
         return options;
     }
 
@@ -200,7 +198,8 @@ export default class HighlightBadgeObjectWizard extends LightningElement {
         if (this.selectedDisplayObject) {
             getChildObjects({objName: this.selectedDisplayObject})
             .then(result => {
-                this.childObjects = result;
+                let rows = JSON.parse(JSON.stringify(result));
+                this.childObjects = this.sortObjectsByLabel(rows);
                 this.hasLoadedChildObjects = true;
             })
             .catch(error => {
@@ -217,7 +216,8 @@ export default class HighlightBadgeObjectWizard extends LightningElement {
                 sourceObject: this.selectedSourceObject
             })
             .then(result => {
-                this.commonAncestorObjects = result;
+                let rows = JSON.parse(JSON.stringify(result));
+                this.commonAncestorObjects = this.sortObjectsByLabel(rows);
                 this.hasLoadedCommonAncestors = true;
                 this.error = undefined;
             })

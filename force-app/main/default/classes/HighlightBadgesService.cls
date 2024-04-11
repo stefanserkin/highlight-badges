@@ -118,6 +118,7 @@ public with sharing class HighlightBadgesService {
             HighlightBadge badge = new HighlightBadge();
             badge.recordId = obj.Id;
             badge.sObjectType = definition.Source_Object__c;
+            badge.sObjectLabel = GlobalDescribeService.getDescribe(badge.sObjectType).getLabel();
             badge.label = getBadgeLabel(definition, obj);
             // Prevent duplicates
             if (setLabelNames.contains(badge.label)) {
