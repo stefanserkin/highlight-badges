@@ -43,7 +43,7 @@ export default class HighlightBadgesAlertsModal extends NavigationMixin(Lightnin
     }
 
     getViewRecordButtonLabel(badge) {
-        return `View ${badge.sObjectType}`;
+        return `View ${badge.sObjectTypeLabel}`;
     }
 
     handleCloseEvent() {

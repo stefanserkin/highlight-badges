@@ -71,9 +71,9 @@ export default class HighlightBadges extends NavigationMixin(LightningElement) {
                                 actionName: 'view',
                             },
                         }).then((url) => {
-                            const badgeAlertMessage = badge.alertMessage + ' | {0}';
+                            const badgeAlertMessage = badge.alertMessage + ' | 🔍 {0}';
                             const messageData = [ 
-                                {url, label: ` 🔍 View ${badge.sObjectType}`} 
+                                {url, label: `View ${badge.sObjectTypeLabel}`} 
                             ];
                             this.showToast(badge.label, badgeAlertMessage, badge.toastVariant, badge.toastMode, badge.includeLabelInToast, messageData);
                         });
@@ -110,6 +110,7 @@ export default class HighlightBadges extends NavigationMixin(LightningElement) {
      * @param message - The message of the toast
      * @param variant - The variant of the toast
      * @param mode - The mode of the toast
+     * @param includeLabel - If true, the definition label is displayed as the toast title
      * @param messageData - Optional data for the message template
      */
     showToast(title = 'Alert', message = ' ', variant = 'info', mode = 'dismissible', includeLabel = false, messageData = null) {

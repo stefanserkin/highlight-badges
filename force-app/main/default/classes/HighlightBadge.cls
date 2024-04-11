@@ -30,7 +30,7 @@ public with sharing class HighlightBadge {
     public String sObjectType {get;set;}
 
     @AuraEnabled
-    public String sObjectLabel {get;set;}
+    public String sObjectTypeLabel {get;set;}
 
     /**
      * The label of the badge - can include merge fields (e.g. {!FirstName})

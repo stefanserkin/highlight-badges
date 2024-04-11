@@ -22,7 +22,7 @@ export default class HighlightBadgesDetailModal extends NavigationMixin(Lightnin
     }
 
     get detailsHeader() {
-        return `${this.badge.sObjectType} Details`;
+        return `${this.badge.sObjectTypeLabel} Details`;
     }
 
     get headerStyle() {
@@ -38,7 +38,7 @@ export default class HighlightBadgesDetailModal extends NavigationMixin(Lightnin
     }
 
     get viewRecordButtonLabel() {
-        return `View ${this.badge.sObjectType}`;
+        return `View ${this.badge.sObjectTypeLabel}`;
     }
 
     handleGoToRecord() {
