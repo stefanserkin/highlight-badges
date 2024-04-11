@@ -2,6 +2,27 @@
 private class GlobalDescribeService_Test {
 
     @IsTest
+    static void testGetGlobalDescribe() {
+        Map<String, Schema.SObjectType> gd;
+        Test.startTest();
+        gd = GlobalDescribeService.getGlobalDescribe();
+        Test.stopTest();
+        Map<String, Schema.SObjectType> expectedResult = Schema.getGlobalDescribe();
+        Assert.areEqual(expectedResult, gd, 'Should have received the describe result for the account object');
+    }
+
+    @IsTest
+    static void testGetGlobalDescribeFromCache() {
+        Map<String, Schema.SObjectType> gd = GlobalDescribeService.getGlobalDescribe();
+        Test.startTest();
+        Map<String, Schema.SObjectType> refreshedDescribe = GlobalDescribeService.getGlobalDescribe();
+        Test.stopTest();
+        Map<String, Schema.SObjectType> expectedResult = Schema.getGlobalDescribe();
+        Assert.areEqual(gd, refreshedDescribe, 'Should have received the describe result for the account object');
+        Assert.areEqual(expectedResult, gd, 'Should have received the describe result for the account object');
+    }
+
+    @IsTest
     static void testGetSObjectDescribe() {
         String sObjectApiName = 'Account';
         Test.startTest();

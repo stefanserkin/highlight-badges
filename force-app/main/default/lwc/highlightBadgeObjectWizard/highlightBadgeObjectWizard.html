@@ -47,7 +47,7 @@
                             <!-- SOURCE TYPE -->
                             <lightning-combobox
                                 name="sourceRelationshipPicklist"
-                                label="What object is the badge information based on?"
+                                label="Which object is the badge information based on?"
                                 value={selectedSourceObjectRelationship}
                                 options={sourceObjectRelationshipOptions} 
                                 onchange={handleSourceObjectRelationshipChange} 
@@ -73,7 +73,7 @@
         
                                 <!-- ANCESTOR TYPE -->
                                 <p class="slds-var-m-horizontal_medium slds-var-m-top_medium slds-var-m-bottom_small">
-                                    You can show {selectedSourceObject} records directly related to the {selectedDisplayObject} record the user is viewing, or all {selectedSourceObject} records related to a common ancestor.
+                                    You can show {selectedSourceObjectLabel} records directly related to the {selectedDisplayObjectLabel} record the user is viewing, or all {selectedSourceObjectLabel} records related to a common ancestor.
                                 </p>
                                 <lightning-combobox
                                     name="ancestorTypePicklist"

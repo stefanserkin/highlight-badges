@@ -13,7 +13,7 @@ public with sharing class GlobalDescribeService {
      * Ensures global describe is only invoked once
      * @return Map<String, Schema.SObjectType> global describe
      ****************************************************/
-    private static Map<String, Schema.SObjectType> getGlobalDescribe() {
+    public static Map<String, Schema.SObjectType> getGlobalDescribe() {
         if (globalDescribe == null) {
             globalDescribe = Schema.getGlobalDescribe();
         }

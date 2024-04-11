@@ -28,10 +28,13 @@ export default class HighlightBadgeObjectWizard extends LightningElement {
     commonAncestorObjects;
 
     selectedDisplayObject;
+    selectedDisplayObjectLabel;
     sortOrder = 1.00;
     selectedSourceObject;
+    selectedSourceObjectLabel;
     selectedDisplayChildRelationship;
     selectedCommonAncestorObject;
+    selectedCommonAncestorObjectLabel;
     selectedSourceObjectRelationship;
     selectedAncestorType;
     hasLoadedChildObjects = false;
@@ -103,14 +106,14 @@ export default class HighlightBadgeObjectWizard extends LightningElement {
 
     get sourceObjectRelationshipOptions() {
         return [
-            {label: `The display ${this.selectedDisplayObject}`, value: 'same'},
+            {label: `The displayed ${this.selectedDisplayObjectLabel}`, value: 'same'},
             {label: 'A related object', value: 'related'},
         ];
     }
 
     get ancestorTypeOptions() {
         return [
-            {label: `The display ${this.selectedDisplayObject}`, value: 'display'},
+            {label: `The displayed ${this.selectedDisplayObjectLabel}`, value: 'display'},
             {label: 'A common ancestor', value: 'ancestor'},
         ];
     }
@@ -124,8 +127,8 @@ export default class HighlightBadgeObjectWizard extends LightningElement {
     }
 
     handleDisplayObjectChange(event) {
-        const selectedObj = event.detail.value;
-        this.selectedDisplayObject = selectedObj;
+        this.selectedDisplayObject = event.detail.value;
+        this.selectedDisplayObjectLabel = this.displayObjects.find(obj => obj.name === this.selectedDisplayObject).label.toLowerCase();
         this.loadChildObjects();
     }
 
@@ -145,12 +148,12 @@ export default class HighlightBadgeObjectWizard extends LightningElement {
     }
 
     handleSourceObjectChange(event) {
-        const selectedObj = event.detail.value;
-        this.selectedDisplayChildRelationship = selectedObj;
+        this.selectedDisplayChildRelationship = event.detail.value;
 
         // Get child object name based on child relationship
-        const childObj = this.childObjects.find(obj => obj.childRelationshipName === selectedObj);
+        const childObj = this.childObjects.find(obj => obj.childRelationshipName === this.selectedDisplayChildRelationship);
         this.selectedSourceObject = childObj.name;
+        this.selectedSourceObjectLabel = childObj.label.toLowerCase();
 
         if (this.selectedAncestorType == 'ancestor') {
             this.loadAncestorObjects();
@@ -181,8 +184,9 @@ export default class HighlightBadgeObjectWizard extends LightningElement {
     }
 
     handleCommonAncestorObjectChange(event) {
-        const selectedObj = event.detail.value;
-        this.selectedCommonAncestorObject = selectedObj;
+        this.selectedCommonAncestorObject = event.detail.value;
+        const commonAncestorObj = this.commonAncestorObjects.find(obj => obj.name === this.selectedCommonAncestorObject);
+        this.selectedCommonAncestorObjectLabel = commonAncestorObj.label.toLowerCase();
         this.fetchRelationshipPaths();
     }
 
@@ -300,11 +304,11 @@ export default class HighlightBadgeObjectWizard extends LightningElement {
      */
 
     get displayToAncestorPathLabel() {
-        return `API Path from the display object (${this.selectedDisplayObject}) to the common ancestor (${this.selectedCommonAncestorObject})`;
+        return `API Path from the displayed ${this.selectedDisplayObjectLabel} to the common ancestor ${this.selectedCommonAncestorObjectLabel}`;
     }
 
     get sourceToAncestorPathLabel() {
-        return `API Path from the source object (${this.selectedSourceObject}) to the common ancestor (${this.selectedCommonAncestorObject})`;
+        return `API Path from the source ${this.selectedSourceObjectLabel} to the common ancestor ${this.selectedCommonAncestorObjectLabel}`;
     }
 
     /**
