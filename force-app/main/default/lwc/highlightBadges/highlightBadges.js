@@ -22,6 +22,51 @@ export default class HighlightBadges extends NavigationMixin(LightningElement) {
     showModal = false;
     showModalAlert = false;
 
+    emojis = '🎉🎊✨💫🌟⭐🎈🔥🤩🥳😎👏👍👌🙌🍾🍻🥂🌈🦄🧁🎂🎁💐🎀💝💖';
+
+    emojiArray = [
+        { value: '🎉', selected: true },
+        { value: '🎊', selected: true },
+        { value: '✨', selected: true },
+        { value: '💫', selected: true },
+        { value: '🌟', selected: true },
+        { value: '✨', selected: true },
+        { value: '🎈', selected: true },
+        { value: '🔥', selected: true },
+        { value: '🤩', selected: true },
+        { value: '🥳', selected: true },
+        { value: '😎', selected: true },
+        { value: '👏', selected: true },
+        { value: '🌈', selected: true },
+        { value: '🥂', selected: true },
+        { value: '🍻', selected: true }
+    ];
+
+    showConfetti = false;
+    confettiSize = 'medium';
+    confettiType = 'default';
+    confettiNumber = 'plenty';
+
+    /*
+    confettiSizeOptions = [
+        { label: 'Small', value: 'small' },
+        { label: 'Medium', value: 'medium' },
+        { label: 'Large', value: 'large' }
+    ];
+
+    confettiNumberOptions = [
+        { label: 'Few', value: 'few' },
+        { label: 'Normal', value: 'normal' },
+        { label: 'Plenty', value: 'plenty' }
+    ];
+
+    confettiTypeOptions = [
+        { label: 'Default', value: 'default' },
+        { label: 'Emoji', value: 'emoji' }
+    ];
+       */
+ 
+
     get hasBadgeAccess() {
         return canViewHighlightBadges;
     }
@@ -83,12 +128,24 @@ export default class HighlightBadges extends NavigationMixin(LightningElement) {
                     }
                 }
             }
+            // Confetti
+            if (badge.hasConfetti) {
+                this.rainConfetti(badge.confettiNumber, badge.confettiSize);
+            }
         }
 
         // Show modal
         if (this.alertModalBadges && this.alertModalBadges.length > 0) {
             this.showModalAlert = true;
         }
+    }
+
+    get selectedEmojis() {
+        if (this.emojiArray.filter(e => e.selected === true).length !== 0) {
+            console.log('::::')
+            return this.emojiArray.filter(e => e.selected === true).map(e => e.value).join('');
+        }
+        return null;
     }
 
     handleBadgeClick(event) {
@@ -132,6 +189,19 @@ export default class HighlightBadges extends NavigationMixin(LightningElement) {
     
         const toast = new ShowToastEvent(eventConfig);
         this.dispatchEvent(toast);
+    }
+
+    /**
+     * @description Rain confetti
+     * @param size - The size of individual confetti items
+     * @param type - Default/Emoji
+     * @param number - The quantity of confetti items
+     */
+    rainConfetti(number = 'normal', size = 'medium', type = 'default') {
+        this.confettiNumber = number;
+        this.confettiSize = size;
+        this.confettiType = type;
+        this.showConfetti = true;
     }
 
 }

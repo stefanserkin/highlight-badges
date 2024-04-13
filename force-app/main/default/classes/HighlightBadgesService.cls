@@ -108,7 +108,10 @@ public with sharing class HighlightBadgesService {
     /****************************************************
      * Builds and returns a HighlightBadge object from the SObject and definition
      ****************************************************/
-    private List<HighlightBadge> constructHighlightBadges(List<SObject> objs, Highlight_Badge_Definition__c definition) {
+    private List<HighlightBadge> constructHighlightBadges(
+        List<SObject> objs, 
+        Highlight_Badge_Definition__c definition
+    ) {
         List<HighlightBadge> lstBadges = new List<HighlightBadge>();
 
         // Create set to store label names to avoid duplicates
@@ -133,6 +136,7 @@ public with sharing class HighlightBadgesService {
             badge.fieldSet = String.isBlank(definition.Source_Detail_Fields__c)
                 ? getDefaultFieldSet(definition.Source_Object__c)
                 : definition.Source_Detail_Fields__c.replaceAll('\\s+', '');
+
             // Badge has alert if alerts are enabled and either set to show every time, or this is the first user visit
             if (
                 definition.Alert__c && 
@@ -140,7 +144,7 @@ public with sharing class HighlightBadgesService {
             ) {
                 badge.hasAlert = true;
                 badge.alertMessage = getBadgeAlertMessage(definition, obj);
-                badge.alertType = definition.Alert_Type__c != null ? definition.Alert_Type__c : null;
+                badge.alertType = definition.Alert_Type__c ?? null;
                 if (badge.alertType == ALERT_TYPE_TOAST) {
                     badge.toastVariant = definition.Toast_Variant__c;
                     badge.toastMode = definition.Toast_Mode__c;
@@ -148,6 +152,15 @@ public with sharing class HighlightBadgesService {
                 }
             } else {
                 badge.hasAlert = false;
+            }
+
+            // Confetti settings
+            if (definition.Confetti__c) {
+                badge.hasConfetti = true;
+                badge.confettiNumber = definition.Confetti_Number__c.toLowerCase() ?? 'normal';
+                badge.confettiSize = definition.Confetti_Size__c.toLowerCase() ?? 'medium';
+            } else {
+                badge.hasConfetti = false;
             }
             
             lstBadges.add(badge);
@@ -443,7 +456,10 @@ public with sharing class HighlightBadgesService {
                    Toast_Variant__c, 
                    Toast_Mode__c, 
                    Alert_Frequency__c, 
-                   Include_Label_in_Toast__c
+                   Include_Label_in_Toast__c,
+                   Confetti__c,
+                   Confetti_Number__c,
+                   Confetti_Size__c
               FROM Highlight_Badge_Definition__c
              WHERE Display_Object__c = :displayObject
                AND Active__c = true

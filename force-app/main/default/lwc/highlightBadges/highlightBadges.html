@@ -1,5 +1,14 @@
 <template>
 
+    <!-- CONFETTI -->
+    <c-confetti 
+        lwc:if={showConfetti} 
+        emojis={selectedEmojis} 
+        number={confettiNumber}
+        size={confettiSize} 
+        type={confettiType}
+    ></c-confetti>
+
     <!-- MODAL ALERTS -->
     <c-highlight-badges-alerts-modal
         lwc:if={showModalAlert}

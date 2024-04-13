@@ -98,4 +98,16 @@ public with sharing class HighlightBadge {
     @AuraEnabled
     public Boolean includeLabelInToast {get;set;}
 
+    /**
+     * Confetti settings
+     */
+    @AuraEnabled
+    public Boolean hasConfetti {get;set;}
+
+    @AuraEnabled
+    public String confettiNumber {get;set;}
+    
+    @AuraEnabled
+    public String confettiSize {get;set;}
+
 }
