@@ -1,11 +1,11 @@
 @IsTest
-private class HighlightBadgeSetupController_Test {
+private class HighlightBadgeSetupService_Test {
     
     @IsTest
     static void testGetDisplayObjects() {
         List<HighlightBadgeSetupService.ObjectSelectOption> lstOptions;
         Test.startTest();
-        lstOptions = HighlightBadgeSetupController.getDisplayObjects();
+        lstOptions = HighlightBadgeSetupService.getDisplayObjects();
         Test.stopTest();
     }
 
@@ -13,7 +13,7 @@ private class HighlightBadgeSetupController_Test {
     static void testGetChildObjects() {
         List<HighlightBadgeSetupService.ObjectSelectOption> lstOptions;
         Test.startTest();
-        lstOptions = HighlightBadgeSetupController.getChildObjects('Account');
+        lstOptions = HighlightBadgeSetupService.getChildObjects('Account');
         Test.stopTest();
     }
 
@@ -21,7 +21,7 @@ private class HighlightBadgeSetupController_Test {
     static void testGetCommonAncestorObjects() {
         List<HighlightBadgeSetupService.ObjectSelectOption> lstOptions;
         Test.startTest();
-        lstOptions = HighlightBadgeSetupController.getCommonAncestorObjects(
+        lstOptions = HighlightBadgeSetupService.getCommonAncestorObjects(
             'Contact',
             'Case'
         );
@@ -31,7 +31,7 @@ private class HighlightBadgeSetupController_Test {
     @IsTest
     static void testFindInverseRelationshipField() {
         Test.startTest();
-        String result = HighlightBadgeSetupController.findInverseRelationshipField(
+        String result = HighlightBadgeSetupService.findInverseRelationshipField(
             'Contact',
             'Case',
             'Cases'
@@ -44,7 +44,7 @@ private class HighlightBadgeSetupController_Test {
     static void testGetPossibleAncestorPaths() {
         List<HighlightBadgeSetupService.AncestorRelationship> results;
         Test.startTest();
-        results = HighlightBadgeSetupController.getPossibleAncestorPaths(
+        results = HighlightBadgeSetupService.getPossibleAncestorPaths(
             'Contact',
             'Case',
             'Account'
@@ -63,7 +63,7 @@ private class HighlightBadgeSetupController_Test {
     static void testGetObjectFields() {
         List<HighlightBadgeSetupService.FieldOption> results;
         Test.startTest();
-        results = HighlightBadgeSetupController.getObjectFields('Case');
+        results = HighlightBadgeSetupService.getObjectFields('Case');
         Test.stopTest();
         Set<String> setFields = new Set<String>();
         for (HighlightBadgeSetupService.FieldOption fo : results) {
@@ -79,12 +79,12 @@ private class HighlightBadgeSetupController_Test {
         Boolean hasException = false;
         Test.startTest();
         try {
-            results = HighlightBadgeSetupController.getObjectFields('FakeObjectWontWork');
+            results = HighlightBadgeSetupService.getObjectFields('FakeObjectWontWork');
         } catch (Exception e) {
             hasException = true;
         }
         Test.stopTest();
         Assert.isTrue(hasException, 'Should have received an exception for the fake object');
     }
-
+    
 }
