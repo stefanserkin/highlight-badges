@@ -22,6 +22,12 @@ export default class HighlightBadges extends NavigationMixin(LightningElement) {
     showModal = false;
     showModalAlert = false;
 
+    showConfetti = false;
+    confettiNumber = 'normal';
+    confettiSize = 'medium';
+    confettiType = 'default';
+
+    /*
     emojis = '🎉🎊✨💫🌟⭐🎈🔥🤩🥳😎👏👍👌🙌🍾🍻🥂🌈🦄🧁🎂🎁💐🎀💝💖';
 
     emojiArray = [
@@ -42,12 +48,6 @@ export default class HighlightBadges extends NavigationMixin(LightningElement) {
         { value: '🍻', selected: true }
     ];
 
-    showConfetti = false;
-    confettiSize = 'medium';
-    confettiType = 'default';
-    confettiNumber = 'plenty';
-
-    /*
     confettiSizeOptions = [
         { label: 'Small', value: 'small' },
         { label: 'Medium', value: 'medium' },
@@ -64,6 +64,14 @@ export default class HighlightBadges extends NavigationMixin(LightningElement) {
         { label: 'Default', value: 'default' },
         { label: 'Emoji', value: 'emoji' }
     ];
+
+    get selectedEmojis() {
+        if (this.emojiArray.filter(e => e.selected === true).length !== 0) {
+            console.log('::::')
+            return this.emojiArray.filter(e => e.selected === true).map(e => e.value).join('');
+        }
+        return null;
+    }
        */
  
 
@@ -138,14 +146,6 @@ export default class HighlightBadges extends NavigationMixin(LightningElement) {
         if (this.alertModalBadges && this.alertModalBadges.length > 0) {
             this.showModalAlert = true;
         }
-    }
-
-    get selectedEmojis() {
-        if (this.emojiArray.filter(e => e.selected === true).length !== 0) {
-            console.log('::::')
-            return this.emojiArray.filter(e => e.selected === true).map(e => e.value).join('');
-        }
-        return null;
     }
 
     handleBadgeClick(event) {
