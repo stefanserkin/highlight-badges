@@ -606,8 +606,8 @@
                     <name>uiBehavior</name>
                     <value>none</value>
                 </fieldInstanceProperties>
-                <fieldItem>Record.Confetti_Number__c</fieldItem>
-                <identifier>RecordConfetti_Number_cField</identifier>
+                <fieldItem>Record.Confetti_Volume__c</fieldItem>
+                <identifier>RecordConfetti_Volume_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
