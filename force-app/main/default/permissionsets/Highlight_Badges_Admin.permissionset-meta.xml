@@ -46,12 +46,12 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Highlight_Badge_Definition__c.Confetti_Number__c</field>
+        <field>Highlight_Badge_Definition__c.Confetti_Size__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Highlight_Badge_Definition__c.Confetti_Size__c</field>
+        <field>Highlight_Badge_Definition__c.Confetti_Volume__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
