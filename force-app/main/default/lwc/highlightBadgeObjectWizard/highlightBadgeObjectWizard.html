@@ -16,6 +16,10 @@
 
             <!-- FORM -->
             <div class="slds-modal__content slds-var-p-around_medium" id="modal-content-id-1">
+                <template lwc:if={isLoading}>
+                    <lightning-spinner size="medium" alternative-text="Loading..." title="Loading..."></lightning-spinner>
+                </template>
+                
                 <template lwc:if={displayObjects}>
                     <lightning-layout>
                         <!-- SET UP OBJECT RELATIONSHIPS -->
