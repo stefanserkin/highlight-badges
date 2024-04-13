@@ -13,19 +13,19 @@
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
-                <fullName>Small</fullName>
+                <fullName>small</fullName>
                 <default>false</default>
-                <label>Small</label>
+                <label>small</label>
             </value>
             <value>
-                <fullName>Medium</fullName>
+                <fullName>medium</fullName>
                 <default>false</default>
-                <label>Medium</label>
+                <label>medium</label>
             </value>
             <value>
-                <fullName>Large</fullName>
+                <fullName>large</fullName>
                 <default>false</default>
-                <label>Large</label>
+                <label>large</label>
             </value>
         </valueSetDefinition>
     </valueSet>

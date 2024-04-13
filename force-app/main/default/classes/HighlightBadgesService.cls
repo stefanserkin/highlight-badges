@@ -157,8 +157,8 @@ public with sharing class HighlightBadgesService {
             // Confetti settings
             if (definition.Confetti__c) {
                 badge.hasConfetti = true;
-                // badge.confettiNumber = definition.Confetti_Volume__c.toLowerCase() ?? 'normal';
-                badge.confettiSize = definition.Confetti_Size__c.toLowerCase() ?? 'medium';
+                badge.confettiNumber = definition.Confetti_Volume__c ?? 'normal';
+                badge.confettiSize = definition.Confetti_Size__c ?? 'medium';
             } else {
                 badge.hasConfetti = false;
             }
@@ -458,7 +458,7 @@ public with sharing class HighlightBadgesService {
                    Alert_Frequency__c, 
                    Include_Label_in_Toast__c,
                    Confetti__c,
-                   // Confetti_Volume__c,
+                   Confetti_Volume__c,
                    Confetti_Size__c
               FROM Highlight_Badge_Definition__c
              WHERE Display_Object__c = :displayObject

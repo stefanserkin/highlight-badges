@@ -13,19 +13,19 @@
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
-                <fullName>Few</fullName>
+                <fullName>few</fullName>
                 <default>false</default>
-                <label>Few</label>
+                <label>few</label>
             </value>
             <value>
-                <fullName>Normal</fullName>
+                <fullName>normal</fullName>
                 <default>false</default>
-                <label>Normal</label>
+                <label>normal</label>
             </value>
             <value>
-                <fullName>Plenty</fullName>
+                <fullName>plenty</fullName>
                 <default>false</default>
-                <label>Plenty</label>
+                <label>plenty</label>
             </value>
         </valueSetDefinition>
     </valueSet>
