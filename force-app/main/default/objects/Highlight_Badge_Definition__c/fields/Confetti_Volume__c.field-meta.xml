@@ -15,17 +15,17 @@
             <value>
                 <fullName>few</fullName>
                 <default>false</default>
-                <label>few</label>
+                <label>Few</label>
             </value>
             <value>
                 <fullName>normal</fullName>
                 <default>false</default>
-                <label>normal</label>
+                <label>Normal</label>
             </value>
             <value>
                 <fullName>plenty</fullName>
                 <default>false</default>
-                <label>plenty</label>
+                <label>Plenty</label>
             </value>
         </valueSetDefinition>
     </valueSet>
