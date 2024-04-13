@@ -1,3 +1,7 @@
+/**
+ * From Mario Pavicic and Salesforce Labs
+ * https://bootcamp.uxdesign.cc/mastering-salesforce-ui-confetti-ff8e0b945dce
+ */
 import { LightningElement, api } from 'lwc';
 import { JSConfetti } from './js-confetti';
 

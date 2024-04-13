@@ -444,6 +444,10 @@
                 <identifier>RecordAlert_cField</identifier>
             </fieldInstance>
         </itemInstances>
+        <name>Facet-b7f827b0-b101-4851-8d7e-597e077f48b0</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
         <itemInstances>
             <fieldInstance>
                 <fieldInstanceProperties>
@@ -454,10 +458,6 @@
                 <identifier>RecordAlert_Type_cField</identifier>
             </fieldInstance>
         </itemInstances>
-        <name>Facet-b7f827b0-b101-4851-8d7e-597e077f48b0</name>
-        <type>Facet</type>
-    </flexiPageRegions>
-    <flexiPageRegions>
         <itemInstances>
             <fieldInstance>
                 <fieldInstanceProperties>
@@ -493,6 +493,34 @@
             </componentInstance>
         </itemInstances>
         <name>Facet-39f71571-67a7-4432-a256-0d275dbef7f8</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Alert_Message__c</fieldItem>
+                <identifier>RecordAlert_Message_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <name>Facet-d402f6d0-10f7-43b2-9927-a713ebef816c</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>body</name>
+                    <value>Facet-d402f6d0-10f7-43b2-9927-a713ebef816c</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:column</componentName>
+                <identifier>flexipage_column13</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>Facet-d8a80f2d-9139-4cb0-8536-32a42ab4fc94</name>
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
@@ -564,11 +592,35 @@
                     <name>uiBehavior</name>
                     <value>none</value>
                 </fieldInstanceProperties>
-                <fieldItem>Record.Alert_Message__c</fieldItem>
-                <identifier>RecordAlert_Message_cField</identifier>
+                <fieldItem>Record.Confetti__c</fieldItem>
+                <identifier>RecordConfetti_cField</identifier>
             </fieldInstance>
         </itemInstances>
-        <name>Facet-d402f6d0-10f7-43b2-9927-a713ebef816c</name>
+        <name>Facet-071cea77-2930-4f90-a473-745b35a4343c</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Confetti_Number__c</fieldItem>
+                <identifier>RecordConfetti_Number_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Confetti_Size__c</fieldItem>
+                <identifier>RecordConfetti_Size_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <name>Facet-dd027ded-699d-49c2-8703-6bcf6cee0a33</name>
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
@@ -576,13 +628,23 @@
             <componentInstance>
                 <componentInstanceProperties>
                     <name>body</name>
-                    <value>Facet-d402f6d0-10f7-43b2-9927-a713ebef816c</value>
+                    <value>Facet-071cea77-2930-4f90-a473-745b35a4343c</value>
                 </componentInstanceProperties>
                 <componentName>flexipage:column</componentName>
-                <identifier>flexipage_column13</identifier>
+                <identifier>flexipage_column10</identifier>
             </componentInstance>
         </itemInstances>
-        <name>Facet-d8a80f2d-9139-4cb0-8536-32a42ab4fc94</name>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>body</name>
+                    <value>Facet-dd027ded-699d-49c2-8703-6bcf6cee0a33</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:column</componentName>
+                <identifier>flexipage_column18</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>Facet-9d4ac457-e290-4908-9b14-6b152776ea9d</name>
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
@@ -608,6 +670,24 @@
             <componentInstance>
                 <componentInstanceProperties>
                     <name>columns</name>
+                    <value>Facet-d8a80f2d-9139-4cb0-8536-32a42ab4fc94</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>horizontalAlignment</name>
+                    <value>false</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>label</name>
+                    <value>Alert Message</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:fieldSection</componentName>
+                <identifier>flexipage_fieldSection8</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>columns</name>
                     <value>Facet-10d27496-f5fc-4dd7-933c-128f5361cee3</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
@@ -626,7 +706,7 @@
             <componentInstance>
                 <componentInstanceProperties>
                     <name>columns</name>
-                    <value>Facet-d8a80f2d-9139-4cb0-8536-32a42ab4fc94</value>
+                    <value>Facet-9d4ac457-e290-4908-9b14-6b152776ea9d</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>horizontalAlignment</name>
@@ -634,10 +714,10 @@
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>label</name>
-                    <value>Alert Message</value>
+                    <value>Confetti Settings</value>
                 </componentInstanceProperties>
                 <componentName>flexipage:fieldSection</componentName>
-                <identifier>flexipage_fieldSection8</identifier>
+                <identifier>flexipage_fieldSection6</identifier>
             </componentInstance>
         </itemInstances>
         <name>Facet-gt4bwyg7pgo</name>
