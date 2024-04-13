@@ -440,20 +440,6 @@
                     <name>uiBehavior</name>
                     <value>none</value>
                 </fieldInstanceProperties>
-                <fieldItem>Record.Alert__c</fieldItem>
-                <identifier>RecordAlert_cField</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <name>Facet-b7f827b0-b101-4851-8d7e-597e077f48b0</name>
-        <type>Facet</type>
-    </flexiPageRegions>
-    <flexiPageRegions>
-        <itemInstances>
-            <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
-                    <value>none</value>
-                </fieldInstanceProperties>
                 <fieldItem>Record.Alert_Type__c</fieldItem>
                 <identifier>RecordAlert_Type_cField</identifier>
             </fieldInstance>
@@ -466,6 +452,20 @@
                 </fieldInstanceProperties>
                 <fieldItem>Record.Alert_Frequency__c</fieldItem>
                 <identifier>RecordAlert_Frequency_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <name>Facet-b7f827b0-b101-4851-8d7e-597e077f48b0</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Alert__c</fieldItem>
+                <identifier>RecordAlert_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <name>Facet-ec3a0c4b-1e8b-4b38-a7c9-4b69ebeed462</name>
@@ -592,20 +592,6 @@
                     <name>uiBehavior</name>
                     <value>none</value>
                 </fieldInstanceProperties>
-                <fieldItem>Record.Confetti__c</fieldItem>
-                <identifier>RecordConfetti_cField</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <name>Facet-071cea77-2930-4f90-a473-745b35a4343c</name>
-        <type>Facet</type>
-    </flexiPageRegions>
-    <flexiPageRegions>
-        <itemInstances>
-            <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
-                    <value>none</value>
-                </fieldInstanceProperties>
                 <fieldItem>Record.Confetti_Volume__c</fieldItem>
                 <identifier>RecordConfetti_Volume_cField</identifier>
             </fieldInstance>
@@ -618,6 +604,20 @@
                 </fieldInstanceProperties>
                 <fieldItem>Record.Confetti_Size__c</fieldItem>
                 <identifier>RecordConfetti_Size_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <name>Facet-071cea77-2930-4f90-a473-745b35a4343c</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Confetti__c</fieldItem>
+                <identifier>RecordConfetti_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <name>Facet-dd027ded-699d-49c2-8703-6bcf6cee0a33</name>
