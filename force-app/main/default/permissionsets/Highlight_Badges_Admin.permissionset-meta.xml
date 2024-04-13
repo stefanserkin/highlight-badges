@@ -51,11 +51,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Highlight_Badge_Definition__c.Confetti_Volume__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>Highlight_Badge_Definition__c.Confetti__c</field>
         <readable>true</readable>
     </fieldPermissions>
