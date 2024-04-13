@@ -15,17 +15,17 @@
             <value>
                 <fullName>dismissible</fullName>
                 <default>false</default>
-                <label>dismissible</label>
+                <label>Dismissible</label>
             </value>
             <value>
                 <fullName>pester</fullName>
                 <default>false</default>
-                <label>pester</label>
+                <label>Pester</label>
             </value>
             <value>
                 <fullName>sticky</fullName>
                 <default>false</default>
-                <label>sticky</label>
+                <label>Sticky</label>
             </value>
         </valueSetDefinition>
     </valueSet>
