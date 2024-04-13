@@ -6,12 +6,6 @@
  ************************************************************************/
 public with sharing class HighlightBadgeQueryBuilder {
 
-    /****************************************************
-     * Constants
-     ****************************************************/
-    private static final String DEFAULT_BACKGROUND_COLOR = '#D3D3D3';
-    private static final String DEFAULT_LABEL_COLOR = '#000000';
-    private static final String DEFAULT_ICON_NAME = 'utility:info';
     private static final String MERGE_FIELD_REGEX = '\\{!.+?\\}';
 
     private Highlight_Badge_Definition__c definition;
