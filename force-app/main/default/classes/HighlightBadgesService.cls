@@ -150,17 +150,13 @@ public with sharing class HighlightBadgesService {
                     badge.toastMode = definition.Toast_Mode__c;
                     badge.includeLabelInToast = definition.Include_Label_in_Toast__c;
                 }
-            } else {
-                badge.hasAlert = false;
-            }
 
-            // Confetti settings
-            if (definition.Confetti__c) {
-                badge.hasConfetti = true;
-                badge.confettiNumber = definition.Confetti_Volume__c ?? 'normal';
-                badge.confettiSize = definition.Confetti_Size__c ?? 'medium';
-            } else {
-                badge.hasConfetti = false;
+                // Confetti settings
+                if (definition.Confetti__c) {
+                    badge.hasConfetti = true;
+                    badge.confettiNumber = definition.Confetti_Volume__c ?? 'normal';
+                    badge.confettiSize = definition.Confetti_Size__c ?? 'medium';
+                }
             }
             
             lstBadges.add(badge);
