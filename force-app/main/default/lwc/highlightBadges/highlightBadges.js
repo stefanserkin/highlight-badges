@@ -7,7 +7,7 @@ import canViewHighlightBadges from '@salesforce/customPermission/Can_View_Highli
 export default class HighlightBadges extends NavigationMixin(LightningElement) {
     @api recordId;
     @api objectApiName;
-    @api alertModalHeader;
+    @api alertModalHeader = 'Highlight Badges Alerts';
     
     wiredBadges = [];
     badges;
