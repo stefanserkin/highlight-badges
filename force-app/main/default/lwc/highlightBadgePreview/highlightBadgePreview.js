@@ -90,6 +90,10 @@ export default class HighlightBadgePreview extends LightningElement {
         this.isRecordPreviewMode = !this.isRecordPreviewMode;
     }
 
+    handleRefresh() {
+        this.template.querySelector('c-highlight-badges').refresh();
+    }
+
     handleError(error, title='Error') {
         this.error = error;
         let message = 'Unknown error';

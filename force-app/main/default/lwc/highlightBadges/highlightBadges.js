@@ -1,6 +1,7 @@
 import { LightningElement, api, wire } from 'lwc';
-import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import { NavigationMixin } from 'lightning/navigation';
+import { ShowToastEvent } from 'lightning/platformShowToastEvent';
+import { refreshApex } from '@salesforce/apex';
 import getBadges from '@salesforce/apex/HighlightBadgesController.getBadges';
 import canViewHighlightBadges from '@salesforce/customPermission/Can_View_Highlight_Badges';
 
@@ -55,6 +56,10 @@ export default class HighlightBadges extends NavigationMixin(LightningElement) {
             }
             this.isLoading = false;
         }
+    }
+
+    @api refresh() {
+        refreshApex(this.wiredBadges);
     }
 
     handleAlerts(objs) {

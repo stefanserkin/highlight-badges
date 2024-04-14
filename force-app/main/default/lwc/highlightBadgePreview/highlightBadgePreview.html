@@ -1,14 +1,24 @@
 <template>
     <lightning-card title="Highlight Badge Preview">
 
-        <!-- TOGGLE PREVIEW MODE -->
+        <!-- ACTIONS SLOT -->
         <div slot="actions">
+            <!-- REFRESH CHILD BADGES COMPONENT -->
+            <lightning-button-icon lwc:if={isRecordPreviewMode}
+                icon-name="utility:refresh"
+                size="medium"
+                alternative-text="Refresh"
+                tooltip="Refresh"
+                onclick={handleRefresh}
+            ></lightning-button-icon>
+            <!-- TOGGLE PREVIEW MODE -->
             <lightning-button
                 variant={togglePreviewModeVariant}
                 icon-name={togglePreviewModeIcon} 
                 label={togglePreviewModeLabel}
                 onclick={handleTogglePreviewMode} 
                 alternative-text="Toggle Preview Mode"
+                class="slds-var-p-left_small"
             ></lightning-button>
         </div>
 
