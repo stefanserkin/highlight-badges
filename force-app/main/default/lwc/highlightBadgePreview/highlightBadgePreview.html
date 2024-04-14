@@ -3,12 +3,13 @@
 
         <!-- TOGGLE PREVIEW MODE -->
         <div slot="actions">
-            <lightning-button-icon-stateful 
-                icon-name="utility:preview" 
-                selected={isRecordPreviewMode} 
+            <lightning-button
+                variant={togglePreviewModeVariant}
+                icon-name={togglePreviewModeIcon} 
+                label={togglePreviewModeLabel}
                 onclick={handleTogglePreviewMode} 
-                alternative-text="Record Preview Mode"
-            ></lightning-button-icon-stateful>
+                alternative-text="Toggle Preview Mode"
+            ></lightning-button>
         </div>
 
         <!-- RECORD PREVIEW MODE -->
@@ -24,8 +25,9 @@
                     <c-lookup
                         object-api-name={displayObject}
                         icon-name="standard:record_lookup"
-                        search-placeholder="Search for Record"
+                        search-placeholder="Search by Record Name"
                         onselection={handleSelectedRecord}
+                        default-record-id={previewRecordId}
                     ></c-lookup>
                 </div>
                 <!-- SHOW BADGES -->

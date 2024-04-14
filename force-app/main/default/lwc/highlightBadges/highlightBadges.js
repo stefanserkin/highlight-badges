@@ -58,6 +58,7 @@ export default class HighlightBadges extends NavigationMixin(LightningElement) {
     }
 
     handleAlerts(objs) {
+        this.alertModalBadges = [];
         for (let i = 0; i < objs.length; i++) {
             const badge = objs[i];
             if (badge.hasAlert) {

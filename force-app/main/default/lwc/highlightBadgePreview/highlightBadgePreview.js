@@ -66,6 +66,18 @@ export default class HighlightBadgePreview extends LightningElement {
         return !this.iconName ? this.defaultIconName : this.iconName;
     }
 
+    get togglePreviewModeIcon() {
+        return this.isRecordPreviewMode ? 'utility:close' : 'utility:preview';
+    }
+
+    get togglePreviewModeLabel() {
+        return this.isRecordPreviewMode ? 'Exit Record Preview' : 'Preview a Record';
+    }
+
+    get togglePreviewModeVariant() {
+        return this.isRecordPreviewMode ? 'destructive-text' : 'brand-outline';
+    }
+
     handlePreviewRecordIdChange(event) {
         this.previewRecordId = event.detail.value;
     }

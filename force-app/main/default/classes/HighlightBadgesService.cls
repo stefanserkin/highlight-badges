@@ -31,10 +31,6 @@ public with sharing class HighlightBadgesService {
     private static final String DEFAULT_ICON_NAME = 'utility:info';
     private static final String DEFAULT_BADGE_FIELDSET = 'Name';
     private static final String MERGE_FIELD_REGEX = '\\{!.+?\\}';
-    
-    // sObjects
-    @TestVisible
-    private static final String SOBJECT_CASE = 'Case';
 
     /**
      * Platform Cache - Session partition
@@ -430,7 +426,7 @@ public with sharing class HighlightBadgesService {
      * @return String A comma-separated string of default fields
      ****************************************************/
     public static String getDefaultFieldSet(String sObjectType) {
-        return sObjectType == SOBJECT_CASE ? 'CaseNumber' : 'Name';
+        return sObjectType == 'Case' ? 'CaseNumber' : 'Name';
     }
 
     /****************************************************

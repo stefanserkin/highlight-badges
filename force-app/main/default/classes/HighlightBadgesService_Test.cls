@@ -149,7 +149,7 @@ private class HighlightBadgesService_Test {
         Test.stopTest();
 
         for (HighlightBadge badge : lstBadges) {
-            if (badge.sObjectType == HighlightBadgesService.SOBJECT_CASE) {
+            if (badge.sObjectType == 'Case') {
                 Assert.areEqual('CaseNumber', badge.fieldSet, 'Should have received default case field set');
             } else {
                 Assert.areEqual('Name', badge.fieldSet, 'Should have received default field set');

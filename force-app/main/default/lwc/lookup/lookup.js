@@ -10,16 +10,16 @@ export default class Lookup extends LightningElement {
     @api defaultRecordId;
 
     wiredDefaultRecord = [];
-    @track selectedId;
-    @track selectedName;
-    @track isValueSelected;
-    @track searchRecords;
-    @track blurTimeout;
+    selectedId;
+    selectedName;
+    isValueSelected;
+    searchRecords;
+    blurTimeout;
 
     searchInput;
-    //css
-    @track boxClass = 'slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click slds-has-focus';
-    @track inputClass = '';
+
+    boxClass = 'slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click slds-has-focus';
+    inputClass = '';
 
     isLoading = false;
     error;
