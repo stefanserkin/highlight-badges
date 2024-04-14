@@ -23,7 +23,7 @@ private class HighlightBadgesController_Test {
         User u = TestDataFactory.createTestUser('Rey', 'Ordonez', 'Admin');
         Test.startTest();
         System.runAs(u) {
-            List<HighlightBadge> lstBadges = HighlightBadgesController.getBadges(ct.Id, 'Contact');
+            List<HighlightBadge> lstBadges = HighlightBadgesController.getBadges(ct.Id, 'Contact', null);
             Test.stopTest();
             Assert.isFalse(lstBadges.isEmpty(), 'Should have received a badge');
             HighlightBadge openCaseBadge = new HighlightBadge();

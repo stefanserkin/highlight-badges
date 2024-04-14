@@ -49,22 +49,30 @@ public with sharing class HighlightBadgesService {
     private Map<String, Id> mapAncestorIds;
 
     /****************************************************
-     * Get active highlight badges for the source record id
+     * Get active highlight badges for the display record id
      ****************************************************/
     public List<HighlightBadge> getBadges() {
-        List<Highlight_Badge_Definition__c> lstBadgeDefinitions = queryForBadgeDefinitions(displayObjectType);
-        
-        // Guard against empty list of definitions
-        if (lstBadgeDefinitions.isEmpty()) {
-            return new List<HighlightBadge>();
-        }
-
+        List<Highlight_Badge_Definition__c> lstBadgeDefinitions = queryForBadgeDefinitions(
+            displayObjectType, null
+        );
         List<HighlightBadge> lstBadges = getBadgeWrappers(lstBadgeDefinitions);
         return lstBadges;
     }
 
     /****************************************************
-     * Get a list of HighlightBadge data wrappers
+     * Get a previewed, inactive badge, along with all active 
+     * badges for the display record id.
+     ****************************************************/
+    public List<HighlightBadge> getBadges(Id previewDefinitionId) {
+        List<Highlight_Badge_Definition__c> lstBadgeDefinitions = queryForBadgeDefinitions(
+            displayObjectType, new Set<Id>{ previewDefinitionId }
+        );
+        List<HighlightBadge> lstBadges = getBadgeWrappers(lstBadgeDefinitions);
+        return lstBadges;
+    }
+
+    /****************************************************
+     * Get a list of HighlightBadge data wrappers.
      ****************************************************/
     private List<HighlightBadge> getBadgeWrappers(
         List<Highlight_Badge_Definition__c> lstBadgeDefinitions
@@ -119,6 +127,7 @@ public with sharing class HighlightBadgesService {
 
         for (SObject obj : objs) {
             HighlightBadge badge = new HighlightBadge();
+            badge.definitionId = definition.Id;
             badge.recordId = obj.Id;
             badge.sObjectType = definition.Source_Object__c;
             badge.sObjectTypeLabel = GlobalDescribeService.getDescribe(badge.sObjectType).getLabel();
@@ -137,7 +146,8 @@ public with sharing class HighlightBadgesService {
                 ? getDefaultFieldSet(definition.Source_Object__c)
                 : definition.Source_Detail_Fields__c.replaceAll('\\s+', '');
 
-            // Badge has alert if alerts are enabled and either set to show every time, or this is the first user visit
+            // Badge has alert if alerts are enabled and either set to show every time, 
+            // or this is the first user visit
             if (
                 definition.Alert__c && 
                 (definition.Alert_Frequency__c == ALERT_FREQUENCY_ALWAYS || verifyFirstBadgeView(badge.recordId))
@@ -425,10 +435,12 @@ public with sharing class HighlightBadgesService {
 
     /****************************************************
      * Query for active badge definition records
-     * @param The api name of the source object
+     * @param displayObject The api name of the source object
+     * @param additionalDefinitionIds Optionally, include additional ids
      ****************************************************/
     private List<Highlight_Badge_Definition__c> queryForBadgeDefinitions(
-        String displayObject
+        String displayObject,
+        Set<Id> additionalDefinitionIds
     ) {
         return [
             SELECT Id, 
@@ -458,7 +470,7 @@ public with sharing class HighlightBadgesService {
                    Confetti_Size__c
               FROM Highlight_Badge_Definition__c
              WHERE Display_Object__c = :displayObject
-               AND Active__c = true
+               AND (Active__c = true OR Id IN :additionalDefinitionIds)
               WITH USER_MODE
              ORDER BY Sort_Order__c ASC
              LIMIT 100

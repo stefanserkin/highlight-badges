@@ -7,10 +7,17 @@
 public with sharing class HighlightBadgesController {
     
     @AuraEnabled(cacheable=true)
-    public static List<HighlightBadge> getBadges(String recordId, String sObjectType) {
+    public static List<HighlightBadge> getBadges(String recordId, String sObjectType, String previewDefinitionId) {
         try {
             HighlightBadgesService service = new HighlightBadgesService(recordId, sObjectType);
-            return service.getBadges();
+
+            List<HighlightBadge> lstBadges;
+            if (previewDefinitionId != null && previewDefinitionId != '') {
+                lstBadges = service.getBadges(previewDefinitionId);
+            } else {
+                lstBadges = service.getBadges();
+            }
+            return lstBadges;
         } catch (Exception e) {
             throw new AuraHandledException(e.getMessage());
         }

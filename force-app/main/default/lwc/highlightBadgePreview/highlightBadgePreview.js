@@ -13,6 +13,7 @@ export default class HighlightBadgePreview extends LightningElement {
     @api recordId;
     error;
     definition;
+    isLoading = false;
 
     active = false;
     label;
@@ -26,7 +27,6 @@ export default class HighlightBadgePreview extends LightningElement {
     defaultIconName = 'utility:info';
 
     isRecordPreviewMode = false;
-    isRecordPreviewEntry = false;
     previewRecordId;
 
     @wire(getRecord, {recordId: '$recordId', fields: FIELDS})
@@ -70,33 +70,12 @@ export default class HighlightBadgePreview extends LightningElement {
         this.previewRecordId = event.detail.value;
     }
 
+    handleSelectedRecord(event) {
+        this.previewRecordId = event.detail;
+    }
+
     handleTogglePreviewMode() {
         this.isRecordPreviewMode = !this.isRecordPreviewMode;
-        if (this.isRecordPreviewMode) this.isRecordPreviewEntry = true;
-    }
-
-    handleRecordPreview() {
-        // Validate length of id before calling highlight badges component
-        if (!this.validateId(this.previewRecordId)) {
-            console.log('invalid record id');
-            const error = new Error(
-                
-                `${this.previewRecordId} is not a valid record ID`
-            );
-            console.error(error);
-            this.handleError(error, 'Invalid Record ID');
-            return;
-        }
-        this.error = undefined;
-        this.isRecordPreviewEntry = false;
-    }
-
-    validateId(recordId) {
-        return (recordId != null && (recordId.length == 15 || recordId.length == 18));
-    }
-
-    get previewRecordIdIsInvalid() {
-        return !this.validateId(this.previewRecordId);
     }
 
     handleError(error, title='Error') {

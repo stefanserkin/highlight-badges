@@ -8,6 +8,7 @@ export default class HighlightBadges extends NavigationMixin(LightningElement) {
     @api recordId;
     @api objectApiName;
     @api alertModalHeader = 'Highlight Badges Alerts';
+    @api previewDefinitionId = '';
     
     wiredBadges = [];
     badges;
@@ -35,7 +36,7 @@ export default class HighlightBadges extends NavigationMixin(LightningElement) {
         return (this.hasBadgeAccess && this.badges != null && this.badges.length > 0);
     }
 
-    @wire(getBadges, {recordId: '$recordId', sObjectType: '$objectApiName'})
+    @wire(getBadges, {recordId: '$recordId', sObjectType: '$objectApiName', previewDefinitionId: '$previewDefinitionId'})
     wireResult(result) {
         this.isLoading = true;
         this.wiredBadges = result;
@@ -52,7 +53,6 @@ export default class HighlightBadges extends NavigationMixin(LightningElement) {
             } else if (typeof this.error.body.message === 'string') {
                 this.errorMessage = this.error.body.message;
             }
-            console.error(this.error);
             this.isLoading = false;
         }
     }

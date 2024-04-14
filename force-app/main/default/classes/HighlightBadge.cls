@@ -18,6 +18,12 @@ public with sharing class HighlightBadge {
     }
 
     /**
+     * The record id of the highlight badge definition
+     */
+    @AuraEnabled
+    public Id definitionId {get;set;}
+
+    /**
      * The record id of the source record
      */
     @AuraEnabled

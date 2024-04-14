@@ -15,49 +15,30 @@
         <template lwc:if={isRecordPreviewMode}>
             <!-- HAS DISPLAY OBJECT -->
             <template lwc:if={displayObject}>
-
                 <!-- WARNING FOR INACTIVE BADGES -->
-                <div lwc:if={isInactive} class="slds-var-p-around_small slds-align_absolute-center">
+                <div lwc:if={isInactive} class="slds-var-m-around_medium">
                     <p class="inactive-badge-warning">This badge is not active. To see it appear on record pages, activate it first.</p>
                 </div>
-
-                <!-- ENTER RECORD ID FOR PREVIEW -->
-                <template lwc:if={isRecordPreviewEntry}>
-                    <lightning-layout multiple-rows="true">
-                        <lightning-layout-item size="12" padding="around-small" class="slds-align_absolute-center">
-                            <lightning-input
-                                type="text"
-                                label="Display Record ID"
-                                value={previewRecordId}
-                                onchange={handlePreviewRecordIdChange}
-                            ></lightning-input>
-                        </lightning-layout-item>
-                        <lightning-layout-item size="12" padding="around-small" class="slds-align_absolute-center">
-                            <lightning-button
-                                variant="brand"
-                                label="Preview Record"
-                                title="Preview Record"
-                                onclick={handleRecordPreview} 
-                                disabled={previewRecordIdIsInvalid}
-                            ></lightning-button>
-                        </lightning-layout-item>
-                    </lightning-layout>
-                </template>
-
+                <!-- SELECT RECORD FOR PREVIEW -->
+                <c-lookup
+                    object-api-name={displayObject}
+                    icon-name="standard:record_lookup"
+                    search-placeholder="Search for Record"
+                    onselection={handleSelectedRecord}
+                    class="slds-var-m-around_medium"
+                ></c-lookup>
                 <!-- SHOW BADGES -->
-                <template lwc:else>
-                    <c-highlight-badges
-                        record-id={previewRecordId}
-                        object-api-name={displayObject}
-                    ></c-highlight-badges>
-                </template>
-
+                <c-highlight-badges lwc-if={previewRecordId}
+                    record-id={previewRecordId}
+                    object-api-name={displayObject}
+                    preview-definition-id={recordId}
+                ></c-highlight-badges>
             </template>
 
             <!-- DISPLAY OBJECT NOT DEFINED -->
             <template lwc:else>
                 <p class="slds-var-m-around_medium">
-                    Define a Display Object before previewing a record.
+                    A Display Object must be defined before previewing a record.
                 </p>
             </template>
         </template>
