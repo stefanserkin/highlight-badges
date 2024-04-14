@@ -27,54 +27,6 @@ export default class HighlightBadges extends NavigationMixin(LightningElement) {
     confettiSize = 'medium';
     confettiType = 'default';
 
-    /*
-    emojis = '🎉🎊✨💫🌟⭐🎈🔥🤩🥳😎👏👍👌🙌🍾🍻🥂🌈🦄🧁🎂🎁💐🎀💝💖';
-
-    emojiArray = [
-        { value: '🎉', selected: true },
-        { value: '🎊', selected: true },
-        { value: '✨', selected: true },
-        { value: '💫', selected: true },
-        { value: '🌟', selected: true },
-        { value: '✨', selected: true },
-        { value: '🎈', selected: true },
-        { value: '🔥', selected: true },
-        { value: '🤩', selected: true },
-        { value: '🥳', selected: true },
-        { value: '😎', selected: true },
-        { value: '👏', selected: true },
-        { value: '🌈', selected: true },
-        { value: '🥂', selected: true },
-        { value: '🍻', selected: true }
-    ];
-
-    confettiSizeOptions = [
-        { label: 'Small', value: 'small' },
-        { label: 'Medium', value: 'medium' },
-        { label: 'Large', value: 'large' }
-    ];
-
-    confettiNumberOptions = [
-        { label: 'Few', value: 'few' },
-        { label: 'Normal', value: 'normal' },
-        { label: 'Plenty', value: 'plenty' }
-    ];
-
-    confettiTypeOptions = [
-        { label: 'Default', value: 'default' },
-        { label: 'Emoji', value: 'emoji' }
-    ];
-
-    get selectedEmojis() {
-        if (this.emojiArray.filter(e => e.selected === true).length !== 0) {
-            console.log('::::')
-            return this.emojiArray.filter(e => e.selected === true).map(e => e.value).join('');
-        }
-        return null;
-    }
-       */
- 
-
     get hasBadgeAccess() {
         return canViewHighlightBadges;
     }
@@ -138,7 +90,7 @@ export default class HighlightBadges extends NavigationMixin(LightningElement) {
             }
             // Confetti
             if (badge.hasConfetti) {
-                this.rainConfetti(badge.confettiNumber, badge.confettiSize);
+                this.makeConfetti(badge.confettiNumber, badge.confettiSize);
             }
         }
 
@@ -197,7 +149,7 @@ export default class HighlightBadges extends NavigationMixin(LightningElement) {
      * @param type - Default/Emoji
      * @param number - The quantity of confetti items
      */
-    rainConfetti(number = 'normal', size = 'medium', type = 'default') {
+    makeConfetti(number = 'normal', size = 'medium', type = 'default') {
         this.confettiNumber = number;
         this.confettiSize = size;
         this.confettiType = type;

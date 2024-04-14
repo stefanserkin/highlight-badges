@@ -9,21 +9,27 @@ export default class Confetti extends LightningElement {
     @api size = 'medium';
     @api number = 'normal';
     @api type = 'default';
-    @api emojis = null;
+    // @api emojis = null;
 
     sizeOptions = [
         { label: 'small', value: 60 },
         { label: 'medium', value: 100 },
-        { label: 'large', value: 140 }];
+        { label: 'large', value: 140 }
+    ];
     numberOptions = [
         { label: 'few', value: 15 },
         { label: 'normal', value: 30 },
-        { label: 'plenty', value: 50 }];
+        { label: 'plenty', value: 50 }
+    ];
 
     renderedCallback() {
         // Confetti will be shown immediatelly when component renders
-        const jsConfetti = new JSConfetti({})
+        const jsConfetti = new JSConfetti({});
+        jsConfetti.addConfetti({
+            confettiNumber: this.numberOptions.filter(o => o.label === this.number)[0].value * 4,
+        });
         // The emoji confettis accept the emojiSize and confettiNumber parameters
+        /*
         if (this.type === 'emoji') {
             console.table(this.emojis);
             jsConfetti.addConfetti({
@@ -38,5 +44,6 @@ export default class Confetti extends LightningElement {
                 confettiNumber: this.numberOptions.filter(o => o.label === this.number)[0].value * 4,
             })
         }
+        */
     }
 }
