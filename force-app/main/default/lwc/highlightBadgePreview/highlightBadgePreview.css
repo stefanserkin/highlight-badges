@@ -2,3 +2,7 @@
     color: red;
     font-style: italic;
 }
+
+.lookup-container {
+    max-width: 400px;
+}

@@ -20,13 +20,14 @@
                     <p class="inactive-badge-warning">This badge is not active. To see it appear on record pages, activate it first.</p>
                 </div>
                 <!-- SELECT RECORD FOR PREVIEW -->
-                <c-lookup
-                    object-api-name={displayObject}
-                    icon-name="standard:record_lookup"
-                    search-placeholder="Search for Record"
-                    onselection={handleSelectedRecord}
-                    class="slds-var-m-around_medium"
-                ></c-lookup>
+                <div class="lookup-container slds-var-m-around_medium">
+                    <c-lookup
+                        object-api-name={displayObject}
+                        icon-name="standard:record_lookup"
+                        search-placeholder="Search for Record"
+                        onselection={handleSelectedRecord}
+                    ></c-lookup>
+                </div>
                 <!-- SHOW BADGES -->
                 <c-highlight-badges lwc-if={previewRecordId}
                     record-id={previewRecordId}
