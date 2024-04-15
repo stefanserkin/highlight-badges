@@ -7,9 +7,6 @@
  * @date 2024
  ************************************************************************/
 public with sharing class LookupController {
-
-    // Cache the set of fields to retrieve available fields in repeated queries
-    private static Set<String> setObjectFields;
     
     /**
      * Get the default, predefined record for a particular lookup
@@ -24,8 +21,8 @@ public with sharing class LookupController {
         String sObjectType
     ) {
         try {
-            String strQuery = '';
-            strQuery = 'SELECT Id, Name FROM ' + sObjectType + ' WHERE Id = :defaultRecordId LIMIT 1';
+            String nameField = GlobalDescribeService.getSObjectNameField(sObjectType);
+            String strQuery = 'SELECT Id, ' + nameField + ' FROM ' + sObjectType + ' WHERE Id = :defaultRecordId LIMIT 1';
             List<sObject> lstRecords = Database.query(String.escapeSingleQuotes(strQuery));
             return lstRecords[0];
         } catch (Exception e) {
@@ -40,35 +37,55 @@ public with sharing class LookupController {
      * @param searchInput The user's current input
      * @param sObjectType The sObject type of the lookup
      * @param filter Any soql formatted filters that should be applied to the results
-     * @return List<sObject> Search results
+     * @return List<LookupResult> Search results
      */
     @AuraEnabled(cacheable=true)
-    public static List<sObject> search(
+    public static List<LookupResult> search(
         String searchInput, 
         String sObjectType, 
         String filter
     ) {
         try {
             String querySearchInput = '%' + searchInput + '%';
+            // Ensure LastViewedDate and Name fields exist before using them in query. Default to CreatedDate and Id
+            String sortField = GlobalDescribeService.doesFieldExist(sObjectType, 'LastViewedDate') ? 'LastViewedDate' : 'CreatedDate';
+            String nameField = GlobalDescribeService.getSObjectNameField(sObjectType);
 
-            String strQuery = 'SELECT Id, Name FROM ' + sObjectType + ' WHERE';
+            // Build query
+            String strQuery = 'SELECT ' + nameField + ' FROM ' + sObjectType + ' WHERE ';
             if (searchInput == null || searchInput == '') {
-                strQuery += ' LastViewedDate != NULL';
+                strQuery += sortField + ' != NULL';
             } else {
-                strQuery += ' Name LIKE :querySearchInput';
+                strQuery += nameField + ' LIKE :querySearchInput';
             }
-            // Apply additional filter clause if provided
+
+            // Apply additional filters if provided
             if (filter != null && filter != '') {
                 strQuery += ' AND ' + filter;
             }
-            strQuery += ' ORDER BY LastViewedDate DESC LIMIT 5';
+            strQuery += ' ORDER BY ' + sortField + ' LIMIT 5';
 
             // Return query results
             List<sObject> lstRecords = Database.query(String.escapeSingleQuotes(strQuery));
-            return lstRecords;
+
+            List<LookupResult> lstResults = new List<LookupResult>();
+            for (sObject obj : lstRecords) {
+                LookupResult lr = new LookupResult();
+                lr.id = (Id) obj.get('Id');
+                lr.name = (String) obj.get(nameField);
+                lstResults.add(lr);
+            }
+            return lstResults;
         } catch (Exception e) {
             throw new AuraHandledException(e.getMessage());
         }
+    }
+
+    public class LookupResult {
+        @AuraEnabled
+        public Id id {get;set;}
+        @AuraEnabled
+        public String name {get;set;}
     }
 
 }

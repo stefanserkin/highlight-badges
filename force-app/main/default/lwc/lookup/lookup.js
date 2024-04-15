@@ -7,7 +7,7 @@ export default class Lookup extends LightningElement {
     @api iconName;
     @api filter = '';
     @api searchPlaceholder = 'Search';
-    @api defaultRecordId;
+    @api defaultRecord;
 
     wiredDefaultRecord = [];
     selectedId;
@@ -30,8 +30,8 @@ export default class Lookup extends LightningElement {
         this.wiredDefaultRecord = result;
         if (result.data) {
             const row = result.data;
-            this.selectedId = row.Id;
-            this.selectedName = row.Name;
+            this.selectedId = row.id;
+            this.selectedName = row.name;
             this.isValueSelected = true;
         } else if (result.error) {
             console.error(result.error);
@@ -52,11 +52,6 @@ export default class Lookup extends LightningElement {
 
     get recordUrl() {
         return this.selectedId != null ? '/' + this.selectedId : '';
-    }
-
-    get objectIsMetadata() {
-        const objSuffix = this.objectApiName.slice(-3);
-        return objSuffix === 'mdt' ? true : false;
     }
 
     handleClick() {
