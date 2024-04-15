@@ -71,7 +71,7 @@ export default class HighlightBadgePreview extends LightningElement {
     }
 
     get togglePreviewModeLabel() {
-        return this.isRecordPreviewMode ? 'Exit Record Preview' : 'Preview a Record';
+        return this.isRecordPreviewMode ? 'Exit Record Preview' : 'Record Preview Mode';
     }
 
     get togglePreviewModeVariant() {
