@@ -8,11 +8,13 @@
                             <template if:true={isValueSelected}>
                                 <!-- PILL WITH SELECTED VALUE -->
                                 <div id="lookup-pill" class="slds-pill-container">
-                                    <lightning-pill class="pill-size" 
-                                                    label={selectedName} 
-                                                    name={selectedName} 
-                                                    onremove={handleRemovePill} 
-                                                    href={recordUrl}>
+                                    <lightning-pill 
+                                        class="pill-size" 
+                                        label={selectedName} 
+                                        name={selectedName} 
+                                        onremove={handleRemovePill} 
+                                        href={recordUrl}
+                                    >
                                         <lightning-icon 
                                             icon-name={iconName} 
                                             alternative-text="acc"
