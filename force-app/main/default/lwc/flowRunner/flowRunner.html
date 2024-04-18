@@ -1,0 +1,10 @@
+<template>
+    <div class="flow-container">
+        <lightning-flow
+            flow-api-name={flowName}
+            flow-input-variables={inputVariables}
+            flow-finish-behavior="NONE"
+            onstatuschange={handleStatusChange}
+        ></lightning-flow>
+    </div>
+</template>
