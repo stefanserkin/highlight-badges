@@ -229,13 +229,23 @@
         <layoutColumns/>
         <style>CustomLinks</style>
     </layoutSections>
+    <relatedLists>
+        <excludeButtons>MassChangeOwner</excludeButtons>
+        <fields>NAME</fields>
+        <fields>Active__c</fields>
+        <fields>Sort_Order__c</fields>
+        <fields>RECORDTYPE</fields>
+        <relatedList>Highlight_Badge_Action__c.Highlight_Badge_Definition__c</relatedList>
+        <sortField>Sort_Order__c</sortField>
+        <sortOrder>Asc</sortOrder>
+    </relatedLists>
     <showEmailCheckbox>false</showEmailCheckbox>
     <showHighlightsPanel>false</showHighlightsPanel>
     <showInteractionLogPanel>false</showInteractionLogPanel>
     <showRunAssignmentRulesCheckbox>false</showRunAssignmentRulesCheckbox>
     <showSubmitAndAttachButton>false</showSubmitAndAttachButton>
     <summaryLayout>
-        <masterLabel>00h8H000005grgP</masterLabel>
+        <masterLabel>00hDC000003TkVe</masterLabel>
         <sizeX>4</sizeX>
         <sizeY>0</sizeY>
         <summaryLayoutStyle>Default</summaryLayoutStyle>
