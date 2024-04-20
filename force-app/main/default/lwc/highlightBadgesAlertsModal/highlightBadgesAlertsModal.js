@@ -24,9 +24,13 @@ export default class HighlightBadgesAlertsModal extends NavigationMixin(Lightnin
     runFlowMode = false;
     flowApiName;
     selectedSourceId;
+    includeRecordId = false;
+    includeDisplayRecordId = false;
 
     runFlow(event) {
         this.flowApiName = event.detail.flowApiName;
+        this.includeRecordId = event.detail.includeRecordId;
+        this.includeDisplayRecordId = event.detail.includeDisplayRecordId;
         this.selectedSourceId = event.target.dataset.sourceId;
         this.runFlowMode = true;
     }

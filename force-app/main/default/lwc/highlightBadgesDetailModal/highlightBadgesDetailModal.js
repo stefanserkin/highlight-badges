@@ -9,6 +9,8 @@ export default class HighlightBadgesDetailModal extends NavigationMixin(Lightnin
 
     runFlowMode = false;
     flowApiName;
+    includeRecordId = false;
+    includeDisplayRecordId = false;
 
     get fieldSet() {
         let fields = [];
@@ -44,7 +46,8 @@ export default class HighlightBadgesDetailModal extends NavigationMixin(Lightnin
 
     runFlow(event) {
         this.flowApiName = event.detail.flowApiName;
-        console.log(`Running flow: ${this.flowApiName}`);
+        this.includeRecordId = event.detail.includeRecordId;
+        this.includeDisplayRecordId = event.detail.includeDisplayRecordId;
         this.runFlowMode = true;
     }
 

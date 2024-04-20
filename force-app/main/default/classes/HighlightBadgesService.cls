@@ -191,6 +191,8 @@ public with sharing class HighlightBadgesService {
             a.url = hba.Navigation_Type__c == 'View Source Record' ? '/' + record.Id : hba.URL__c;
             a.flowType = hba.Flow_Type__c;
             a.flowApiName = hba.Flow_API_Name__c;
+            a.includeRecordId = hba.Include_Record_ID__c;
+            a.includeDisplayRecordId = hba.Include_Display_Record_ID__c;
             a.label = hba.Label__c;
             a.variant = hba.Variant__c;
             a.iconName = hba.Icon_Name__c;
@@ -468,27 +470,27 @@ public with sharing class HighlightBadgesService {
         Set<Id> additionalDefinitionIds
     ) {
         return [
-            SELECT Id, 
-                   Name, 
-                   Display_Object__c, 
-                   Common_Ancestor_Object__c, 
-                   Source_Object__c, 
-                   Source_to_Ancestor_Path__c, 
-                   Display_to_Ancestor_Path__c, 
-                   Filter_Criteria__c, 
-                   Order_By__c, 
-                   Limit__c, 
-                   Source_Detail_Fields__c, 
-                   Label__c, 
-                   Icon_Name__c, 
-                   Background_Color__c, 
-                   Label_Color__c, 
-                   Alert__c, 
-                   Alert_Message__c, 
-                   Alert_Type__c, 
-                   Toast_Variant__c, 
-                   Toast_Mode__c, 
-                   Alert_Frequency__c, 
+            SELECT Id,
+                   Name,
+                   Display_Object__c,
+                   Common_Ancestor_Object__c,
+                   Source_Object__c,
+                   Source_to_Ancestor_Path__c,
+                   Display_to_Ancestor_Path__c,
+                   Filter_Criteria__c,
+                   Order_By__c,
+                   Limit__c,
+                   Source_Detail_Fields__c,
+                   Label__c,
+                   Icon_Name__c,
+                   Background_Color__c,
+                   Label_Color__c,
+                   Alert__c,
+                   Alert_Message__c,
+                   Alert_Type__c,
+                   Toast_Variant__c,
+                   Toast_Mode__c,
+                   Alert_Frequency__c,
                    Include_Label_in_Toast__c,
                    Confetti__c,
                    Confetti_Volume__c,
@@ -500,6 +502,8 @@ public with sharing class HighlightBadgesService {
                            URL__c,
                            Flow_Type__c,
                            Flow_API_Name__c,
+                           Include_Record_ID__c,
+                           Include_Display_Record_ID__c,
                            Label__c,
                            Variant__c,
                            Icon_Name__c,

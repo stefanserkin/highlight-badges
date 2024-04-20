@@ -170,6 +170,12 @@ public with sharing class HighlightBadge {
         @AuraEnabled
         public String flowApiName {get;set;}
 
+        @AuraEnabled
+        public Boolean includeRecordId {get;set;}
+
+        @AuraEnabled
+        public Boolean includeDisplayRecordId {get;set;}
+
         /**
          * Button styles
          * https://developer.salesforce.com/docs/component-library/bundle/lightning-button/specification

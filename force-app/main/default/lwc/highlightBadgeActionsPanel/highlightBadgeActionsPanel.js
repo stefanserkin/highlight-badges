@@ -95,8 +95,14 @@ export default class HighlightBadgeActionsPanel extends NavigationMixin(Lightnin
         
         switch (this.selectedAction.flowType) {
             case 'Screen Flow':
+                console.log('headed to screen flow with action...');
+                console.log(JSON.stringify(this.selectedAction));
                 this.dispatchEvent(new CustomEvent('handleflow', {
-                    detail: { flowApiName: this.selectedAction.flowApiName },
+                    detail: { 
+                        flowApiName: this.selectedAction.flowApiName, 
+                        includeRecordId: this.selectedAction.includeRecordId,
+                        includeDisplayRecordId: this.selectedAction.includeDisplayRecordId
+                    },
                     bubbles: true,
                     composed: true
                 }));

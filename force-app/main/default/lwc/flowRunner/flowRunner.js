@@ -4,20 +4,32 @@ export default class FlowRunner extends LightningElement {
     @api flowName;
     @api recordId;
     @api displayRecordId;
+    @api includeRecordId = false;
+    @api includeDisplayRecordId = false;
     
     get inputVariables() {
-        return [
-            {
+        // Return null if no input is required
+        if (!this.includeRecordId && !this.includeDisplayRecordId) {
+            return;
+        }
+
+        // Add requested ids to input
+        let results = [];
+        if (this.includeRecordId) {
+            results.push({
                 name: 'recordId',
                 type: 'String',
-                value: this.recordId,
-            },
-            {
+                value: this.recordId
+            });
+        }
+        if (this.includeDisplayRecordId) {
+            results.push({
                 name: 'displayRecordId',
                 type: 'String',
-                value: this.displayRecordId,
-            },
-        ];
+                value: this.displayRecordId
+            });
+        }
+        return results;
     }
 
     handleStatusChange(event) {
