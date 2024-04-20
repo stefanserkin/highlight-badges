@@ -14,7 +14,7 @@
                 ></lightning-button>
             </template>
             <!-- OVERFLOW MENU ITEMS -->
-            <lightning-button-menu 
+            <lightning-button-menu lwc:if={hasOverflowActions}
                 alternative-text="Related Actions" 
                 menu-alignment="right"
                 onselect={handleSelectedOverflowAction}>

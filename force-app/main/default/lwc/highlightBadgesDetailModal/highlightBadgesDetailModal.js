@@ -53,6 +53,7 @@ export default class HighlightBadgesDetailModal extends NavigationMixin(Lightnin
 
     handleFlowCompletion() {
         this.runFlowMode = false;
+        this.dispatchEvent(new CustomEvent('refresh'));
     }
 
     handleClose() {

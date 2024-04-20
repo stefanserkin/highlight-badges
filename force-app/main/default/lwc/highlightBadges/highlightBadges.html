@@ -15,6 +15,7 @@
         record-id={recordId}
         badges={alertModalBadges}
         onclose={handleModalClose}
+        onrefresh={refresh}
     ></c-highlight-badges-alerts-modal>
 
     <!-- MODAL DETAIL DISPLAY -->
@@ -23,6 +24,7 @@
         badge={selectedBadge}
         record-id={recordId}
         onclose={handleModalClose}
+        onrefresh={refresh}
     ></c-highlight-badges-detail-modal>
 
     <!-- ROW OF BADGES -->

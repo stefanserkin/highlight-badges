@@ -1,5 +1,6 @@
 import { LightningElement, api } from 'lwc';
 import { NavigationMixin } from 'lightning/navigation';
+import canRunFlows from '@salesforce/userPermission/RunFlow';
 
 export default class HighlightBadgeActionsPanel extends NavigationMixin(LightningElement) {
     @api badge;
@@ -11,18 +12,44 @@ export default class HighlightBadgeActionsPanel extends NavigationMixin(Lightnin
     selectedActionId;
     selectedAction;
 
+    get hasRunFlowsAccess() {
+        return canRunFlows;
+    }
+
     connectedCallback() {
         this.loadActions();
     }
 
     loadActions() {
+        let displayedTotal = 0;
         for (let i = 0; i < this.actions.length; i++) {
-            if (i < this.maxButtons) {
+            const curAction = this.actions[i];
+            // Do not include screen flow actions if the user can not run flows
+            if (!this.verifyActionAccess(curAction)) continue;
+            // Divide actions into buttons and overflow menu items
+            if (displayedTotal < this.maxButtons) {
                 this.buttonActions.push(this.actions[i]);
             } else {
                 this.overflowActions.push(this.actions[i]);
             }
+            displayedTotal++;
         }
+    }
+
+    verifyActionAccess(action) {
+        if (
+            action.recordTypeName === 'Flow' && 
+            action.flowType === 'Screen Flow' && 
+            !this.hasRunFlowsAccess
+        ) {
+            console.log('::: user can run flow --> ',this.hasRunFlowsAccess);
+            return false;
+        }
+        return true;
+    }
+
+    get hasOverflowActions() {
+        return (this.overflowActions && this.overflowActions.length > 0);
     }
 
     handleSelectedButtonAction(event) {
@@ -36,11 +63,9 @@ export default class HighlightBadgeActionsPanel extends NavigationMixin(Lightnin
     }
 
     handleAction(actionId) {
-        console.log('action id --> ',actionId);
         this.selectedAction = this.actions.find(action => {
             return action.id == actionId;
         });
-        console.log(JSON.stringify(this.selectedAction));
 
         switch (this.selectedAction.recordTypeName) {
             case 'Navigation':
@@ -64,7 +89,7 @@ export default class HighlightBadgeActionsPanel extends NavigationMixin(Lightnin
             console.error('URL is missing for navigation action.');
             return;
         }
-
+        // Navigate to external page
         this[NavigationMixin.Navigate]({
             type: 'standard__webPage',
             attributes: {
@@ -75,8 +100,6 @@ export default class HighlightBadgeActionsPanel extends NavigationMixin(Lightnin
     }
 
     navigateToRecord() {
-        console.log('ready to navigate to record');
-        console.log(JSON.stringify(this.badge));
         this[NavigationMixin.Navigate]({
             type: 'standard__recordPage',
             attributes: {
@@ -95,9 +118,7 @@ export default class HighlightBadgeActionsPanel extends NavigationMixin(Lightnin
         
         switch (this.selectedAction.flowType) {
             case 'Screen Flow':
-                console.log('headed to screen flow with action...');
-                console.log(JSON.stringify(this.selectedAction));
-                this.dispatchEvent(new CustomEvent('handleflow', {
+                this.dispatchEvent(new CustomEvent('flowaction', {
                     detail: { 
                         flowApiName: this.selectedAction.flowApiName, 
                         includeRecordId: this.selectedAction.includeRecordId,
@@ -110,7 +131,7 @@ export default class HighlightBadgeActionsPanel extends NavigationMixin(Lightnin
 
             case 'Autolaunched Flow':
                 console.log('Selected autolaunched flow');
-                // do something else
+                // do flow stuff
 
             default:
                 console.alert(`Unhandled flow type: ${this.selectedAction.flowType}`);

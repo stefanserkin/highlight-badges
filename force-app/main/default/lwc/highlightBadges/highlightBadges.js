@@ -60,6 +60,7 @@ export default class HighlightBadges extends NavigationMixin(LightningElement) {
 
     @api refresh() {
         refreshApex(this.wiredBadges);
+        this.showModal = false;
     }
 
     handleAlerts(objs) {

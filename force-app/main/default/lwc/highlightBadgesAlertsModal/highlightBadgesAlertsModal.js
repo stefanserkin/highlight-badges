@@ -37,6 +37,7 @@ export default class HighlightBadgesAlertsModal extends NavigationMixin(Lightnin
 
     handleFlowCompletion() {
         this.runFlowMode = false;
+        this.dispatchEvent(new CustomEvent('refresh'));
     }
 
     getHeaderIconStyle(badge) {
