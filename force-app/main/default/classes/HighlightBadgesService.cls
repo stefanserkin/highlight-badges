@@ -476,12 +476,12 @@ public with sharing class HighlightBadgesService {
                            Icon_Position__c
                       FROM Highlight_Badge_Actions__r
                      WHERE Active__c = true
-                     ORDER BY Sort_Order__c ASC)
+                     ORDER BY Sort_Order__c ASC NULLS LAST)
               FROM Highlight_Badge_Definition__c
              WHERE Display_Object__c = :displayObject
                AND (Active__c = true OR Id IN :additionalDefinitionIds)
               WITH USER_MODE
-             ORDER BY Sort_Order__c ASC
+             ORDER BY Sort_Order__c ASC NULLS LAST
              LIMIT 100
         ];
     }
