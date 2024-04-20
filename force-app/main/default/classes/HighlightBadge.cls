@@ -116,4 +116,69 @@ public with sharing class HighlightBadge {
     @AuraEnabled
     public String confettiSize {get;set;}
 
+    /**
+     * Collection of child Actions (Highlight Badge Action wrappers)
+     */
+    @AuraEnabled
+    public Action[] actions {get;set;}
+
+    /**
+     * A Highlight Badge Action wrapper
+     */
+    public class Action {
+        /**
+         * Lowest values first, nulls last
+         */
+        @AuraEnabled
+        public Decimal sortOrder {get;set;}
+
+        /**
+         * Available values:
+         *   - Flow
+         *   - Navigation
+         */
+        @AuraEnabled
+        public String recordTypeName {get;set;}
+
+        /**
+         * Navigation settings
+         * Types:
+         *   - View Source Record
+         *   - Web Page
+         */
+        @AuraEnabled
+        public String navigationType {get;set;}
+
+        @AuraEnabled
+        public String url {get;set;}
+
+        /**
+         * Flow settings
+         * Types:
+         *   - Autolaunched Flow
+         *   - Screen Flow
+         */
+        @AuraEnabled
+        public String flowType {get;set;}
+
+        @AuraEnabled
+        public String flowApiName {get;set;}
+
+        /**
+         * Button styles
+         * https://developer.salesforce.com/docs/component-library/bundle/lightning-button/specification
+         */
+        @AuraEnabled
+        public String label {get;set;}
+
+        @AuraEnabled
+        public String variant {get;set;}
+
+        @AuraEnabled
+        public String iconName {get;set;}
+
+        @AuraEnabled
+        public String iconPosition {get;set;}
+    }
+
 }
