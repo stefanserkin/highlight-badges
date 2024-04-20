@@ -1,0 +1,33 @@
+<template>
+    <div class="slds-text-align_right">
+        <lightning-button-group>
+            <!-- BUTTONS -->
+            <template for:each={buttonActions} for:item="ba">
+                <lightning-button
+                    key={ba.id}
+                    variant={ba.variant}
+                    label={ba.label}
+                    icon-name={ba.iconName}
+                    icon-position={ba.iconPosition}
+                    data-id={ba.id}
+                    onclick={handleSelectedButtonAction}
+                ></lightning-button>
+            </template>
+            <!-- OVERFLOW MENU ITEMS -->
+            <lightning-button-menu 
+                alternative-text="Related Actions" 
+                menu-alignment="right"
+                onselect={handleSelectedOverflowAction}>
+                <template for:each={overflowActions} for:item="oa">
+                    <lightning-menu-item
+                        key={oa.id}
+                        value={oa.id}
+                        label={oa.label}
+                        data-id={oa.id}
+                        prefix-icon-name={oa.iconName}
+                    ></lightning-menu-item>
+                </template>
+            </lightning-button-menu>
+        </lightning-button-group>
+    </div>
+</template>

@@ -29,8 +29,29 @@
             <!-- MODAL BODY -->
             <div class="slds-modal__content slds-var-p-around_medium" id="modal-content-id-1">
 
-                <template if:true={badge}>
+                <!-- RUN FLOW -->
+                <template lwc:if={runFlowMode}>
+                    <c-flow-runner
+                        flow-name={flowApiName}
+                        record-id={badge.recordId}
+                        display-record-id={recordId}
+                        onfinished={handleFlowCompletion}
+                    ></c-flow-runner>
+                </template>
+
+                <!-- BADGE INFORMATION -->
+                <template lwc:elseif={badge}>
                     <lightning-layout multiple-rows="true">
+
+                        <!-- ACTIONS BUTTON GROUP -->
+                        <lightning-layout-item lwc:if={hasActions} size="12" padding="around-small">
+                            <c-highlight-badge-actions-panel
+                                badge={badge}
+                                actions={badge.actions}
+                                max-buttons={maxButtonActions}
+                                onhandleflow={runFlow}
+                            ></c-highlight-badge-actions-panel>
+                        </lightning-layout-item>
 
                         <!-- ALERT MESSAGE -->
                         <lightning-layout-item lwc:if={hasAlert} size="12" padding="around-small">
@@ -63,20 +84,12 @@
             </div>
 
             <!-- MODAL FOOTER -->
-            <footer class="slds-modal__footer">
+            <footer if:false={runFlowMode} class="slds-modal__footer">
                 <lightning-button 
-                    variant="neutral" 
-                    label="Cancel" 
-                    title="Cancel" 
-                    onclick={handleClose} 
-                    class="slds-m-left_x-small"
-                ></lightning-button>
-                <lightning-button 
-                    lwc:if={navigationEnabled} 
                     variant="brand"
-                    label={viewRecordButtonLabel} 
-                    title="View Record" 
-                    onclick={handleGoToRecord} 
+                    label="OK"
+                    title="Close Modal" 
+                    onclick={handleClose} 
                     class="slds-m-left_x-small"
                 ></lightning-button>
             </footer>

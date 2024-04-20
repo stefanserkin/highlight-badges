@@ -5,9 +5,10 @@ export default class HighlightBadgesDetailModal extends NavigationMixin(Lightnin
     @api badge;
     @api recordId;
 
-    get navigationEnabled() {
-        return (this.badge.recordId != this.recordId);
-    }
+    maxButtonActions = 3;
+
+    runFlowMode = false;
+    flowApiName;
 
     get fieldSet() {
         let fields = [];
@@ -15,6 +16,10 @@ export default class HighlightBadgesDetailModal extends NavigationMixin(Lightnin
             fields = this.badge.fieldSet.split(',');
         }
         return fields;
+    }
+
+    get hasActions() {
+        return this.badge && this.badge.actions && this.badge.actions.length > 0;
     }
 
     get hasAlert() {
@@ -37,19 +42,14 @@ export default class HighlightBadgesDetailModal extends NavigationMixin(Lightnin
         return `color: ${this.badge.labelColor};`;
     }
 
-    get viewRecordButtonLabel() {
-        return `View ${this.badge.sObjectTypeLabel}`;
+    runFlow(event) {
+        this.flowApiName = event.detail.flowApiName;
+        console.log(`Running flow: ${this.flowApiName}`);
+        this.runFlowMode = true;
     }
 
-    handleGoToRecord() {
-        this[NavigationMixin.Navigate]({
-            type: 'standard__recordPage',
-            attributes: {
-                recordId: this.badge.recordId,
-                objectApiName: this.badge.sObjectType,
-                actionName: 'view'
-            }
-        });
+    handleFlowCompletion() {
+        this.runFlowMode = false;
     }
 
     handleClose() {

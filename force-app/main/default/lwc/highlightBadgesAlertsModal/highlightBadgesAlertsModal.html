@@ -17,8 +17,18 @@
 
             <!-- MODAL BODY -->
             <div class="slds-modal__content slds-var-p-around_medium" id="modal-content-id-1">
-                <template for:each={badges} for:item="badge">
+                <template lwc:if={runFlowMode}>
+                    <c-flow-runner
+                        flow-name={flowApiName}
+                        record-id={selectedSourceId}
+                        display-record-id={recordId}
+                        onfinished={handleFlowCompletion}
+                    ></c-flow-runner>
+                </template>
+
+                <template lwc:elseif={badges} for:each={badges} for:item="badge">
                     <lightning-card key={badge.id}>
+                        <!-- DISPLAYED BADGE IN TITLE SLOT -->
                         <div slot="title" style={badge.styles}>
                             <lightning-badge 
                                 icon-name={badge.iconName}
@@ -26,17 +36,16 @@
                                 class="slds-var-m-horizontal_small slds-var-m-bottom_small" 
                             ></lightning-badge>
                         </div>
-                        <!-- NAVIGATE TO RECORD BUTTON -->
-                        <div slot="actions">
-                            <lightning-button lwc:if={badge.navigationEnabled}
-                                variant="neutral" 
-                                icon-name="utility:new_window" 
-                                icon-position="right" 
-                                label={badge.viewRecordButtonLabel} 
-                                data-id={badge.id} 
-                                onclick={handleGoToRecord} 
-                                class="slds-align_absolute-center"
-                            ></lightning-button>
+
+                        <!-- AVAILABLE ACTIONS -->
+                        <div slot="actions" lwc:if={badge.hasActions}>
+                            <c-highlight-badge-actions-panel
+                                badge={badge}
+                                actions={badge.actions}
+                                max-buttons={maxButtonActions}
+                                data-source-id={badge.recordId}
+                                onhandleflow={runFlow}
+                            ></c-highlight-badge-actions-panel>
                         </div>
 
                         <!-- ALERT MESSAGE CONTENT -->
@@ -45,13 +54,12 @@
                                 value={badge.alertMessage}
                             ></lightning-formatted-rich-text>
                         </p>
-
                     </lightning-card>
                 </template>
             </div>
 
             <!-- MODAL FOOTER -->
-            <footer class="slds-modal__footer">
+            <footer if:false={runFlowMode} class="slds-modal__footer">
                 <lightning-button 
                     variant="brand" 
                     title="OK" 

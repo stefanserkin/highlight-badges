@@ -3,13 +3,21 @@ import { LightningElement, api } from 'lwc';
 export default class FlowRunner extends LightningElement {
     @api flowName;
     @api recordId;
+    @api displayRecordId;
     
     get inputVariables() {
-        return [{
-            name: 'recordId',
-            type: 'String',
-            value: this.recordId,
-        }];
+        return [
+            {
+                name: 'recordId',
+                type: 'String',
+                value: this.recordId,
+            },
+            {
+                name: 'displayRecordId',
+                type: 'String',
+                value: this.displayRecordId,
+            },
+        ];
     }
 
     handleStatusChange(event) {

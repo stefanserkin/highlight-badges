@@ -15,35 +15,28 @@ export default class HighlightBadgesAlertsModal extends NavigationMixin(Lightnin
         rows.forEach(row => {
             row.iconStyle = this.getHeaderIconStyle(row);
             row.navigationEnabled = (row.recordId != this.recordId);
-            row.viewRecordButtonLabel = this.getViewRecordButtonLabel(row);
+            row.hasActions = (row.actions && row.actions.length > 0);
         });
         this._badges = rows;
     }
 
-    handleGoToRecord(event) {
-        const selectedId = event.currentTarget.dataset.id;
-        const selectedBadge = this.badges.find(badge => {
-            return badge.id === selectedId
-        });
+    maxButtonActions = 1;
+    runFlowMode = false;
+    flowApiName;
+    selectedSourceId;
 
-        this[NavigationMixin.GenerateUrl]({
-            type: 'standard__recordPage',
-            attributes: {
-                recordId: selectedBadge.recordId,
-                objectApiName: selectedBadge.sObjectType,
-                actionName: 'view'
-            }
-        }).then(url => {
-            window.open(url, '_blank');
-        });
+    runFlow(event) {
+        this.flowApiName = event.detail.flowApiName;
+        this.selectedSourceId = event.target.dataset.sourceId;
+        this.runFlowMode = true;
+    }
+
+    handleFlowCompletion() {
+        this.runFlowMode = false;
     }
 
     getHeaderIconStyle(badge) {
         return `--slds-c-icon-color-background: ${badge.backgroundColor}; --slds-c-icon-color-foreground: ${badge.labelColor}`;
-    }
-
-    getViewRecordButtonLabel(badge) {
-        return `View ${badge.sObjectTypeLabel}`;
     }
 
     handleCloseEvent() {

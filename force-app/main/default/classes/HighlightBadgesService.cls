@@ -164,11 +164,40 @@ public with sharing class HighlightBadgesService {
                     badge.confettiSize = definition.Confetti_Size__c ?? 'medium';
                 }
             }
+
+            // Add actions to badge
+            badge.actions = constructBadgeActions(definition, obj);
             
             lstBadges.add(badge);
         }
 
         return lstBadges;
+    }
+
+    /****************************************************
+     * Wrap child Highlight_Badge_Actions__r as HighlightBadge.Action objects
+     ****************************************************/
+    private List<HighlightBadge.Action> constructBadgeActions(
+        Highlight_Badge_Definition__c definition,
+        SObject record
+    ) {
+        List<HighlightBadge.Action> lstActions = new List<HighlightBadge.Action>();
+        for (Highlight_Badge_Action__c hba : definition.Highlight_Badge_Actions__r) {
+            HighlightBadge.Action a = new HighlightBadge.Action();
+            a.id = hba.Id;
+            a.sortOrder = hba.Sort_Order__c;
+            a.recordTypeName = hba.RecordType.Name;
+            a.navigationType = hba.Navigation_Type__c;
+            a.url = hba.Navigation_Type__c == 'View Source Record' ? '/' + record.Id : hba.URL__c;
+            a.flowType = hba.Flow_Type__c;
+            a.flowApiName = hba.Flow_API_Name__c;
+            a.label = hba.Label__c;
+            a.variant = hba.Variant__c;
+            a.iconName = hba.Icon_Name__c;
+            a.iconPosition = hba.Icon_Position__c;
+            lstActions.add(a);
+        }
+        return lstActions;
     }
 
     /****************************************************
@@ -464,7 +493,8 @@ public with sharing class HighlightBadgesService {
                    Confetti__c,
                    Confetti_Volume__c,
                    Confetti_Size__c,
-                   (SELECT Sort_Order__c,
+                   (SELECT Id,
+                           Sort_Order__c,
                            RecordType.Name,
                            Navigation_Type__c,
                            URL__c,

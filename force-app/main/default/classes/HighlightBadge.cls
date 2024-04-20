@@ -127,6 +127,12 @@ public with sharing class HighlightBadge {
      */
     public class Action {
         /**
+         * Id
+         */
+        @AuraEnabled
+        public Id id {get;set;}
+
+        /**
          * Lowest values first, nulls last
          */
         @AuraEnabled
