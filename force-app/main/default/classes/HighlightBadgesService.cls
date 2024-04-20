@@ -463,7 +463,20 @@ public with sharing class HighlightBadgesService {
                    Include_Label_in_Toast__c,
                    Confetti__c,
                    Confetti_Volume__c,
-                   Confetti_Size__c
+                   Confetti_Size__c,
+                   (SELECT Sort_Order__c,
+                           RecordType.Name,
+                           Navigation_Type__c,
+                           URL__c,
+                           Flow_Type__c,
+                           Flow_API_Name__c,
+                           Label__c,
+                           Variant__c,
+                           Icon_Name__c,
+                           Icon_Position__c
+                      FROM Highlight_Badge_Actions__r
+                     WHERE Active__c = true
+                     ORDER BY Sort_Order__c ASC)
               FROM Highlight_Badge_Definition__c
              WHERE Display_Object__c = :displayObject
                AND (Active__c = true OR Id IN :additionalDefinitionIds)
