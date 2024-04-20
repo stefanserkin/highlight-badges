@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Include_Record_ID__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>If checked, the Record ID of the badge&apos;s Source Object record will be provided to the recordId input variable.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>If checked, the Record ID of the badge&apos;s Source Object record will be provided to the recordId input variable.</inlineHelpText>
+    <label>Include Record ID</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>
