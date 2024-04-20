@@ -47,7 +47,7 @@ public with sharing class LookupController {
     ) {
         try {
             String querySearchInput = '%' + searchInput + '%';
-            // Ensure LastViewedDate and Name fields exist before using them in query. Default to CreatedDate and Id
+            // Ensure LastViewedDate and Name fields exist before using them in the query
             String sortField = GlobalDescribeService.doesFieldExist(sObjectType, 'LastViewedDate') ? 'LastViewedDate' : 'CreatedDate';
             String nameField = GlobalDescribeService.getSObjectNameField(sObjectType);
 
@@ -68,6 +68,7 @@ public with sharing class LookupController {
             // Return query results
             List<sObject> lstRecords = Database.query(String.escapeSingleQuotes(strQuery));
 
+            // Assemble LookupResult wrappers to return
             List<LookupResult> lstResults = new List<LookupResult>();
             for (sObject obj : lstRecords) {
                 LookupResult lr = new LookupResult();
