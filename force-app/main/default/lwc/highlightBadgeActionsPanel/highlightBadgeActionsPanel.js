@@ -42,7 +42,6 @@ export default class HighlightBadgeActionsPanel extends NavigationMixin(Lightnin
             action.flowType === 'Screen Flow' && 
             !this.hasRunFlowsAccess
         ) {
-            console.log('::: user can run flow --> ',this.hasRunFlowsAccess);
             return false;
         }
         return true;
@@ -69,7 +68,7 @@ export default class HighlightBadgeActionsPanel extends NavigationMixin(Lightnin
 
         switch (this.selectedAction.recordTypeName) {
             case 'Navigation':
-                if (this.selectedAction.navigationType === 'View Source Record') {
+                if (this.selectedAction.navigationType === 'Source Record') {
                     this.navigateToRecord();
                 } else {
                     this.navigateToUrl();
@@ -109,6 +108,19 @@ export default class HighlightBadgeActionsPanel extends NavigationMixin(Lightnin
             }
         });
     }
+
+    // Not yet offered as a navigation type
+    /*
+    navigateToKnowledgeArticle() {
+        this[NavigationMixin.Navigate]({
+            type: 'standard__knowledgeArticlePage',
+            attributes: {
+                articleType: 'Briefings',
+                urlName: 'February-2017'
+            }
+        });
+    }
+    */
 
     handleFlow() {
         if (!this.selectedAction.flowType) {
