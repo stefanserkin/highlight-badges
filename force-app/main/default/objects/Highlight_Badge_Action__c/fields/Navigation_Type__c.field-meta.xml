@@ -11,9 +11,14 @@
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
-                <fullName>View Source Record</fullName>
+                <fullName>Knowledge Article</fullName>
                 <default>false</default>
-                <label>View Source Record</label>
+                <label>Knowledge Article</label>
+            </value>
+            <value>
+                <fullName>Source Record</fullName>
+                <default>false</default>
+                <label>Source Record</label>
             </value>
             <value>
                 <fullName>Web Page</fullName>
