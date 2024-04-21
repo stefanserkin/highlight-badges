@@ -99,7 +99,7 @@ private class HighlightBadgesController_Test {
         String jsonInputVariables = JSON.serialize(inputVars);
         
         Test.startTest();
-        String result = HighlightBadgesController.runFlow(flowApiName, jsonInputVariables);
+        String result = HighlightBadgesController.runFlow('bdgs', flowApiName, jsonInputVariables);
         Test.stopTest();
         Assert.areEqual('success', result, 'Should have received a successful response');
     }
@@ -115,7 +115,7 @@ private class HighlightBadgesController_Test {
         
         Test.startTest();
         try {
-            HighlightBadgesController.runFlow(flowApiName, jsonInputVariables);
+            HighlightBadgesController.runFlow('bdgs', flowApiName, jsonInputVariables);
             System.assert(false, 'Method should not succeed with missing flow API name');
         } catch (Exception e) {
             hasException = true;
