@@ -213,4 +213,18 @@ public class TestDataFactory {
         return u;
     }
 
+    private static Integer fakeIdNumber = 1;
+
+    /**
+     * Get fake id for sobject type
+     * @param Schema.SObjectType - SObject type for the fake id
+     * @return Id - Random id with the key prefix of the provided SObject type
+     */
+    public static Id getFakeId(Schema.SObjectType sObjectType) {
+		String result = String.valueOf(fakeIdNumber++);
+		return (Id) (sObjectType.getDescribe().getKeyPrefix() +
+            '0'.repeat(12 - result.length()) +
+            result);
+	}
+
 }

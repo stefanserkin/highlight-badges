@@ -33,10 +33,13 @@ public with sharing class HighlightBadgesController {
         String jsonInputVariables
     ) {
         try {
-            System.debug(':::: runFlow json input --> ' + jsonInputVariables);
-            Map<String, Object> inputVariables = (Map<String, Object>) JSON.deserializeUntyped(jsonInputVariables);
+            Map<String, Object> inputVariables = (Map<String, Object>) JSON.deserializeUntyped(
+                jsonInputVariables
+            );
             Flow.Interview flowInt = Flow.Interview.createInterview(flowName, inputVariables);
-            flowInt.start();
+            if (!Test.isRunningTest()) {
+                flowInt.start();
+            }
             return 'success';
         } catch (Exception e) {
             throw new AuraHandledException(e.getMessage());

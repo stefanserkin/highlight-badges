@@ -92,4 +92,37 @@ private class HighlightBadgesController_Test {
         Assert.isTrue(hasException, 'Should have received an exception for the invalid record id');
     }
 
+    @IsTest
+    static void testRunFlow() {
+        String flowApiName = 'Highlight_Badges_Flow_Test';
+        Map<String, Object> inputVars = new Map<String, Object>{'recordId' => TestDataFactory.getFakeId(Account.SObjectType)};
+        String jsonInputVariables = JSON.serialize(inputVars);
+        
+        Test.startTest();
+        String result = HighlightBadgesController.runFlow(flowApiName, jsonInputVariables);
+        Test.stopTest();
+        Assert.areEqual('success', result, 'Should have received a successful response');
+    }
+
+    @IsTest
+    static void testRunFlowWithException() {
+        // Set flow api name to null
+        String flowApiName = null;
+        Map<String, Object> inputVars = new Map<String, Object>{'recordId' => TestDataFactory.getFakeId(Account.SObjectType)};
+        String jsonInputVariables = JSON.serialize(inputVars);
+
+        Boolean hasException = false;
+        
+        Test.startTest();
+        try {
+            HighlightBadgesController.runFlow(flowApiName, jsonInputVariables);
+            System.assert(false, 'Method should not succeed with missing flow API name');
+        } catch (Exception e) {
+            hasException = true;
+        }
+        Test.stopTest();
+
+        Assert.isTrue(hasException, 'Should have received an exception for the missing parameter');
+    }
+
 }
