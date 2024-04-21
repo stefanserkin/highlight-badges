@@ -50,15 +50,18 @@
                             <c-highlight-badge-actions-panel
                                 badge={badge}
                                 actions={badge.actions}
+                                record-id={recordId}
                                 max-buttons={maxButtonActions}
                                 onflowaction={runFlow}
+                                onrefresh={handleFlowCompletion}
                             ></c-highlight-badge-actions-panel>
                         </lightning-layout-item>
 
                         <!-- ALERT MESSAGE -->
                         <lightning-layout-item lwc:if={hasAlert} size="12" padding="around-small">
-                            <h3 class="slds-text-heading_medium slds-var-m-bottom_small">Alert</h3>
-                            <div class="slds-var-m-left_medium">
+                            <!-- <h3 class="slds-text-heading_medium slds-var-m-bottom_small">Alert</h3> -->
+                            <div class="alert-container slds-var-p-around_medium">
+                                <h4 class="slds-text-heading_small slds-var-p-bottom_x-small">Alert</h4>
                                 <lightning-formatted-rich-text
                                     value={badge.alertMessage}
                                 ></lightning-formatted-rich-text>

@@ -44,9 +44,11 @@
                             <c-highlight-badge-actions-panel
                                 badge={badge}
                                 actions={badge.actions}
+                                record-id={recordId}
                                 max-buttons={maxButtonActions}
                                 data-source-id={badge.recordId}
                                 onflowaction={runFlow}
+                                onrefresh={handleFlowCompletion}
                             ></c-highlight-badge-actions-panel>
                         </div>
 
