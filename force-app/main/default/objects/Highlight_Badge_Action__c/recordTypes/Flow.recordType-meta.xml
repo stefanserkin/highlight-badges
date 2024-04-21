@@ -29,10 +29,6 @@
     <picklistValues>
         <picklist>Navigation_Type__c</picklist>
         <values>
-            <fullName>Knowledge Article</fullName>
-            <default>false</default>
-        </values>
-        <values>
             <fullName>Source Record</fullName>
             <default>false</default>
         </values>
