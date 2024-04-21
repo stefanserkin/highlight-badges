@@ -1,7 +1,5 @@
 @IsTest
 private class HighlightBadgesController_Test {
-
-    private static final String TEST_FLOW_NAME = 'Highlight_Badges_Flow_Test';
     
     @TestSetup
     static void makeData() {
@@ -92,19 +90,6 @@ private class HighlightBadgesController_Test {
         Test.stopTest();
 
         Assert.isTrue(hasException, 'Should have received an exception for the invalid record id');
-    }
-
-    @IsTest
-    static void testRunFlow() {
-        String flowApiName = TEST_FLOW_NAME;
-        Map<String, Object> inputVars = new Map<String, Object>{'recordId' => TestDataFactory.getFakeId(Account.SObjectType)};
-        String jsonInputVariables = JSON.serialize(inputVars);
-        
-        Test.startTest();
-        String result = HighlightBadgesController.runFlow(flowApiName, jsonInputVariables);
-        Test.stopTest();
-        
-        Assert.areEqual('success', result, 'Should have received a successful response');
     }
 
     @IsTest

@@ -37,9 +37,7 @@ public with sharing class HighlightBadgesController {
                 jsonInputVariables
             );
             Flow.Interview flowInt = Flow.Interview.createInterview(flowName, inputVariables);
-            if (!Test.isRunningTest()) {
-                flowInt.start();
-            }
+            flowInt.start();
             return 'success';
         } catch (Exception e) {
             throw new AuraHandledException(e.getMessage());
