@@ -44,4 +44,34 @@ private class GlobalDescribeService_Test {
         Assert.areEqual(expectedResult, secondResult, 'Should have received the describe result for the account object');
     }
 
+    @IsTest
+    static void testDoesFieldExist() {
+        Test.startTest();
+        Boolean fieldExists = GlobalDescribeService.doesFieldExist('Account', 'Name');
+        Test.stopTest();
+        Assert.isTrue(fieldExists, 'Should have verified account name field');
+    }
+
+    @IsTest
+    static void testDoesFieldExistNegative() {
+        Test.startTest();
+        Boolean fieldExists = GlobalDescribeService.doesFieldExist('Account', 'phonybalogny');
+        Test.stopTest();
+        Assert.isFalse(fieldExists, 'Should not have verified phonybalogny field');
+    }
+
+    @IsTest
+    static void testGetSObjectNameField() {
+        Test.startTest();
+        String caseField = GlobalDescribeService.getSObjectNameField('Case');
+        String taskField = GlobalDescribeService.getSObjectNameField('Task');
+        String eventField = GlobalDescribeService.getSObjectNameField('Event');
+        String oliField = GlobalDescribeService.getSObjectNameField('OpportunityLineItem');
+        Test.stopTest();
+        Assert.areEqual('CaseNumber', caseField, 'Received unexpected field name');
+        Assert.areEqual('Subject', taskField, 'Received unexpected field name');
+        Assert.areEqual('Subject', eventField, 'Received unexpected field name');
+        Assert.areEqual('Name', oliField, 'Received unexpected field name');
+    }
+
 }

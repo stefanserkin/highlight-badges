@@ -15,7 +15,10 @@ private class HighlightBadgesService_Test {
         List<Opportunity> lstOpps = TestDataFactory.createOpportunities(lstContacts, 1);
         insert lstOpps;
 
-        insert TestDataFactory.getTestDefinitions();
+        List<Highlight_Badge_Definition__c> lstDefinitions = TestDataFactory.getTestDefinitions();
+        insert lstDefinitions;
+
+        insert TestDataFactory.getTestActions(lstDefinitions);
     }
 
     @IsTest

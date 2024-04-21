@@ -15,11 +15,7 @@ public with sharing class HighlightBadgeSetupController {
      */
     @AuraEnabled(cacheable=true)
     public static List<HighlightBadgeSetupService.ObjectSelectOption> getDisplayObjects() {
-        try {
-            return HighlightBadgeSetupService.getDisplayObjects();
-        } catch (Exception e) {
-            throw new AuraHandledException(e.getMessage());
-        }
+        return HighlightBadgeSetupService.getDisplayObjects();
     }
 
     /**

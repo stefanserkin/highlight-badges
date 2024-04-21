@@ -125,7 +125,10 @@ public class TestDataFactory {
                 Alert_Message__c = 'Test important opp alert for {!Name}', 
                 Alert_Frequency__c = ALERT_FREQUENCY_ONCE_PER_SESSION, 
                 Toast_Variant__c = 'success', 
-                Toast_Mode__c = 'sticky'
+                Toast_Mode__c = 'sticky',
+                Confetti__c = true,
+                Confetti_Size__c = 'Large',
+                Confetti_Volume__c = 'Plenty'
             )
         );
 
@@ -146,6 +149,30 @@ public class TestDataFactory {
         );
 
         return lstDefinitions;
+    }
+
+    public static List<Highlight_Badge_Action__c> getTestActions(
+        List<Highlight_Badge_Definition__c> lstDefinitions
+    ) {
+        Id recTypeId = Schema.SObjectType.Highlight_Badge_Action__c.getRecordTypeInfosByDeveloperName().get('Navigation').getRecordTypeId();
+        List<Highlight_Badge_Action__c> lstActions = new List<Highlight_Badge_Action__c>();
+        for (Highlight_Badge_Definition__c hbd : lstDefinitions) {
+            Highlight_Badge_Action__c act = new Highlight_Badge_Action__c();
+            act.Highlight_Badge_Definition__c = hbd.Id;
+            act.Name = 'Really Helpful Website';
+            act.Description__c = 'My action description';
+            act.Label__c = 'Really Helpful Website';
+            act.RecordTypeId = recTypeId;
+            act.Navigation_Type__c = 'Web Page';
+            act.URL__c = 'https://www.mets.com';
+            act.Active__c = true;
+            act.Sort_Order__c = 1.00;
+            act.Variant__c = 'brand';
+            act.Icon_Name__c = 'action:web_link';
+            act.Icon_Position__c = 'Left';
+            lstActions.add(act);
+        }
+        return lstActions;
     }
 
     public static User createTestUser(

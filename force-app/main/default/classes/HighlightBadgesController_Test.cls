@@ -39,4 +39,57 @@ private class HighlightBadgesController_Test {
         }
     }
 
+    @IsTest
+    static void testGetBadgesForPreview() {
+        Contact ct = [SELECT Id, (SELECT Id, CaseNumber FROM Cases WHERE IsClosed = false) FROM Contact LIMIT 1];
+        Assert.isFalse(ct.Cases.isEmpty(), 'Test contact should have an open case');
+
+        String caseBadgeLabel = 'Open Case #{!CaseNumber}';
+        Highlight_Badge_Definition__c hbd = [
+            SELECT Id 
+              FROM Highlight_Badge_Definition__c 
+             WHERE Label__c = :caseBadgeLabel
+             LIMIT 1
+        ];
+
+        User u = TestDataFactory.createTestUser('Rey', 'Ordonez', 'Admin');
+        Test.startTest();
+        System.runAs(u) {
+            List<HighlightBadge> lstBadges = HighlightBadgesController.getBadges(ct.Id, 'Contact', hbd.Id);
+            Test.stopTest();
+            Assert.isFalse(lstBadges.isEmpty(), 'Should have received a badge');
+            HighlightBadge openCaseBadge = new HighlightBadge();
+            for (HighlightBadge badge : lstBadges) {
+                if (badge.recordId == ct.Cases[0].Id) {
+                    openCaseBadge = badge;
+                }
+            }
+            Assert.isTrue(
+                openCaseBadge.label.contains(ct.Cases[0].CaseNumber), 
+                'The badge label should include the open case number'
+            );
+        }
+    }
+
+    @IsTest
+    static void testGetBadgesWithException() {
+        Contact ct = [SELECT Id, (SELECT Id, CaseNumber FROM Cases WHERE IsClosed = false) FROM Contact LIMIT 1];
+        String badDefinitionId = 'notAnId';
+
+        Boolean hasException = false;
+
+        User u = TestDataFactory.createTestUser('Rey', 'Ordonez', 'Admin');
+        Test.startTest();
+        System.runAs(u) {
+            try {
+                List<HighlightBadge> lstBadges = HighlightBadgesController.getBadges(ct.Id, 'Contact', badDefinitionId);
+            } catch (Exception e) {
+                hasException = true;
+            }
+        }
+        Test.stopTest();
+
+        Assert.isTrue(hasException, 'Should have received an exception for the invalid record id');
+    }
+
 }

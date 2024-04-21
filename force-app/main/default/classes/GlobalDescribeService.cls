@@ -80,14 +80,8 @@ public with sharing class GlobalDescribeService {
             when 'Case' {
                 fieldName = 'CaseNumber';
             }
-            when 'Contract' {
-                fieldName = 'ContractNumber';
-            }
             when 'Task', 'Event' {
                 fieldName = 'Subject';
-            }
-            when 'OpportunityLineItem', 'QuoteLineItem', 'OrderItem' {
-                fieldName = 'Description';
             }
             when else {
                 fieldName = 'Id';

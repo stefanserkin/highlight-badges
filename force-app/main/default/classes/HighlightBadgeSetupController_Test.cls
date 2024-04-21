@@ -18,6 +18,21 @@ private class HighlightBadgeSetupController_Test {
     }
 
     @IsTest
+    static void testGetChildObjectsWithException() {
+        String invalidObjectName = 'NotAThing';
+        Boolean hasException = false;
+        List<HighlightBadgeSetupService.ObjectSelectOption> lstOptions;
+        Test.startTest();
+        try {
+            lstOptions = HighlightBadgeSetupController.getChildObjects(invalidObjectName);
+        } catch (Exception e) {
+            hasException = true;
+        }
+        Test.stopTest();
+        Assert.isTrue(hasException, 'Should have received an exception for the invalid object name');
+    }
+
+    @IsTest
     static void testGetCommonAncestorObjects() {
         List<HighlightBadgeSetupService.ObjectSelectOption> lstOptions;
         Test.startTest();
