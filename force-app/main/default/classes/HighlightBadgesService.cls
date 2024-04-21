@@ -429,6 +429,7 @@ public with sharing class HighlightBadgesService {
      * @param Schema.DescribeFieldResult field describe for the provided field
      * @return String Formatted field value
      ****************************************************/
+    @TestVisible
     private static String formatFieldValue(
         Object fieldValue, 
         Schema.DescribeFieldResult fieldDescribe
@@ -457,7 +458,7 @@ public with sharing class HighlightBadgesService {
      * @return String A comma-separated string of default fields
      ****************************************************/
     public static String getDefaultFieldSet(String sObjectType) {
-        return sObjectType == 'Case' ? 'CaseNumber' : 'Name';
+        return GlobalDescribeService.getSObjectNameField(sObjectType);
     }
 
     /****************************************************

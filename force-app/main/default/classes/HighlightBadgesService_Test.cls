@@ -215,5 +215,32 @@ private class HighlightBadgesService_Test {
     static void testModalAlert() {
         
     }
+    
+    @IsTest
+    static void testFormatFieldValues() {
+        Date dateValue = Date.today();
+        Datetime dateTimeValue = Datetime.now();
+        Decimal currencyValue = 100.00;
+        String stringValue = 'I am a string';
+        
+        Schema.DescribeFieldResult dateDescribe = Opportunity.CloseDate.getDescribe();
+        Schema.DescribeFieldResult datetimeDescribe = Opportunity.CreatedDate.getDescribe();
+        Schema.DescribeFieldResult currencyDescribe = Opportunity.Amount.getDescribe();
+        Schema.DescribeFieldResult stringDescribe = Opportunity.Name.getDescribe();
+
+        Test.startTest();
+        String dateResult = HighlightBadgesService.formatFieldValue(dateValue, dateDescribe);
+        String datetimeResult = HighlightBadgesService.formatFieldValue(dateTimeValue, datetimeDescribe);
+        String currencyResult = HighlightBadgesService.formatFieldValue(currencyValue, currencyDescribe);
+        String stringResult = HighlightBadgesService.formatFieldValue(stringValue, stringDescribe);
+        Test.stopTest();
+
+        Opportunity opp = new Opportunity(Amount = currencyValue);
+        String expectedCurrency = '$' + opp.Amount.format();
+
+        Assert.areEqual(dateValue.format(), dateResult, 'Should have received a formatted result of the date');
+        Assert.areEqual(dateTimeValue.format(), datetimeResult, 'Should have received a formatted result of the datetime');
+        Assert.areEqual(expectedCurrency, currencyResult, 'Should have received a formatted result of the currency value');
+    }
 
 }
