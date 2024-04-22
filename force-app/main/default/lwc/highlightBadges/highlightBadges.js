@@ -1,4 +1,4 @@
-import { LightningElement, api, wire } from 'lwc';
+import { LightningElement, api, wire, track } from 'lwc';
 import { NavigationMixin } from 'lightning/navigation';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import { refreshApex } from '@salesforce/apex';
@@ -12,7 +12,7 @@ export default class HighlightBadges extends NavigationMixin(LightningElement) {
     @api previewDefinitionId = '';
     
     wiredBadges = [];
-    badges;
+    @track badges;
     selectedBadge;
     alertModalMessages = [];
     alertModalContent;
@@ -61,6 +61,10 @@ export default class HighlightBadges extends NavigationMixin(LightningElement) {
     @api refresh() {
         refreshApex(this.wiredBadges);
         this.showModal = false;
+    }
+
+    refreshWithModal() {
+        refreshApex(this.wiredBadges);
     }
 
     handleAlerts(objs) {

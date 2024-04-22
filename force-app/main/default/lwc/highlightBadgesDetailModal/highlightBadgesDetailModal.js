@@ -1,4 +1,4 @@
-import { LightningElement, api } from 'lwc';
+import { LightningElement, api, wire } from 'lwc';
 import { NavigationMixin } from 'lightning/navigation';
 
 export default class HighlightBadgesDetailModal extends NavigationMixin(LightningElement) {

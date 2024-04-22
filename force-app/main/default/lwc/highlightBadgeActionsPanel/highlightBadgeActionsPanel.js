@@ -85,7 +85,7 @@ export default class HighlightBadgeActionsPanel extends NavigationMixin(Lightnin
                 this.handleFlow();
                 break;
             default:
-                console.error('Unhandled action type:', this.selectedAction.type);
+                console.error('Unhandled action type:', this.selectedAction.recordTypeName);
         }
     }
 
@@ -158,9 +158,10 @@ export default class HighlightBadgeActionsPanel extends NavigationMixin(Lightnin
 
             case 'Autolaunched Flow':
                 this.runAutolaunchedFlow();
+                break;
 
             default:
-                console.alert(`Unhandled flow type: ${this.selectedAction.flowType}`);
+                console.error(`Unhandled flow type: ${this.selectedAction.flowType}`);
         }
     }
 
@@ -181,7 +182,6 @@ export default class HighlightBadgeActionsPanel extends NavigationMixin(Lightnin
             })
             .catch(error => {
                 this.error = error;
-                console.error(this.error);
                 const evt = new ShowToastEvent({
                     title: 'Hmm... something went wrong',
                     message: 'An error occurred while running the flow.',
