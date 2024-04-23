@@ -1,8 +1,11 @@
 import { LightningElement, api, wire } from 'lwc';
 import { NavigationMixin } from 'lightning/navigation';
+import { getRecord } from 'lightning/uiRecordApi';
+import { refreshApex } from '@salesforce/apex';
 
 export default class HighlightBadgesDetailModal extends NavigationMixin(LightningElement) {
     @api badge;
+    @api badgeId;
     @api recordId;
 
     maxButtonActions = 3;
@@ -11,6 +14,26 @@ export default class HighlightBadgesDetailModal extends NavigationMixin(Lightnin
     flowApiName;
     includeRecordId = false;
     includeDisplayRecordId = false;
+
+    get badgeRecordId() {
+        return this.badge ? this.badge.recordId : null;
+    }
+
+    get fieldsToDisplay() {
+        // Ensure the badge and its sObjectType are defined before attempting to format field names
+        if (this.badge && this.badge.sObjectType && this.badge.fieldSet) {
+            return this.badge.fieldSet.split(',')
+                .map(field => `${this.badge.sObjectType}.${field.trim()}`);
+        }
+        return [];
+    }
+
+    /**
+     * Use getRecord so that the record-view-form can be refreshed
+     * when a child action is completed that could alter record data
+     */
+    @wire(getRecord, { recordId: '$badgeRecordId', fields: '$fieldsToDisplay' })
+    wiredRecord;
 
     get fieldSet() {
         let fields = [];
@@ -54,6 +77,7 @@ export default class HighlightBadgesDetailModal extends NavigationMixin(Lightnin
     handleFlowCompletion() {
         this.runFlowMode = false;
         this.dispatchEvent(new CustomEvent('refresh'));
+        refreshApex(this.wiredRecord);
     }
 
     handleClose() {

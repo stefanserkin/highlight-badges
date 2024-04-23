@@ -12,8 +12,8 @@ export default class HighlightBadges extends NavigationMixin(LightningElement) {
     @api previewDefinitionId = '';
     
     wiredBadges = [];
-    @track badges;
-    selectedBadge;
+    badges;
+    @track selectedBadge;
     alertModalMessages = [];
     alertModalContent;
     alertModalBadges = [];
@@ -42,8 +42,11 @@ export default class HighlightBadges extends NavigationMixin(LightningElement) {
         this.isLoading = true;
         this.wiredBadges = result;
         if (result.data) {
-            this.badges = JSON.parse( JSON.stringify(result.data) );
+            this.badges = JSON.parse(JSON.stringify(result.data));
             this.handleAlerts(this.badges);
+            // If a badge was previously selected, 
+            // reset it using definitionId and recordId
+            if (this.selectedBadge) this.refreshSelectedBadge();
             this.error = undefined;
             this.isLoading = false;
         } else if (result.error) {
@@ -56,15 +59,6 @@ export default class HighlightBadges extends NavigationMixin(LightningElement) {
             }
             this.isLoading = false;
         }
-    }
-
-    @api refresh() {
-        refreshApex(this.wiredBadges);
-        this.showModal = false;
-    }
-
-    refreshWithModal() {
-        refreshApex(this.wiredBadges);
     }
 
     handleAlerts(objs) {
@@ -105,9 +99,25 @@ export default class HighlightBadges extends NavigationMixin(LightningElement) {
             }
         }
 
-        // Show modal
-        if (this.alertModalBadges && this.alertModalBadges.length > 0) {
+        // Show modal if there are modal alerts and the user is not in the detail modal
+        if (!this.showModal && this.alertModalBadges && this.alertModalBadges.length > 0) {
             this.showModalAlert = true;
+        }
+    }
+
+    @api refresh() {
+        refreshApex(this.wiredBadges);
+    }
+
+    refreshSelectedBadge() {
+        const updatedBadge = this.badges.find(badge => 
+            badge.definitionId === this.selectedBadge.definitionId && 
+            badge.recordId === this.selectedBadge.recordId);
+        if (updatedBadge) {
+            this.selectedBadge = updatedBadge;
+        } else {
+            this.selectedBadge = undefined;
+            this.showModal = false;
         }
     }
 

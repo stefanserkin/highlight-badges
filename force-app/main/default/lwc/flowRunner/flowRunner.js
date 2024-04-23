@@ -45,6 +45,8 @@ export default class FlowRunner extends LightningElement {
         FINISHED: The interview for a flow with screens is finished.
         FINISHED_SCREEN: The interview for a flow without screens is finished.
         ERROR: Something went wrong and the interview failed.
+
+        https://developer.salesforce.com/docs/atlas.en-us.object_reference.meta/object_reference/sforce_api_objects_flowinterview.htm
          */
         if (status === 'FINISHED') {
             console.log(':::: completed the flow');
