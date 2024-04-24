@@ -6,11 +6,11 @@
  ************************************************************************/
 public with sharing class HighlightBadgesService {
 
-    public Id displayRecordId {get; private set;}
+    public Id recordId {get; private set;}
     public String displayObjectType {get; private set;}
 
     public HighlightBadgesService(String recordId, String sObjectType) {
-        this.displayRecordId = Id.valueOf( recordId );
+        this.recordId = Id.valueOf( recordId );
         this.displayObjectType = sObjectType;
     }
 
@@ -90,14 +90,16 @@ public with sharing class HighlightBadgesService {
             }
 
             String ancestorId = definition.Common_Ancestor_Object__c == definition.Display_Object__c 
-                ? displayRecordId 
+                ? recordId 
                 : mapFieldNameToAncestorId.get(definition.Display_to_Ancestor_Path__c);
+            System.debug(':::: ancestor id --> ' + ancestorId);
             HighlightBadgeQueryBuilder queryBuilder = new HighlightBadgeQueryBuilder(
                 definition, 
-                displayRecordId, 
+                recordId, 
                 ancestorId
             );
             String strQuery = queryBuilder.getQueryString();
+            System.debug('::: query --> ' + strQuery);
 
             List<SObject> queryResults;
             try {
@@ -122,12 +124,14 @@ public with sharing class HighlightBadgesService {
         List<SObject> objs, 
         Highlight_Badge_Definition__c definition
     ) {
+        System.debug('::: constructing badges');
         List<HighlightBadge> lstBadges = new List<HighlightBadge>();
 
         // Create set to store label names to avoid duplicates
         Set<String> setLabelNames = new Set<String>();
 
         for (SObject obj : objs) {
+            System.debug('::: constructing badge --> ' + obj);
             HighlightBadge badge = new HighlightBadge();
             badge.definitionId = definition.Id;
             badge.recordId = obj.Id;
@@ -237,7 +241,7 @@ public with sharing class HighlightBadgesService {
 
         String strQuery = 'SELECT ' + String.join(lstAncestorFields, ', ') + 
             ' FROM ' + displayObjectType + 
-            ' WHERE Id = \'' + displayRecordId + '\' LIMIT 1';
+            ' WHERE Id = \'' + recordId + '\' LIMIT 1';
 
         List<SObject> lstObjs = Database.query(strQuery, AccessLevel.USER_MODE);
         for (String fieldName : setAncestorFields) {

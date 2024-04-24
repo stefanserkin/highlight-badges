@@ -29,7 +29,7 @@ private class HighlightBadgesService_Test {
         Test.startTest();
         HighlightBadgesService serv = new HighlightBadgesService(acc.Id, objType);
         Test.stopTest();
-        Assert.areEqual(acc.Id, serv.displayRecordId, 'Should have set the display record id in the constructor');
+        Assert.areEqual(acc.Id, serv.recordId, 'Should have set the display record id in the constructor');
         Assert.areEqual(objType, serv.displayObjectType, 'Should have set the display object type in the constructor');
     }
 
