@@ -38,6 +38,12 @@ public with sharing class HighlightBadgesService {
     private static Cache.SessionPartition sessionCachePartition;
 
     /**
+     * User id of running user
+     * Allows for :userId to be used in badge definition queries
+     */
+    private static Id userId = UserInfo.getUserId();
+
+    /**
      * A map of field names to their common ancestor id
      * The field name is the api path from source to ancestor object
      * The ancestor id is the record id at the end of it
