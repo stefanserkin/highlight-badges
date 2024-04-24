@@ -114,10 +114,9 @@ public with sharing class HighlightBadgeQueryBuilder {
     }
 
     /****************************************************
-     * Returns a set of strings with each of the merge fields contained in the original string
+     * Returns a set of field api names for merge fields in the input
      * @param String String containing merge fields
      ****************************************************/
-
      private Set<String> getMergeFieldsFromString(
         String input
     ) {
