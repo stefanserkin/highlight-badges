@@ -28,8 +28,7 @@ public with sharing class HighlightBadgeQueryBuilder {
     }
 
     /****************************************************
-     * Returns a soql query string, constructed from highlight badge definition properties
-     * @param Highlight_Badge_Definition__c The definition record to construct a query for
+     * Returns a soql query string, constructed from the object's definition properties
      ****************************************************/
     private String getQueryFromDefinition() {
         // SELECT
