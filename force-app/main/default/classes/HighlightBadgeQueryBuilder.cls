@@ -9,16 +9,16 @@ public with sharing class HighlightBadgeQueryBuilder {
     private static final String MERGE_FIELD_REGEX = '\\{!.+?\\}';
 
     private Highlight_Badge_Definition__c definition;
-    private Id recordId;
+    private Id displayRecordId;
     private Id ancestorId;
 
     public HighlightBadgeQueryBuilder(
         Highlight_Badge_Definition__c definition, 
-        Id recordId, 
+        Id displayRecordId, 
         Id ancestorId
     ) {
         this.definition = definition;
-        this.recordId = recordId;
+        this.displayRecordId = displayRecordId;
         this.ancestorId = ancestorId;
     }
 

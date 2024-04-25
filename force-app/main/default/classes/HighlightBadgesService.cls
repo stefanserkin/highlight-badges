@@ -6,11 +6,11 @@
  ************************************************************************/
 public with sharing class HighlightBadgesService {
 
-    public Id recordId {get; private set;}
+    public Id displayRecordId {get; private set;}
     public String displayObjectType {get; private set;}
 
-    public HighlightBadgesService(String recordId, String sObjectType) {
-        this.recordId = Id.valueOf( recordId );
+    public HighlightBadgesService(String displayRecordId, String sObjectType) {
+        this.displayRecordId = Id.valueOf( displayRecordId );
         this.displayObjectType = sObjectType;
     }
 
@@ -90,11 +90,11 @@ public with sharing class HighlightBadgesService {
             }
 
             String ancestorId = definition.Common_Ancestor_Object__c == definition.Display_Object__c 
-                ? recordId 
+                ? displayRecordId 
                 : mapFieldNameToAncestorId.get(definition.Display_to_Ancestor_Path__c);
             HighlightBadgeQueryBuilder queryBuilder = new HighlightBadgeQueryBuilder(
                 definition, 
-                recordId, 
+                displayRecordId, 
                 ancestorId
             );
             String strQuery = queryBuilder.getQueryString();
@@ -237,7 +237,7 @@ public with sharing class HighlightBadgesService {
 
         String strQuery = 'SELECT ' + String.join(lstAncestorFields, ', ') + 
             ' FROM ' + displayObjectType + 
-            ' WHERE Id = \'' + recordId + '\' LIMIT 1';
+            ' WHERE Id = :displayRecordId LIMIT 1';
 
         List<SObject> lstObjs = Database.query(strQuery, AccessLevel.USER_MODE);
         for (String fieldName : setAncestorFields) {
