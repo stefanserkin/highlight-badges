@@ -47,7 +47,7 @@ private class HighlightBadgesService_Test {
             Assert.isFalse(lstBadges.isEmpty(), 'Should have received a badge');
             HighlightBadge openCaseBadge = new HighlightBadge();
             for (HighlightBadge badge : lstBadges) {
-                if (badge.recordId == ct.Cases[0].Id) {
+                if (badge.sourceRecordId == ct.Cases[0].Id) {
                     openCaseBadge = badge;
                 }
             }
@@ -77,7 +77,7 @@ private class HighlightBadgesService_Test {
             Test.stopTest();
             Boolean hasOppBadge = false;
             for (HighlightBadge badge : lstBadges) {
-                if (badge.recordId == ct.Opportunities[0].Id) {
+                if (badge.sourceRecordId == ct.Opportunities[0].Id) {
                     hasOppBadge = true;
                 }
             }

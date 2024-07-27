@@ -14,7 +14,7 @@ export default class HighlightBadgesAlertsModal extends NavigationMixin(Lightnin
         let rows = JSON.parse( JSON.stringify(value) );
         rows.forEach(row => {
             row.iconStyle = this.getHeaderIconStyle(row);
-            row.navigationEnabled = (row.recordId != this.recordId);
+            row.navigationEnabled = (row.sourceRecordId != this.recordId);
             row.hasActions = (row.actions && row.actions.length > 0);
         });
         this._badges = rows;
@@ -24,12 +24,12 @@ export default class HighlightBadgesAlertsModal extends NavigationMixin(Lightnin
     runFlowMode = false;
     flowApiName;
     selectedSourceId;
-    includeRecordId = false;
+    includeSourceRecordId = false;
     includeDisplayRecordId = false;
 
     runFlow(event) {
         this.flowApiName = event.detail.flowApiName;
-        this.includeRecordId = event.detail.includeRecordId;
+        this.includeSourceRecordId = event.detail.includeSourceRecordId;
         this.includeDisplayRecordId = event.detail.includeDisplayRecordId;
         this.selectedSourceId = event.target.dataset.sourceId;
         this.runFlowMode = true;

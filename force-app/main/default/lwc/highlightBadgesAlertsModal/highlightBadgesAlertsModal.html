@@ -20,9 +20,9 @@
                 <template lwc:if={runFlowMode}>
                     <c-flow-runner
                         flow-name={flowApiName}
-                        record-id={selectedSourceId}
+                        source-record-id={selectedSourceId}
                         display-record-id={recordId}
-                        include-record-id={includeRecordId}
+                        include-source-record-id={includeSourceRecordId}
                         include-display-record-id={includeDisplayRecordId}
                         onfinished={handleFlowCompletion}
                     ></c-flow-runner>
@@ -46,7 +46,7 @@
                                 actions={badge.actions}
                                 record-id={recordId}
                                 max-buttons={maxButtonActions}
-                                data-source-id={badge.recordId}
+                                data-source-id={badge.sourceRecordId}
                                 onflowaction={runFlow}
                                 onrefresh={handleFlowCompletion}
                             ></c-highlight-badge-actions-panel>

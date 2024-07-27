@@ -112,7 +112,7 @@ export default class HighlightBadgeActionsPanel extends NavigationMixin(Lightnin
         this[NavigationMixin.Navigate]({
             type: 'standard__recordPage',
             attributes: {
-                recordId: this.badge.recordId,
+                recordId: this.badge.sourceRecordId,
                 objectApiName: this.badge.sObjectType,
                 actionName: 'view'
             }
@@ -148,7 +148,7 @@ export default class HighlightBadgeActionsPanel extends NavigationMixin(Lightnin
                 this.dispatchEvent(new CustomEvent('flowaction', {
                     detail: { 
                         flowApiName: this.selectedAction.flowApiName, 
-                        includeRecordId: this.selectedAction.includeRecordId,
+                        includeSourceRecordId: this.selectedAction.includeSourceRecordId,
                         includeDisplayRecordId: this.selectedAction.includeDisplayRecordId
                     },
                     bubbles: true,
@@ -192,17 +192,17 @@ export default class HighlightBadgeActionsPanel extends NavigationMixin(Lightnin
     }
 
     get flowInputVariables() {
-        const includeRecordId = this.selectedAction.includeRecordId;
+        const includeSourceRecordId = this.selectedAction.includeSourceRecordId;
         const includeDisplayRecordId = this.selectedAction.includeDisplayRecordId;
         // Return null if no input is required
-        if (!includeRecordId && !includeDisplayRecordId) {
+        if (!includeSourceRecordId && !includeDisplayRecordId) {
             return;
         }
 
         // Add requested ids to input
         let input = {};
-        if (includeRecordId) {
-            input['recordId'] = this.badge.recordId;
+        if (includeSourceRecordId) {
+            input['sourceRecordId'] = this.badge.sourceRecordId;
         }
         if (includeDisplayRecordId) {
             input['displayRecordId'] = this.recordId;

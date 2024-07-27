@@ -33,9 +33,9 @@
                 <template lwc:if={runFlowMode}>
                     <c-flow-runner
                         flow-name={flowApiName}
-                        record-id={badge.recordId}
+                        source-record-id={badge.sourceRecordId}
                         display-record-id={recordId}
-                        include-record-id={includeRecordId}
+                        include-source-record-id={includeSourceRecordId}
                         include-display-record-id={includeDisplayRecordId}
                         onfinished={handleFlowCompletion}
                     ></c-flow-runner>
@@ -72,7 +72,7 @@
                         <lightning-layout-item size="12" padding="around-small">
                             <h3 class="slds-text-heading_medium slds-var-m-bottom_small">{detailsHeader}</h3>
                             <div class="slds-var-m-left_medium">
-                                <lightning-record-view-form record-id={badge.recordId} 
+                                <lightning-record-view-form record-id={badge.sourceRecordId} 
                                                             object-api-name={badge.sObjectType}
                                                             density="compact">
                                     <template for:each={fieldSet} for:item="field">

@@ -2,24 +2,24 @@ import { LightningElement, api } from 'lwc';
 
 export default class FlowRunner extends LightningElement {
     @api flowName;
-    @api recordId;
+    @api sourceRecordId;
     @api displayRecordId;
-    @api includeRecordId = false;
+    @api includeSourceRecordId = false;
     @api includeDisplayRecordId = false;
     
     get inputVariables() {
         // Return null if no input is required
-        if (!this.includeRecordId && !this.includeDisplayRecordId) {
+        if (!this.includeSourceRecordId && !this.includeDisplayRecordId) {
             return;
         }
 
         // Add requested ids to input
         let results = [];
-        if (this.includeRecordId) {
+        if (this.includeSourceRecordId) {
             results.push({
-                name: 'recordId',
+                name: 'sourceRecordId',
                 type: 'String',
-                value: this.recordId
+                value: this.sourceRecordId
             });
         }
         if (this.includeDisplayRecordId) {

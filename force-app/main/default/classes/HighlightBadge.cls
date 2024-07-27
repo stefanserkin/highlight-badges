@@ -26,8 +26,8 @@ public with sharing class HighlightBadge {
     /**
      * The record id of the source record
      */
-    @AuraEnabled
-    public Id recordId {get;set;} // Deprecated - retire once all references are replaced
+    // @AuraEnabled
+    // public Id recordId {get;set;}
 
     @AuraEnabled
     public Id sourceRecordId {get;set;}
@@ -174,7 +174,7 @@ public with sharing class HighlightBadge {
         public String flowApiName {get;set;}
 
         @AuraEnabled
-        public Boolean includeRecordId {get;set;}
+        public Boolean includeSourceRecordId {get;set;}
 
         @AuraEnabled
         public Boolean includeDisplayRecordId {get;set;}

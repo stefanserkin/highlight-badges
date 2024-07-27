@@ -72,12 +72,12 @@ export default class HighlightBadges extends NavigationMixin(LightningElement) {
                 } 
                 // Toast alerts
                 else if (badge.alertType == 'Toast') {
-                    if (badge.recordId != this.recordId) {
+                    if (badge.sourceRecordId != this.recordId) {
                         // Add record link to alert message
                         this[NavigationMixin.GenerateUrl]({
                             type: 'standard__recordPage',
                             attributes: {
-                                recordId: badge.recordId,
+                                recordId: badge.sourceRecordId,
                                 actionName: 'view',
                             },
                         }).then((url) => {
@@ -112,7 +112,7 @@ export default class HighlightBadges extends NavigationMixin(LightningElement) {
     refreshSelectedBadge() {
         const updatedBadge = this.badges.find(badge => 
             badge.definitionId === this.selectedBadge.definitionId && 
-            badge.recordId === this.selectedBadge.recordId);
+            badge.sourceRecordId === this.selectedBadge.sourceRecordId);
         if (updatedBadge) {
             this.selectedBadge = updatedBadge;
         } else {

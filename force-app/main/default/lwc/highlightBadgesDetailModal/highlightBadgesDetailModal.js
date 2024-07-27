@@ -12,11 +12,11 @@ export default class HighlightBadgesDetailModal extends NavigationMixin(Lightnin
 
     runFlowMode = false;
     flowApiName;
-    includeRecordId = false;
+    includeSourceRecordId = false;
     includeDisplayRecordId = false;
 
-    get badgeRecordId() {
-        return this.badge ? this.badge.recordId : null;
+    get badgeSourceRecordId() {
+        return this.badge ? this.badge.sourceRecordId : null;
     }
 
     get fieldsToDisplay() {
@@ -32,7 +32,7 @@ export default class HighlightBadgesDetailModal extends NavigationMixin(Lightnin
      * Use getRecord so that the record-view-form can be refreshed
      * when a child action is completed that could alter record data
      */
-    @wire(getRecord, { recordId: '$badgeRecordId', fields: '$fieldsToDisplay' })
+    @wire(getRecord, { recordId: '$badgeSourceRecordId', fields: '$fieldsToDisplay' })
     wiredRecord;
 
     get fieldSet() {
@@ -69,7 +69,7 @@ export default class HighlightBadgesDetailModal extends NavigationMixin(Lightnin
 
     runFlow(event) {
         this.flowApiName = event.detail.flowApiName;
-        this.includeRecordId = event.detail.includeRecordId;
+        this.includeSourceRecordId = event.detail.includeSourceRecordId;
         this.includeDisplayRecordId = event.detail.includeDisplayRecordId;
         this.runFlowMode = true;
     }

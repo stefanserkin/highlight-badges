@@ -130,7 +130,7 @@ public with sharing class HighlightBadgesService {
         for (SObject obj : objs) {
             HighlightBadge badge = new HighlightBadge();
             badge.definitionId = definition.Id;
-            badge.recordId = obj.Id;
+            badge.sourceRecordId = obj.Id;
             badge.sObjectType = definition.Source_Object__c;
             badge.sObjectTypeLabel = GlobalDescribeService.getDescribe(badge.sObjectType).getLabel();
             badge.label = getBadgeLabel(definition, obj);
@@ -152,7 +152,7 @@ public with sharing class HighlightBadgesService {
             // or this is the first user visit
             if (
                 definition.Alert__c && 
-                (definition.Alert_Frequency__c == ALERT_FREQUENCY_ALWAYS || verifyFirstBadgeView(badge.recordId))
+                (definition.Alert_Frequency__c == ALERT_FREQUENCY_ALWAYS || verifyFirstBadgeView(badge.sourceRecordId))
             ) {
                 badge.hasAlert = true;
                 badge.alertMessage = getBadgeAlertMessage(definition, obj);
@@ -197,7 +197,7 @@ public with sharing class HighlightBadgesService {
             a.url = hba.Navigation_Type__c == 'View Source Record' ? '/' + record.Id : hba.URL__c;
             a.flowType = hba.Flow_Type__c;
             a.flowApiName = hba.Flow_API_Name__c;
-            a.includeRecordId = hba.Include_Record_ID__c;
+            a.includeSourceRecordId = hba.Include_Record_ID__c;
             a.includeDisplayRecordId = hba.Include_Display_Record_ID__c;
             a.label = hba.Label__c;
             a.variant = hba.Variant__c;
