@@ -2,8 +2,9 @@ import { LightningElement, api, wire, track } from 'lwc';
 import { NavigationMixin } from 'lightning/navigation';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import { refreshApex } from '@salesforce/apex';
+import { subscribe, onError } from 'lightning/empApi';
 import getBadges from '@salesforce/apex/HighlightBadgesController.getBadges';
-import canViewHighlightBadges from '@salesforce/customPermission/Can_View_Highlight_Badges';
+import userCanViewHighlightBadges from '@salesforce/customPermission/Can_View_Highlight_Badges';
 
 export default class HighlightBadges extends NavigationMixin(LightningElement) {
     @api recordId;
@@ -29,12 +30,49 @@ export default class HighlightBadges extends NavigationMixin(LightningElement) {
     confettiSize = 'medium';
     confettiType = 'default';
 
-    get hasBadgeAccess() {
-        return canViewHighlightBadges;
+    channelName = '/event/Highlight_Badge_Refresh__e';
+    subscription = {};
+    recordIdsToRefresh = [];
+
+    connectedCallback() {
+        this.registerErrorListener();
+        this.handleSubscribe();
+    }
+
+    registerErrorListener() {
+        // Invoke onError empApi method
+        onError((error) => {
+            // Error contains the server-side error
+            console.log('Received error from server: ', JSON.stringify(error));
+        });
+    }
+
+    handleSubscribe() {
+        // Callback invoked whenever a new event message is received
+        const messageCallback = response => {
+            const recordIdToRefresh = response.data.payload.Record_ID__c;
+            if (this.hasRecordIdForRefresh(recordIdToRefresh)) {
+                this.refresh();
+            }
+        };
+
+        // Invoke subscribe method of empApi. Pass reference to messageCallback
+        subscribe(this.channelName, -1, messageCallback).then((response) => {
+            // Response contains the subscription information on subscribe call
+            this.subscription = response;
+        });
+    }
+
+    hasRecordIdForRefresh(recordIdToRefresh) {
+        return this.recordIdsToRefresh.includes(recordIdToRefresh);
+    }
+
+    get userHasBadgeAccess() {
+        return userCanViewHighlightBadges;
     }
 
     get displayBadges() {
-        return (this.hasBadgeAccess && this.badges != null && this.badges.length > 0);
+        return (this.userHasBadgeAccess && this.badges != null && this.badges.length > 0);
     }
 
     @wire(getBadges, {recordId: '$recordId', sObjectType: '$objectApiName', previewDefinitionId: '$previewDefinitionId'})
@@ -43,6 +81,7 @@ export default class HighlightBadges extends NavigationMixin(LightningElement) {
         this.wiredBadges = result;
         if (result.data) {
             this.badges = JSON.parse(JSON.stringify(result.data));
+            this.addRecordIdsForRefreshEvents(this.badges);
             this.handleAlerts(this.badges);
             // If a badge was previously selected, 
             // reset it using definitionId and recordId
@@ -59,6 +98,12 @@ export default class HighlightBadges extends NavigationMixin(LightningElement) {
             }
             this.isLoading = false;
         }
+    }
+
+    addRecordIdsForRefreshEvents(badges) {
+        badges.forEach(badge => {
+            this.recordIdsToRefresh.push(badge.sourceRecordId);
+        });
     }
 
     handleAlerts(objs) {
