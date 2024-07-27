@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Publish refresh events to refresh Highlight Badges components displaying data based on a particular record</description>
+    <eventType>HighVolume</eventType>
+    <label>Highlight Badge Refresh</label>
+    <pluralLabel>Highlight Badge Refreshes</pluralLabel>
+    <publishBehavior>PublishAfterCommit</publishBehavior>
+</CustomObject>
