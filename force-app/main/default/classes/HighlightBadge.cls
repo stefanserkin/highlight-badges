@@ -27,7 +27,10 @@ public with sharing class HighlightBadge {
      * The record id of the source record
      */
     @AuraEnabled
-    public Id recordId {get;set;}
+    public Id recordId {get;set;} // Deprecated - retire once all references are replaced
+
+    @AuraEnabled
+    public Id sourceRecordId {get;set;}
 
     /**
      * sObject type api name and label of the source record
