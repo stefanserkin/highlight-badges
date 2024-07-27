@@ -54,11 +54,7 @@ public with sharing class HighlightBadgesService {
      * Get active highlight badges for the display record id
      ****************************************************/
     public List<HighlightBadge> getBadges() {
-        List<Highlight_Badge_Definition__c> lstBadgeDefinitions = queryForBadgeDefinitions(
-            displayObjectType, null
-        );
-        List<HighlightBadge> lstBadges = getBadgeWrappers(lstBadgeDefinitions);
-        return lstBadges;
+        return getBadges(null);
     }
 
     /****************************************************
@@ -66,11 +62,20 @@ public with sharing class HighlightBadgesService {
      * badges for the display record id.
      ****************************************************/
     public List<HighlightBadge> getBadges(Id previewDefinitionId) {
-        List<Highlight_Badge_Definition__c> lstBadgeDefinitions = queryForBadgeDefinitions(
-            displayObjectType, new Set<Id>{ previewDefinitionId }
-        );
+        List<Highlight_Badge_Definition__c> lstBadgeDefinitions = getBadgeDefinitions(previewDefinitionId);
         List<HighlightBadge> lstBadges = getBadgeWrappers(lstBadgeDefinitions);
         return lstBadges;
+    }
+
+    /****************************************************
+     * Get badge definitions from selector
+     ****************************************************/
+    public List<Highlight_Badge_Definition__c> getBadgeDefinitions(Id previewDefinitionId) {
+        HighlightBadgeDefinitionSelector selector = new HighlightBadgeDefinitionSelector(displayObjectType);
+        if (previewDefinitionId != null) {
+            selector.setAdditionalDefinitions(new Set<Id>{ previewDefinitionId });
+        }
+        return selector.execute();
     }
 
     /****************************************************
