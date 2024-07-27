@@ -197,7 +197,7 @@ public with sharing class HighlightBadgesService {
             a.url = hba.Navigation_Type__c == 'View Source Record' ? '/' + record.Id : hba.URL__c;
             a.flowType = hba.Flow_Type__c;
             a.flowApiName = hba.Flow_API_Name__c;
-            a.includeSourceRecordId = hba.Include_Record_ID__c;
+            a.includeSourceRecordId = hba.Include_Source_Record_ID__c;
             a.includeDisplayRecordId = hba.Include_Display_Record_ID__c;
             a.label = hba.Label__c;
             a.variant = hba.Variant__c;
@@ -509,7 +509,7 @@ public with sharing class HighlightBadgesService {
                            URL__c,
                            Flow_Type__c,
                            Flow_API_Name__c,
-                           Include_Record_ID__c,
+                           Include_Source_Record_ID__c,
                            Include_Display_Record_ID__c,
                            Label__c,
                            Variant__c,

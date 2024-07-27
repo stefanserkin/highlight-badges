@@ -182,9 +182,10 @@ export default class HighlightBadgeActionsPanel extends NavigationMixin(Lightnin
             })
             .catch(error => {
                 this.error = error;
+                const errorMessage = this.error.body.message;
                 const evt = new ShowToastEvent({
                     title: 'Hmm... something went wrong',
-                    message: 'An error occurred while running the flow.',
+                    message: `An error occurred while running the flow: ${errorMessage}`,
                     variant: 'error',
                 });
                 this.dispatchEvent(evt);
