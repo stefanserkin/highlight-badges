@@ -15,7 +15,6 @@ export default class HighlightBadgeDefinitionCreator extends NavigationMixin(Lig
 
     handleSuccess(event) {
         this.recordId = event.detail.id;
-        console.log('::: record id in success event --> ',this.recordId);
         this.dispatchEvent(
             new CustomEvent('success', {
                 detail: {

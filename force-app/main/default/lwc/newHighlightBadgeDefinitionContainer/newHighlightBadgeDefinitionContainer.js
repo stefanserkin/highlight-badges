@@ -16,7 +16,6 @@ export default class NewHighlightBadgeDefinitionContainer extends NavigationMixi
             size: 'small',
             description: 'Create a new highlight badge definition'
         });
-        console.log(result);
         if (this.isRecordId(result)) {
             this.handleNavigateToRecordPage(result);
         } else {
@@ -48,4 +47,5 @@ export default class NewHighlightBadgeDefinitionContainer extends NavigationMixi
             },
         });
     }
+    
 }
