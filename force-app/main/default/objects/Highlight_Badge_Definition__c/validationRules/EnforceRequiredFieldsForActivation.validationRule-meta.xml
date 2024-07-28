@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>EnforceRequiredFieldsForActivation</fullName>
+    <active>true</active>
+    <description>Ensure all required fields have values before a highlight badge definition can be activated.</description>
+    <errorConditionFormula>AND(
+ Active__c ,
+ !PRIORVALUE(Active__c) ,
+ OR(
+  ISBLANK( Label__c ),
+  ISBLANK( Display_Object__c ),
+  ISBLANK( Source_Object__c ),
+  ISBLANK( Common_Ancestor_Object__c ),
+  ISBLANK( Display_to_Ancestor_Path__c ),
+  ISBLANK( Source_to_Ancestor_Path__c )
+ )
+)</errorConditionFormula>
+    <errorMessage>This record is not ready for activation. Ensure the definition has a label and all objects and relationship paths are defined.</errorMessage>
+</ValidationRule>
