@@ -1,0 +1,26 @@
+<template>
+    <lightning-card icon-name="custom:custom96">
+        <div slot="actions">
+            <lightning-button 
+                variant="neutral"
+                label="New"
+                onclick={handleCreateNewAction}
+            ></lightning-button>
+        </div>
+
+        <div slot="title">
+            <h3 class="slds-text-heading_small">Highlight Badge Actions ({numberOfActions})</h3>
+        </div>
+
+        <div>
+            <lightning-datatable
+                key-field="Id"
+                data={actions}
+                columns={cols}
+                onrowaction={handleRowAction}
+                hide-checkbox-column
+            ></lightning-datatable>
+        </div>
+        
+    </lightning-card>
+</template>

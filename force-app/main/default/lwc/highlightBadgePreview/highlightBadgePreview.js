@@ -75,7 +75,7 @@ export default class HighlightBadgePreview extends LightningElement {
     }
 
     get togglePreviewModeVariant() {
-        return this.isRecordPreviewMode ? 'destructive-text' : 'brand-outline';
+        return this.isRecordPreviewMode ? 'destructive-text' : 'neutral';
     }
 
     handlePreviewRecordIdChange(event) {

@@ -28,7 +28,9 @@
             <template lwc:if={displayObject}>
                 <!-- WARNING FOR INACTIVE BADGES -->
                 <div lwc:if={isInactive} class="slds-var-m-around_medium">
-                    <p class="inactive-badge-warning">This badge is not active. To see it appear on record pages, activate it first.</p>
+                    <p class="inactive-badge-warning">
+                        This badge is not active and will only show in the previewer. To see it appear on record pages, activate it first.
+                    </p>
                 </div>
                 <!-- SELECT RECORD FOR PREVIEW -->
                 <div class="lookup-container slds-var-m-around_medium">
