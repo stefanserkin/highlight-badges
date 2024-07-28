@@ -1,0 +1,3 @@
+<aura:component implements="flexipage:availableForRecordHome, lightning:actionOverride">
+    <c:newHighlightBadgeDefinitionContainer></c:newHighlightBadgeDefinitionContainer>
+</aura:component>

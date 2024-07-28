@@ -62,6 +62,16 @@
                 <identifier>RecordNameField</identifier>
             </fieldInstance>
         </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Sort_Order__c</fieldItem>
+                <identifier>RecordSort_Order_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
         <name>Facet-a00ea98f-bff7-4020-acc1-641c4a5278fe</name>
         <type>Facet</type>
     </flexiPageRegions>
@@ -213,16 +223,6 @@
                 <identifier>RecordDisplay_Object_cField</identifier>
             </fieldInstance>
         </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
-                    <value>none</value>
-                </fieldInstanceProperties>
-                <fieldItem>Record.Source_Object__c</fieldItem>
-                <identifier>RecordSource_Object_cField</identifier>
-            </fieldInstance>
-        </itemInstances>
         <name>Facet-513ad371-4c83-4d54-b8fc-6abab69eb156</name>
         <type>Facet</type>
     </flexiPageRegions>
@@ -233,8 +233,8 @@
                     <name>uiBehavior</name>
                     <value>none</value>
                 </fieldInstanceProperties>
-                <fieldItem>Record.Sort_Order__c</fieldItem>
-                <identifier>RecordSort_Order_cField</identifier>
+                <fieldItem>Record.Source_Object__c</fieldItem>
+                <identifier>RecordSource_Object_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <name>Facet-8df466c1-ef99-4916-b488-77fc12ed7940</name>
@@ -271,9 +271,29 @@
                     <name>uiBehavior</name>
                     <value>none</value>
                 </fieldInstanceProperties>
+                <fieldItem>Record.Common_Ancestor_Object__c</fieldItem>
+                <identifier>RecordCommon_Ancestor_Object_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Display_to_Ancestor_Path__c</fieldItem>
                 <identifier>RecordDisplay_to_Ancestor_Path_cField</identifier>
             </fieldInstance>
+        </itemInstances>
+        <name>Facet-e5cc2810-383f-4350-a480-58256216475b</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentName>flexipage:blankSpace</componentName>
+                <identifier>flexipage_blankSpace</identifier>
+            </componentInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
@@ -283,20 +303,6 @@
                 </fieldInstanceProperties>
                 <fieldItem>Record.Source_to_Ancestor_Path__c</fieldItem>
                 <identifier>RecordSource_to_Ancestor_Path_cField</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <name>Facet-e5cc2810-383f-4350-a480-58256216475b</name>
-        <type>Facet</type>
-    </flexiPageRegions>
-    <flexiPageRegions>
-        <itemInstances>
-            <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
-                    <value>none</value>
-                </fieldInstanceProperties>
-                <fieldItem>Record.Common_Ancestor_Object__c</fieldItem>
-                <identifier>RecordCommon_Ancestor_Object_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <name>Facet-615dc15b-248a-4736-ad7b-242f1e263f2c</name>
@@ -359,7 +365,7 @@
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>horizontalAlignment</name>
-                    <value>false</value>
+                    <value>true</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>label</name>

@@ -1,0 +1,15 @@
+<template>
+    <lightning-modal-header label="New Highlight Badge Definition"></lightning-modal-header>
+    <lightning-modal-body>
+        <c-highlight-badge-definition-creator
+            onsuccess={handleSuccess}
+            oncancel={handleCancel}
+        ></c-highlight-badge-definition-creator>
+    </lightning-modal-body>
+    <lightning-modal-footer></lightning-modal-footer>
+    <!--
+    <lightning-modal-footer>
+        <lightning-button label="Close" onclick={handleClose}></lightning-button>
+    </lightning-modal-footer>
+    -->
+</template>
