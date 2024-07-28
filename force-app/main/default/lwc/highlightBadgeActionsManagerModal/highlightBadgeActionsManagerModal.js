@@ -14,20 +14,31 @@ import FLOW_NAME_FIELD from '@salesforce/schema/Highlight_Badge_Action__c.Flow_A
 import VARIANT_FIELD from '@salesforce/schema/Highlight_Badge_Action__c.Variant__c';
 import ICON_NAME_FIELD from '@salesforce/schema/Highlight_Badge_Action__c.Icon_Name__c';
 import ICON_POSITION_FIELD from '@salesforce/schema/Highlight_Badge_Action__c.Icon_Position__c';
+import URL_FIELD from '@salesforce/schema/Highlight_Badge_Action__c.URL__c';
 
-const FIELDS = [
+const GENERAL_FIELDS = [
     NAME_FIELD,
     SORT_ORDER_FIELD,
+    LABEL_FIELD
+];
+
+const BUTTON_FIELDS = [
     LABEL_FIELD,
-    RECORDTYPEID_FIELD,
-    INCLUDE_SOURCE_ID_FIELD,
-    INCLUDE_DISPLAY_ID_FIELD,
-    FLOW_TYPE_FIELD,
-    NAVIGATION_TYPE_FIELD,
-    FLOW_NAME_FIELD,
     VARIANT_FIELD,
     ICON_NAME_FIELD,
     ICON_POSITION_FIELD
+];
+
+const FLOW_FIELDS = [
+    FLOW_TYPE_FIELD,
+    FLOW_NAME_FIELD,
+    INCLUDE_SOURCE_ID_FIELD,
+    INCLUDE_DISPLAY_ID_FIELD
+];
+
+const NAVIGATION_FIELDS = [
+    NAVIGATION_TYPE_FIELD,
+    URL_FIELD
 ];
 
 export default class HighlightBadgeActionsManagerModal extends LightningModal {
@@ -36,7 +47,7 @@ export default class HighlightBadgeActionsManagerModal extends LightningModal {
     @api action;
 
     objectApiName = ACTION_OBJECT;
-    fields = FIELDS;
+    generalFields = GENERAL_FIELDS;
 
     totalPages = 2;
     currentPage = 1;

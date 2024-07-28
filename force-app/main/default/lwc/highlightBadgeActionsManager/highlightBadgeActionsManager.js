@@ -1,4 +1,5 @@
 import { LightningElement, api, wire } from 'lwc';
+import { NavigationMixin } from 'lightning/navigation';
 import { deleteRecord, updateRecord } from 'lightning/uiRecordApi';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import { refreshApex } from "@salesforce/apex";
@@ -16,7 +17,7 @@ const COLS = [
     { type: 'action', typeAttributes: { rowActions: ACTIONS, menuAlignment: 'auto' } }
 ];
 
-export default class HighlightBadgeActionsManager extends LightningElement {
+export default class HighlightBadgeActionsManager extends NavigationMixin(LightningElement) {
     @api recordId;
     error;
     isLoading = false;
@@ -51,7 +52,7 @@ export default class HighlightBadgeActionsManager extends LightningElement {
     }
 
     handleCreateNewAction() {
-        alert(`Hooray! But that's not ready yet`);
+        this.openModal('new');
     }
 
     handleRowAction(event) {
@@ -60,7 +61,8 @@ export default class HighlightBadgeActionsManager extends LightningElement {
         this.selectedAction = event.detail.row;
         switch (mode.name) {
             case 'edit':
-                this.openModal(mode.name);
+                // this.openModal(mode.name);
+                this.editAction(this.selectedAction.Id);
                 break;
             case 'delete':
                 this.deleteAction(this.selectedAction.Id);
@@ -77,15 +79,25 @@ export default class HighlightBadgeActionsManager extends LightningElement {
             action: this.selectedAction
         });
         console.log(':::: result --> ',result);
-        if (result === 'okay') {
+        if (result === 'success') {
             this.dispatchEvent(
                 new ShowToastEvent({
                     title: 'Success',
-                    message: 'Action deleted',
                     variant: 'success'
                 })
             );
+            await refreshApex(this.wiredActions);
         }
+    }
+
+    editAction(recordIdToEdit) {
+        this[NavigationMixin.Navigate]({
+            type: 'standard__recordPage',
+            attributes: {
+                recordId: recordIdToEdit,
+                actionName: 'edit',
+            },
+        });
     }
 
     async deleteAction(recordIdToDelete) {
