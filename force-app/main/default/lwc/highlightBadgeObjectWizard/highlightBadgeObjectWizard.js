@@ -14,7 +14,7 @@ import SOURCE_OBJ_FIELD from '@salesforce/schema/Highlight_Badge_Definition__c.S
 import ANCESTOR_OBJ_FIELD from '@salesforce/schema/Highlight_Badge_Definition__c.Common_Ancestor_Object__c';
 import SOURCE_PATH_FIELD from '@salesforce/schema/Highlight_Badge_Definition__c.Source_to_Ancestor_Path__c';
 import DISPLAY_PATH_FIELD from '@salesforce/schema/Highlight_Badge_Definition__c.Display_to_Ancestor_Path__c';
-import SORT_ORDER_FIELD from '@salesforce/schema/Highlight_Badge_Definition__c.Sort_Order__c';
+// import SORT_ORDER_FIELD from '@salesforce/schema/Highlight_Badge_Definition__c.Sort_Order__c';
 
 export default class HighlightBadgeObjectWizard extends LightningElement {
     @api recordId;
@@ -29,7 +29,7 @@ export default class HighlightBadgeObjectWizard extends LightningElement {
 
     selectedDisplayObject;
     selectedDisplayObjectLabel;
-    sortOrder = 1.00;
+    // sortOrder = 1.00;
     selectedSourceObject;
     selectedSourceObjectLabel;
     selectedDisplayChildRelationship;
@@ -132,9 +132,9 @@ export default class HighlightBadgeObjectWizard extends LightningElement {
         this.loadChildObjects();
     }
 
-    handleSortOrderChange(event) {
-        this.sortOrder = event.detail.value;
-    }
+    // handleSortOrderChange(event) {
+    //     this.sortOrder = event.detail.value;
+    // }
 
     handleSourceObjectRelationshipChange(event) {
         const selectedVal = event.detail.value;
@@ -267,7 +267,7 @@ export default class HighlightBadgeObjectWizard extends LightningElement {
         fields[ANCESTOR_OBJ_FIELD.fieldApiName] = this.selectedCommonAncestorObject;
         fields[DISPLAY_PATH_FIELD.fieldApiName] = this.selectedDisplayRelationshipPath;
         fields[SOURCE_PATH_FIELD.fieldApiName] = this.selectedSourceObjectRelationship == 'same' ? 'Id' : this.selectedSourceRelationshipPath;
-        fields[SORT_ORDER_FIELD.fieldApiName] = this.sortOrder;
+        // fields[SORT_ORDER_FIELD.fieldApiName] = this.sortOrder;
         
         const recordInput = { fields };
 
