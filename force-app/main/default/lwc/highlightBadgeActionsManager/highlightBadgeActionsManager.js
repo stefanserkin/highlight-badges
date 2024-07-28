@@ -3,6 +3,7 @@ import { deleteRecord, updateRecord } from 'lightning/uiRecordApi';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import { refreshApex } from "@salesforce/apex";
 import getActions from '@salesforce/apex/HighlightBadgeActionsMgrController.getActions';
+import ActionsModal from 'c/highlightBadgeActionsManagerModal';
 
 const ACTIONS = [
     { label: 'Edit', name: 'edit' },
@@ -24,6 +25,7 @@ export default class HighlightBadgeActionsManager extends LightningElement {
 
     wiredActions = [];
     actions;
+    selectedAction;
 
     @wire(getActions, { recordId: '$recordId' })
     wiredActionsResult(result) {
@@ -53,16 +55,36 @@ export default class HighlightBadgeActionsManager extends LightningElement {
     }
 
     handleRowAction(event) {
-        const action = event.detail.action;
-        console.log('::::: selected action --> ',action);
-        const row = event.detail.row;
-        switch (action.name) {
+        const mode = event.detail.action;
+        console.log('::::: selected mode --> ',mode.name);
+        this.selectedAction = event.detail.row;
+        switch (mode.name) {
             case 'edit':
-                alert('Edit Action: ' + JSON.stringify(row));
+                this.openModal(mode.name);
                 break;
             case 'delete':
-                this.deleteAction(row.Id);
+                this.deleteAction(this.selectedAction.Id);
                 break;
+        }
+    }
+
+    async openModal(mode) {
+        const result = await ActionsModal.open({
+            size: 'small',
+            description: 'Manage highlight badge actions',
+            definitionId: this.recordId,
+            mode: mode,
+            action: this.selectedAction
+        });
+        console.log(':::: result --> ',result);
+        if (result === 'okay') {
+            this.dispatchEvent(
+                new ShowToastEvent({
+                    title: 'Success',
+                    message: 'Action deleted',
+                    variant: 'success'
+                })
+            );
         }
     }
 

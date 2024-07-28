@@ -1,0 +1,71 @@
+<template>
+    <lightning-modal-header label={modalHeader}></lightning-modal-header>
+    <lightning-modal-body> 
+
+        <!-- EDIT MODE -->
+        <div lwc:if={isEditMode} class="slds-var-m-around_medium">
+            <lightning-record-edit-form 
+                record-id={action.Id}
+                object-api-name={objectApiName} 
+                onsuccess={handleSuccess}
+            >
+                <lightning-messages> </lightning-messages>
+                
+                <template for:each={fields} for:item="field">
+                    <lightning-input-field 
+                        key={field} 
+                        field-name={field}
+                    ></lightning-input-field>
+                </template>
+
+                <div class="slds-align_absolute-center">
+                    <lightning-button
+                        class="slds-m-top_small"
+                        type="button"
+                        label="Cancel"
+                        onclick={handleCancel}
+                    ></lightning-button>
+                    <lightning-button
+                        class="slds-m-top_small slds-m-left_small"
+                        variant="brand"
+                        type="submit"
+                        label="Update"
+                    ></lightning-button>
+                </div>
+            </lightning-record-edit-form>
+        </div>
+
+        <!-- NEW MODE -->
+        <div lwc:if={isNewMode} class="slds-var-m-around_medium">
+            <lightning-record-edit-form 
+                object-api-name={objectApiName} 
+                onsuccess={handleSuccess}
+            >
+                <lightning-messages> </lightning-messages>
+
+                <template for:each={fields} for:item="field">
+                    <lightning-input-field 
+                        key={field} 
+                        field-name={field}
+                    ></lightning-input-field>
+                </template>
+
+                <div class="slds-align_absolute-center">
+                    <lightning-button
+                        class="slds-m-top_small"
+                        type="button"
+                        label="Cancel"
+                        onclick={handleCancel}
+                    ></lightning-button>
+                    <lightning-button
+                        class="slds-m-top_small slds-m-left_small"
+                        variant="brand"
+                        type="submit"
+                        label="Save"
+                    ></lightning-button>
+                </div>
+            </lightning-record-edit-form>
+        </div>
+    </lightning-modal-body>
+    <lightning-modal-footer></lightning-modal-footer>
+</template>
