@@ -1,8 +1,16 @@
 <template>
-    <lightning-modal-header label={modalHeader}></lightning-modal-header>
-    <lightning-modal-body> 
+    <lightning-modal-header label="Highlight Badge Action Editor"></lightning-modal-header>
+    <lightning-modal-body>
+        <!-- ACTION EDITOR FLOW -->
+        <lightning-flow
+            flow-api-name={flowName}
+            flow-input-variables={flowInputVariables}
+            flow-finish-behavior="NONE"
+            onstatuschange={handleStatusChange}
+        ></lightning-flow>
 
         <!-- NEW MODE -->
+         <!--
         <div lwc:if={isNewMode} class="slds-var-m-around_medium">
             <lightning-record-edit-form 
                 object-api-name={objectApiName} 
@@ -37,6 +45,7 @@
         <div lwc:else>
             Mode "{mode}" not supported
         </div>
+        -->
 
     </lightning-modal-body>
     <lightning-modal-footer></lightning-modal-footer>

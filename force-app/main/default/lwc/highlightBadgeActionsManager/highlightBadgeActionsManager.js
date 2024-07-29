@@ -57,11 +57,9 @@ export default class HighlightBadgeActionsManager extends NavigationMixin(Lightn
 
     handleRowAction(event) {
         const mode = event.detail.action;
-        console.log('::::: selected mode --> ',mode.name);
         this.selectedAction = event.detail.row;
         switch (mode.name) {
             case 'edit':
-                // this.openModal(mode.name);
                 this.editAction(this.selectedAction.Id);
                 break;
             case 'delete':
@@ -78,7 +76,6 @@ export default class HighlightBadgeActionsManager extends NavigationMixin(Lightn
             mode: mode,
             action: this.selectedAction
         });
-        console.log(':::: result --> ',result);
         if (result === 'success') {
             this.dispatchEvent(
                 new ShowToastEvent({
@@ -91,18 +88,10 @@ export default class HighlightBadgeActionsManager extends NavigationMixin(Lightn
     }
 
     editAction(recordIdToEdit) {
-        this[NavigationMixin.Navigate]({
-            type: 'standard__recordPage',
-            attributes: {
-                recordId: recordIdToEdit,
-                actionName: 'edit',
-            },
-        });
+        this.openModal('edit');
     }
 
     async deleteAction(recordIdToDelete) {
-        // const recordId = event.target.dataset.recordid;
-
         try {
             await deleteRecord(recordIdToDelete);
             this.dispatchEvent(

@@ -16,68 +16,45 @@ import ICON_NAME_FIELD from '@salesforce/schema/Highlight_Badge_Action__c.Icon_N
 import ICON_POSITION_FIELD from '@salesforce/schema/Highlight_Badge_Action__c.Icon_Position__c';
 import URL_FIELD from '@salesforce/schema/Highlight_Badge_Action__c.URL__c';
 
-const GENERAL_FIELDS = [
-    NAME_FIELD,
-    SORT_ORDER_FIELD,
-    LABEL_FIELD
-];
-
-const BUTTON_FIELDS = [
-    LABEL_FIELD,
-    VARIANT_FIELD,
-    ICON_NAME_FIELD,
-    ICON_POSITION_FIELD
-];
-
-const FLOW_FIELDS = [
-    FLOW_TYPE_FIELD,
-    FLOW_NAME_FIELD,
-    INCLUDE_SOURCE_ID_FIELD,
-    INCLUDE_DISPLAY_ID_FIELD
-];
-
-const NAVIGATION_FIELDS = [
-    NAVIGATION_TYPE_FIELD,
-    URL_FIELD
-];
-
 export default class HighlightBadgeActionsManagerModal extends LightningModal {
     @api definitionId;
-    @api mode;
     @api action;
 
-    objectApiName = ACTION_OBJECT;
-    generalFields = GENERAL_FIELDS;
+    flowName = 'Highlight_Badge_Action_Editor';
 
-    totalPages = 2;
-    currentPage = 1;
-
-    get modalHeader() {
-        return this.mode === 'new' ? 'New Highlight Badge Action' : 'Edit Highlight Badge Action';
+    get flowInputVariables() {
+        let results = [];
+        results.push({
+            name: 'definitionId',
+            type: 'String',
+            value: this.definitionId
+        });
+        if (this.action) {
+            results.push({
+                name: 'actionId',
+                type: 'String',
+                value: this.action.Id
+            });
+        }
+        return results;
     }
 
-    get isEditMode() {
-        return this.mode === 'edit';
-    }
+    handleStatusChange(event) {
+        const { status, flowTitle, guid } = event.detail;
+        /*
+        These are the valid status values for a flow interview.
+        STARTED: The interview is started and ongoing.
+        PAUSED: The interview is paused successfully.
+        FINISHED: The interview for a flow with screens is finished.
+        FINISHED_SCREEN: The interview for a flow without screens is finished.
+        ERROR: Something went wrong and the interview failed.
 
-    get isNewMode() {
-        return this.mode === 'new';
-    }
-
-    handleNext() {
-        this.currentPage++;
-    }
-
-    handlePrevious() {
-        this.currentPage--;
-    }
-
-    previousIsDisabled() {
-        this.currentPage === 1;
-    }
-
-    nextButtonLabel() {
-        return this.currentPage < this.totalPages ? 'Next' : 'Save';
+        https://developer.salesforce.com/docs/atlas.en-us.object_reference.meta/object_reference/sforce_api_objects_flowinterview.htm
+         */
+        if (status === 'FINISHED') {
+            console.log(':::: completed the flow');
+            this.handleSuccess();
+        }
     }
 
     handleCancel() {
@@ -87,4 +64,5 @@ export default class HighlightBadgeActionsManagerModal extends LightningModal {
     handleSuccess() {
         this.close('success');
     }
+
 }
