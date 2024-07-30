@@ -1,6 +1,6 @@
 import { LightningElement, api, wire } from 'lwc';
 import { NavigationMixin } from 'lightning/navigation';
-import { deleteRecord, updateRecord } from 'lightning/uiRecordApi';
+import { deleteRecord } from 'lightning/uiRecordApi';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import { refreshApex } from "@salesforce/apex";
 import getActions from '@salesforce/apex/HighlightBadgeActionsMgrController.getActions';
@@ -52,7 +52,8 @@ export default class HighlightBadgeActionsManager extends NavigationMixin(Lightn
     }
 
     handleCreateNewAction() {
-        this.openModal('new');
+        this.selectedAction = undefined;
+        this.openModal();
     }
 
     handleRowAction(event) {
@@ -60,20 +61,23 @@ export default class HighlightBadgeActionsManager extends NavigationMixin(Lightn
         this.selectedAction = event.detail.row;
         switch (mode.name) {
             case 'edit':
-                this.editAction(this.selectedAction.Id);
+                this.editAction();
                 break;
             case 'delete':
-                this.deleteAction(this.selectedAction.Id);
+                this.deleteAction();
                 break;
         }
     }
 
-    async openModal(mode) {
+    editAction() {
+        this.openModal();
+    }
+
+    async openModal() {
         const result = await ActionsModal.open({
             size: 'small',
             description: 'Manage highlight badge actions',
             definitionId: this.recordId,
-            mode: mode,
             action: this.selectedAction
         });
         if (result === 'success') {
@@ -87,13 +91,9 @@ export default class HighlightBadgeActionsManager extends NavigationMixin(Lightn
         }
     }
 
-    editAction(recordIdToEdit) {
-        this.openModal('edit');
-    }
-
-    async deleteAction(recordIdToDelete) {
+    async deleteAction() {
         try {
-            await deleteRecord(recordIdToDelete);
+            await deleteRecord(this.selectedAction.Id);
             this.dispatchEvent(
                 new ShowToastEvent({
                     title: 'Success',

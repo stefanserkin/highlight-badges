@@ -20,7 +20,17 @@ export default class HighlightBadgeActionsManagerModal extends LightningModal {
     @api definitionId;
     @api action;
 
-    flowName = 'Highlight_Badge_Action_Editor';
+    objectApiName = ACTION_OBJECT;
+
+    flowNameBase = 'Highlight_Badge_Action_Editor';
+    namespace = 'bdgs__';
+
+    get flowName() {
+        console.log(':::: evaluating flow name for --> ' + this.objectApiName.objectApiName);
+        return this.objectApiName.objectApiName.substring(0,6) === this.namespace 
+            ? this.namespace + this.flowNameBase 
+            : this.flowNameBase;
+    }
 
     get flowInputVariables() {
         let results = [];

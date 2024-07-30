@@ -6,7 +6,8 @@
  ************************************************************************/
 public with sharing class HighlightBadgeActionsMgrController {
 
-    private static final String FLOW_PROCESS_TYPE = 'Flow';
+    private static final String FLOW_PROCESS_TYPE_SCREEN = 'Flow';
+    private static final String FLOW_PROCESS_TYPE_AUTOLAUNCHED = 'AutoLaunchedFlow';
     
     @AuraEnabled(cacheable=true)
     public static List<Highlight_Badge_Action__c> getActions(String recordId) {
@@ -18,13 +19,30 @@ public with sharing class HighlightBadgeActionsMgrController {
     }
 
     @AuraEnabled(cacheable=true)
-    public static List<FlowOption> getFlowOptions() {
+    public static List<FlowOption> getFlowOptions(String flowType) {
         try {
             List<FlowDefinitionView> fdvs = getActiveFlows();
+            fdvs = filterByFlowType(fdvs, flowType);
             return createFlowOptionsFromDefinitionViews(fdvs);
         } catch (Exception e) {
             throw new AuraHandledException(e.getMessage());
         }
+    }
+
+    private static List<FlowDefinitionView> filterByFlowType(List<FlowDefinitionView> fdvs, String flowType) {
+        List<FlowDefinitionView> filteredFlows = new List<FlowDefinitionView>();
+        if (flowType == null) {
+            return fdvs;
+        }
+
+        String processType = flowType == 'Screen Flow' 
+            ? FLOW_PROCESS_TYPE_SCREEN : FLOW_PROCESS_TYPE_AUTOLAUNCHED;
+        for (FlowDefinitionView fdv : fdvs) {
+            if (fdv.ProcessType == processType) {
+                filteredFlows.add(fdv);
+            }
+        }
+        return filteredFlows;
     }
 
     private static List<FlowOption> createFlowOptionsFromDefinitionViews(List<FlowDefinitionView> fdvs) {
@@ -46,11 +64,24 @@ public with sharing class HighlightBadgeActionsMgrController {
     }
 
     private static List<FlowDefinitionView> getActiveFlows() {
+        /*
+        String query = 'SELECT ApiName, Label, NamespacePrefix FROM FlowDefinitionView WHERE IsActive = true ';
+        if (flowType == 'Screen Flow') {
+            query += 'AND ProcessType = :FLOW_PROCESS_TYPE_SCREEN ';
+        } else if (flowType == 'Autolaunched Flow') {
+            query += 'AND ProcessType = :FLOW_PROCESS_TYPE_AUTOLAUNCHED AND TriggerType = null ';
+        }
+        query += 'WITH SYSTEM_MODE ORDER BY Label ASC';
+
+        return Database.query(query);
+        */
+        
         return [
             SELECT ApiName, Label, NamespacePrefix
               FROM FlowDefinitionView
              WHERE IsActive = true
-               AND ProcessType = :FLOW_PROCESS_TYPE
+               AND ProcessType IN (:FLOW_PROCESS_TYPE_SCREEN, :FLOW_PROCESS_TYPE_AUTOLAUNCHED)
+               AND TriggerType = null
               WITH SYSTEM_MODE
              ORDER BY Label ASC
         ];
