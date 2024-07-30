@@ -5,6 +5,9 @@ import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import { refreshApex } from "@salesforce/apex";
 import getActions from '@salesforce/apex/HighlightBadgeActionsMgrController.getActions';
 import ActionsModal from 'c/highlightBadgeActionsManagerModal';
+import LABEL_FIELD from '@salesforce/schema/Highlight_Badge_Action__c.Label__c';
+import SORT_ORDER_FIELD from '@salesforce/schema/Highlight_Badge_Action__c.Sort_Order__c';
+import ACTIVE_FIELD from '@salesforce/schema/Highlight_Badge_Action__c.Active__c';
 
 const ACTIONS = [
     { label: 'Edit', name: 'edit' },
@@ -38,9 +41,9 @@ export default class HighlightBadgeActionsManager extends NavigationMixin(Lightn
         if (result.data) {
             let rows = JSON.parse( JSON.stringify(result.data) );
             rows.forEach(row => {
-                row.label = row.Label__c;
-                row.active = row.Active__c;
-                row.sortOrder = row.Sort_Order__c;
+                row.label = row[LABEL_FIELD.fieldApiName];
+                row.active = row[ACTIVE_FIELD.fieldApiName];
+                row.sortOrder = row[SORT_ORDER_FIELD.fieldApiName];
                 row.recordTypeName = row.RecordType.Name;
             });
             this.actions = rows;
