@@ -5,7 +5,7 @@
         <name>Set_Active_Flag</name>
         <label>Set Active Flag</label>
         <locationX>380</locationX>
-        <locationY>1166</locationY>
+        <locationY>2198</locationY>
         <assignmentItems>
             <assignToReference>highlightBadgeAction.Active__c</assignToReference>
             <operator>Assign</operator>
@@ -15,6 +15,29 @@
         </assignmentItems>
         <connector>
             <targetReference>Check_Mode</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Set_Flow_Input</name>
+        <label>Set Flow Input</label>
+        <locationX>512</locationX>
+        <locationY>1658</locationY>
+        <assignmentItems>
+            <assignToReference>strFlowInputScreen</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Input_Screen_Flow_Picklist</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>strFlowInputAutolaunched</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Input_Autolaunched_Flow_Picklist</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Button_Details_Screen</targetReference>
         </connector>
     </assignments>
     <assignments>
@@ -36,15 +59,22 @@
                 <elementReference>highlightBadgeAction.Active__c</elementReference>
             </value>
         </assignmentItems>
+        <assignmentItems>
+            <assignToReference>strRecordTypeName</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>highlightBadgeAction.RecordType.Name</elementReference>
+            </value>
+        </assignmentItems>
         <connector>
-            <targetReference>Action_Details_Screen</targetReference>
+            <targetReference>Action_Information_Screen</targetReference>
         </connector>
     </assignments>
     <assignments>
         <name>Set_isSuccess_Output_Variable</name>
         <label>Set isSuccess Output Variable</label>
         <locationX>512</locationX>
-        <locationY>1898</locationY>
+        <locationY>2930</locationY>
         <assignmentItems>
             <assignToReference>isSuccess</assignToReference>
             <operator>Assign</operator>
@@ -73,9 +103,74 @@
             </value>
         </assignmentItems>
         <connector>
-            <targetReference>Action_Details_Screen</targetReference>
+            <targetReference>Action_Information_Screen</targetReference>
         </connector>
     </assignments>
+    <assignments>
+        <name>Set_Unbound_Input</name>
+        <label>Set Unbound Input</label>
+        <locationX>512</locationX>
+        <locationY>1874</locationY>
+        <assignmentItems>
+            <assignToReference>highlightBadgeAction.Flow_API_Name__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>strFmlSelectedFlowApiName</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>highlightBadgeAction.Icon_Name__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Input_Icon_Picker.iconName</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Check_Active_Flag</targetReference>
+        </connector>
+    </assignments>
+    <collectionProcessors>
+        <name>Filter_to_Autolaunched_Flows</name>
+        <elementSubtype>FilterCollectionProcessor</elementSubtype>
+        <label>Filter to Autolaunched Flows</label>
+        <locationX>226</locationX>
+        <locationY>1274</locationY>
+        <assignNextValueToReference>currentItem_Filter_to_Autolaunched_Flows</assignNextValueToReference>
+        <collectionProcessorType>FilterCollectionProcessor</collectionProcessorType>
+        <collectionReference>Get_Flows</collectionReference>
+        <conditionLogic>and</conditionLogic>
+        <conditions>
+            <leftValueReference>currentItem_Filter_to_Autolaunched_Flows.FlowType</leftValueReference>
+            <operator>EqualTo</operator>
+            <rightValue>
+                <stringValue>AutolnchNoTrig</stringValue>
+            </rightValue>
+        </conditions>
+        <connector>
+            <targetReference>Action_Details_Screen</targetReference>
+        </connector>
+    </collectionProcessors>
+    <collectionProcessors>
+        <name>Filter_to_Screen_Flows</name>
+        <elementSubtype>FilterCollectionProcessor</elementSubtype>
+        <label>Filter to Screen Flows</label>
+        <locationX>226</locationX>
+        <locationY>1166</locationY>
+        <assignNextValueToReference>currentItem_Filter_to_Screen_Flows</assignNextValueToReference>
+        <collectionProcessorType>FilterCollectionProcessor</collectionProcessorType>
+        <collectionReference>Get_Flows</collectionReference>
+        <conditionLogic>and</conditionLogic>
+        <conditions>
+            <leftValueReference>currentItem_Filter_to_Screen_Flows.FlowType</leftValueReference>
+            <operator>EqualTo</operator>
+            <rightValue>
+                <stringValue>Screen</stringValue>
+            </rightValue>
+        </conditions>
+        <connector>
+            <targetReference>Filter_to_Autolaunched_Flows</targetReference>
+        </connector>
+    </collectionProcessors>
     <constants>
         <name>RECORD_TYPE_FLOW</name>
         <dataType>String</dataType>
@@ -94,7 +189,7 @@
         <name>Check_Active_Flag</name>
         <label>Check Active Flag</label>
         <locationX>512</locationX>
-        <locationY>950</locationY>
+        <locationY>1982</locationY>
         <defaultConnector>
             <targetReference>Check_Mode</targetReference>
         </defaultConnector>
@@ -149,6 +244,31 @@
         </rules>
     </decisions>
     <decisions>
+        <name>Check_for_Flow_Action</name>
+        <label>Check for Flow Action</label>
+        <locationX>512</locationX>
+        <locationY>842</locationY>
+        <defaultConnector>
+            <targetReference>Action_Details_Screen</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Is_Flow_Action</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>strRecordTypeName</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>RECORD_TYPE_FLOW</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Get_Flows</targetReference>
+            </connector>
+            <label>Is Flow Action</label>
+        </rules>
+    </decisions>
+    <decisions>
         <name>Check_Get_Highlight_Badge_Action</name>
         <label>Check Get Highlight Badge Action</label>
         <locationX>182</locationX>
@@ -174,7 +294,7 @@
         <name>Check_Mode</name>
         <label>Check Mode</label>
         <locationX>512</locationX>
-        <locationY>1358</locationY>
+        <locationY>2390</locationY>
         <defaultConnector>
             <targetReference>Insert_Action</targetReference>
         </defaultConnector>
@@ -195,6 +315,47 @@
             <label>Is Update</label>
         </rules>
     </decisions>
+    <decisions>
+        <name>Got_ScreenFlows</name>
+        <label>Got ScreenFlows</label>
+        <locationX>358</locationX>
+        <locationY>1058</locationY>
+        <defaultConnector>
+            <targetReference>Action_Details_Screen</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Has_Screen_Flows</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Flows</leftValueReference>
+                <operator>IsEmpty</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Filter_to_Screen_Flows</targetReference>
+            </connector>
+            <label>Has Screen Flows</label>
+        </rules>
+    </decisions>
+    <dynamicChoiceSets>
+        <name>collChoiceAutolaunchedFlows</name>
+        <collectionReference>Filter_to_Autolaunched_Flows</collectionReference>
+        <dataType>String</dataType>
+        <displayField>Name</displayField>
+        <object>FlowRecord</object>
+        <valueField>ApiName</valueField>
+    </dynamicChoiceSets>
+    <dynamicChoiceSets>
+        <name>collChoiceScreenFlows</name>
+        <collectionReference>Filter_to_Screen_Flows</collectionReference>
+        <dataType>String</dataType>
+        <displayField>Name</displayField>
+        <object>FlowRecord</object>
+        <valueField>ApiName</valueField>
+    </dynamicChoiceSets>
     <dynamicChoiceSets>
         <name>recChoiceActionRecordTypes</name>
         <dataType>String</dataType>
@@ -215,6 +376,17 @@
         <valueField>Id</valueField>
     </dynamicChoiceSets>
     <environments>Default</environments>
+    <formulas>
+        <name>strFmlSelectedFlowApiName</name>
+        <dataType>String</dataType>
+        <expression>IF( ISPICKVAL( {!highlightBadgeAction.Flow_Type__c}, &quot;Screen Flow&quot;),
+  {!strFlowInputScreen},
+  IF( ISPICKVAL( {!highlightBadgeAction.Flow_Type__c}, &quot;Autolaunched Flow&quot;),
+    {!strFlowInputAutolaunched},
+    &quot;&quot;
+  )
+)</expression>
+    </formulas>
     <interviewLabel>Highlight Badge Action Editor {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Highlight Badge Action Editor</label>
     <processMetadataValues>
@@ -240,7 +412,7 @@
         <name>Insert_Action</name>
         <label>Insert Action</label>
         <locationX>776</locationX>
-        <locationY>1466</locationY>
+        <locationY>2498</locationY>
         <connector>
             <targetReference>Set_isSuccess_Output_Variable</targetReference>
         </connector>
@@ -249,6 +421,46 @@
         </faultConnector>
         <inputReference>highlightBadgeAction</inputReference>
     </recordCreates>
+    <recordLookups>
+        <name>Get_Flows</name>
+        <label>Get Flows</label>
+        <locationX>358</locationX>
+        <locationY>950</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Got_ScreenFlows</targetReference>
+        </connector>
+        <filterLogic>(1 OR 2) AND 3</filterLogic>
+        <filters>
+            <field>FlowType</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Screen</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>FlowType</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>AutolnchNoTrig</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>ActiveVersionId__NotFound</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>FlowRecord</object>
+        <queriedFields>Id</queriedFields>
+        <queriedFields>Name</queriedFields>
+        <queriedFields>FlowLabel</queriedFields>
+        <queriedFields>ApiName</queriedFields>
+        <queriedFields>FlowType</queriedFields>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
     <recordLookups>
         <name>Get_Highlight_Badge_Action</name>
         <label>Get Highlight Badge Action</label>
@@ -278,7 +490,7 @@
         <name>Update_Action</name>
         <label>Update Action</label>
         <locationX>248</locationX>
-        <locationY>1466</locationY>
+        <locationY>2498</locationY>
         <connector>
             <targetReference>Set_isSuccess_Output_Variable</targetReference>
         </connector>
@@ -292,65 +504,13 @@
         <name>Action_Details_Screen</name>
         <label>Action Details Screen</label>
         <locationX>512</locationX>
-        <locationY>734</locationY>
+        <locationY>1550</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
         <connector>
-            <targetReference>Button_Details_Screen</targetReference>
+            <targetReference>Set_Flow_Input</targetReference>
         </connector>
-        <fields>
-            <name>Highlight_Badge_Action_Details_Section</name>
-            <fieldText>Highlight Badge Action Details</fieldText>
-            <fieldType>RegionContainer</fieldType>
-            <fields>
-                <name>Highlight_Badge_Action_Details_Section_Column1</name>
-                <fieldType>Region</fieldType>
-                <fields>
-                    <fieldType>ObjectProvided</fieldType>
-                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
-                    <isRequired>false</isRequired>
-                    <objectFieldReference>highlightBadgeAction.Name</objectFieldReference>
-                </fields>
-                <fields>
-                    <fieldType>ObjectProvided</fieldType>
-                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
-                    <isRequired>false</isRequired>
-                    <objectFieldReference>highlightBadgeAction.Active__c</objectFieldReference>
-                    <visibilityRule>
-                        <conditionLogic>and</conditionLogic>
-                        <conditions>
-                            <leftValueReference>defaultActiveStatus</leftValueReference>
-                            <operator>EqualTo</operator>
-                            <rightValue>
-                                <booleanValue>true</booleanValue>
-                            </rightValue>
-                        </conditions>
-                    </visibilityRule>
-                </fields>
-                <fields>
-                    <fieldType>ObjectProvided</fieldType>
-                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
-                    <isRequired>false</isRequired>
-                    <objectFieldReference>highlightBadgeAction.Sort_Order__c</objectFieldReference>
-                </fields>
-                <fields>
-                    <fieldType>ObjectProvided</fieldType>
-                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
-                    <isRequired>false</isRequired>
-                    <objectFieldReference>highlightBadgeAction.Description__c</objectFieldReference>
-                </fields>
-                <inputParameters>
-                    <name>width</name>
-                    <value>
-                        <stringValue>12</stringValue>
-                    </value>
-                </inputParameters>
-                <isRequired>false</isRequired>
-            </fields>
-            <isRequired>false</isRequired>
-            <regionContainerType>SectionWithHeader</regionContainerType>
-        </fields>
         <fields>
             <name>Flow_Settings_Section</name>
             <fieldText>Flow Settings</fieldText>
@@ -365,10 +525,48 @@
                     <objectFieldReference>highlightBadgeAction.Flow_Type__c</objectFieldReference>
                 </fields>
                 <fields>
-                    <fieldType>ObjectProvided</fieldType>
+                    <name>Input_Screen_Flow_Picklist</name>
+                    <choiceReferences>collChoiceScreenFlows</choiceReferences>
+                    <dataType>String</dataType>
+                    <defaultValue>
+                        <elementReference>Get_Highlight_Badge_Action.Flow_API_Name__c</elementReference>
+                    </defaultValue>
+                    <fieldText>Select Flow</fieldText>
+                    <fieldType>DropdownBox</fieldType>
                     <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
-                    <isRequired>false</isRequired>
-                    <objectFieldReference>highlightBadgeAction.Flow_API_Name__c</objectFieldReference>
+                    <isRequired>true</isRequired>
+                    <visibilityRule>
+                        <conditionLogic>and</conditionLogic>
+                        <conditions>
+                            <leftValueReference>highlightBadgeAction.Flow_Type__c</leftValueReference>
+                            <operator>EqualTo</operator>
+                            <rightValue>
+                                <stringValue>Screen Flow</stringValue>
+                            </rightValue>
+                        </conditions>
+                    </visibilityRule>
+                </fields>
+                <fields>
+                    <name>Input_Autolaunched_Flow_Picklist</name>
+                    <choiceReferences>collChoiceAutolaunchedFlows</choiceReferences>
+                    <dataType>String</dataType>
+                    <defaultValue>
+                        <elementReference>highlightBadgeAction.Flow_API_Name__c</elementReference>
+                    </defaultValue>
+                    <fieldText>Select Flow</fieldText>
+                    <fieldType>DropdownBox</fieldType>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+                    <isRequired>true</isRequired>
+                    <visibilityRule>
+                        <conditionLogic>and</conditionLogic>
+                        <conditions>
+                            <leftValueReference>highlightBadgeAction.Flow_Type__c</leftValueReference>
+                            <operator>EqualTo</operator>
+                            <rightValue>
+                                <stringValue>Autolaunched Flow</stringValue>
+                            </rightValue>
+                        </conditions>
+                    </visibilityRule>
                 </fields>
                 <inputParameters>
                     <name>width</name>
@@ -468,10 +666,76 @@
         <showHeader>false</showHeader>
     </screens>
     <screens>
+        <name>Action_Information_Screen</name>
+        <label>Action Information Screen</label>
+        <locationX>512</locationX>
+        <locationY>734</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <connector>
+            <targetReference>Check_for_Flow_Action</targetReference>
+        </connector>
+        <fields>
+            <name>Highlight_Badge_Action_Information_Section</name>
+            <fieldText>Highlight Badge Action Information</fieldText>
+            <fieldType>RegionContainer</fieldType>
+            <fields>
+                <name>Highlight_Badge_Action_Information_Section_Column1</name>
+                <fieldType>Region</fieldType>
+                <fields>
+                    <fieldType>ObjectProvided</fieldType>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+                    <isRequired>false</isRequired>
+                    <objectFieldReference>highlightBadgeAction.Name</objectFieldReference>
+                </fields>
+                <fields>
+                    <fieldType>ObjectProvided</fieldType>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+                    <isRequired>false</isRequired>
+                    <objectFieldReference>highlightBadgeAction.Active__c</objectFieldReference>
+                    <visibilityRule>
+                        <conditionLogic>and</conditionLogic>
+                        <conditions>
+                            <leftValueReference>defaultActiveStatus</leftValueReference>
+                            <operator>EqualTo</operator>
+                            <rightValue>
+                                <booleanValue>true</booleanValue>
+                            </rightValue>
+                        </conditions>
+                    </visibilityRule>
+                </fields>
+                <fields>
+                    <fieldType>ObjectProvided</fieldType>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+                    <isRequired>false</isRequired>
+                    <objectFieldReference>highlightBadgeAction.Sort_Order__c</objectFieldReference>
+                </fields>
+                <fields>
+                    <fieldType>ObjectProvided</fieldType>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+                    <isRequired>false</isRequired>
+                    <objectFieldReference>highlightBadgeAction.Description__c</objectFieldReference>
+                </fields>
+                <inputParameters>
+                    <name>width</name>
+                    <value>
+                        <stringValue>12</stringValue>
+                    </value>
+                </inputParameters>
+                <isRequired>false</isRequired>
+            </fields>
+            <isRequired>false</isRequired>
+            <regionContainerType>SectionWithHeader</regionContainerType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>false</showHeader>
+    </screens>
+    <screens>
         <name>Activation_Screen</name>
         <label>Activation Screen</label>
         <locationX>380</locationX>
-        <locationY>1058</locationY>
+        <locationY>2090</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -511,12 +775,12 @@
         <name>Button_Details_Screen</name>
         <label>Button Details Screen</label>
         <locationX>512</locationX>
-        <locationY>842</locationY>
+        <locationY>1766</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
         <connector>
-            <targetReference>Check_Active_Flag</targetReference>
+            <targetReference>Set_Unbound_Input</targetReference>
         </connector>
         <fields>
             <name>Button_Display_Section</name>
@@ -549,10 +813,18 @@
                 <name>Button_Display_Section_Column2</name>
                 <fieldType>Region</fieldType>
                 <fields>
-                    <fieldType>ObjectProvided</fieldType>
+                    <name>Input_Icon_Picker</name>
+                    <extensionName>c:iconPickerFlowContainer</extensionName>
+                    <fieldType>ComponentInstance</fieldType>
+                    <inputParameters>
+                        <name>iconName</name>
+                        <value>
+                            <elementReference>highlightBadgeAction.Icon_Name__c</elementReference>
+                        </value>
+                    </inputParameters>
                     <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
-                    <isRequired>false</isRequired>
-                    <objectFieldReference>highlightBadgeAction.Icon_Name__c</objectFieldReference>
+                    <isRequired>true</isRequired>
+                    <storeOutputAutomatically>true</storeOutputAutomatically>
                 </fields>
                 <fields>
                     <fieldType>ObjectProvided</fieldType>
@@ -579,7 +851,7 @@
         <name>Error_Screen</name>
         <label>Error Screen</label>
         <locationX>1040</locationX>
-        <locationY>1574</locationY>
+        <locationY>2606</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -635,6 +907,22 @@
         <isOutput>false</isOutput>
     </variables>
     <variables>
+        <name>currentItem_Filter_to_Autolaunched_Flows</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>FlowRecord</objectType>
+    </variables>
+    <variables>
+        <name>currentItem_Filter_to_Screen_Flows</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>FlowRecord</objectType>
+    </variables>
+    <variables>
         <name>defaultActiveStatus</name>
         <dataType>Boolean</dataType>
         <isCollection>false</isCollection>
@@ -668,6 +956,20 @@
         <value>
             <booleanValue>false</booleanValue>
         </value>
+    </variables>
+    <variables>
+        <name>strFlowInputAutolaunched</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>strFlowInputScreen</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
     </variables>
     <variables>
         <name>strRecordTypeName</name>
