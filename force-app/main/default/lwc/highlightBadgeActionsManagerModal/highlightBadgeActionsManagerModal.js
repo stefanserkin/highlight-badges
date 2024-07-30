@@ -2,33 +2,19 @@ import { api } from 'lwc';
 import LightningModal from 'lightning/modal';
 
 import ACTION_OBJECT from '@salesforce/schema/Highlight_Badge_Action__c';
-import NAME_FIELD from '@salesforce/schema/Highlight_Badge_Action__c.Name';
-import SORT_ORDER_FIELD from '@salesforce/schema/Highlight_Badge_Action__c.Sort_Order__c';
-import LABEL_FIELD from '@salesforce/schema/Highlight_Badge_Action__c.Label__c';
-import RECORDTYPEID_FIELD from '@salesforce/schema/Highlight_Badge_Action__c.RecordTypeId';
-import INCLUDE_SOURCE_ID_FIELD from '@salesforce/schema/Highlight_Badge_Action__c.Include_Source_Record_ID__c';
-import INCLUDE_DISPLAY_ID_FIELD from '@salesforce/schema/Highlight_Badge_Action__c.Include_Display_Record_ID__c';
-import FLOW_TYPE_FIELD from '@salesforce/schema/Highlight_Badge_Action__c.Flow_Type__c';
-import NAVIGATION_TYPE_FIELD from '@salesforce/schema/Highlight_Badge_Action__c.Navigation_Type__c';
-import FLOW_NAME_FIELD from '@salesforce/schema/Highlight_Badge_Action__c.Flow_API_Name__c';
-import VARIANT_FIELD from '@salesforce/schema/Highlight_Badge_Action__c.Variant__c';
-import ICON_NAME_FIELD from '@salesforce/schema/Highlight_Badge_Action__c.Icon_Name__c';
-import ICON_POSITION_FIELD from '@salesforce/schema/Highlight_Badge_Action__c.Icon_Position__c';
-import URL_FIELD from '@salesforce/schema/Highlight_Badge_Action__c.URL__c';
 
 export default class HighlightBadgeActionsManagerModal extends LightningModal {
     @api definitionId;
     @api action;
 
-    objectApiName = ACTION_OBJECT;
+    actionObject = ACTION_OBJECT;
 
     flowNameBase = 'Highlight_Badge_Action_Editor';
-    namespace = 'bdgs__';
+    namespace = 'bdgs';
 
     get flowName() {
-        console.log(':::: evaluating flow name for --> ' + this.objectApiName.objectApiName);
-        return this.objectApiName.objectApiName.substring(0,6) === this.namespace 
-            ? this.namespace + this.flowNameBase 
+        return this.actionObject.objectApiName.substring(0,4) === this.namespace 
+            ? this.namespace + '__' + this.flowNameBase 
             : this.flowNameBase;
     }
 

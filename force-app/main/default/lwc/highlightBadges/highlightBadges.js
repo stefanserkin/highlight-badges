@@ -5,6 +5,7 @@ import { refreshApex } from '@salesforce/apex';
 import { subscribe, onError } from 'lightning/empApi';
 import getBadges from '@salesforce/apex/HighlightBadgesController.getBadges';
 import userCanViewHighlightBadges from '@salesforce/customPermission/Can_View_Highlight_Badges';
+import DEFINITION_OBJECT from '@salesforce/schema/Highlight_Badge_Definition__c';
 
 export default class HighlightBadges extends NavigationMixin(LightningElement) {
     @api recordId;
@@ -30,9 +31,21 @@ export default class HighlightBadges extends NavigationMixin(LightningElement) {
     confettiSize = 'medium';
     confettiType = 'default';
 
-    channelName = '/event/Highlight_Badge_Refresh__e';
+    refreshEventObjectName = 'Highlight_Badge_Refresh__e';
+    definitionObject = DEFINITION_OBJECT;
+    namespace = 'bdgs';
     subscription = {};
     recordIdsToRefresh = [];
+
+    get channelName() {
+        return this.definitionObject.objectApiName.substring(0,4) === this.namespace 
+            ? '/event/' + this.namespace + '__' + this.refreshEventObjectName 
+            : '/event/' + this.refreshEventObjectName;
+    }
+
+    get userHasBadgeAccess() {
+        return userCanViewHighlightBadges;
+    }
 
     connectedCallback() {
         this.registerErrorListener();
@@ -55,7 +68,6 @@ export default class HighlightBadges extends NavigationMixin(LightningElement) {
                 this.refresh();
             }
         };
-
         // Invoke subscribe method of empApi. Pass reference to messageCallback
         subscribe(this.channelName, -1, messageCallback).then((response) => {
             // Response contains the subscription information on subscribe call
@@ -64,7 +76,7 @@ export default class HighlightBadges extends NavigationMixin(LightningElement) {
     }
 
     hasRecordIdForRefresh(recordIdToRefresh) {
-        return this.recordIdsToRefresh.includes(recordIdToRefresh);
+        return this.recordIdsToRefresh.includes(recordIdToRefresh) || this.recordId == recordIdToRefresh;
     }
 
     get userHasBadgeAccess() {
