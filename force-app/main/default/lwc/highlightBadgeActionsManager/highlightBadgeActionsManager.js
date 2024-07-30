@@ -12,10 +12,10 @@ const ACTIONS = [
 ];
 
 const COLS = [
-    { fieldName: 'Label__c', label: 'Label', type: 'text' },
+    { fieldName: 'label', label: 'Label', type: 'text' },
     { fieldName: 'recordTypeName', label: 'Type', type: 'text' },
-    { fieldName: 'Active__c', label: 'Active', type: 'boolean' },
-    { fieldName: 'Sort_Order__c', label: 'Sort Order', type: 'number' },
+    { fieldName: 'active', label: 'Active', type: 'boolean' },
+    { fieldName: 'sortOrder', label: 'Sort Order', type: 'number' },
     { type: 'action', typeAttributes: { rowActions: ACTIONS, menuAlignment: 'auto' } }
 ];
 
@@ -38,6 +38,9 @@ export default class HighlightBadgeActionsManager extends NavigationMixin(Lightn
         if (result.data) {
             let rows = JSON.parse( JSON.stringify(result.data) );
             rows.forEach(row => {
+                row.label = row.Label__c;
+                row.active = row.Active__c;
+                row.sortOrder = row.Sort_Order__c;
                 row.recordTypeName = row.RecordType.Name;
             });
             this.actions = rows;

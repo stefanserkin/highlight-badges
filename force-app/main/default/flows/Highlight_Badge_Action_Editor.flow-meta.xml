@@ -297,7 +297,7 @@
         <filterLogic>and</filterLogic>
         <filters>
             <field>SobjectType</field>
-            <operator>EqualTo</operator>
+            <operator>Contains</operator>
             <value>
                 <stringValue>Highlight_Badge_Action__c</stringValue>
             </value>
