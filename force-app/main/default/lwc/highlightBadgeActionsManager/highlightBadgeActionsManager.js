@@ -14,6 +14,8 @@ const ACTIONS = [
 const COLS = [
     { fieldName: 'Label__c', label: 'Label', type: 'text' },
     { fieldName: 'recordTypeName', label: 'Type', type: 'text' },
+    { fieldName: 'Active__c', label: 'Active', type: 'boolean' },
+    { fieldName: 'Sort_Order__c', label: 'Sort Order', type: 'number' },
     { type: 'action', typeAttributes: { rowActions: ACTIONS, menuAlignment: 'auto' } }
 ];
 

@@ -18,6 +18,7 @@ public with sharing class HighlightBadgeActionsMgrController {
     private static List<Highlight_Badge_Action__c> queryForActions(String recordId) {
         return [
             SELECT Id,
+                   Active__c,
                    Sort_Order__c,
                    RecordType.Name,
                    Navigation_Type__c,
