@@ -34,6 +34,7 @@ public with sharing class HighlightBadgeActionsMgrController {
               FROM Highlight_Badge_Action__c 
              WHERE Highlight_Badge_Definition__c = :recordId
               WITH USER_MODE
+             ORDER BY Sort_Order__c ASC
              LIMIT 10000
         ];
     }
