@@ -1,3 +1,9 @@
+/************************************************************************
+ * @description Query for highlight badge definitions with child highlight badge actions
+ * 
+ * @author SerkinSolutions
+ * @date 2024
+ ************************************************************************/
 public with sharing class HighlightBadgeDefinitionSelector {
 
     private String displayObject;
