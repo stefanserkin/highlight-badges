@@ -16,7 +16,7 @@
             <!-- OVERFLOW MENU ITEMS -->
             <lightning-button-menu lwc:if={hasOverflowActions}
                 alternative-text="Related Actions" 
-                menu-alignment="right"
+                menu-alignment="auto"
                 onselect={handleSelectedOverflowAction}>
                 <template for:each={overflowActions} for:item="oa">
                     <lightning-menu-item
