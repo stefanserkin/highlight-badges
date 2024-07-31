@@ -109,7 +109,7 @@ export default class HighlightBadgeActionsPanel extends NavigationMixin(Lightnin
     }
 
     navigateToRecord() {
-        const target = '_blank';
+        const target = this.selectedAction.openInNewTab ? '_blank' : '_self';
 
         this[NavigationMixin.GenerateUrl]({
             type: 'standard__recordPage',
