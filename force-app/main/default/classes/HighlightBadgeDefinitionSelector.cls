@@ -51,6 +51,7 @@ public with sharing class HighlightBadgeDefinitionSelector {
                            RecordType.Name,
                            Navigation_Type__c,
                            URL__c,
+                           Open_in_New_Tab__c,
                            Flow_Type__c,
                            Flow_API_Name__c,
                            Include_Source_Record_ID__c,

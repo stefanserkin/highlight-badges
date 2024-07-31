@@ -161,6 +161,9 @@ public with sharing class HighlightBadge {
         @AuraEnabled
         public String url {get;set;}
 
+        @AuraEnabled
+        public Boolean openInNewTab {get;set;}
+
         /**
          * Flow settings
          * Types:

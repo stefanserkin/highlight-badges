@@ -197,6 +197,7 @@ public with sharing class HighlightBadgesService {
             a.recordTypeName = hba.RecordType.Name;
             a.navigationType = hba.Navigation_Type__c;
             a.url = hba.Navigation_Type__c == 'View Source Record' ? '/' + record.Id : hba.URL__c;
+            a.openInNewTab = hba.Open_in_New_Tab__c;
             a.flowType = hba.Flow_Type__c;
             a.flowApiName = hba.Flow_API_Name__c;
             a.includeSourceRecordId = hba.Include_Source_Record_ID__c;
